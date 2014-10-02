@@ -1,16 +1,32 @@
+# Resource directories
 ASEDIR = resources/ase
-SPRITEDIR = content/image
-ASEFILES := $(wildcard resources/ase/*.ase)
+SVGDIR = resources/svg
+MMPZDIR = resources/mmpz
 
-all: dirs sprites
+# Content directories
+PNGDIR = content/image
+OGGDIR = content/music
+WAVDIR = content/sound
+
+# Source files
+ASEFILES := $(wildcard $(ASEDIR)/*.ase)
+MMPZFILES := $(wildcard $(MMPZDIR)/*.mmpz)
+
+all: dirs sprites music
 
 dirs:
-	@mkdir -p $(SPRITEDIR)
+	@mkdir -p $(PNGDIR) $(MUSICDIR)
 
-sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(SPRITEDIR)/%.png)
+sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(PNGDIR)/%.png)
 
-$(SPRITEDIR)/%.png : $(ASEDIR)/%.ase
-	@aseprite --batch --sheet $(SPRITEDIR)/$*.png $(ASEDIR)/$*.ase --data /dev/null
+music: $(MMPZFILES:$(MMPZDIR)/%.mmpz=$(OGGDIR)/%.ogg)
+
+$(PNGDIR)/%.png : $(ASEDIR)/%.ase
+	@aseprite --batch --sheet $(PNGDIR)/$*.png $(ASEDIR)/$*.ase --data /dev/null
+
+$(OGGDIR)/%.ogg : $(MMPZDIR)/%.mmpz
+	-@lmms -r $(MMPZDIR)/$*.mmpz -f ogg -o $(OGGDIR)/$*.ogg
 
 clean:
-	@$(RM) $(SPRITEDIR)/*.png 
+	@$(RM) $(PNGDIR)/*.png
+	@$(RM) $(OGGDIR)/*.ogg
