@@ -1,11 +1,13 @@
 ASEDIR = resources/ase
 SPRITEDIR = content/image
-ASEFILES := $(wildcard ./resources/ase/*.ase)
+ASEFILES := $(wildcard resources/ase/*.ase)
 
 all: sprites
 
-sprites: $(ASEFILES:%.ase=%.png)
+sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(SPRITEDIR)/%.png)
 
-%.png : %.ase
-	aseprite --batch --sheet $*.png $*.ase
-	mv ./resources/ase/*.png ./content/image/
+content/image/%.png : resources/ase/%.ase
+	@aseprite --batch --sheet content/image/$*.png resources/ase/$*.ase --data /dev/null
+
+clean:
+	@$(RM) $(SPRITEDIR)/*.png 
