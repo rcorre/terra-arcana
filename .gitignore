@@ -1,3 +1,11 @@
+# content (generated from resources by Makefile)
 content/image/*.png
 content/music/*.ogg
 content/sound/*.wav
+
+# dub files
+.dub
+docs.json
+__dummy.html
+*.o
+*.obj
