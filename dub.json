@@ -2,7 +2,12 @@
 	"name": "Haven",
 	"description": "A 2D turn-based strategy game",
 	"copyright": "Copyright © 2014, murphyslaw480",
+	"license": "MIT",
 	"authors": ["murphyslaw480"],
 	"dependencies": {
-	}
+    "allegro5": "~master"
+	},
+  "subConfigurations": {
+    "allegro5": "all-addons"
+  }
 }
