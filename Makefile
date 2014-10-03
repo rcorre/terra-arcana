@@ -15,7 +15,7 @@ MMPZFILES := $(wildcard $(MMPZDIR)/*.mmpz)
 all: dirs sprites music
 
 dirs:
-	@mkdir -p $(PNGDIR) $(MUSICDIR)
+	@mkdir -p $(PNGDIR) $(OGGDIR)
 
 sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(PNGDIR)/%.png)
 
