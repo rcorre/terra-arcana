@@ -1,13 +1,15 @@
 {
-	"name": "Haven",
-	"description": "A 2D turn-based strategy game",
-	"copyright": "Copyright © 2014, murphyslaw480",
-	"license": "MIT",
-	"authors": ["murphyslaw480"],
-	"dependencies": {
-    "allegro5": "~master"
-	},
+  "name": "Haven",
+  "description": "A 2D turn-based strategy game",
+  "copyright": "Copyright © 2014, murphyslaw480",
+  "license": "MIT",
+  "authors": ["murphyslaw480"],
+  "sourcePaths": ["src", "dau"],
+  "importPaths": ["src", "dau"],
+  "dependencies": {
+    "allegro": "2.0.2+5.0.10"
+  },
   "subConfigurations": {
-    "allegro5": "all-addons"
+    "allegro": "all-addons"
   }
 }
