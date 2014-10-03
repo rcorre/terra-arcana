@@ -25,7 +25,7 @@ $(PNGDIR)/%.png : $(ASEDIR)/%.ase
 	@aseprite --batch --sheet $(PNGDIR)/$*.png $(ASEDIR)/$*.ase --data /dev/null
 
 $(OGGDIR)/%.ogg : $(MMPZDIR)/%.mmpz
-	-@lmms -r $(MMPZDIR)/$*.mmpz -f ogg -o $(OGGDIR)/$*.ogg
+	@-! { lmms -r $(MMPZDIR)/$*.mmpz -f ogg -o $(OGGDIR)/$*.ogg ; } >/dev/null 2>&1
 
 clean:
 	@$(RM) $(PNGDIR)/*.png
