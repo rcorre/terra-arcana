@@ -24,7 +24,8 @@ dirs:
 sprites: $(SPRITES:%=$(PNGDIR)/%.png)
 
 $(PNGDIR)/%.png : $(ASEDIR)/%
-	./tools/build-spritesheet.sh $(ASEDIR)/$*
+	@echo building sprite $*
+	@./tools/build-spritesheet.sh $(ASEDIR)/$*
 
 music: $(MMPZFILES:$(MMPZDIR)/%.mmpz=$(OGGDIR)/%.ogg)
 
@@ -32,6 +33,7 @@ music: $(MMPZFILES:$(MMPZDIR)/%.mmpz=$(OGGDIR)/%.ogg)
 #	@aseprite --batch --sheet $(PNGDIR)/$*.png $(ASEDIR)/$*.ase --data /dev/null
 
 $(OGGDIR)/%.ogg : $(MMPZDIR)/%.mmpz
+	@building song $*
 	@-! { lmms -r $(MMPZDIR)/$*.mmpz -f ogg -o $(OGGDIR)/$*.ogg ; } >/dev/null 2>&1
 
 clean:
