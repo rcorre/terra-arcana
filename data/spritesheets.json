@@ -1,0 +1,11 @@
+{
+  "animations": {
+    "assault": {
+      "frameSize": 32,
+      "frameTimeMs": 100,
+      "rows": ["idle", "fire", "grenade"]
+    }
+  },
+  "sprites": {
+  }
+}
