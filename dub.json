@@ -4,8 +4,8 @@
   "copyright": "Copyright © 2014, murphyslaw480",
   "license": "MIT",
   "authors": ["murphyslaw480"],
-  "sourcePaths": ["src", "dau"],
-  "importPaths": ["src", "dau"],
+  "sourcePaths": ["src", "ext"],
+  "importPaths": ["src", "ext"],
   "dependencies": {
     "allegro": "2.0.2+5.0.10"
   },

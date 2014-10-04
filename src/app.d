@@ -1,4 +1,4 @@
-import allegro;
+import dau.engine;
 
 private bool _run = true;        /// if false, shutdown game
 

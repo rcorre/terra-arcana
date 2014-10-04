@@ -1,4 +1,4 @@
-module allegro;
+module dau.engine;
 
 // library setup
 pragma(lib, "dallegro5");
