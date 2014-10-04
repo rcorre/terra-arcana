@@ -9,7 +9,8 @@ OGGDIR = content/music
 WAVDIR = content/sound
 
 # Source files
-ASEFILES := $(wildcard $(ASEDIR)/*.ase)
+#ASEFILES := $(wildcard $(ASEDIR)/*.ase)
+SPRITES := $(sort $(dir $(wildcard $(ASEDIR)/*/)))
 MMPZFILES := $(wildcard $(MMPZDIR)/*.mmpz)
 
 all: dirs sprites music
@@ -17,7 +18,10 @@ all: dirs sprites music
 dirs:
 	@mkdir -p $(PNGDIR) $(OGGDIR)
 
-sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(PNGDIR)/%.png)
+#sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(PNGDIR)/%.png)
+
+sprites:
+	echo $(SPRITES)
 
 music: $(MMPZFILES:$(MMPZDIR)/%.mmpz=$(OGGDIR)/%.ogg)
 
