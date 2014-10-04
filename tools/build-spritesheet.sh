@@ -5,7 +5,7 @@ SPRITENAME=$(basename $SPRITEDIR)
 DEST="content/image"
 TEMPDIR="sprite_build_temp"
 mkdir "$TEMPDIR"
-for file in $SPRITEDIR*.ase ;
+for file in $SPRITEDIR/*.ase ;
 do
   IDX=$(basename $file .ase)
   aseprite --batch --sheet "$TEMPDIR/$IDX.png" "$file" --data /dev/null

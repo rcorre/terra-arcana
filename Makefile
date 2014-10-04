@@ -10,7 +10,8 @@ WAVDIR = content/sound
 
 # Source files
 #ASEFILES := $(wildcard $(ASEDIR)/*.ase)
-SPRITES := $(sort $(dir $(wildcard $(ASEDIR)/*/)))
+SPRITEDIRS := $(sort $(dir $(wildcard $(ASEDIR)/*/)))
+SPRITES := $(notdir $(SPRITEDIRS:%/=%))
 MMPZFILES := $(wildcard $(MMPZDIR)/*.mmpz)
 
 all: dirs sprites music
@@ -20,13 +21,15 @@ dirs:
 
 #sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(PNGDIR)/%.png)
 
-sprites:
-	echo $(SPRITES)
+sprites: $(SPRITES:%=$(PNGDIR)/%.png)
+
+$(PNGDIR)/%.png : $(ASEDIR)/%
+	./tools/build-spritesheet.sh $(ASEDIR)/$*
 
 music: $(MMPZFILES:$(MMPZDIR)/%.mmpz=$(OGGDIR)/%.ogg)
 
-$(PNGDIR)/%.png : $(ASEDIR)/%.ase
-	@aseprite --batch --sheet $(PNGDIR)/$*.png $(ASEDIR)/$*.ase --data /dev/null
+#$(PNGDIR)/%.png : $(ASEDIR)/%.ase
+#	@aseprite --batch --sheet $(PNGDIR)/$*.png $(ASEDIR)/$*.ase --data /dev/null
 
 $(OGGDIR)/%.ogg : $(MMPZDIR)/%.mmpz
 	@-! { lmms -r $(MMPZDIR)/$*.mmpz -f ogg -o $(OGGDIR)/$*.ogg ; } >/dev/null 2>&1
