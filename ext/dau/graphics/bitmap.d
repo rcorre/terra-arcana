@@ -9,40 +9,27 @@ import dau.graphics.color;
 
 class Bitmap {
   @property {
-    /// number of frame columns in the texture
-    int numRows() { return height / frameHeight; }
-    /// number of frame rows in the texture
-    int numCols() { return width / frameWidth; }
-    /// width of entire texture (px)
-    int width()  { return _width; }
+    int width()  { return al_get_bitmap_width(_bitmap); }
     /// height of entire texture (px)
-    int height() { return _height; }
-    /// width of a single texture frame (px)
-    int frameWidth()  { return _frameWidth; }
-    /// height of a single texture frame (px)
-    int frameHeight() { return _frameHeight; }
-    /// center position of a single frame (relative to the frame itself)
-    Vector2i frameCenter() { return _frameCenter; }
+    int height() { return al_get_bitmap_height(_bitmap); }
+    /// center of bitmap
+    auto center() { return Vector2i(width / 2, height / 2); }
   }
 
-  void drawTopLeft(Vector2i pos, Vector2f scale = Vector2f(1, 1), Color tint = Color.white, float angle = 0) {
+  void draw(Vector2i pos, Vector2i origin = Vector2i.zero, Vector2f scale = Vector2f(1, 1),
+      Color tint = Color.white, float angle = 0)
+  {
     al_draw_tinted_scaled_rotated_bitmap(_bmp, // bitmap
         tint,                                  // color
-        0, 0,                                  // frame center position
+        origin.x, origin.y,                    // frame center position
         pos.x, pos.y,                          // position to place center of frame at
         scale.x, scale.y,                      // x and y scale
         angle, 0);                             // rotation and flats
   }
 
-  void draw(Vector2i pos, Vector2f scale = Vector2f(1, 1), Color tint = Color.white, float angle = 0) {
-    al_draw_tinted_scaled_rotated_bitmap(_bmp, // bitmap
-        tint,                                  // color
-        frameCenter.x, frameCenter.y,          // frame center position
-        pos.x, pos.y,                          // position to place center of frame at
-        scale.x, scale.y,                      // x and y scale
-        angle, 0);                             // rotation and flats
-  }
+  void drawRegion(Rec
 
+  /*
   void draw(int row, int col, Vector2i pos, Vector2f scale = Vector2f(1, 1), Color tint = Color.white, float angle = 0) {
     assert(col >= 0 && col < numCols && row >= 0 && row < numRows);
     auto frame = Rect2i(col * frameWidth, row * frameHeight, frameWidth, frameHeight);
@@ -54,35 +41,13 @@ class Bitmap {
         scale.x, scale.y,                             // x and y scale
         angle, 0);                                    // rotation and flats
   }
-
-  void draw(int idx, Vector2i pos, Vector2f scale = Vector2f(1, 1), Color tint = Color.white, float angle = 0) {
-    int row = idx / numCols;
-    int col = idx % numCols;
-    draw(row, col, pos, scale, tint, angle);
-  }
+  */
 
   private:
   ALLEGRO_BITMAP* _bmp;
-  const int _width, _height;
-  const int _frameWidth, _frameHeight;
-  const Vector2i _frameCenter;
-
-  this(ALLEGRO_BITMAP *bmp, int frameWidth, int frameHeight) {
-    _bmp         = bmp;
-    _frameWidth  = frameWidth;
-    _frameHeight = frameHeight;
-    _width       = al_get_bitmap_width(bmp);
-    _height      = al_get_bitmap_height(bmp);
-    _frameCenter = Vector2i(frameWidth / 2, frameHeight / 2);
-  }
 
   this(ALLEGRO_BITMAP *bmp) {
-    _bmp         = bmp;
-    _width       = al_get_bitmap_width(bmp);
-    _height      = al_get_bitmap_height(bmp);
-    _frameWidth  = _width;
-    _frameHeight = _height;
-    _frameCenter = Vector2i(frameWidth / 2, frameHeight / 2);
+    _bmp = bmp;
   }
 }
 
