@@ -28,6 +28,9 @@ public import allegro5.allegro_color;
 public import allegro5.allegro_audio;
 public import allegro5.allegro_acodec;
 
+alias InitFunction = void function();
+alias ShutdownFunction = void function();
+
 // global variables
 ALLEGRO_DISPLAY* mainDisplay;
 ALLEGRO_EVENT_QUEUE* mainEventQueue;
@@ -43,22 +46,16 @@ enum Settings {
 
 /// paths to configuration files and content
 enum Paths {
-  textureData         = "content/textures.cfg",
-  spriteData          = "content/sprites.cfg",
-  characterSpriteData = "content/unit_sprites.cfg",
+  bitmapDir           = "./content/image",
+  spriteData          = "./data/spritesheets.json",
   fontData            = "content/fonts.cfg",
-  backgroundDir       = "content/image/background/",
   mapDir              = "content/maps",
   soundData           = "content/sounds.cfg",
   musicData           = "content/music.cfg",
-  characterData       = "content/data/characters.json",
-  itemData            = "content/data/items.json",
-  talentData          = "content/data/talents.json",
-  names               = "content/data/names.txt",
 }
 
 // allegro initialization
-void initialize_all() {
+void startGame() {
   al_init();
 
   mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
@@ -88,5 +85,27 @@ void initialize_all() {
     al_set_blender(ALLEGRO_BLEND_OPERATIONS.ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
   }
 
+  foreach(fn ; _initializers) {
+    fn();
+  }
+
   al_start_timer(mainTimer); // start fps timer
 }
+
+void shutdownGame() {
+  foreach(fn ; _deInitializers) {
+    fn();
+  }
+}
+
+void onInit(InitFunction fn) {
+  _initializers ~= fn;
+}
+
+void onShutdown(ShutdownFunction fn) {
+  _deInitializers ~= fn;
+}
+
+private:
+InitFunction[] _initializers;
+ShutdownFunction[] _deInitializers;

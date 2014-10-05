@@ -7,88 +7,59 @@ import dau.engine;
 import dau.geometry.all;
 import dau.graphics.color;
 
-class Bitmap {
+private enum {
+  bmpExtension = "png" // TODO: support for other types
+}
+
+struct Bitmap {
   @property {
-    int width()  { return al_get_bitmap_width(_bitmap); }
+    int width()  { return al_get_bitmap_width(_bmp); }
     /// height of entire texture (px)
-    int height() { return al_get_bitmap_height(_bitmap); }
+    int height() { return al_get_bitmap_height(_bmp); }
     /// center of bitmap
     auto center() { return Vector2i(width / 2, height / 2); }
   }
 
   void draw(Vector2i pos, Vector2i origin = Vector2i.zero, Vector2f scale = Vector2f(1, 1),
-      Color tint = Color.white, float angle = 0)
+      Color tint = Color.white, float angle = 0, Rect2i region = Rect2i(0, 0, width, height))
   {
-    al_draw_tinted_scaled_rotated_bitmap(_bmp, // bitmap
-        tint,                                  // color
-        origin.x, origin.y,                    // frame center position
-        pos.x, pos.y,                          // position to place center of frame at
-        scale.x, scale.y,                      // x and y scale
-        angle, 0);                             // rotation and flats
+    al_draw_tinted_scaled_rotated_bitmap_region(
+        _bmp,                                            // bitmap
+        region.x, region.y, region.width, region.height, // region
+        tint,                                            // color
+        origin.x, origin.y,                              // frame center position
+        pos.x, pos.y,                                    // position to place center of frame at
+        scale.x, scale.y,                                // x and y scale
+        angle, 0);                                       // rotation and flats
   }
-
-  void drawRegion(Rec
-
-  /*
-  void draw(int row, int col, Vector2i pos, Vector2f scale = Vector2f(1, 1), Color tint = Color.white, float angle = 0) {
-    assert(col >= 0 && col < numCols && row >= 0 && row < numRows);
-    auto frame = Rect2i(col * frameWidth, row * frameHeight, frameWidth, frameHeight);
-    al_draw_tinted_scaled_rotated_bitmap_region(_bmp, // bitmap
-        frame.x, frame.y, frame.width, frame.height,  // bitmap region
-        tint,                                         // color
-        frameCenter.x, frameCenter.y,                 // frame center position
-        pos.x, pos.y,                                 // position to place center of frame at
-        scale.x, scale.y,                             // x and y scale
-        angle, 0);                                    // rotation and flats
-  }
-  */
 
   private:
   ALLEGRO_BITMAP* _bmp;
+}
 
-  this(ALLEGRO_BITMAP *bmp) {
-    _bmp = bmp;
+/// try to load bitmap from Paths.bitmapDir/path.png
+Bitmap loadBitmap(string path) {
+  auto bmp = _bitmapStore.get(path, null);
+  if (bmp is null) { // try to load and cache
+    auto fullPath = "%s/%s.%s".format(Paths.bitmapDir, path, bmpExtension);
+    assert(fullPath.exists, "bitmap file " ~ fullPath ~ " does not exist");
+    bmp = al_load_bitmap(path.toStringz);
+    assert(bmp !is null, fullPath ~ " exists, but loading bitmap failed");
+    _bitmapStore[path] = bmp;
   }
+  return Bitmap(bmp); // wrap ALLEGRO_BITMAP in D struct
 }
 
-private Bitmap[string] _bitmapStore;
-
-Bitmap getBitmap(string name) {
-  assert(name in _bitmapStore, name ~ " could not be found in " ~ Paths.textureData);
-  return _bitmapStore[name];
-}
-
-Bitmap registerBitmap(ALLEGRO_BITMAP* bmp, string name) {
-  assert(name !in _bitmapStore, "cannot register bitmap " ~ name ~ " as it is already in texture store");
-  return _bitmapStore[name] = new Bitmap(bmp);
-}
-
-Bitmap registerBitmap(ALLEGRO_BITMAP* bmp, string name, int frameWidth, int frameHeight) {
-  assert(name !in _bitmapStore, "cannot register bitmap " ~ name ~ " as it is already in texture store");
-  return _bitmapStore[name] = new Bitmap(bmp, frameWidth, frameHeight);
-}
-
-static this() { // automatically load a texture for each entry in the texture sheet config file
-  auto textureData = loadConfigFile(Paths.textureData);
-  auto textureDir = textureData.globals["texture_dir"];
-  foreach (textureName, textureInfo; textureData.entries) {
-    auto path = (textureDir ~ "/" ~ textureInfo["filename"]);
-    assert(path.exists, format("texture path %s does not exist", path));
-    auto bmp = al_load_bitmap(toStringz(path));
-    assert(bmp, format("failed to load image %s", path));
-    if ("frameSize" in textureInfo) {
-      auto frameSize = split(textureInfo["frameSize"], ",");
-      _bitmapStore[textureName] = new Bitmap(bmp, to!int(frameSize[0]), to!int(frameSize[1]));
-    }
-    else {
-      _bitmapStore[textureName] = new Bitmap(bmp);
-    }
-  }
-}
-
-static ~this() { // destroy all bitmaps and clear texture store
-  foreach (texture ; _bitmapStore) {
-    al_destroy_bitmap(texture._bmp);
+/// destroy all bitmaps and clear texture store
+void unloadAllBitmaps() {
+  foreach (bitmap ; _bitmapStore) {
+    al_destroy_bitmap(bitmap);
   }
   _bitmapStore = null;
 }
+
+static this() {
+  onShutdown(&unloadAllBitmaps);
+}
+
+private ALLEGRO_BITMAP*[string] _bitmapStore;
