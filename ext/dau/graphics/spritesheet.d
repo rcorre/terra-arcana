@@ -48,7 +48,15 @@ private:
 SpriteSheet[string] _spriteData;
 
 void loadData() {
-  _spriteData = Paths.spriteData.extract!(SpriteSheet[string]);
+  auto json = readJSON(Paths.spriteData);
+  _spriteData = json.extract!(SpriteSheet[string])("sheets");
+  foreach(group ; json["groups"].object) {
+    foreach(name ; group.extract!(string[])("sheets")) {
+      auto sheet = group.extract!SpriteSheet;
+      sheet.bitmap = name;
+      _spriteData[name] = sheet;
+    }
+  }
 }
 
 static this() {

@@ -313,6 +313,11 @@ T readJSON(T)(string file) {
   return extract!T(json);
 }
 
+/// shortcut to read file directly into JSONValue
+auto readJSON(string file) {
+  return parseJSON(readText(file));
+}
+
 /// write a jsonizeable object to a file
 void writeJSON(T)(T obj, string file) {
   auto json = toJSON!T(obj);
