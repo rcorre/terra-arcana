@@ -1,15 +1,15 @@
-module graphics.sprite;
+module dau.graphics.sprite;
 
 import std.string;
 import std.array;
 import std.conv;
 import std.algorithm : min;
-import allegro;
-import geometry.vector;
-import graphics.texture;
-import graphics.color;
-import util.config;
-import util.math;
+import dau.allegro;
+import dau.geometry.all;
+import dau.graphics.bitmap;
+import dau.graphics.color;
+import dau.util.config;
+import dau.util.math;
 
 /// displays a single frame of a texture
 class Sprite {
@@ -29,8 +29,7 @@ class Sprite {
   this(Texture spriteSheet, int spriteIdx, float baseScale = 1) {
     _texture = spriteSheet;
     _row = spriteIdx / _texture.numCols;
-    _col = spriteIdx % _texture.numCols;
-    assert(_row >= 0 && _col >= 0 && _row < _texture.numRows && _col < _texture.numCols,
+    _col = spriteIdx % _texture.numCols; assert(_row >= 0 && _col >= 0 && _row < _texture.numRows && _col < _texture.numCols,
         format("sprite coord %d, %d is out of bounds", _row, _col));
     _baseScale = baseScale;
   }
@@ -169,6 +168,10 @@ struct JiggleEffect {
   float _period;
   float _lerpFactor = 0;
   int _repetitions = 0;
+}
+
+private:
+class SpriteData {
 }
 
 ConfigData _spriteData;
