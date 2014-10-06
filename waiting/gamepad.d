@@ -40,7 +40,7 @@ class GamePad {
 
     Vector2f scrollDirection() {
       auto scroll = _currentState.leftStickPos;
-      return (scroll.len < deadZone) ? Vector2f.Zero : scroll;
+      return (scroll.len < deadZone) ? Vector2f.zero : scroll;
     }
 
     bool tappedDown() {

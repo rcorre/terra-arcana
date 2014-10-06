@@ -4,7 +4,7 @@ private bool _run = true;        /// if false, shutdown game
 
 int main(char[][] args) {
   return al_run_allegro({
-      initialize_all();
+      startGame();
       while(_run) {
         bool frameTick = process_event();
         if (frameTick) {

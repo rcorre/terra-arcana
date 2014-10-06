@@ -55,7 +55,7 @@ class InputManager {
     bool gamepadConnected() { return _gamePad.connected; }
 
     Vector2f scrollDirection() {
-      Vector2f scroll = Vector2f.Zero;
+      Vector2f scroll = Vector2f.zero;
       if (keyHeld(Keymap.up)) {
         scroll.y = -1;
       }
@@ -68,7 +68,7 @@ class InputManager {
       else if (keyHeld(Keymap.right)) {
         scroll.x = 1;
       }
-      return scroll == Vector2f.Zero ? _gamePad.scrollDirection : scroll;
+      return scroll == Vector2f.zero ? _gamePad.scrollDirection : scroll;
     }
 
     bool selectUp()    { return keyPressed(Keymap.up)    || _gamePad.tappedUp; }

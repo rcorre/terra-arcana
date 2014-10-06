@@ -35,10 +35,10 @@ Color ucolor(ubyte r, ubyte g, ubyte b, ubyte a = 255u) {
 }
 
 Color lerp(Color start, Color end, float factor) {
-  auto r = util.math.lerp(start.r, end.r, factor);
-  auto g = util.math.lerp(start.g, end.g, factor);
-  auto b = util.math.lerp(start.b, end.b, factor);
-  auto a = util.math.lerp(start.a, end.a, factor);
+  auto r = dau.util.math.lerp(start.r, end.r, factor);
+  auto g = dau.util.math.lerp(start.g, end.g, factor);
+  auto b = dau.util.math.lerp(start.b, end.b, factor);
+  auto a = dau.util.math.lerp(start.a, end.a, factor);
   return Color(r, g, b, a);
 }
 
