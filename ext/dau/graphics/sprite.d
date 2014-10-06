@@ -13,8 +13,8 @@ import dau.util.math;
 
 /// displays a single frame of a texture
 class Sprite {
-  this(string spriteName) {
-    assert(spriteName in _spriteData.entries, spriteName ~ " is not defined in " ~ Paths.spriteData);
+  this(string sheetName, string spriteName) {
+    _spriteSheet = loadSpriteSheet(sheetName);
     auto data = _spriteData.entries[spriteName];
     _name = spriteName;
     _texture = getTexture(data["texture"]);
@@ -82,12 +82,10 @@ class Sprite {
   }
 
   @property {
-    /// unique name used to look up sprite data
-    string name() { return _name; }
     /// width of the sprite after scaling (px)
-    int width() { return cast(int) (_texture.frameWidth * totalScale.x); }
+    int width() { return cast(int) (_spriteSheet.frameSize * totalScale.x); }
     /// height of the sprite after scaling (px)
-    int height() { return cast(int) (_texture.frameHeight * totalScale.y); }
+    int height() { return cast(int) (_spriteSheet.frameSize * totalScale.y); }
     /// width and height of sprite after scaling
     auto size() { return Vector2i(width, height); }
     /// tint color of the sprite
@@ -111,14 +109,13 @@ class Sprite {
   }
 
   protected:
-  int _row, _col;
+  Rect2i _region;
+  const SpriteSheet _spriteSheet;
 
   private:
-  string _name;
-  Texture _texture;
   const float _baseScale;
-  Vector2f _scaleFactor  = Vector2f(1, 1);
-  float _angle        = 0;
+  Vector2f _scaleFactor = Vector2f(1, 1);
+  float _angle = 0;
   Color _tint = Color.white;
 
   float _flashTimer, _totalFlashTime;
@@ -126,6 +123,7 @@ class Sprite {
 
   JiggleEffect _jiggleEffect;
 }
+
 private:
 struct JiggleEffect {
   this(Vector2i start, Vector2i end, float frequency, int repetitions) {

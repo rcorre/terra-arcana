@@ -1,11 +1,30 @@
 {
-  "animations": {
-    "assault": {
-      "frameSize": 32,
-      "frameTimeMs": 100,
-      "rows": ["idle", "fire", "grenade"]
-    }
+  "assault": {
+    "bitmap": "assault",
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "rows": ["idle", "action1", "action2"]
   },
-  "sprites": {
+
+  "medic": {
+    "bitmap": "medic",
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "rows": ["idle", "action1", "action2"]
+  },
+
+  "sniper": {
+    "bitmap": "sniper",
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "rows": ["idle", "action1", "action2"]
+  },
+
+  "guardian": {
+    "bitmap": "guardian",
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "rows": ["idle", "action1", "action2"]
   }
+
 }
