@@ -11,5 +11,5 @@ do
   aseprite --batch --sheet "$TEMPDIR/$IDX.png" "$file" --data /dev/null
 done
 
-convert -append "$TEMPDIR/*.png" "$DEST/$SPRITENAME.png"
+convert -background none "$TEMPDIR/*.png" -append "$DEST/$SPRITENAME.png"
 rm -r "$TEMPDIR"
