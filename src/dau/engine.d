@@ -28,6 +28,8 @@ public import allegro5.allegro_color;
 public import allegro5.allegro_audio;
 public import allegro5.allegro_acodec;
 
+import dau.entity;
+
 alias InitFunction = void function();
 alias ShutdownFunction = void function();
 
@@ -45,9 +47,9 @@ enum Settings {
 }
 
 /// paths to configuration files and content
-enum Paths {
-  bitmapDir           = "./content/image",
-  textureData         = "./data/textures.json",
+enum Paths : string {
+  bitmapDir           = "content/image",
+  textureData         = "data/textures.json",
   fontData            = "content/fonts.cfg",
   mapDir              = "content/maps",
   soundData           = "content/sounds.cfg",
@@ -55,7 +57,8 @@ enum Paths {
 }
 
 // allegro initialization
-void startGame() {
+int runGame() {
+  // initialize
   al_init();
 
   mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
@@ -90,6 +93,18 @@ void startGame() {
   }
 
   al_start_timer(mainTimer); // start fps timer
+
+  return al_run_allegro({
+    while(_run) {
+      bool frameTick = processEvents();
+      if (frameTick) {
+        mainUpdate();
+        mainDraw();
+      }
+    }
+
+    return 0;
+  });
 }
 
 void shutdownGame() {
@@ -109,3 +124,53 @@ void onShutdown(ShutdownFunction fn) {
 private:
 InitFunction[] _initializers;
 ShutdownFunction[] _deInitializers;
+bool _run = true;
+
+// returns true if time to render next frame
+bool processEvents() {
+  ALLEGRO_EVENT event;
+  al_wait_for_event(mainEventQueue, &event);
+  switch(event.type)
+  {
+    case ALLEGRO_EVENT_TIMER:
+      {
+        if (event.timer.source == mainTimer) {
+          return true;
+        }
+        break;
+      }
+    case ALLEGRO_EVENT_DISPLAY_CLOSE:
+      {
+        _run = false;
+        break;
+      }
+    case ALLEGRO_EVENT_KEY_DOWN:
+      {
+        switch(event.keyboard.keycode)
+        {
+          case ALLEGRO_KEY_ESCAPE:
+            {
+              _run = false;
+              break;
+            }
+          default:
+        }
+        break;
+      }
+    default:
+  }
+  return false;
+}
+
+void mainUpdate() {
+  static float last_update_time = 0;
+  float current_time = al_get_time();
+  float delta = current_time - last_update_time;
+  last_update_time = current_time;
+  //updateEntities(delta);
+}
+
+void mainDraw() {
+  al_clear_to_color(al_map_rgb(0,0,0));
+  al_flip_display();
+}
