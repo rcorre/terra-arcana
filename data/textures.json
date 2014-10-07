@@ -1,0 +1,8 @@
+[
+  {
+    "sheets" : ["assault", "medic", "sniper", "guardian"],
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "rows": ["idle", "action1", "action2", "effect1", "effect2"]
+  }
+]

@@ -14,7 +14,18 @@ SPRITEDIRS := $(sort $(dir $(wildcard $(ASEDIR)/*/)))
 SPRITES := $(notdir $(SPRITEDIRS:%/=%))
 MMPZFILES := $(wildcard $(MMPZDIR)/*.mmpz)
 
-all: dirs sprites music
+all: debug
+
+debug: content
+	dub build
+
+release: content
+	dub build release
+
+run: content
+	dub run
+
+content: dirs sprites music
 
 dirs:
 	@mkdir -p $(PNGDIR) $(OGGDIR)
