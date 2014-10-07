@@ -47,7 +47,7 @@ enum Settings {
 /// paths to configuration files and content
 enum Paths {
   bitmapDir           = "./content/image",
-  spriteData          = "./data/spritesheets.json",
+  textureData         = "./data/textures.json",
   fontData            = "content/fonts.cfg",
   mapDir              = "content/maps",
   soundData           = "content/sounds.cfg",
