@@ -7,7 +7,7 @@ import dau.graphics.texture;
 import dau.graphics.sprite;
 import dau.graphics.color;
 
-class AnimatedSprite : Sprite {
+class Animation : Sprite {
   alias Action = void delegate();
   enum Repeat {
     no,          /// run only once
@@ -46,7 +46,7 @@ class AnimatedSprite : Sprite {
             _col = _startCol;
             break;
           case rebound:
-            assert(0, "AnimatedSprite.Repeat.rebound not implemented");
+            assert(0, "Animation.Repeat.rebound not implemented");
         }
       }
     }

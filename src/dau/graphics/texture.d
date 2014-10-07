@@ -31,7 +31,11 @@ class Texture {
 
   int rowByName(string name) {
     int row = cast(int) _rows.countUntil(name);
-    assert(row <= 0, "no row named " ~ name);
+    debug {
+      import std.stdio;
+      writeln(name ~ " is at row " ~ row.to!string ~ " in " ~ _rows.to!string);
+    }
+    assert(row >= 0, "no row named " ~ name);
     return row;
   }
 
