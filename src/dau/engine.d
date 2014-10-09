@@ -28,6 +28,7 @@ public import allegro5.allegro_color;
 public import allegro5.allegro_audio;
 public import allegro5.allegro_acodec;
 
+import dau.gamestate;
 import dau.entity;
 
 alias InitFunction = void function();
@@ -169,10 +170,12 @@ void mainUpdate() {
   float delta = current_time - last_update_time;
   last_update_time = current_time;
   updateEntities(delta);
+  updateState(delta);
 }
 
 void mainDraw() {
   al_clear_to_color(al_map_rgb(0,0,0));
   drawEntities();
+  drawState();
   al_flip_display();
 }
