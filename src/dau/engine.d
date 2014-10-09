@@ -58,52 +58,53 @@ enum Paths : string {
 
 // allegro initialization
 int runGame() {
-  // initialize
-  al_init();
-
-  mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
-  mainEventQueue = al_create_event_queue();
-  mainTimer = al_create_timer(1.0 / Settings.fps);
-
-  al_install_keyboard();
-  al_install_mouse();
-  al_install_joystick();
-  al_install_audio();
-  al_init_acodec_addon();
-  al_init_image_addon();
-  al_init_font_addon();
-  al_init_ttf_addon();
-  al_init_primitives_addon();
-
-  al_reserve_samples(Settings.numAudioSamples);
-
-  al_register_event_source(mainEventQueue, al_get_display_event_source(mainDisplay));
-  al_register_event_source(mainEventQueue, al_get_keyboard_event_source());
-  al_register_event_source(mainEventQueue, al_get_mouse_event_source());
-  al_register_event_source(mainEventQueue, al_get_timer_event_source(mainTimer));
-  al_register_event_source(mainEventQueue, al_get_joystick_event_source());
-
-  with(ALLEGRO_BLEND_MODE)
-  {
-    al_set_blender(ALLEGRO_BLEND_OPERATIONS.ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
-  }
-
-  foreach(fn ; _initializers) {
-    fn();
-  }
-
-  al_start_timer(mainTimer); // start fps timer
-
   return al_run_allegro({
-    while(_run) {
-      bool frameTick = processEvents();
-      if (frameTick) {
-        mainUpdate();
-        mainDraw();
-      }
+    // initialize
+    al_init();
+
+    mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
+    mainEventQueue = al_create_event_queue();
+    mainTimer = al_create_timer(1.0 / Settings.fps);
+
+    al_install_keyboard();
+    al_install_mouse();
+    al_install_joystick();
+    al_install_audio();
+    al_init_acodec_addon();
+    al_init_image_addon();
+    al_init_font_addon();
+    al_init_ttf_addon();
+    al_init_primitives_addon();
+
+    al_reserve_samples(Settings.numAudioSamples);
+
+    al_register_event_source(mainEventQueue, al_get_display_event_source(mainDisplay));
+    al_register_event_source(mainEventQueue, al_get_keyboard_event_source());
+    al_register_event_source(mainEventQueue, al_get_mouse_event_source());
+    al_register_event_source(mainEventQueue, al_get_timer_event_source(mainTimer));
+    al_register_event_source(mainEventQueue, al_get_joystick_event_source());
+
+    with(ALLEGRO_BLEND_MODE)
+    {
+      al_set_blender(ALLEGRO_BLEND_OPERATIONS.ALLEGRO_ADD, ALLEGRO_ALPHA,
+          ALLEGRO_INVERSE_ALPHA);
     }
 
-    return 0;
+    foreach(fn ; _initializers) {
+      fn();
+    }
+
+    al_start_timer(mainTimer); // start fps timer
+
+      while(_run) {
+        bool frameTick = processEvents();
+        if (frameTick) {
+          mainUpdate();
+          mainDraw();
+        }
+      }
+
+      return 0;
   });
 }
 
@@ -167,10 +168,11 @@ void mainUpdate() {
   float current_time = al_get_time();
   float delta = current_time - last_update_time;
   last_update_time = current_time;
-  //updateEntities(delta);
+  updateEntities(delta);
 }
 
 void mainDraw() {
   al_clear_to_color(al_map_rgb(0,0,0));
+  drawEntities();
   al_flip_display();
 }

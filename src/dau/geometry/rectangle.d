@@ -43,8 +43,8 @@ struct Rect2(T) {
 
     auto center() { return Vector2!T(x + width / 2, y + height / 2); }
     auto center(Vector2!T val) {
-      x = val.x;
-      y = val.y;
+      x = val.x - width / 2;
+      y = val.y - height / 2;
       return center;
     }
 
