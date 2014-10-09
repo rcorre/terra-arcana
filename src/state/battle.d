@@ -1,9 +1,6 @@
 module state.battle;
 
-import dau.geometry.all;
-import dau.graphics.all;
-import dau.gamestate;
-import dau.entity;
+import dau.all;
 
 class Battle : GameState {
   override {
