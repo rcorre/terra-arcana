@@ -14,7 +14,9 @@ class SpriteBatch {
   }
 
   void draw(Sprite sprite) {
-    _sprites.insert(sprite);
+    if (sprite !is null) {
+      _sprites.insert(sprite);
+    }
   }
 
   void render() {

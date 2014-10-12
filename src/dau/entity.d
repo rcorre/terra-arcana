@@ -9,6 +9,11 @@ import dau.geometry.all;
 class Entity {
   const string tag;
 
+  this(Rect2i area, string tag = null) {
+    _area = area;
+    this.tag = tag;
+  }
+
   this(Vector2i pos, Sprite sprite, string tag = null) {
     _sprite = sprite;
     _area = Rect2i.centeredAt(pos, sprite.width, sprite.height);
@@ -26,7 +31,9 @@ class Entity {
   }
 
   void update(float time) {
-    _sprite.update(time);
+    if (_sprite !is null) {
+      _sprite.update(time);
+    }
   }
 
   void remove() {

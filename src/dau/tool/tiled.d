@@ -8,7 +8,7 @@ import dau.engine;
 import dau.graphics.all;
 import dau.util.jsonizer;
 
-auto loadMap(string path) {
+auto loadTiledMap(string path) {
   assert(path.exists, "no map file found at " ~ path);
   return readJSON!MapData(path);
 }
