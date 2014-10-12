@@ -1,0 +1,31 @@
+{
+  "assault": {
+    "name"       : "Assault",
+    "deployCost" : 4,
+    "maxHp"      : 4,
+    "maxAp"      : 4,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Rifle",
+      "description" : "",
+      "apCost"      : 2,
+      "power"       : 1,
+      "hits"        : 3,
+      "minRange"    : 1,
+      "maxRange"    : 2
+    },
+
+    "action2": {
+      "name"        : "Grenade",
+      "description" : "",
+      "apCost"      : 3,
+      "power"       : 3,
+      "hits"        : 1,
+      "minRange"    : 2,
+      "maxRange"    : 2
+    }
+  }
+
+}
