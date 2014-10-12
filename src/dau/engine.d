@@ -49,12 +49,13 @@ enum Settings {
 
 /// paths to configuration files and content
 enum Paths : string {
-  bitmapDir           = "content/image",
-  textureData         = "data/textures.json",
-  fontData            = "content/fonts.cfg",
-  mapDir              = "content/maps",
-  soundData           = "content/sounds.cfg",
-  musicData           = "content/music.cfg",
+  bitmapDir   = "content/image",
+  fontData    = "content/fonts.cfg",
+  mapDir      = "content/maps",
+  soundData   = "content/sounds.cfg",
+  musicData   = "content/music.cfg",
+  textureData = "data/textures.json",
+  unitData    = "data/units.json",
 }
 
 // allegro initialization

@@ -4,13 +4,17 @@ import dau.engine;
 import dau.entity;
 import dau.util.jsonizer;
 import dau.graphics.all;
+import dau.geometry.all;
 import dau.tool.tiled;
 
 class Unit : Entity {
   const UnitData data;
   alias data this;
 
-  this(string key) {
+  //TODO: pass tile instead of pos?
+  this(string key, Vector2i pos) {
+    auto sprite = new Animation(key, "idle", Animation.Repeat.loop);
+    super(pos, sprite, "unit");
     assert(key in _data, "no unit data matches key "  ~ key);
     data = _data[key];
   }
@@ -19,7 +23,7 @@ class Unit : Entity {
 class UnitData {
   mixin JsonizeMe;
 
-  @jsonize const {
+  @jsonize {
     string name;
     int deployCost;
     int maxHp;
@@ -33,7 +37,7 @@ class UnitData {
 class UnitAction {
   mixin JsonizeMe;
 
-  @jsonize const {
+  @jsonize {
     string name;
     string description;
     int apCost;
