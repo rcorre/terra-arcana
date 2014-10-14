@@ -10,6 +10,8 @@
     "action1": {
       "name"        : "Rifle",
       "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
       "apCost"      : 2,
       "power"       : 1,
       "hits"        : 3,
@@ -20,12 +22,145 @@
     "action2": {
       "name"        : "Grenade",
       "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
       "apCost"      : 3,
       "power"       : 3,
       "hits"        : 1,
       "minRange"    : 2,
       "maxRange"    : 2
     }
-  }
+  },
 
+  "guardian": {
+    "name"       : "Guardian",
+    "deployCost" : 4,
+    "maxHp"      : 4,
+    "maxAp"      : 3,
+    "baseArmor"  : 1,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Shotgun",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 2,
+      "power"       : 3,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 1
+    },
+
+    "action2": {
+      "name"        : "Concussor",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "stun",
+      "apCost"      : 2,
+      "power"       : 0,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 2
+    }
+  },
+
+  "sniper": {
+    "name"       : "Sniper",
+    "deployCost" : 4,
+    "maxHp"      : 4,
+    "maxAp"      : 4,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Sniper",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 3,
+      "power"       : 3,
+      "hits"        : 1,
+      "minRange"    : 2,
+      "maxRange"    : 3
+    },
+
+    "action2": {
+      "name"        : "AP Mine",
+      "description" : "",
+      "target"      : "ground",
+      "effect"      : "damage",
+      "apCost"      : 2,
+      "power"       : 3,
+      "hits"        : 1,
+      "minRange"    : 0,
+      "maxRange"    : 0
+    }
+  },
+
+  "medic": {
+    "name"       : "Medic",
+    "deployCost" : 4,
+    "maxHp"      : 4,
+    "maxAp"      : 4,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Aid",
+      "description" : "",
+      "target"      : "ally",
+      "effect"      : "heal",
+      "apCost"      : 2,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 1
+    },
+
+    "action2": {
+      "name"        : "Smoke",
+      "description" : "",
+      "target"      : "ally",
+      "effect"      : "evade",
+      "apCost"      : 3,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 2
+    }
+  },
+
+  "antlion": {
+    "name"       : "Antlion",
+    "deployCost" : 4,
+    "maxHp"      : 4,
+    "maxAp"      : 4,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Bite",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 2,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 1
+    },
+
+    "action2": {
+      "name"        : "Screech",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "evade",
+      "apCost"      : 2,
+      "power"       : -2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 2
+    }
+  }
 }

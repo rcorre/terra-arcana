@@ -37,17 +37,37 @@ class UnitData {
 class UnitAction {
   mixin JsonizeMe;
 
+  enum Target {
+    enemy,
+    ally,
+    self,
+    ground
+  }
+
+  enum Effect {
+    damage, /// reduce hp
+    stun,   /// reduce ap
+    heal,   /// restore hp
+    armor,  /// adjust armor
+    evade,  /// adjust evade
+  }
+
+  enum Special {
+    pierce,  /// ignore armor
+    precise, /// ignore evasion
+  }
+
   @jsonize {
     string name;
     string description;
+    Target target;
+    Effect effect;
     int apCost;
     int power;  /// damage or healing
     int hits;   /// number of times to hit
     int minRange;
     int maxRange;
-
-    bool piercing;
-    bool precise;
+    Special[] specials;
   }
 }
 
