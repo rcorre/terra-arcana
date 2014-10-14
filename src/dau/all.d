@@ -1,6 +1,7 @@
 module dau.all;
 
 public import dau.engine;
+public import dau.input;
 public import dau.entity;
 public import dau.gamestate;
 public import dau.geometry.all;

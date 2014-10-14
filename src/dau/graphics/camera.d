@@ -5,13 +5,8 @@ import dau.geometry.all;
 
 class Camera {
   this(int width, int height) {
-    _area = Rect2i(bounds.topLeft, width, height);
-    _bounds = Rect2i(0, 0, width, height);
-  }
-
-  this(int width, int height, Rect2i bounds) {
-    _area = Rect2i(bounds.topLeft, width, height);
-    _bounds = bounds;
+    _area = Rect2f(0, 0, width, height);
+    _bounds = _area;
   }
 
   @property {
@@ -23,24 +18,24 @@ class Camera {
     }
 
     auto bounds() { return _bounds; }
-    void bounds(Rect2i bounds) {
-      _bounds = bounds;
+    void bounds(T)(Rect2!T bounds) {
+      _bounds = cast(Rect2f) bounds;
       _area.keepInside(bounds);
     }
   }
 
-  void move(Vector2i disp) {
-    _area.center = _area.center + disp;
+  void move(T)(Vector2!T disp) {
+    _area.center = _area.center + cast(Vector2f) disp;
     _area.keepInside(_bounds);
   }
 
-  void place(Vector2i center) {
-    _area.center = center;
+  void place(T)(Vector!T center) {
+    _area.center = cast(Vector2f) center;
     _area.keepInside(_bounds);
   }
 
   private:
-  Rect2i _area, _bounds;
+  Rect2f _area, _bounds;
   ALLEGRO_TRANSFORM _transform;
 }
 

@@ -30,6 +30,7 @@ public import allegro5.allegro_acodec;
 
 import dau.gamestate;
 import dau.entity;
+import dau.input;
 
 alias InitFunction = void function();
 alias ShutdownFunction = void function();
@@ -106,6 +107,8 @@ int runGame() {
         }
       }
 
+      shutdownGame();
+
       return 0;
   });
 }
@@ -114,6 +117,7 @@ void shutdownGame() {
   foreach(fn ; _deInitializers) {
     fn();
   }
+  _run = false;
 }
 
 void onInit(InitFunction fn) {
@@ -144,7 +148,7 @@ bool processEvents() {
       }
     case ALLEGRO_EVENT_DISPLAY_CLOSE:
       {
-        _run = false;
+        shutdownGame();
         break;
       }
     case ALLEGRO_EVENT_KEY_DOWN:
@@ -153,7 +157,7 @@ bool processEvents() {
         {
           case ALLEGRO_KEY_ESCAPE:
             {
-              _run = false;
+              shutdownGame();
               break;
             }
           default:
@@ -172,6 +176,7 @@ void mainUpdate() {
   last_update_time = current_time;
   updateEntities(delta);
   updateState(delta);
+  Input.update(delta);
 }
 
 void mainDraw() {
