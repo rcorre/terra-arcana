@@ -15,11 +15,13 @@ class Tile : Entity {
     super(pos, sprite, "tile");
     row = data.row;
     col = data.col;
+    name = data.properties.get("name", "ground");
     cover = data.properties.get("cover", "0").to!int;
     impassable = data.properties.get("impassable", "false").to!bool;
   }
 
   const {
+    string name;
     int row, col;
     int cover;
     bool impassable;
