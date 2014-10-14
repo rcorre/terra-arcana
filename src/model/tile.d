@@ -10,7 +10,7 @@ class Tile : Entity {
   enum size = 32;
 
   this(TileData data) {
-    auto pos = Vector2i(data.row, data.col) * size;
+    auto pos = Vector2i(data.col, data.row) * size + Vector2i(size, size) / 2;
     auto sprite = new Sprite(getTexture(data.tilesetName), data.tilesetIdx);
     super(pos, sprite, "tile");
     row = data.row;

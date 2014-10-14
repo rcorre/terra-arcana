@@ -9,7 +9,7 @@ import model.tile;
 
 class TileMap : Entity {
   this(string key) {
-    auto path = "%s/%s.json".format(Paths.mapDir, key);
+    auto path = "%s/%s.json".format(cast(string) Paths.mapDir, key);
     auto map = loadTiledMap(path);
     auto terrain = map.layerTileData("terrain");
     foreach(data ; terrain) {

@@ -34,7 +34,7 @@ class SpriteBatch {
   }
 
   private:
-  alias SpriteStore = RedBlackTree!(Sprite, (a,b) => a.depth < b.depth);
+  alias SpriteStore = RedBlackTree!(Sprite, (a,b) => a.depth < b.depth, true); // allow duplicates
   SpriteStore _sprites;
   Camera _camera;
 }
