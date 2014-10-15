@@ -18,8 +18,11 @@ class TileMap : Entity {
     numCols = map.width;
     numRows = map.height;
     auto terrain = map.layerTileData("terrain");
+    _tiles = new Tile[][numRows];
     foreach(data ; terrain) {
-      registerEntity(new Tile(data));
+      auto tile = new Tile(data);
+      registerEntity(tile);
+      _tiles[tile.row] ~= tile;
     }
 
     auto area = Rect2i(Vector2i.zero, Vector2i(map.width, map.height) * Tile.size);
@@ -29,4 +32,17 @@ class TileMap : Entity {
   @property {
     auto totalSize() { return Vector2i(numCols, numRows) * Tile.size; }
   }
+
+  auto tileAt(int row, int col) {
+    return _tiles[row][col];
+  }
+
+  auto tileAt(Vector2i pos) {
+    int row = pos.y / Tile.size;
+    int col = pos.x % Tile.size;
+    return tileAt(row, col);
+  }
+
+  private:
+  Tile[][] _tiles;
 }

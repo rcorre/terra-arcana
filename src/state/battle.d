@@ -1,7 +1,7 @@
 module state.battle;
 
 import dau.all;
-import model.tilemap;
+import model.all;
 
 private enum {
   cameraScrollSpeed = 12,
@@ -13,6 +13,8 @@ class Battle : GameState {
       _map = new TileMap("test");
       registerEntity(_map);
       mainCamera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) _map.totalSize);
+      auto unit = new Unit("sniper", _map.tileAt(3, 3));
+      registerEntity(unit);
     }
 
     void update(float time) { 
@@ -28,4 +30,5 @@ class Battle : GameState {
 
   private:
   TileMap _map;
+  Unit[] _units;
 }

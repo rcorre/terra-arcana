@@ -5,19 +5,33 @@ import dau.entity;
 import dau.util.jsonizer;
 import dau.graphics.all;
 import dau.geometry.all;
-import dau.tool.tiled;
+import model.tile;
+
+private enum unitDepth = 1;
 
 class Unit : Entity {
   const UnitData data;
   alias data this;
 
   //TODO: pass tile instead of pos?
-  this(string key, Vector2i pos) {
-    auto sprite = new Animation(key, "idle", Animation.Repeat.loop);
-    super(pos, sprite, "unit");
+  this(string key, Tile tile) {
+    auto sprite = new Animation(key, "idle", Animation.Repeat.loop, unitDepth);
+    super(tile.center, sprite, "unit");
     assert(key in _data, "no unit data matches key "  ~ key);
     data = _data[key];
+    _tile = tile;
   }
+
+  @property {
+    auto tile() { return _tile; }
+    auto tile(Tile newTile) { 
+      _tile = newTile; 
+      center = tile.center;
+    }
+  }
+
+  private:
+  Tile _tile;
 }
 
 class UnitData {

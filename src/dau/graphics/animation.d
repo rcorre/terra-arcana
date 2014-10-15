@@ -15,9 +15,11 @@ class Animation : Sprite {
     rebound      /// reverse animation direction
   }
 
-  this(string textureName, string key, Repeat repeat = Repeat.no, Action onAnimationEnd = null) {
+  this(string textureName, string key, Repeat repeat = Repeat.no, int depth = 0, 
+      Action onAnimationEnd = null) 
+  { 
     auto texture = getTexture(textureName);
-    super(texture);
+    super(texture, 0, depth);
     _startCol       = 0;
     _endCol         = texture.numCols;
     _row            = texture.rowByName(key);
