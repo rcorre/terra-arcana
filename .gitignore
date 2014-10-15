@@ -2,9 +2,7 @@
 haven
 
 # content (generated from resources by Makefile)
-content/image/*.png
-content/music/*.ogg
-content/sound/*.wav
+content/
 
 # dub files
 .dub
