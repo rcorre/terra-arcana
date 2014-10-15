@@ -17,13 +17,13 @@ MMPZFILES := $(wildcard $(MMPZDIR)/*.mmpz)
 all: debug
 
 debug: content
-	dub build
+	@dub build
 
 release: content
-	dub build release
+	@dub build release
 
 run: content
-	dub run
+	@dub run
 
 content: dirs sprites music
 
