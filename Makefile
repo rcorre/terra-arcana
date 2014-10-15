@@ -17,13 +17,13 @@ MMPZFILES := $(wildcard $(MMPZDIR)/*.mmpz)
 all: debug
 
 debug: content
-	@dub build
+	@dub build --quiet
 
 release: content
-	@dub build release
+	@dub build release --quiet
 
 run: content
-	@dub run
+	@dub run --quiet 
 
 content: dirs sprites music
 
@@ -34,7 +34,7 @@ dirs:
 
 sprites: $(SPRITES:%=$(PNGDIR)/%.png)
 
-$(PNGDIR)/%.png : $(ASEDIR)/%
+$(PNGDIR)/%.png : $(ASEDIR)/%/*
 	@echo building sprite $*
 	@./tools/build-spritesheet.sh $(ASEDIR)/$*
 
