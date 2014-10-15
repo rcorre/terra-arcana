@@ -7,12 +7,14 @@ MMPZDIR = resources/mmpz
 PNGDIR = content/image
 OGGDIR = content/music
 WAVDIR = content/sound
+GUIDIR = $(PNGDIR)/gui
 
 # Source files
-#ASEFILES := $(wildcard $(ASEDIR)/*.ase)
+#ASEFILES  := $(wildcard $(ASEDIR)/*.ase)
 SPRITEDIRS := $(sort $(dir $(wildcard $(ASEDIR)/*/)))
-SPRITES := $(notdir $(SPRITEDIRS:%/=%))
-MMPZFILES := $(wildcard $(MMPZDIR)/*.mmpz)
+SPRITES    := $(notdir $(SPRITEDIRS:%/=%))
+MMPZFILES  := $(wildcard $(MMPZDIR)/*.mmpz)
+GUIFILES   := $(wildcard $(SVGDIR)/*.svg)
 
 all: debug
 
@@ -25,10 +27,10 @@ release: content
 run: content
 	@dub run --quiet 
 
-content: dirs sprites music
+content: dirs sprites gui music
 
 dirs:
-	@mkdir -p $(PNGDIR) $(OGGDIR)
+	@mkdir -p $(PNGDIR) $(OGGDIR) $(GUIDIR) $(WAVDIR)
 
 #sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(PNGDIR)/%.png)
 
@@ -40,12 +42,15 @@ $(PNGDIR)/%.png : $(ASEDIR)/%/*
 
 music: $(MMPZFILES:$(MMPZDIR)/%.mmpz=$(OGGDIR)/%.ogg)
 
-#$(PNGDIR)/%.png : $(ASEDIR)/%.ase
-#	@aseprite --batch --sheet $(PNGDIR)/$*.png $(ASEDIR)/$*.ase --data /dev/null
-
 $(OGGDIR)/%.ogg : $(MMPZDIR)/%.mmpz
-	@building song $*
+	@echo building song $*
 	@-! { lmms -r $(MMPZDIR)/$*.mmpz -f ogg -o $(OGGDIR)/$*.ogg ; } >/dev/null 2>&1
+
+gui: $(GUIFILES:$(SVGDIR)/%.svg=$(GUIDIR)/%.png)
+
+$(GUIDIR)/%.png : $(SVGDIR)/%.svg
+	@echo building gui image $*
+	@inkscape $(SVGDIR)/$*.svg --export-png=$(GUIDIR)/$*.png
 
 clean:
 	@$(RM) $(PNGDIR)/*.png
