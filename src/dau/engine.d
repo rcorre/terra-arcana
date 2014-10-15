@@ -31,6 +31,7 @@ public import allegro5.allegro_acodec;
 import dau.gamestate;
 import dau.entity;
 import dau.input;
+import dau.gui.manager;
 
 alias InitFunction = void function();
 alias ShutdownFunction = void function();
@@ -183,5 +184,6 @@ void mainDraw() {
   al_clear_to_color(al_map_rgb(0,0,0));
   drawEntities();
   drawState();
+  drawGUI();
   al_flip_display();
 }

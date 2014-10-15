@@ -12,6 +12,7 @@ import dau.util.math;
 
 /// displays a single frame of a texture
 class Sprite {
+  /// create a sprite from a subsection of the bitmap
   this(string textureName, string spriteName, int depth = 0) {
     _texture = getTexture(textureName);
     int idx = _texture.spriteIdx(spriteName);
@@ -20,6 +21,7 @@ class Sprite {
     _depth = depth;
   }
 
+  /// create a sprite from a subsection of the bitmap
   this(Texture spriteSheet, int spriteIdx = 0, int depth = 0) {
     _texture = spriteSheet;
     _row = spriteIdx / _texture.numCols;
@@ -66,14 +68,13 @@ class Sprite {
     _jiggleEffect.update(time);
   }
 
-  void draw() {
+  void draw(Vector2i pos) {
     auto adjustedPos = pos + _jiggleEffect.offset;
     _texture.draw(adjustedPos, _row, _col, scale, _tint, _angle);
   }
 
   @property {
     ref int depth() { return _depth; }
-    ref auto pos() { return _pos; }
     /// width of the sprite after scaling (px)
     int width() { return cast(int) (_texture.frameWidth * scale.x); }
     /// height of the sprite after scaling (px)
@@ -103,7 +104,6 @@ class Sprite {
 
   private:
   int _depth;
-  Vector2i _pos;
   Texture _texture;
   Vector2f _scaleFactor = Vector2f(1, 1);
   float _angle          = 0;

@@ -106,6 +106,11 @@ unittest {
   vals = [];
   foreach(el ; list) {
     vals ~= el.val;
+    el.active = false;
   }
   assert(vals == [6, 3]);
+
+  foreach(el ; list) { // should never be entered
+    assert(0, "vals should be empty");
+  }
 }

@@ -13,9 +13,12 @@ class SpriteBatch {
     _sprites = new SpriteStore;
   }
 
-  void draw(Sprite sprite) {
+  void draw(Sprite sprite, Vector2i pos) {
     if (sprite !is null) {
-      _sprites.insert(sprite);
+      Entry entry;
+      entry.sprite = sprite;
+      entry.pos = pos;
+      _sprites.insert(entry);
     }
   }
 
@@ -25,8 +28,8 @@ class SpriteBatch {
     al_copy_transform(&prevTrans, al_get_current_transform());
     al_use_transform(_camera.transform);
 
-    foreach(sprite ; _sprites) {
-      sprite.draw();
+    foreach(entry ; _sprites) {
+      entry.sprite.draw(entry.pos);
     }
 
     al_use_transform(&prevTrans); // restore old transform
@@ -34,7 +37,13 @@ class SpriteBatch {
   }
 
   private:
-  alias SpriteStore = RedBlackTree!(Sprite, (a,b) => a.depth < b.depth, true); // allow duplicates
+  struct Entry {
+    Sprite sprite;
+    Vector2i pos;
+  }
+
+  // true indicates: allow duplicates
+  alias SpriteStore = RedBlackTree!(Entry, (a,b) => a.sprite.depth < b.sprite.depth, true);
   SpriteStore _sprites;
   Camera _camera;
 }
