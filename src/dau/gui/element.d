@@ -31,6 +31,8 @@ class GUIElement {
 
   @property {
     auto area() { return _area; }
+    auto sprite() { return _sprite; }
+
     bool active() { return _active; }
     void active(bool val) { _active = val; }
   }

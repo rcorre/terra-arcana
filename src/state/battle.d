@@ -2,6 +2,7 @@ module state.battle;
 
 import dau.all;
 import model.all;
+import gui.unitinfo;
 
 private enum {
   cameraScrollSpeed = 12,
@@ -43,7 +44,7 @@ class Battle : GameState {
   TileMap _map;
   Unit[] _units;
   Tile _tileUnderMouse;
-  GUIElement _unitInfo;
+  UnitInfoGUI _unitInfo;
 
   void clearUnitInfo() {
     if (_unitInfo !is null) {
@@ -54,7 +55,7 @@ class Battle : GameState {
 
   void setUnitInfo(Unit unit) {
     clearUnitInfo();
-    _unitInfo = new GUIElement(new Sprite("gui/unit_status"), unit.area.bottomRight);
+    _unitInfo = new UnitInfoGUI(unit);
     addGUIElement(_unitInfo);
   }
 }
