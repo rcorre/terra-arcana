@@ -15,6 +15,7 @@ class Battle : GameState {
       mainCamera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) _map.totalSize);
       auto unit = new Unit("sniper", _map.tileAt(3, 3));
       registerEntity(unit);
+      addGUIElement(new GUIElement(new Sprite("gui/unit_status"), Vector2i(00, 00)));
     }
 
     void update(float time) { 

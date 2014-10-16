@@ -13,9 +13,9 @@ import dau.util.math;
 /// displays a single frame of a texture
 class Sprite {
   /// create a sprite from a subsection of the bitmap
-  this(string textureName, string spriteName, int depth = 0) {
+  this(string textureName, string spriteName = null, int depth = 0) {
     _texture = getTexture(textureName);
-    int idx = _texture.spriteIdx(spriteName);
+    int idx = (spriteName is null) ? 0 : _texture.spriteIdx(spriteName);
     _row = idx / _texture.numCols;
     _col = idx % _texture.numCols;
     _depth = depth;

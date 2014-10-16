@@ -177,6 +177,7 @@ void mainUpdate() {
   last_update_time = current_time;
   updateEntities(delta);
   updateState(delta);
+  updateGUI(delta);
   Input.update(delta);
 }
 

@@ -9,7 +9,7 @@ void addGUIElement(GUIElement el) {
 }
 
 void clearGUI() {
-  _topElement = new GUIElement(Settings.screenW, Settings.screenH);
+  _topElement = new GUIElement(Rect2i(0, 0, Settings.screenW, Settings.screenH));
 }
 
 void updateGUI(float time) {

@@ -10,26 +10,23 @@ class GUIElement {
     topLeft
   }
 
-  this(int width, int height) {
-    _area = Rect2i(0, 0, width, height);
-    _children = new ChildList;
-  }
-
-  this(string textureName, Anchor anchor = Anchor.topLeft) {
-    _sprite = new Sprite(getTexture(textureName));
-    _children = new ChildList;
-  }
-
-  this(string textureName, string spriteName, Vector2i pos, Anchor anchor = Anchor.topLeft) {
-    _sprite = new Sprite(textureName, spriteName);
+  this(Sprite sprite, Vector2i pos, Anchor anchor = Anchor.topLeft) {
+    _sprite = sprite;
+    Rect2i area;
     final switch (anchor) with (Anchor) {
-      case center:
-        _area = Rect2i(pos, _sprite.width, _sprite.height);
-        break;
       case topLeft:
-        _area = Rect2i.centeredAt(pos, _sprite.width, _sprite.height);
+        area = Rect2i(pos, _sprite.width, _sprite.height);
+        break;
+      case center:
+        area = Rect2i.centeredAt(pos, _sprite.width, _sprite.height);
         break;
     }
+    this(area);
+  }
+
+  this(Rect2i area) {
+    _area = area;
+    _children = new ChildList;
   }
 
   @property {
@@ -73,5 +70,5 @@ class GUIElement {
   Sprite _sprite;
   Rect2i _area;
   ChildList _children;
-  bool _active;
+  bool _active = true;
 }

@@ -89,19 +89,30 @@ class Texture {
   ALLEGRO_BITMAP* _bmp;
   const string[] _rows, _sprites;
 
-  this(ALLEGRO_BITMAP *bmp, TextureData data)
-  {
+  this(ALLEGRO_BITMAP *bmp, TextureData data) {
+    _bmp        = bmp;
+    frameWidth  = data.frameSize;
+    frameHeight = data.frameSize;
+    frameTime   = data.frameTimeMs / 1000f;
+    _rows       = data.rows;
+    _sprites    = data.sprites;
+  }
+
+  this(ALLEGRO_BITMAP *bmp) {
     _bmp             = bmp;
-    this.frameWidth  = data.frameSize;
-    this.frameHeight = data.frameSize;
-    this.frameTime   = data.frameTimeMs / 1000f;
-    _rows            = data.rows;
-    _sprites         = data.sprites;
+    frameWidth  = width;
+    frameHeight = height;
+    frameTime = 0;
+    _rows = [];
+    _sprites = [];
   }
 }
 
 Texture getTexture(string name) {
-  assert(name in _textureStore, name ~ " could not be found in " ~ Paths.textureData);
+  if (name !in _textureStore) {
+    auto bmp = loadBitmap(name);
+    _textureStore[name] = new Texture(bmp);
+  }
   return _textureStore[name];
 }
 
@@ -116,14 +127,18 @@ void loadTextures() {
   auto textureData = Paths.textureData.readJSON!(TextureData[]);
   foreach (data ; textureData) {
     foreach(name ; data.sheets) {
-      auto path = pathFormat.format(name);
-      assert(path.exists, format("texture path %s does not exist", path));
-      auto bmp = al_load_bitmap(path.toStringz);
-      assert(bmp, format("failed to load image %s", path));
-
+      auto bmp = loadBitmap(name);
       _textureStore[name] = new Texture(bmp, data);
     }
   }
+}
+
+auto loadBitmap(string name) {
+  auto path = pathFormat.format(name);
+  assert(path.exists, format("texture path %s does not exist", path));
+  auto bmp = al_load_bitmap(path.toStringz);
+  assert(bmp, format("failed to load image %s", path));
+  return bmp;
 }
 
 void unloadTextures() { // destroy all bitmaps and clear texture store
