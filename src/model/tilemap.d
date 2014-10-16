@@ -39,7 +39,7 @@ class TileMap : Entity {
 
   auto tileAt(Vector2i pos) {
     int row = pos.y / Tile.size;
-    int col = pos.x % Tile.size;
+    int col = pos.x / Tile.size;
     return tileAt(row, col);
   }
 

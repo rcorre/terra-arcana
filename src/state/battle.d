@@ -23,7 +23,10 @@ class Battle : GameState {
       if (tile !is null && _tileUnderMouse != tile) { // moved cursor to new tile
         _tileUnderMouse = tile;
         auto unit = cast(Unit) tile.entity;
-        if (unit !is null) {
+        if (unit is null) {
+          clearUnitInfo();
+        }
+        else {
           setUnitInfo(unit);
         }
       }
@@ -50,6 +53,7 @@ class Battle : GameState {
   }
 
   void setUnitInfo(Unit unit) {
+    clearUnitInfo();
     _unitInfo = new GUIElement(new Sprite("gui/unit_status"), unit.area.bottomRight);
     addGUIElement(_unitInfo);
   }
