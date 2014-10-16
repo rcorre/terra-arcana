@@ -28,4 +28,5 @@ class Tile : Entity {
     int cover;
     bool impassable;
   }
+  Entity entity;
 }

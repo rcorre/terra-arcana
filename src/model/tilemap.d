@@ -34,7 +34,7 @@ class TileMap : Entity {
   }
 
   auto tileAt(int row, int col) {
-    return _tiles[row][col];
+    return (row < 0 || col < 0 || row >= numRows || col >= numCols) ? null : _tiles[row][col];
   }
 
   auto tileAt(Vector2i pos) {

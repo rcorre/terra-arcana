@@ -32,6 +32,7 @@ class GUIElement {
   @property {
     auto area() { return _area; }
     bool active() { return _active; }
+    void active(bool val) { _active = val; }
   }
 
   void update(float time) {
@@ -55,13 +56,6 @@ class GUIElement {
   final {
     void addChild(GUIElement el) {
       _children.insert(el);
-    }
-
-    void destroy() {
-      _active = false;
-      foreach(child ; _children) {
-        child.destroy();
-      }
     }
   }
 

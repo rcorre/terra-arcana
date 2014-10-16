@@ -1,5 +1,6 @@
 module model.unit;
 
+import std.string : format;
 import dau.engine;
 import dau.entity;
 import dau.util.jsonizer;
@@ -19,13 +20,16 @@ class Unit : Entity {
     super(tile.center, sprite, "unit");
     assert(key in _data, "no unit data matches key "  ~ key);
     data = _data[key];
-    _tile = tile;
+    this.tile = tile;
   }
 
   @property {
     auto tile() { return _tile; }
     auto tile(Tile newTile) { 
+      assert(newTile.entity is null, "cannot place %s on tile %d,%d which already has entity"
+          .format(name, newTile.row, newTile.col));
       _tile = newTile; 
+      _tile.entity = this;
       center = tile.center;
     }
   }
