@@ -91,20 +91,20 @@ class Texture {
 
   this(ALLEGRO_BITMAP *bmp, TextureData data) {
     _bmp        = bmp;
-    frameWidth  = data.frameSize;
-    frameHeight = data.frameSize;
+    frameWidth  = data.frameWidth;
+    frameHeight = data.frameHeight;
     frameTime   = data.frameTimeMs / 1000f;
     _rows       = data.rows;
     _sprites    = data.sprites;
   }
 
   this(ALLEGRO_BITMAP *bmp) {
-    _bmp             = bmp;
+    _bmp        = bmp;
     frameWidth  = width;
     frameHeight = height;
-    frameTime = 0;
-    _rows = [];
-    _sprites = [];
+    frameTime   = 0;
+    _rows       = [];
+    _sprites    = [];
   }
 }
 
@@ -156,7 +156,11 @@ class TextureData {
     string[] sheets;
     string[] sprites;
     string[] rows;
-    int frameSize;
+    int frameWidth, frameHeight;
     int frameTimeMs;
+    @property {
+      auto frameSize() { return frameWidth; }
+      void frameSize(int size) { frameWidth = frameHeight = size; }
+    }
   }
 }

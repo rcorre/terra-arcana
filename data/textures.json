@@ -7,6 +7,13 @@
   },
 
   {
+    "sheets" : ["gui/pip"],
+    "frameWidth": 10,
+    "frameHeight": 20,
+    "sprites": ["hpPip", "apPip"]
+  },
+
+  {
     "sheets" : ["terrain"],
     "frameSize": 32
   }
