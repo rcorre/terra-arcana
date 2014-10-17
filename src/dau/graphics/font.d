@@ -12,7 +12,7 @@ enum fileFormat = Paths.fontDir ~ "/%s.ttf"; // TODO: support other formats
 
 /// TODO: should I use std.ascii.newline instead of '\n'?
 /// Wrapper around ALLEGRO_FONT
-class Font {
+struct Font {
   this(string name, int size) {
     if (name !in _fontStore || size !in _fontStore[name]) {
       auto file = fileFormat.format(name);
@@ -25,7 +25,7 @@ class Font {
 
   int heightOf(string text) {
     auto lines = text.splitter('\n');
-    return al_get_font_line_height(_font) * cast(int) lines.count("\n");
+    return al_get_font_line_height(_font) * (cast(int) lines.count("\n") + 1);
   }
 
   int widthOf(string text) {

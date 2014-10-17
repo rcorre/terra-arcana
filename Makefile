@@ -2,12 +2,14 @@
 ASEDIR = resources/ase
 SVGDIR = resources/svg
 MMPZDIR = resources/mmpz
+TTFDIR = resources/font
 
 # Content directories
-PNGDIR = content/image
-OGGDIR = content/music
-WAVDIR = content/sound
-GUIDIR = $(PNGDIR)/gui
+PNGDIR  = content/image
+OGGDIR  = content/music
+WAVDIR  = content/sound
+GUIDIR  = $(PNGDIR)/gui
+FONTDIR = content/font
 
 # Source files
 #ASEFILES  := $(wildcard $(ASEDIR)/*.ase)
@@ -15,6 +17,7 @@ SPRITEDIRS := $(sort $(dir $(wildcard $(ASEDIR)/*/)))
 SPRITES    := $(notdir $(SPRITEDIRS:%/=%))
 MMPZFILES  := $(wildcard $(MMPZDIR)/*.mmpz)
 GUIFILES   := $(wildcard $(SVGDIR)/*.svg)
+FONTFILES  := $(wildcard $(TTFDIR)/*.ttf)
 
 all: debug
 
@@ -27,7 +30,7 @@ release: content
 run: content
 	@dub run --quiet 
 
-content: dirs sprites gui music
+content: dirs sprites gui music fonts
 
 dirs:
 	@mkdir -p $(PNGDIR) $(OGGDIR) $(GUIDIR) $(WAVDIR)
@@ -51,6 +54,11 @@ gui: $(GUIFILES:$(SVGDIR)/%.svg=$(GUIDIR)/%.png)
 $(GUIDIR)/%.png : $(SVGDIR)/%.svg
 	@echo building gui image $*
 	@inkscape $(SVGDIR)/$*.svg --export-png=$(GUIDIR)/$*.png
+
+fonts: $(FONTFILES:$(TTFDIR)/%.ttf=$(FONTDIR)/%.ttf)
+
+$(FONTDIR)/%.ttf : $(TTFDIR)/%.ttf
+	@cp $(TTFDIR)/$*.ttf $(FONTDIR)/$*.ttf
 
 clean:
 	@$(RM) $(PNGDIR)/*.png

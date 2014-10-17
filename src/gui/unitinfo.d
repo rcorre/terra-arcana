@@ -1,5 +1,6 @@
 module gui.unitinfo;
 
+import dau.engine;
 import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.all;
@@ -7,8 +8,8 @@ import model.unit;
 
 private enum {
   spriteName  = "gui/unit_status",
-  armorOffset = Vector2i(25, 21),
-  evadeOffset = Vector2i(224, 36),
+  armorOffset = Vector2i(29, 29),
+  evadeOffset = Vector2i(229, 29),
   hpArea      = Rect2i(56, 8, 141, 21),
   apArea      = Rect2i(56, 32, 77, 21),
 }
@@ -18,12 +19,29 @@ class UnitInfoGUI : GUIElement {
   this(Unit unit) {
     // TODO: choose corner of unit based on screen positioning
     super(new Sprite("gui/unit_status"), unit.area.bottomRight);
-    addChild(new PipBar(hpArea, unit.maxHp, new Sprite("gui/pip", "hpPip")));
-    addChild(new PipBar(apArea, unit.maxAp, new Sprite("gui/pip", "apPip")));
+    _hpBar = new PipBar(hpArea, unit.maxHp, new Sprite("gui/pip", "hpPip"));
+    _apBar = new PipBar(apArea, unit.maxAp, new Sprite("gui/pip", "apPip"));
+    _armorText = new TextBox(unit.baseArmor, _font, armorOffset, GUIElement.Anchor.center);
+    _evadeText = new TextBox(unit.baseEvade, _font, evadeOffset, GUIElement.Anchor.center);
+    addChild(_hpBar);
+    addChild(_apBar);
+    addChild(_armorText);
+    addChild(_evadeText);
   }
+
+  private:
+  PipBar _hpBar, _apBar;
+  TextBox _armorText, _evadeText;
+}
+
+private:
+Font _font;
+
+static this() {
+  onInit({ _font = Font("Mecha_Bold", 16); });
 }
 
 // TODO:
-// add pip bars to unitinfo
+// show dimmed pips
 // dau font
 // dau gui textbox

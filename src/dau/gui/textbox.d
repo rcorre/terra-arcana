@@ -1,20 +1,21 @@
 module dau.gui.textbox;
 
+import std.conv;
 import dau.gui.element;
 import dau.geometry.all;
 import dau.graphics.color;
 import dau.graphics.font;
 
 class TextBox : GUIElement {
-  this(string text, Font font, Vector2i pos, Color color = Color.black,
-      Anchor anchor = Anchor.topLeft)
+  this(T)(T text, Font font, Vector2i pos, Anchor anchor = Anchor.topLeft,
+      Color color = Color.black)
   {
-    _text = text;
+    _text = text.to!string;
     _font = font;
     _color = color;
     Rect2i textArea;
-    int width = _font.widthOf(text);
-    int height = _font.heightOf(text);
+    int width = _font.widthOf(_text);
+    int height = _font.heightOf(_text);
     final switch (anchor) with (Anchor) {
       case topLeft:
         textArea = Rect2i(pos, width, height);
