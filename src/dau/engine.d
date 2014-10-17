@@ -52,7 +52,7 @@ enum Settings {
 /// paths to configuration files and content
 enum Paths : string {
   bitmapDir   = "content/image",
-  fontData    = "content/fonts.cfg",
+  fontDir     = "content/font",
   soundData   = "content/sounds.cfg",
   musicData   = "content/music.cfg",
   mapDir      = "data/maps",

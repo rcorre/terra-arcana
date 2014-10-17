@@ -1,5 +1,6 @@
 module dau.graphics.all;
 
+public import dau.graphics.font;
 public import dau.graphics.color;
 public import dau.graphics.texture;
 public import dau.graphics.sprite;
