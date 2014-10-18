@@ -28,10 +28,12 @@ public import allegro5.allegro_color;
 public import allegro5.allegro_audio;
 public import allegro5.allegro_acodec;
 
-import dau.gamestate;
+import dau.scene;
 import dau.entity;
 import dau.input;
 import dau.gui.manager;
+import dau.graphics.camera;
+import dau.graphics.spritebatch;
 
 alias InitFunction = void function();
 alias ShutdownFunction = void function();
@@ -99,6 +101,7 @@ int runGame() {
     }
 
     al_start_timer(mainTimer); // start fps timer
+    _spriteBatch = new SpriteBatch();
 
       while(_run) {
         bool frameTick = processEvents();
@@ -133,6 +136,7 @@ private:
 InitFunction[] _initializers;
 ShutdownFunction[] _deInitializers;
 bool _run = true;
+SpriteBatch _spriteBatch;
 
 // returns true if time to render next frame
 bool processEvents() {
@@ -176,15 +180,16 @@ void mainUpdate() {
   float delta = current_time - last_update_time;
   last_update_time = current_time;
   updateEntities(delta);
-  updateState(delta);
+  currentScene.update(delta);
   updateGUI(delta);
   Input.update(delta);
 }
 
 void mainDraw() {
   al_clear_to_color(al_map_rgb(0,0,0));
-  drawEntities();
-  drawState();
+  drawEntities(_spriteBatch);
+  currentScene.draw(_spriteBatch);
+  _spriteBatch.render(mainCamera);
   drawGUI();
   al_flip_display();
 }

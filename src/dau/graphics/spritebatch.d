@@ -8,8 +8,7 @@ import dau.graphics.camera;
 
 // TODO: group textures and use al_hold_bitmap_drawing
 class SpriteBatch {
-  this(Camera camera) {
-    _camera = camera;
+  this() {
     _sprites = new SpriteStore;
   }
 
@@ -22,11 +21,11 @@ class SpriteBatch {
     }
   }
 
-  void render() {
+  void render(Camera camera) {
     // use camera transform, store previous transform
     ALLEGRO_TRANSFORM prevTrans;
     al_copy_transform(&prevTrans, al_get_current_transform());
-    al_use_transform(_camera.transform);
+    al_use_transform(camera.transform);
 
     foreach(entry ; _sprites) {
       entry.sprite.draw(entry.pos);
@@ -45,5 +44,4 @@ class SpriteBatch {
   // true indicates: allow duplicates
   alias SpriteStore = RedBlackTree!(Entry, (a,b) => a.sprite.depth < b.sprite.depth, true);
   SpriteStore _sprites;
-  Camera _camera;
 }

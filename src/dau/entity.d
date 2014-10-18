@@ -59,14 +59,12 @@ void updateEntities(float time) {
   }
 }
 
-void drawEntities() {
-  auto batch = new SpriteBatch(mainCamera);
+void drawEntities(SpriteBatch sb) {
   foreach(list ; _entityMap.values) {
     foreach(entity ; list) {
-      batch.draw(entity._sprite, entity.center);
+      sb.draw(entity._sprite, entity.center);
     }
   }
-  batch.render();
 }
 
 void removeEntity(Entity entity) {

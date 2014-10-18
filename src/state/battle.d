@@ -8,9 +8,9 @@ private enum {
   cameraScrollSpeed = 12,
 }
 
-class Battle : GameState {
+class Battle : Scene {
   override {
-    void start() { 
+    void enter() { 
       _map = new TileMap("test");
       registerEntity(_map);
       mainCamera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) _map.totalSize);
@@ -33,10 +33,10 @@ class Battle : GameState {
       }
     }
 
-    void draw() { 
+    void draw(SpriteBatch sb) { 
     }
 
-    void end() { 
+    void exit() { 
     }
   }
 
