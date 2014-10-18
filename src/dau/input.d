@@ -1,7 +1,8 @@
 module dau.input;
 
 import std.algorithm : max, min, any;
-import dau.engine;
+import dau.setup;
+import dau.allegro;
 import dau.geometry.vector;
 
 private enum MouseButton {

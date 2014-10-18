@@ -1,4 +1,5 @@
 import dau.engine;
+import dau.setup;
 import dau.scene;
 import state.battle;
 

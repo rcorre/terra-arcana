@@ -1,7 +1,7 @@
 module model.unit;
 
 import std.string : format;
-import dau.engine;
+import dau.setup;
 import dau.entity;
 import dau.util.jsonizer;
 import dau.graphics.all;

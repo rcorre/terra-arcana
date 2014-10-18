@@ -1,6 +1,7 @@
 module dau.graphics.camera;
 
-import dau.engine;
+import dau.setup;
+import dau.allegro;
 import dau.geometry.all;
 
 class Camera {

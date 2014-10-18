@@ -18,16 +18,8 @@ else
 	pragma(lib, "allegro_acodec");
 }
 
-// make all allegro functions available
-public import allegro5.allegro;
-public import allegro5.allegro_primitives;
-public import allegro5.allegro_image;
-public import allegro5.allegro_font;
-public import allegro5.allegro_ttf;
-public import allegro5.allegro_color;
-public import allegro5.allegro_audio;
-public import allegro5.allegro_acodec;
-
+import dau.allegro;
+import dau.setup;
 import dau.scene;
 import dau.entity;
 import dau.input;
@@ -35,32 +27,10 @@ import dau.gui.manager;
 import dau.graphics.camera;
 import dau.graphics.spritebatch;
 
-alias InitFunction = void function();
-alias ShutdownFunction = void function();
-
 // global variables
 ALLEGRO_DISPLAY* mainDisplay;
 ALLEGRO_EVENT_QUEUE* mainEventQueue;
 ALLEGRO_TIMER* mainTimer;
-
-/// global settings
-enum Settings {
-  fps     = 60,   /// frames-per-second of update/draw loop
-  screenW = 800,  /// screen width
-  screenH = 600,  /// screen height
-  numAudioSamples = 4,  /// number of audio samples to reserve
-}
-
-/// paths to configuration files and content
-enum Paths : string {
-  bitmapDir   = "content/image",
-  fontDir     = "content/font",
-  soundData   = "content/sounds.cfg",
-  musicData   = "content/music.cfg",
-  mapDir      = "data/maps",
-  textureData = "data/textures.json",
-  unitData    = "data/units.json",
-}
 
 // allegro initialization
 int runGame() {
@@ -96,9 +66,7 @@ int runGame() {
           ALLEGRO_INVERSE_ALPHA);
     }
 
-    foreach(fn ; _initializers) {
-      fn();
-    }
+    runSetupFunctions();
 
     al_start_timer(mainTimer); // start fps timer
     _spriteBatch = new SpriteBatch();
@@ -118,23 +86,10 @@ int runGame() {
 }
 
 void shutdownGame() {
-  foreach(fn ; _deInitializers) {
-    fn();
-  }
   _run = false;
 }
 
-void onInit(InitFunction fn) {
-  _initializers ~= fn;
-}
-
-void onShutdown(ShutdownFunction fn) {
-  _deInitializers ~= fn;
-}
-
 private:
-InitFunction[] _initializers;
-ShutdownFunction[] _deInitializers;
 bool _run = true;
 SpriteBatch _spriteBatch;
 

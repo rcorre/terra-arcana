@@ -3,7 +3,7 @@ module dau.util.config;
 import std.conv;
 import std.algorithm;
 import std.string;
-import dau.engine;
+import dau.allegro;
 
 struct ConfigData {
   string[string][string] entries;

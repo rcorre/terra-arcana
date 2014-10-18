@@ -4,7 +4,8 @@ import std.string;
 import std.conv;
 import std.range;
 import std.algorithm;
-import dau.engine;
+import dau.allegro;
+import dau.setup;
 import dau.geometry.all;
 import dau.graphics.color;
 

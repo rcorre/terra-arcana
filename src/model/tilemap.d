@@ -2,7 +2,7 @@ module model.tilemap;
 
 import std.string;
 import dau.geometry.all;
-import dau.engine;
+import dau.setup;
 import dau.entity;
 import dau.tool.tiled;
 import model.tile;

@@ -1,6 +1,6 @@
 module dau.gui.manager;
 
-import dau.engine;
+import dau.setup;
 import dau.gui.element;
 import dau.geometry.all;
 

@@ -1,6 +1,6 @@
 module gui.unitinfo;
 
-import dau.engine;
+import dau.setup;
 import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.all;

@@ -1,6 +1,6 @@
 module dau.graphics.color;
 
-import dau.engine;
+import dau.allegro;
 import dau.util.math;
 
 alias color = Color;
