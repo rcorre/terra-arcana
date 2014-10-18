@@ -19,14 +19,16 @@ class UnitInfoGUI : GUIElement {
   this(Unit unit) {
     // TODO: choose corner of unit based on screen positioning
     super(new Sprite("gui/unit_status"), unit.area.bottomRight);
-    _hpBar = new PipBar(hpArea, unit.maxHp, new Sprite("gui/pip", "hpPip"));
-    _apBar = new PipBar(apArea, unit.maxAp, new Sprite("gui/pip", "apPip"));
+    _hpBar = new PipBar(hpArea, unit.maxHp, "gui/pip", "hpPip");
+    _apBar = new PipBar(apArea, unit.maxAp, "gui/pip", "apPip");
     _armorText = new TextBox(unit.baseArmor, _font, armorOffset, GUIElement.Anchor.center);
     _evadeText = new TextBox(unit.baseEvade, _font, evadeOffset, GUIElement.Anchor.center);
     addChild(_hpBar);
     addChild(_apBar);
     addChild(_armorText);
     addChild(_evadeText);
+    _hpBar.setVal(2);
+    _apBar.setVal(1);
   }
 
   private:

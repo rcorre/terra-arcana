@@ -35,6 +35,8 @@ class GUIElement {
 
     bool active() { return _active; }
     void active(bool val) { _active = val; }
+
+    auto children() { return _children[]; }
   }
 
   void update(float time) {

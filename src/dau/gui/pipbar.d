@@ -10,14 +10,23 @@ private enum {
 
 /// bar that displays progress as discrete elements (pips)
 class PipBar : GUIElement {
-  this(Rect2i area, int numPips, Sprite pipSprite) {
+  this(Rect2i area, int numPips, string textureName, string spriteName) {
     super(area);
     _maxVal = numPips;
     // insert pips, moving horizontally from left to right
-    auto pos = pipSprite.size / 2; // relative to top left
+    auto sprite = new Sprite(textureName, spriteName);
+    auto pos = sprite.size / 2; // relative to top left
     for(int i = 0; i < numPips; ++i) {
-      addChild(new Pip(pipSprite, pos));
-      pos.x += pipSprite.width;
+      addChild(new Pip(sprite, pos));
+      pos.x += sprite.width;
+      sprite = new Sprite(textureName, spriteName);
+    }
+  }
+
+  void setVal(int val) {
+    int idx = 0;
+    foreach(child ; children) {
+      child.sprite.tint = (idx++ < val) ? pipDimShade : Color.white;
     }
   }
 
