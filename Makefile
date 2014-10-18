@@ -33,7 +33,7 @@ run: content
 content: dirs sprites gui music fonts
 
 dirs:
-	@mkdir -p $(PNGDIR) $(OGGDIR) $(GUIDIR) $(WAVDIR)
+	@mkdir -p $(PNGDIR) $(OGGDIR) $(GUIDIR) $(WAVDIR) $(FONTDIR)
 
 #sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(PNGDIR)/%.png)
 
@@ -58,8 +58,12 @@ $(GUIDIR)/%.png : $(SVGDIR)/%.svg
 fonts: $(FONTFILES:$(TTFDIR)/%.ttf=$(FONTDIR)/%.ttf)
 
 $(FONTDIR)/%.ttf : $(TTFDIR)/%.ttf
+	@echo copying font $*
 	@cp $(TTFDIR)/$*.ttf $(FONTDIR)/$*.ttf
 
 clean:
 	@$(RM) $(PNGDIR)/*.png
+	@$(RM) $(GUIDIR)/*.png
+	@$(RM) $(WAVDIR)/*.wav
 	@$(RM) $(OGGDIR)/*.ogg
+	@$(RM) $(FONTDIR)/*.ttf
