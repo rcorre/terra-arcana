@@ -27,8 +27,6 @@ class UnitInfoGUI : GUIElement {
     addChild(_apBar);
     addChild(_armorText);
     addChild(_evadeText);
-    _hpBar.setVal(2);
-    _apBar.setVal(1);
   }
 
   private:

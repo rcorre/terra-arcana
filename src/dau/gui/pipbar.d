@@ -5,7 +5,7 @@ import dau.graphics.all;
 import dau.gui.element;
 
 private enum {
-  pipDimShade = Color(0.2, 0.2, 0.2), /// shade to tint 'dimmed' pips with
+  pipDimShade = Color(0.25, 0.25, 0.25), /// shade to tint 'dimmed' pips with
 }
 
 /// bar that displays progress as discrete elements (pips)
