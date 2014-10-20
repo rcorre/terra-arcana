@@ -1,9 +1,11 @@
 module dau.scene;
 
+import std.algorithm;
 import dau.setup;
 import dau.state;
 import dau.input;
 import dau.entity;
+import dau.system;
 import dau.gui.manager;
 import dau.graphics.spritebatch;
 import dau.graphics.camera;
@@ -21,13 +23,14 @@ void setScene(T)(Scene!T newScene) {
 @property auto currentScene() { return _currentScene; }
 
 class Scene(T) : IScene {
-  this(State!T firstState) {
-    _inputManager = new InputManager;
+  this(State!T firstState, System!(T)[] systems) {
+    _inputManager  = new InputManager;
     _entityManager = new EntityManager;
-    _stateMachine = new StateMachine!T;
-    _spriteBatch = new SpriteBatch;
-    _guiManager = new GUIManager;
-    _camera = new Camera(Settings.screenW, Settings.screenH);
+    _stateMachine  = new StateMachine!T;
+    _spriteBatch   = new SpriteBatch;
+    _guiManager    = new GUIManager;
+    _camera        = new Camera(Settings.screenW, Settings.screenH);
+    _systems       = systems;
     _stateMachine.pushState(firstState);
   }
 
@@ -48,6 +51,11 @@ class Scene(T) : IScene {
       _entityManager.updateEntities(time);
       _stateMachine.update(cast(T) this, time, _inputManager);
       _guiManager.update(time);
+      foreach(sys ; _systems) {
+        if (sys.active) {
+          sys.update(time, input);
+        }
+      }
     }
 
     /// called every frame between screen clear and screen flip
@@ -59,6 +67,20 @@ class Scene(T) : IScene {
     }
   }
 
+  S getSystem(S)() {
+    auto res = _systems.map!(x => cast(S) x).find!(x => x !is null);
+    assert(!res.empty, "failed to find system " ~ S.stringof ~ " in scene " ~ T.stringof);
+    return res.front;
+  }
+
+  void enableSystem(S)() {
+    getSystem!S().active = true;
+  }
+
+  void disableSystem(S)() {
+    getSystem!S.active = false;
+  }
+
   private:
   EntityManager  _entityManager;
   GUIManager     _guiManager;
@@ -66,6 +88,7 @@ class Scene(T) : IScene {
   InputManager   _inputManager;
   SpriteBatch    _spriteBatch;
   Camera         _camera;
+  System!(T)[]     _systems;
 
   private:
   bool _started;

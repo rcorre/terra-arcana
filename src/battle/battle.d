@@ -3,7 +3,8 @@ module battle.battle;
 import dau.all;
 import model.all;
 import gui.unitinfo;
-import battle.playerturn;
+import battle.state.playerturn;
+import battle.system.all;
 
 private enum {
   cameraScrollSpeed = 12,
@@ -11,7 +12,10 @@ private enum {
 
 class Battle : Scene!Battle {
   this() {
-    super(new PlayerTurn);
+    System!Battle[] systems = [
+      new TileHoverSystem(this),
+    ];
+    super(new PlayerTurn, systems);
   }
 
   override {
@@ -35,21 +39,5 @@ class Battle : Scene!Battle {
 package:
   TileMap     map;
   Unit[]      units;
-  Tile        tileUnderMouse;
-  UnitInfoGUI unitInfo;
-
   bool enableCameraControl;
-
-  void clearUnitInfo() {
-    if (unitInfo !is null) {
-      unitInfo.active = false;
-    }
-    unitInfo = null;
-  }
-
-  void setUnitInfo(Unit unit) {
-    clearUnitInfo();
-    unitInfo = new UnitInfoGUI(unit);
-    gui.addElement(unitInfo);
-  }
 }
