@@ -14,6 +14,7 @@ class Battle : Scene!Battle {
   this() {
     System!Battle[] systems = [
       new TileHoverSystem(this),
+      new BattleCameraSystem(this),
     ];
     super(new PlayerTurn, systems);
   }
@@ -30,9 +31,6 @@ class Battle : Scene!Battle {
 
     void update(float time) {
       super.update(time);
-      if (enableCameraControl) {
-        camera.move(input.scrollDirection * cameraScrollSpeed);
-      }
     }
   }
 

@@ -10,6 +10,7 @@ class PlayerTurn : State!Battle {
     void enter(Battle b) {
       b.enableCameraControl = true;
       b.enableSystem!TileHoverSystem;
+      b.enableSystem!BattleCameraSystem;
     }
   }
 
