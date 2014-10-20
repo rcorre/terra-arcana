@@ -3,5 +3,5 @@ import dau.setup;
 import battle.battle;
 
 int main(char[][] args) {
-  return runGame(new Battle);
+  return runGame!Battle();
 }

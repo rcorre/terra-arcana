@@ -27,8 +27,8 @@ ALLEGRO_DISPLAY* mainDisplay;
 ALLEGRO_EVENT_QUEUE* mainEventQueue;
 ALLEGRO_TIMER* mainTimer;
 
-// allegro initialization
-int runGame(T)(Scene!T firstScene) {
+/// pass FirstSceneType to instantiate first scene after allegro setup
+int runGame(FirstSceneType)() {
   return al_run_allegro({
     // initialize
     al_init();
@@ -64,7 +64,7 @@ int runGame(T)(Scene!T firstScene) {
     runSetupFunctions();
 
     al_start_timer(mainTimer); // start fps timer
-    setScene(firstScene);
+    setScene(new FirstSceneType);
 
     while(_run) {
       bool frameTick = processEvents();
