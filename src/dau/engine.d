@@ -21,8 +21,6 @@ else
 import dau.allegro;
 import dau.setup;
 import dau.scene;
-import dau.state;
-import dau.gui.manager;
 
 // global variables
 ALLEGRO_DISPLAY* mainDisplay;
@@ -131,12 +129,10 @@ void mainUpdate() {
   float delta = current_time - last_update_time;
   last_update_time = current_time;
   currentScene.update(delta);
-  updateGUI(delta);
 }
 
 void mainDraw() {
   al_clear_to_color(al_map_rgb(0,0,0));
   currentScene.draw();
-  drawGUI();
   al_flip_display();
 }

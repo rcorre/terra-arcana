@@ -4,25 +4,27 @@ import dau.setup;
 import dau.gui.element;
 import dau.geometry.all;
 
-void addGUIElement(GUIElement el) {
-  _topElement.addChild(el);
-}
+class GUIManager {
+  this() {
+    clear(); // set up initial guielement
+  }
 
-void clearGUI() {
-  _topElement = new GUIElement(Rect2i(0, 0, Settings.screenW, Settings.screenH));
-}
+  void addElement(GUIElement el) {
+    _topElement.addChild(el);
+  }
 
-void updateGUI(float time) {
-  _topElement.update(time);
-}
+  void clear() {
+    _topElement = new GUIElement(Rect2i(0, 0, Settings.screenW, Settings.screenH));
+  }
 
-void drawGUI() {
-  _topElement.draw(Vector2i.zero);
-}
+  void update(float time) {
+    _topElement.update(time);
+  }
 
-private:
-GUIElement _topElement;
+  void draw() {
+    _topElement.draw(Vector2i.zero);
+  }
 
-static this() {
-  onInit({ clearGUI(); }); // set up initial guielement
+  private:
+  GUIElement _topElement;
 }

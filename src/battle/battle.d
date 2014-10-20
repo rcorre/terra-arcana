@@ -50,6 +50,6 @@ package:
   void setUnitInfo(Unit unit) {
     clearUnitInfo();
     unitInfo = new UnitInfoGUI(unit);
-    addGUIElement(unitInfo);
+    gui.addElement(unitInfo);
   }
 }

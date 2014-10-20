@@ -4,6 +4,7 @@ import dau.setup;
 import dau.state;
 import dau.input;
 import dau.entity;
+import dau.gui.manager;
 import dau.graphics.spritebatch;
 import dau.graphics.camera;
 
@@ -24,16 +25,18 @@ class Scene(T) : IScene {
     _inputManager = new InputManager;
     _entityManager = new EntityManager;
     _stateMachine = new StateMachine!T;
-    _spriteBatch = new SpriteBatch();
+    _spriteBatch = new SpriteBatch;
+    _guiManager = new GUIManager;
     _camera = new Camera(Settings.screenW, Settings.screenH);
     _stateMachine.pushState(firstState);
   }
 
   @property {
     auto entities() { return _entityManager; }
-    auto states() { return _stateMachine; }
-    auto input() { return _inputManager; }
-    auto camera() { return _camera; }
+    auto states()   { return _stateMachine; }
+    auto input()    { return _inputManager; }
+    auto camera()   { return _camera; }
+    auto gui()      { return _guiManager; }
   }
 
   override {
@@ -44,26 +47,25 @@ class Scene(T) : IScene {
       _inputManager.update(time);
       _entityManager.updateEntities(time);
       _stateMachine.update(cast(T) this, time, _inputManager);
+      _guiManager.update(time);
     }
 
     /// called every frame between screen clear and screen flip
     void draw() {
-      _stateMachine.draw(cast(T) this, _spriteBatch);
       _entityManager.drawEntities(_spriteBatch);
+      _stateMachine.draw(cast(T) this, _spriteBatch);
       _spriteBatch.render(camera);
+      _guiManager.draw(); // gui draws over state & entities
     }
   }
 
   private:
   EntityManager  _entityManager;
+  GUIManager     _guiManager;
   StateMachine!T _stateMachine;
   InputManager   _inputManager;
   SpriteBatch    _spriteBatch;
   Camera         _camera;
-
-static this() {
-  onInit({});
-}
 
   private:
   bool _started;
