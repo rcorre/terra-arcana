@@ -9,7 +9,7 @@ import dau.geometry.all;
 class Entity {
   const string tag;
 
-  this(Rect2i area, string tag = null) {
+  this(Rect2i area, string tag) {
     _area = area;
     this.tag = tag;
   }
@@ -32,10 +32,6 @@ class Entity {
     }
   }
 
-  void remove() {
-    removeEntity(this);
-  }
-
   protected:
   Sprite _sprite;
 
@@ -43,41 +39,43 @@ class Entity {
   Rect2i _area;
 }
 
-void registerEntity(Entity entity) {
-  _entityMap[entity.tag] ~= entity;
-}
+class EntityManager {
+  void registerEntity(Entity entity) {
+    _entityMap[entity.tag] ~= entity;
+  }
 
-auto findEntities(string tag) {
-  return _entityMap[tag][];
-}
+  auto findEntities(string tag) {
+    return _entityMap[tag][];
+  }
 
-void updateEntities(float time) {
-  foreach(list ; _entityMap.values) {
-    foreach(entity ; list) {
-      entity.update(time);
+  void updateEntities(float time) {
+    foreach(list ; _entityMap.values) {
+      foreach(entity ; list) {
+        entity.update(time);
+      }
     }
   }
-}
 
-void drawEntities(SpriteBatch sb) {
-  foreach(list ; _entityMap.values) {
-    foreach(entity ; list) {
-      sb.draw(entity._sprite, entity.center);
+  void drawEntities(SpriteBatch sb) {
+    foreach(list ; _entityMap.values) {
+      foreach(entity ; list) {
+        sb.draw(entity._sprite, entity.center);
+      }
     }
   }
-}
 
-void removeEntity(Entity entity) {
-  _entityMap[entity.tag] = _entityMap[entity.tag].remove!(x => x == entity);
-}
+  void removeEntity(Entity entity) {
+    _entityMap[entity.tag] = _entityMap[entity.tag].remove!(x => x == entity);
+  }
 
-void removeEntities(string tag) {
-  _entityMap[tag] = [];
-}
+  void removeEntities(string tag) {
+    _entityMap[tag] = [];
+  }
 
-void removeAllEntities() {
-  _entityMap = null;
-}
+  void removeAllEntities() {
+    _entityMap = null;
+  }
 
-private:
-Entity[][string] _entityMap;
+  private:
+  Entity[][string] _entityMap;
+}

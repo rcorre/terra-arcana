@@ -12,7 +12,7 @@ class TileMap : Entity {
     int numRows, numCols;
   }
 
-  this(string key) {
+  this(string key, EntityManager entities) {
     auto path = "%s/%s.json".format(cast(string) Paths.mapDir, key);
     auto map = loadTiledMap(path);
     numCols = map.width;
@@ -21,7 +21,7 @@ class TileMap : Entity {
     _tiles = new Tile[][numRows];
     foreach(data ; terrain) {
       auto tile = new Tile(data);
-      registerEntity(tile);
+      entities.registerEntity(tile);
       _tiles[tile.row] ~= tile;
     }
 

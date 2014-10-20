@@ -1,9 +1,7 @@
 import dau.engine;
 import dau.setup;
-import dau.scene;
-import state.battle;
+import battle.battle;
 
 int main(char[][] args) {
-  onInit({ currentScene = new Battle(); });
-  return runGame();
+  return runGame(new Battle);
 }

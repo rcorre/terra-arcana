@@ -21,11 +21,8 @@ else
 import dau.allegro;
 import dau.setup;
 import dau.scene;
-import dau.entity;
-import dau.input;
+import dau.state;
 import dau.gui.manager;
-import dau.graphics.camera;
-import dau.graphics.spritebatch;
 
 // global variables
 ALLEGRO_DISPLAY* mainDisplay;
@@ -33,7 +30,7 @@ ALLEGRO_EVENT_QUEUE* mainEventQueue;
 ALLEGRO_TIMER* mainTimer;
 
 // allegro initialization
-int runGame() {
+int runGame(T)(Scene!T firstScene) {
   return al_run_allegro({
     // initialize
     al_init();
@@ -69,19 +66,19 @@ int runGame() {
     runSetupFunctions();
 
     al_start_timer(mainTimer); // start fps timer
-    _spriteBatch = new SpriteBatch();
+    setScene(firstScene);
 
-      while(_run) {
-        bool frameTick = processEvents();
-        if (frameTick) {
-          mainUpdate();
-          mainDraw();
-        }
+    while(_run) {
+      bool frameTick = processEvents();
+      if (frameTick) {
+        mainUpdate();
+        mainDraw();
       }
+    }
 
-      shutdownGame();
+    shutdownGame();
 
-      return 0;
+    return 0;
   });
 }
 
@@ -91,7 +88,6 @@ void shutdownGame() {
 
 private:
 bool _run = true;
-SpriteBatch _spriteBatch;
 
 // returns true if time to render next frame
 bool processEvents() {
@@ -134,17 +130,13 @@ void mainUpdate() {
   float current_time = al_get_time();
   float delta = current_time - last_update_time;
   last_update_time = current_time;
-  updateEntities(delta);
   currentScene.update(delta);
   updateGUI(delta);
-  Input.update(delta);
 }
 
 void mainDraw() {
   al_clear_to_color(al_map_rgb(0,0,0));
-  drawEntities(_spriteBatch);
-  currentScene.draw(_spriteBatch);
-  _spriteBatch.render(mainCamera);
+  currentScene.draw();
   drawGUI();
   al_flip_display();
 }

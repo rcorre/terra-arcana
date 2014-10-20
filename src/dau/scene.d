@@ -1,32 +1,69 @@
 module dau.scene;
 
-import std.container : SList;
+import dau.state;
+import dau.input;
+import dau.entity;
 import dau.graphics.spritebatch;
+import dau.graphics.camera;
 
-class Scene {
-  /// called once before first update and after previous scene exits
-  void enter() { }
-  /// called every frame before drawing
-  void update(float time) { }
-  /// called every frame between screen clear and screen flip
-  void draw(SpriteBatch sb) { }
-  /// called once when the scene is replaced by another or the game exits
-  void exit() { }
+private IScene _currentScene;
+
+void setScene(T)(Scene!T newScene) {
+  if (_currentScene !is null) {
+    _currentScene.exit();
+  }
+  newScene.enter();
+  _currentScene = newScene;
 }
 
-@property {
-  Scene currentScene() {
-    return _currentScene;
+@property auto currentScene() { return _currentScene; }
+
+class Scene(T) : IScene {
+  this(State!T firstState) {
+    _inputManager = new InputManager;
+    _entityManager = new EntityManager;
+    _stateMachine = new StateMachine!T;
+    _spriteBatch = new SpriteBatch();
+    _stateMachine.pushState(firstState);
   }
 
-  void currentScene(Scene newScene) {
-    if (_currentScene !is null) {
-      _currentScene.exit();
+  @property {
+    auto entities() { return _entityManager; }
+    auto states() { return _stateMachine; }
+    auto input() { return _inputManager; }
+  }
+
+  override {
+    void enter() { }
+    void exit()  { }
+    /// called every frame before drawing
+    void update(float time) {
+      _inputManager.update(time);
+      _entityManager.updateEntities(time);
+      _stateMachine.update(cast(T) this, time, _inputManager);
     }
-    newScene.enter();
-    _currentScene = newScene;
+
+    /// called every frame between screen clear and screen flip
+    void draw() {
+      _stateMachine.draw(cast(T) this, _spriteBatch);
+      _entityManager.drawEntities(_spriteBatch);
+      _spriteBatch.render(mainCamera);
+    }
   }
+
+  private:
+  EntityManager _entityManager;
+  StateMachine!T _stateMachine;
+  InputManager _inputManager;
+  SpriteBatch _spriteBatch;
+
+  private:
+  bool _started;
 }
 
-private:
-Scene _currentScene;
+interface IScene {
+  void enter();
+  void exit();
+  void update(float time);
+  void draw();
+}
