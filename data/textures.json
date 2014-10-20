@@ -17,7 +17,7 @@
   {
     "sheets" : ["gui/tilecursor"],
     "frameSize": 32,
-    "frameTimeMs": 50,
+    "frameTimeMs": 20,
     "defaultDepth": 5,
     "rows": ["move", "ally", "enemy"]
   },
