@@ -17,10 +17,6 @@ private enum Keymap {
   down  = [ALLEGRO_KEY_S],
 }
 
-private enum {
-  scrollSpeed = 14
-}
-
 class InputManager {
   void update(float time) {
     _prevKeyboardState = _curKeyboardState;

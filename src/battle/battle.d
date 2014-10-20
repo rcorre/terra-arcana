@@ -23,6 +23,13 @@ class Battle : Scene!Battle {
       entities.registerEntity(unit);
       states.pushState(new PlayerTurn);
     }
+
+    void update(float time) {
+      super.update(time);
+      if (enableCameraControl) {
+        mainCamera.move(input.scrollDirection * cameraScrollSpeed);
+      }
+    }
   }
 
 package:
@@ -30,6 +37,8 @@ package:
   Unit[]      units;
   Tile        tileUnderMouse;
   UnitInfoGUI unitInfo;
+
+  bool enableCameraControl;
 
   void clearUnitInfo() {
     if (unitInfo !is null) {

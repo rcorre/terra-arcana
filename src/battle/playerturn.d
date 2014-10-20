@@ -5,6 +5,11 @@ import model.all;
 import battle.battle;
 
 class PlayerTurn : State!Battle {
+  override {
+    void enter(Battle b) {
+      b.enableCameraControl = true;
+    }
+  }
   /*
   override void update(Game g, float time, InputManager input) {
     mainCamera.move(input.scrollDirection * cameraScrollSpeed);
