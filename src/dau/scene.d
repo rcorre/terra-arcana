@@ -1,5 +1,6 @@
 module dau.scene;
 
+import dau.setup;
 import dau.state;
 import dau.input;
 import dau.entity;
@@ -24,6 +25,7 @@ class Scene(T) : IScene {
     _entityManager = new EntityManager;
     _stateMachine = new StateMachine!T;
     _spriteBatch = new SpriteBatch();
+    _camera = new Camera(Settings.screenW, Settings.screenH);
     _stateMachine.pushState(firstState);
   }
 
@@ -31,6 +33,7 @@ class Scene(T) : IScene {
     auto entities() { return _entityManager; }
     auto states() { return _stateMachine; }
     auto input() { return _inputManager; }
+    auto camera() { return _camera; }
   }
 
   override {
@@ -47,15 +50,20 @@ class Scene(T) : IScene {
     void draw() {
       _stateMachine.draw(cast(T) this, _spriteBatch);
       _entityManager.drawEntities(_spriteBatch);
-      _spriteBatch.render(mainCamera);
+      _spriteBatch.render(camera);
     }
   }
 
   private:
-  EntityManager _entityManager;
+  EntityManager  _entityManager;
   StateMachine!T _stateMachine;
-  InputManager _inputManager;
-  SpriteBatch _spriteBatch;
+  InputManager   _inputManager;
+  SpriteBatch    _spriteBatch;
+  Camera         _camera;
+
+static this() {
+  onInit({});
+}
 
   private:
   bool _started;

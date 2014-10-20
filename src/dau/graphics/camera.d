@@ -39,9 +39,3 @@ class Camera {
   Rect2f _area, _bounds;
   ALLEGRO_TRANSFORM _transform;
 }
-
-Camera mainCamera;
-
-static this() {
-  onInit({ mainCamera = new Camera(Settings.screenW, Settings.screenH); });
-}
