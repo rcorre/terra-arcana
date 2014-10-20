@@ -19,21 +19,33 @@ class Unit : Entity {
     assert(key in _data, "no unit data matches key "  ~ key);
     data = _data[key];
     this.tile = tile;
+    _hp = data.maxHp;
+    _ap = data.maxHp;
   }
 
   @property {
     auto tile() { return _tile; }
-    auto tile(Tile newTile) { 
+    auto tile(Tile newTile) {
       assert(newTile.entity is null, "cannot place %s on tile %d,%d which already has entity"
           .format(name, newTile.row, newTile.col));
-      _tile = newTile; 
+      _tile = newTile;
       _tile.entity = this;
       center = tile.center;
     }
+
+    int hp() { return _hp; }
+    int ap() { return _ap; }
+
+    bool canAct() { return _ap > 0; }
+  }
+
+  override void update(float time) {
+    if (canAct) { super.update(time); } // only animate sprite if ap > 0
   }
 
   private:
   Tile _tile;
+  int _hp, _ap;
 }
 
 class UnitData {

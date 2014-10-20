@@ -26,6 +26,7 @@ class Battle : Scene!Battle {
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
       auto unit = new Unit("sniper", map.tileAt(3, 3));
       entities.registerEntity(unit);
+      units ~= unit;
       states.pushState(new PlayerTurn);
     }
 
