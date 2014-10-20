@@ -10,9 +10,8 @@ class PlayerTurn : State!Battle {
       b.enableCameraControl = true;
     }
   }
-  /*
-  override void update(Game g, float time, InputManager input) {
-    mainCamera.move(input.scrollDirection * cameraScrollSpeed);
+
+  override void update(Battle b, float time, InputManager input) {
     auto tile = b.map.tileAt(input.mousePos);
     if (tile !is null && b.tileUnderMouse != tile) { // moved cursor to new tile
       b.tileUnderMouse = tile;
@@ -25,5 +24,4 @@ class PlayerTurn : State!Battle {
       }
     }
   }
-  */
 }
