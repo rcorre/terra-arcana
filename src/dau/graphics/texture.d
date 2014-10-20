@@ -16,6 +16,7 @@ private enum {
 
 class Texture {
   const int frameWidth, frameHeight;
+  const int defaultDepth;
   const float frameTime;
   @property {
     /// width of entire bitmap
@@ -91,21 +92,23 @@ class Texture {
   const string[] _rows, _sprites;
 
   this(ALLEGRO_BITMAP *bmp, TextureData data) {
-    _bmp        = bmp;
-    frameWidth  = data.frameWidth;
-    frameHeight = data.frameHeight;
-    frameTime   = data.frameTimeMs / 1000f;
-    _rows       = data.rows;
-    _sprites    = data.sprites;
+    _bmp         = bmp;
+    frameWidth   = data.frameWidth;
+    frameHeight  = data.frameHeight;
+    frameTime    = data.frameTimeMs / 1000f;
+    defaultDepth = data.defaultDepth;
+    _rows        = data.rows;
+    _sprites     = data.sprites;
   }
 
   this(ALLEGRO_BITMAP *bmp) {
-    _bmp        = bmp;
-    frameWidth  = width;
-    frameHeight = height;
-    frameTime   = 0;
-    _rows       = [];
-    _sprites    = [];
+    _bmp         = bmp;
+    frameWidth   = width;
+    frameHeight  = height;
+    frameTime    = 0;
+    defaultDepth = 0;
+    _rows        = [];
+    _sprites     = [];
   }
 }
 
@@ -159,6 +162,7 @@ class TextureData {
     string[] rows;
     int frameWidth, frameHeight;
     int frameTimeMs;
+    int defaultDepth;
     @property {
       auto frameSize() { return frameWidth; }
       void frameSize(int size) { frameWidth = frameHeight = size; }

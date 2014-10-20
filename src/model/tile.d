@@ -6,14 +6,12 @@ import dau.geometry.all;
 import dau.graphics.all;
 import dau.tool.tiled;
 
-private enum tileDepth = 0;
-
 class Tile : Entity {
   enum size = 32;
 
   this(TileData data) {
     auto pos = Vector2i(data.col, data.row) * size + Vector2i(size, size) / 2;
-    auto sprite = new Sprite(getTexture(data.tilesetName), data.tilesetIdx, tileDepth);
+    auto sprite = new Sprite(getTexture(data.tilesetName), data.tilesetIdx);
     super(pos, sprite, "tile");
     row = data.row;
     col = data.col;

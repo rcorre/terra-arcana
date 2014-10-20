@@ -13,22 +13,22 @@ import dau.util.math;
 /// displays a single frame of a texture
 class Sprite {
   /// create a sprite from a subsection of the bitmap
-  this(string textureName, string spriteName = null, int depth = 0) {
+  this(string textureName, string spriteName = null) {
     _texture = getTexture(textureName);
     int idx = (spriteName is null) ? 0 : _texture.spriteIdx(spriteName);
     _row = idx / _texture.numCols;
     _col = idx % _texture.numCols;
-    _depth = depth;
+    _depth = _texture.defaultDepth;
   }
 
   /// create a sprite from a subsection of the bitmap
-  this(Texture spriteSheet, int spriteIdx = 0, int depth = 0) {
+  this(Texture spriteSheet, int spriteIdx = 0) {
     _texture = spriteSheet;
     _row = spriteIdx / _texture.numCols;
     _col = spriteIdx % _texture.numCols;
     assert(_row >= 0 && _col >= 0 && _row < _texture.numRows && _col < _texture.numCols,
         format("sprite coord %d, %d is out of bounds", _row, _col));
-    _depth = depth;
+    _depth = _texture.defaultDepth;
   }
 
   void flash(float time, Color flashColor) {

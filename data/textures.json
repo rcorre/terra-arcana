@@ -3,6 +3,7 @@
     "sheets" : ["assault", "medic", "sniper", "guardian"],
     "frameSize": 32,
     "frameTimeMs": 50,
+    "defaultDepth": 1,
     "rows": ["idle", "action1", "action2", "effect1", "effect2"]
   },
 
@@ -14,7 +15,16 @@
   },
 
   {
+    "sheets" : ["gui/tilecursor"],
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "defaultDepth": 5,
+    "rows": ["move", "ally", "enemy"]
+  },
+
+  {
     "sheets" : ["terrain"],
+    "defaultDepth": 0,
     "frameSize": 32
   }
 ]

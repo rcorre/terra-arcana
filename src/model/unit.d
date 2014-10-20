@@ -8,15 +8,13 @@ import dau.graphics.all;
 import dau.geometry.all;
 import model.tile;
 
-private enum unitDepth = 1;
-
 class Unit : Entity {
   const UnitData data;
   alias data this;
 
   //TODO: pass tile instead of pos?
   this(string key, Tile tile) {
-    auto sprite = new Animation(key, "idle", Animation.Repeat.loop, unitDepth);
+    auto sprite = new Animation(key, "idle", Animation.Repeat.loop);
     super(tile.center, sprite, "unit");
     assert(key in _data, "no unit data matches key "  ~ key);
     data = _data[key];
