@@ -31,6 +31,9 @@ class GUIElement {
 
   @property {
     auto area() { return _area; }
+    auto width() { return _area.width; }
+    auto height() { return _area.height; }
+
     auto sprite() { return _sprite; }
 
     bool active() { return _active; }
@@ -58,8 +61,9 @@ class GUIElement {
   }
 
   final {
-    void addChild(GUIElement el) {
+    auto addChild(GUIElement el) {
       _children.insert(el);
+      return el;
     }
   }
 

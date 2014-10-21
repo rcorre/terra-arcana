@@ -1,6 +1,8 @@
 module dau.gui.icon;
 
+import std.algorithm : max;
 import dau.gui.element;
+import dau.gui.textbox;
 import dau.geometry.all;
 import dau.graphics.all;
 
@@ -11,9 +13,10 @@ class Icon : GUIElement {
   }
 
   this(T)(Sprite sprite, Vector2i pos, T text, Font font, Anchor anchor = Anchor.topLeft) {
-    _text = text.to!string;
-    _font = font;
-    auto textPos = Vector2i(sprite.width, 0);
-    addChild(new TextBox(text, font, textPos, anchor));
+    auto icon = new Icon(sprite, Vector2i.zero, anchor);
+    auto textbox = new TextBox(text, font, Vector2i(sprite.width, 0), anchor);
+    super(Rect2i(pos, icon.width + textbox.width, max(icon.height, textbox.height)));
+    addChild(icon);
+    addChild(textbox);
   }
 }

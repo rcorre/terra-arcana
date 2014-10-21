@@ -1,6 +1,7 @@
 module gui.unitinfo;
 
 import std.string;
+import std.conv;
 import dau.setup;
 import dau.geometry.all;
 import dau.graphics.all;
@@ -48,18 +49,47 @@ private:
 class ActionInfo : GUIElement {
   private enum {
     actionIconOffset = Vector2i(4, 4),
-    iconSeparation = 4,
+    infoOffset = Vector2i(36, 4),
+    iconSeparation = 4
   }
 
   this(Vector2i topLeft, const UnitAction action) {
     super(Rect2i(topLeft, actionBarSize));
     auto actionName = action.name.toLower;
     addChild(new Icon(new Sprite(iconSheetName, actionName), actionIconOffset));
+    Vector2i offset = infoOffset;
+    addEffectIcon(action, offset);
+    addRangeIcon(action, offset);
+    foreach(special ; action.specials) {
+      addSpecialIcon(special, offset);
+    }
+  }
+
+  void addEffectIcon(const UnitAction action, ref Vector2i offset) {
+    auto sprite = new Sprite(iconSheetName, action.effect.to!string);
+    auto text = "%dx%d".format(action.power, action.hits);
+    addInfo(new Icon(sprite, offset, text, _font), offset);
+  }
+
+  void addRangeIcon(const UnitAction action, ref Vector2i offset) {
+    auto sprite = new Sprite(iconSheetName, "range");
+    auto text = "%d-%d".format(action.minRange, action.maxRange);
+    addInfo(new Icon(sprite, offset, text, _font), offset);
+  }
+
+  void addSpecialIcon(UnitAction.Special special, ref Vector2i offset) {
+    auto sprite = new Sprite(iconSheetName, special.to!string);
+    addInfo(new Icon(sprite, offset), offset);
+  }
+
+  void addInfo(Icon icon, ref Vector2i offset) {
+    addChild(icon);
+    offset.x += icon.area.width + iconSeparation;
   }
 }
 
 Font _font;
 
 static this() {
-  onInit({ _font = Font("Mecha", 14); });
+  onInit({ _font = Font("Mecha_Condensed", 16); });
 }
