@@ -24,8 +24,8 @@
 
   {
     "sheets" : ["gui/icons"],
-    "frameWidth": 16,
-    "frameHeight": 16,
+    "frameWidth": 20,
+    "frameHeight": 20,
     "sprites": [
       "range", "damage", "stun", "heal", "armor", "evade", "piercing", "precise", "blitz",
       "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", ""

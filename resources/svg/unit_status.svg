@@ -50,14 +50,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4.0814306"
-     inkscape:cx="61.661482"
-     inkscape:cy="110.22129"
+     inkscape:zoom="8.1628612"
+     inkscape:cx="94.815286"
+     inkscape:cy="26.30527"
      inkscape:document-units="px"
      inkscape:current-layer="layer5"
      showgrid="true"
      inkscape:snap-global="true"
-     inkscape:window-width="958"
+     inkscape:window-width="1918"
      inkscape:window-height="1059"
      inkscape:window-x="0"
      inkscape:window-y="19"
@@ -152,7 +152,7 @@
      transform="translate(-16,15.5)">
     <path
        style="opacity:0.8;fill:#008080;stroke:none"
-       d="m 16,60.399994 0,24 183.67347,0 16.32653,-24 z"
+       d="m 16,60.399994 0,25 183.67347,0 16.32653,-25 z"
        id="path4761"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
@@ -160,7 +160,7 @@
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="path5852"
-       d="m 16,112.39999 0,-23.999996 183.67347,0 L 216,112.39999 z"
+       d="m 16,112.39999 0,-24.999996 183.67347,0 L 216,112.39999 z"
        style="opacity:0.8;fill:#008080;stroke:none" />
     <path
        style="fill:#666666;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -169,7 +169,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccc" />
     <rect
-       y="59.000004"
+       y="60.000004"
        x="39"
        height="25.999996"
        width="1"
@@ -181,7 +181,7 @@
        width="1"
        height="25.999996"
        x="48"
-       y="59.000004" />
+       y="60.000004" />
     <rect
        style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect5854"
@@ -539,7 +539,7 @@
     <g
        style="display:inline"
        id="g6353"
-       transform="matrix(0.03125,0,0,0.03125,307.50005,280.25)">
+       transform="matrix(0.03906251,0,0,0.03906251,306.5,277.89999)">
       <path
          id="path6339"
          d="M 0,0 H 512 V 512 H 0 z"

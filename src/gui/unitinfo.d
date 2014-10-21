@@ -48,8 +48,8 @@ class UnitInfoGUI : GUIElement {
 private:
 class ActionInfo : GUIElement {
   private enum {
-    actionIconOffset = Vector2i(4, 4),
-    infoOffset = Vector2i(36, 4),
+    actionIconOffset = Vector2i(2, 2),
+    infoOffset = Vector2i(34, 2),
     iconSeparation = 4
   }
 
