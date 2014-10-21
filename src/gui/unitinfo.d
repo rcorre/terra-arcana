@@ -1,5 +1,6 @@
 module gui.unitinfo;
 
+import std.string;
 import dau.setup;
 import dau.geometry.all;
 import dau.graphics.all;
@@ -33,6 +34,8 @@ class UnitInfoGUI : GUIElement {
     addChild(_apBar);
     addChild(_armorText);
     addChild(_evadeText);
+    addChild(new ActionInfo(actionBarOffset1, unit.action1));
+    addChild(new ActionInfo(actionBarOffset2, unit.action2));
   }
 
   private:
@@ -48,9 +51,10 @@ class ActionInfo : GUIElement {
     iconSeparation = 4,
   }
 
-  this(Vector2i topLeft, UnitAction action) {
+  this(Vector2i topLeft, const UnitAction action) {
     super(Rect2i(topLeft, actionBarSize));
-    addChild(new Icon(new Sprite(iconSheetName, action.name), actionIconOffset))
+    auto actionName = action.name.toLower;
+    addChild(new Icon(new Sprite(iconSheetName, actionName), actionIconOffset));
   }
 }
 

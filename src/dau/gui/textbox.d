@@ -31,6 +31,7 @@ class TextBox : GUIElement {
   this(T)(T text, Font font, Rect2i area, Anchor anchor = Anchor.topLeft,
       Color color = Color.black)
   {
+    //TODO use for icon text (to make it centered)
   }
 
   override void draw(Vector2i parentTopLeft) {

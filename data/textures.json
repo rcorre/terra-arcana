@@ -24,11 +24,11 @@
 
   {
     "sheets" : ["gui/icons"],
-    "frameWidth": 32,
-    "frameHeight": 32,
+    "frameWidth": 16,
+    "frameHeight": 16,
     "sprites": [
       "range", "damage", "stun", "heal", "armor", "evade", "piercing", "precise", "blitz",
-      "rifle", "frag", "snipe", "mine", "shotgun", "concussor", "aid", "smoke", ""
+      "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", ""
     ]
   },
 

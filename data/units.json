@@ -86,7 +86,7 @@
     },
 
     "action2": {
-      "name"        : "AP Mine",
+      "name"        : "Mine",
       "description" : "",
       "target"      : "ground",
       "effect"      : "damage",
