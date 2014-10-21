@@ -83,6 +83,7 @@ class UnitAction {
   enum Special {
     pierce,  /// ignore armor
     precise, /// ignore evasion
+    blitz,   /// cannot be countered
   }
 
   @jsonize {

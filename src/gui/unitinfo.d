@@ -7,23 +7,26 @@ import dau.gui.all;
 import model.unit;
 
 private enum {
-  spriteName  = "gui/unit_status",
-  armorOffset = Vector2i(21, 53),
-  evadeOffset = Vector2i(180, 53),
-  hpArea      = Rect2i(41, 37, 63, 13),
-  apArea      = Rect2i(108, 37, 51, 13),
-  statOffset  = Vector2i(41, 53),
-  actionBarOffset1  = Vector2i(0, 77),
-  actionBarOffset2  = Vector2i(0, 105),
+  spriteName       = "gui/unit_status",
+  pipName          = "gui/pip",
+  armorOffset      = Vector2i(21, 53),
+  evadeOffset      = Vector2i(180, 53),
+  hpArea           = Rect2i(41, 37, 63, 13),
+  apArea           = Rect2i(108, 37, 51, 13),
+  statOffset       = Vector2i(41, 53),
+  actionBarOffset1 = Vector2i(0, 77),
+  actionBarOffset2 = Vector2i(0, 105),
+  actionBarSize    = Vector2i(200, 24),
+  iconSheetName    = "gui/icons"
 }
 
 /// bar that displays progress as discrete elements (pips)
 class UnitInfoGUI : GUIElement {
   this(Unit unit) {
     // TODO: choose corner of unit based on screen positioning
-    super(new Sprite("gui/unit_status"), unit.area.bottomRight);
-    _hpBar = new PipBar(hpArea, unit.maxHp, "gui/pip", "hpPip");
-    _apBar = new PipBar(apArea, unit.maxAp, "gui/pip", "apPip");
+    super(new Sprite(spriteName), unit.area.bottomRight);
+    _hpBar = new PipBar(hpArea, unit.maxHp, pipName, "hpPip");
+    _apBar = new PipBar(apArea, unit.maxAp, pipName, "apPip");
     _armorText = new TextBox(unit.baseArmor, _font, armorOffset, GUIElement.Anchor.center);
     _evadeText = new TextBox(unit.baseEvade, _font, evadeOffset, GUIElement.Anchor.center);
     addChild(_hpBar);
@@ -38,18 +41,19 @@ class UnitInfoGUI : GUIElement {
   ActionInfo _actionInfo1, _actionInfo2;
 }
 
-private class ActionInfo {
+private:
+class ActionInfo : GUIElement {
   private enum {
+    actionIconOffset = Vector2i(4, 4),
     iconSeparation = 4,
   }
 
   this(Vector2i topLeft, UnitAction action) {
+    super(Rect2i(topLeft, actionBarSize));
+    addChild(new Icon(new Sprite(iconSheetName, action.name), actionIconOffset))
   }
-  private:
-  Sprite _icon;
 }
 
-private:
 Font _font;
 
 static this() {

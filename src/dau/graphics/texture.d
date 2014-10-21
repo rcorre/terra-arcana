@@ -32,12 +32,14 @@ class Texture {
   }
 
   int rowByName(string name) {
+    name.toLowerInPlace;
     int row = cast(int) _rows.countUntil(name);
     assert(row >= 0, "no row named " ~ name);
     return row;
   }
 
   int spriteIdx(string name) {
+    name.toLowerInPlace;
     int idx = cast(int) _sprites.countUntil(name);
     assert(idx < numRows * numCols, "no sprite named " ~ name ~ " found");
     return idx;
@@ -113,6 +115,7 @@ class Texture {
 }
 
 Texture getTexture(string name) {
+  name.toLowerInPlace;
   if (name !in _textureStore) {
     auto bmp = loadBitmap(name);
     _textureStore[name] = new Texture(bmp);
