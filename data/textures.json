@@ -9,8 +9,8 @@
 
   {
     "sheets" : ["gui/pip"],
-    "frameWidth": 10,
-    "frameHeight": 20,
+    "frameWidth": 6,
+    "frameHeight": 10,
     "sprites": ["hpPip", "apPip"]
   },
 

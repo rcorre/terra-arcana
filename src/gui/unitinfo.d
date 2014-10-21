@@ -8,10 +8,13 @@ import model.unit;
 
 private enum {
   spriteName  = "gui/unit_status",
-  armorOffset = Vector2i(29, 29),
-  evadeOffset = Vector2i(229, 29),
-  hpArea      = Rect2i(56, 8, 141, 21),
-  apArea      = Rect2i(56, 32, 77, 21),
+  armorOffset = Vector2i(21, 53),
+  evadeOffset = Vector2i(180, 53),
+  hpArea      = Rect2i(41, 37, 63, 13),
+  apArea      = Rect2i(108, 37, 51, 13),
+  statOffset  = Vector2i(41, 53),
+  actionBarOffset1  = Vector2i(0, 77),
+  actionBarOffset2  = Vector2i(0, 105),
 }
 
 /// bar that displays progress as discrete elements (pips)
@@ -32,16 +35,23 @@ class UnitInfoGUI : GUIElement {
   private:
   PipBar _hpBar, _apBar;
   TextBox _armorText, _evadeText;
+  ActionInfo _actionInfo1, _actionInfo2;
+}
+
+private class ActionInfo {
+  private enum {
+    iconSeparation = 4,
+  }
+
+  this(Vector2i topLeft, UnitAction action) {
+  }
+  private:
+  Sprite _icon;
 }
 
 private:
 Font _font;
 
 static this() {
-  onInit({ _font = Font("Mecha_Bold", 16); });
+  onInit({ _font = Font("Mecha", 14); });
 }
-
-// TODO:
-// show dimmed pips
-// dau font
-// dau gui textbox
