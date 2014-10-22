@@ -25,12 +25,20 @@ class PlayerUnitSelected : State!Battle {
 
   override void update(Battle b, float time, InputManager input) {
     _unitCursor.update(time);
+    if (_tileHover.tileUnderMouseChanged) {
+      _path = _pathFinder.pathTo(_tileHover.tileUnderMouse);
+    }
   }
 
   override void draw(Battle b, SpriteBatch sb) {
     sb.draw(_unitCursor, _unit.center);
     foreach(tile ; _pathFinder.tilesInRange) {
       sb.draw(_moveCursor, tile.center);
+    }
+    if (_path !is null) {
+      foreach(tile ; _path) {
+        sb.draw(_unitCursor, tile.center);
+      }
     }
   }
 
@@ -39,4 +47,5 @@ class PlayerUnitSelected : State!Battle {
   Animation _unitCursor, _moveCursor;
   TileHoverSystem _tileHover;
   Pathfinder _pathFinder;
+  Tile[] _path;
 }

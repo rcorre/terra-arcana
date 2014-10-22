@@ -23,6 +23,22 @@ class Pathfinder {
 
   @property auto tilesInRange() { return _tilesInRange[]; }
 
+  auto pathTo(Tile tile) {
+    int idx = tileToIdx(tile);
+    int startIdx = tileToIdx(origin);
+    Tile[] path;
+    if (_dist[idx] > _unit.ap || tile.entity !is null) {
+      return path;
+    }
+    else {
+      while(idx != startIdx) {
+        path ~= idxToTile(idx);
+        idx = _prev[idx];
+      }
+    }
+    return path;
+  }
+
   private:
   TileMap _map;
   Unit    _unit;

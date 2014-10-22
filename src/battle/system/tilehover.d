@@ -12,11 +12,14 @@ class TileHoverSystem : System!Battle {
 
   @property auto tileUnderMouse() { return _tileUnderMouse; }
   @property auto unitUnderMouse() { return _unitUnderMouse; }
+  @property auto tileUnderMouseChanged() { return _newTileUnderMouse; }
 
   override {
     void update(float time, InputManager input) {
+      _newTileUnderMouse = false;
       auto tile = scene.map.tileAt(input.mousePos);
       if (tile !is null && _tileUnderMouse != tile) { // moved cursor to new tile
+        _newTileUnderMouse = true;
         _tileUnderMouse = tile;
         _unitUnderMouse = cast(Unit) tile.entity;
         if (_unitUnderMouse is null) {
@@ -39,6 +42,7 @@ class TileHoverSystem : System!Battle {
   Tile _tileUnderMouse;
   Unit _unitUnderMouse;
   UnitInfoGUI _unitInfo;
+  bool _newTileUnderMouse;
 
   void clearUnitInfo() {
     if (_unitInfo !is null) {

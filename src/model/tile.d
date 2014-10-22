@@ -12,7 +12,6 @@ class Tile : Entity {
     unreachable = 9999
   }
 
-
   this(TileData data) {
     auto pos = Vector2i(data.col, data.row) * size + Vector2i(size, size) / 2;
     auto sprite = new Sprite(getTexture(data.tilesetName), data.tilesetIdx);
