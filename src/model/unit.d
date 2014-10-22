@@ -89,6 +89,7 @@ class UnitAction {
     heal,   /// restore hp
     armor,  /// adjust armor
     evade,  /// adjust evade
+    transform
   }
 
   enum Special {
@@ -100,6 +101,7 @@ class UnitAction {
   @jsonize {
     string name;
     string description;
+    string transformTo; /// unit to transform to (transform type ability only)
     Target target;
     Effect effect;
     int apCost;

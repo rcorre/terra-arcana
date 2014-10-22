@@ -1,6 +1,5 @@
 {
   "assault": {
-    "name"       : "Assault",
     "deployCost" : 4,
     "maxHp"      : 4,
     "maxAp"      : 4,
@@ -113,7 +112,6 @@
       "effect"      : "heal",
       "apCost"      : 2,
       "power"       : 2,
-      "hits"        : 1,
       "minRange"    : 1,
       "maxRange"    : 1
     },
@@ -125,7 +123,6 @@
       "effect"      : "evade",
       "apCost"      : 3,
       "power"       : 2,
-      "hits"        : 1,
       "minRange"    : 1,
       "maxRange"    : 2
     }
@@ -152,14 +149,140 @@
     },
 
     "action2": {
+      "name"        : "Harden",
+      "description" : "",
+      "target"      : "self",
+      "effect"      : "armor",
+      "apCost"      : 2,
+      "power"       : 1,
+      "hits"        : 1
+    }
+  },
+
+  "hornet": {
+    "name"       : "Hornet",
+    "deployCost" : 4,
+    "maxHp"      : 2,
+    "maxAp"      : 5,
+    "baseArmor"  : 0,
+    "baseEvade"  : 2,
+
+    "action1": {
+      "name"        : "Sting",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 3,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 1
+    },
+
+    "action2": {
       "name"        : "Screech",
       "description" : "",
       "target"      : "enemy",
-      "effect"      : "evade",
-      "apCost"      : 2,
-      "power"       : -2,
+      "effect"      : "stun",
+      "specials"    : ["precise"],
+      "apCost"      : 3,
+      "power"       : 3,
       "hits"        : 1,
       "minRange"    : 1,
+      "maxRange"    : 2
+    }
+  },
+
+  "mantrap": {
+    "name"       : "Mantrap",
+    "deployCost" : 4,
+    "maxHp"      : 4,
+    "maxAp"      : 3,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Spit",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "specials"    : ["pierce"],
+      "apCost"      : 2,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 2
+    },
+
+    "action2": {
+      "name"        : "Overgrow",
+      "description" : "",
+      "target"      : "self",
+      "effect"      : "transform",
+      "apCost"      : 2,
+      "transformTo" : "mantrap-overgrown"
+    }
+  },
+
+  "mantrap-overgrown": {
+    "name"       : "Mantrap",
+    "maxHp"      : 4,
+    "maxAp"      : 3,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Spit",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "specials"    : ["pierce"],
+      "apCost"      : 3,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 3
+    },
+
+    "action2": {
+      "name"        : "Mobilize",
+      "description" : "",
+      "target"      : "self",
+      "effect"      : "transform",
+      "apCost"      : 3,
+      "transformTo" : "mantrap"
+    }
+  },
+
+  "manticore": {
+    "name"       : "Manticore",
+    "deployCost" : 4,
+    "maxHp"      : 4,
+    "maxAp"      : 4,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Spike",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 2,
+      "power"       : 3,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 1
+    },
+
+    "action2": {
+      "name"        : "Spines",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 2,
+      "power"       : 1,
+      "hits"        : 3,
+      "minRange"    : 2,
       "maxRange"    : 2
     }
   }

@@ -1,7 +1,7 @@
 [
   {
     "sheets" : [
-      "assault", "medic", "sniper", "guardian", 
+      "assault", "medic", "sniper", "guardian",
       "antlion", "hornet", "mantrap"
     ],
     "frameSize": 32,
@@ -31,7 +31,8 @@
     "frameHeight": 20,
     "sprites": [
       "range", "damage", "stun", "heal", "armor", "evade", "piercing", "precise", "blitz",
-      "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", ""
+      "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", "",
+      "spike", "spines", "spit", "overgrow", "bite", "harden", "sting", "screech", "mobilize"
     ]
   },
 

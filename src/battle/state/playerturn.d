@@ -19,7 +19,7 @@ class PlayerTurn : State!Battle {
     void update(Battle b, float time, InputManager input) {
       _cursor.update(time);
       auto unit = _tileHoverSys.unitUnderMouse;
-      if (unit !is null && input.select) {
+      if (unit !is null && input.select && unit.team == Team.player) {
         b.states.pushState(new PlayerUnitSelected(unit));
       }
     }
