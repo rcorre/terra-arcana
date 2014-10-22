@@ -17,14 +17,14 @@ class Tile : Entity {
     col = data.col;
     name = data.properties.get("name", "ground");
     cover = data.properties.get("cover", "0").to!int;
-    impassable = data.properties.get("impassable", "false").to!bool;
+    moveCost = data.properties.get("moveCost", "1").to!int;
   }
 
   const {
     string name;
     int row, col;
     int cover;
-    bool impassable;
+    int moveCost;
   }
   Entity entity;
 }
