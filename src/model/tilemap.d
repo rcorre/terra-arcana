@@ -43,6 +43,18 @@ class TileMap : Entity {
     return tileAt(row, col);
   }
 
+  /// return tiles adjacent to tile
+  auto neighbors(Tile tile) {
+    Tile[] neighbors;
+    int row = tile.row;
+    int col = tile.col;
+    if (row > 0)           { neighbors ~= tileAt(row - 1, col); }
+    if (col > 0)           { neighbors ~= tileAt(row, col - 1); }
+    if (row < numRows - 1) { neighbors ~= tileAt(row + 1, col); }
+    if (col < numCols - 1) { neighbors ~= tileAt(row, col + 1); }
+    return neighbors;
+  }
+
   private:
   Tile[][] _tiles;
 }

@@ -12,7 +12,6 @@ class Unit : Entity {
   const UnitData data;
   alias data this;
 
-  //TODO: pass tile instead of pos?
   this(string key, Tile tile) {
     auto sprite = new Animation(key, "idle", Animation.Repeat.loop);
     super(tile.center, sprite, "unit");
