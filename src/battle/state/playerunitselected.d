@@ -19,12 +19,15 @@ class PlayerUnitSelected : State!Battle {
       _tileHover = b.getSystem!TileHoverSystem;
       _unitCursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
       _moveCursor = new Animation("gui/tilecursor", "move", Animation.Repeat.loop);
+      _pathCursor = new Animation("gui/tilecursor", "path", Animation.Repeat.loop);
       _pathFinder = new Pathfinder(b.map, _unit);
     }
   }
 
   override void update(Battle b, float time, InputManager input) {
     _unitCursor.update(time);
+    _moveCursor.update(time);
+    _pathCursor.update(time);
     if (_tileHover.tileUnderMouseChanged) {
       _path = _pathFinder.pathTo(_tileHover.tileUnderMouse);
     }
@@ -37,14 +40,14 @@ class PlayerUnitSelected : State!Battle {
     }
     if (_path !is null) {
       foreach(tile ; _path) {
-        sb.draw(_unitCursor, tile.center);
+        sb.draw(_pathCursor, tile.center);
       }
     }
   }
 
   private:
   Unit _unit;
-  Animation _unitCursor, _moveCursor;
+  Animation _unitCursor, _moveCursor, _pathCursor;
   TileHoverSystem _tileHover;
   Pathfinder _pathFinder;
   Tile[] _path;

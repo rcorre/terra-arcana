@@ -19,7 +19,7 @@
     "frameSize": 32,
     "frameTimeMs": 20,
     "defaultDepth": 5,
-    "rows": ["move", "ally", "enemy"]
+    "rows": ["move", "path", "ally", "enemy"]
   },
 
   {
