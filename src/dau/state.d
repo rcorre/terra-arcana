@@ -59,6 +59,7 @@ class StateMachine(T) {
     if (!currentState._active) { // call enter() is state is returning to activity
       if (_prevState !is null) {
         _prevState.exit(object);
+        _prevState._active = false;
       }
       currentState.enter(object);
       currentState._active = true;
