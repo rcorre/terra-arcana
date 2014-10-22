@@ -8,11 +8,17 @@ import dau.graphics.all;
 import dau.geometry.all;
 import model.tile;
 
+enum Team {
+  player,
+  pc
+}
+
 class Unit : Entity {
+  const Team team;
   const UnitData data;
   alias data this;
 
-  this(string key, Tile tile) {
+  this(string key, Tile tile, Team team) {
     auto sprite = new Animation(key, "idle", Animation.Repeat.loop);
     super(tile.center, sprite, "unit");
     assert(key in _data, "no unit data matches key "  ~ key);
@@ -20,6 +26,7 @@ class Unit : Entity {
     this.tile = tile;
     _hp = data.maxHp;
     _ap = data.maxHp;
+    this.team = team;
   }
 
   @property {

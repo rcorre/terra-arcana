@@ -24,7 +24,10 @@ class Battle : Scene!Battle {
       map = new TileMap("test", entities);
       entities.registerEntity(map);
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
-      auto unit = new Unit("sniper", map.tileAt(3, 3));
+      auto unit = new Unit("sniper", map.tileAt(3, 3), Team.player);
+      entities.registerEntity(unit);
+      units ~= unit;
+      unit = new Unit("antlion", map.tileAt(5, 5), Team.pc);
       entities.registerEntity(unit);
       units ~= unit;
       states.pushState(new PlayerTurn);
@@ -35,7 +38,9 @@ class Battle : Scene!Battle {
     }
   }
 
-package:
-  TileMap     map;
-  Unit[]      units;
+  auto moveableUnits(Team team) { return units.filter!(x => x.team == team && x.canAct); }
+
+  package:
+  TileMap map;
+  Unit[]  units;
 }

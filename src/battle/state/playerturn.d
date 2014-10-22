@@ -25,8 +25,7 @@ class PlayerTurn : State!Battle {
     }
 
     void draw(Battle b, SpriteBatch sb) {
-      auto moveableUnits = b.units.filter!(x => x.canAct);
-      foreach(unit ; moveableUnits) {
+      foreach(unit ; b.moveableUnits(Team.player)) {
         sb.draw(_cursor, unit.center);
       }
     }

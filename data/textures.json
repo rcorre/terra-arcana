@@ -1,6 +1,9 @@
 [
   {
-    "sheets" : ["assault", "medic", "sniper", "guardian"],
+    "sheets" : [
+      "assault", "medic", "sniper", "guardian", 
+      "antlion", "hornet", "mantrap"
+    ],
     "frameSize": 32,
     "frameTimeMs": 50,
     "defaultDepth": 1,
