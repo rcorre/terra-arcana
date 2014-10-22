@@ -13,8 +13,8 @@ private enum {
   pipName          = "gui/pip",
   armorOffset      = Vector2i(21, 53),
   evadeOffset      = Vector2i(180, 53),
-  hpArea           = Rect2i(41, 37, 63, 13),
-  apArea           = Rect2i(108, 37, 51, 13),
+  hpArea           = Rect2i(41, 38, 63, 13),
+  apArea           = Rect2i(108, 38, 51, 13),
   statOffset       = Vector2i(41, 53),
   actionBarOffset1 = Vector2i(0, 77),
   actionBarOffset2 = Vector2i(0, 105),
@@ -67,14 +67,33 @@ class ActionInfo : GUIElement {
 
   void addEffectIcon(const UnitAction action, ref Vector2i offset) {
     auto sprite = new Sprite(iconSheetName, action.effect.to!string);
-    auto text = "%dx%d".format(action.power, action.hits);
+    string text;
+    switch (action.target) with (UnitAction.Target) {
+      case enemy:
+      case ground:
+        text = "%dx%d".format(action.power, action.hits);
+        break;
+      case ally:
+      case self:
+        text = "%d".format(action.power);
+        break;
+      default:
+        text = "";
+    }
     addInfo(new Icon(sprite, offset, text, _font), offset);
   }
 
   void addRangeIcon(const UnitAction action, ref Vector2i offset) {
-    auto sprite = new Sprite(iconSheetName, "range");
-    auto text = "%d-%d".format(action.minRange, action.maxRange);
-    addInfo(new Icon(sprite, offset, text, _font), offset);
+    switch (action.target) with (UnitAction.Target) {
+      case enemy:
+      case ground:
+      case ally:
+        auto sprite = new Sprite(iconSheetName, "range");
+        auto text = "%d-%d".format(action.minRange, action.maxRange);
+        addInfo(new Icon(sprite, offset, text, _font), offset);
+        break;
+      default:
+    }
   }
 
   void addSpecialIcon(UnitAction.Special special, ref Vector2i offset) {
@@ -91,5 +110,5 @@ class ActionInfo : GUIElement {
 Font _font;
 
 static this() {
-  onInit({ _font = Font("Mecha_Condensed", 16); });
+  onInit({ _font = Font("Mecha", 20); });
 }

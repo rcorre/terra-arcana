@@ -50,11 +50,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.1628612"
-     inkscape:cx="94.815286"
-     inkscape:cy="26.30527"
+     inkscape:zoom="11.544029"
+     inkscape:cx="165.43102"
+     inkscape:cy="87.752159"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer2"
      showgrid="true"
      inkscape:snap-global="true"
      inkscape:window-width="1918"
@@ -213,7 +213,7 @@
        sodipodi:nodetypes="ccccccccc" />
     <path
        style="opacity:0.85880001;fill:#e2e2e2;fill-opacity:1;stroke:#000000;stroke-width:0.58749998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 283.5,240.5 c 0,0 6.18862,4.7 9.4,4.7 4.7,0 10.6,-4.7 10.6,-4.7 l 0,16 -10.6,7.5 -9.4,-7.5 z"
+       d="m 281.5,239.89999 c 0,0 6,5 11,5 4.7,0 11,-5 11,-5 l 0,18 -11,9 -11,-9 z"
        id="path3698"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csccccc" />
@@ -237,8 +237,8 @@
        sodipodi:cy="248"
        sodipodi:rx="22"
        sodipodi:ry="20"
-       d="m 512,248 c 0,11.04569 -9.84974,20 -22,20 -12.15026,0 -22,-8.95431 -22,-20 0,-11.04569 9.84974,-20 22,-20 12.15026,0 22,8.95431 22,20 z"
-       transform="matrix(0.52272727,0,0,0.575,195.86364,109.9)" />
+       d="m 512,248 a 22,20 0 1 1 -44,0 22,20 0 1 1 44,0 z"
+       transform="matrix(0.58845699,0,0,0.65,164.21002,91.699993)" />
     <rect
        y="236.5"
        x="311.5"
