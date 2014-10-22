@@ -38,5 +38,4 @@ class Battle : Scene!Battle {
 package:
   TileMap     map;
   Unit[]      units;
-  bool enableCameraControl;
 }

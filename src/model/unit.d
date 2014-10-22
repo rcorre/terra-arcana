@@ -38,6 +38,11 @@ class Unit : Entity {
     bool canAct() { return _ap > 0; }
   }
 
+  void consumeAp(int amount) {
+    assert(amount <= _ap, "tried to consume %d ap when only %d available".format(amount, _ap));
+    _ap -= amount;
+  }
+
   override void update(float time) {
     if (canAct) { super.update(time); } // only animate sprite if ap > 0
   }

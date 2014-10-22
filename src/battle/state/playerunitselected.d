@@ -5,6 +5,7 @@ import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
+import battle.state.moveunit;
 
 class PlayerUnitSelected : State!Battle {
   this(Unit unit) {
@@ -13,7 +14,6 @@ class PlayerUnitSelected : State!Battle {
 
   override {
     void enter(Battle b) {
-      b.enableCameraControl = true;
       b.enableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
       _tileHover = b.getSystem!TileHoverSystem;
@@ -22,23 +22,24 @@ class PlayerUnitSelected : State!Battle {
       _pathCursor = new Animation("gui/tilecursor", "path", Animation.Repeat.loop);
       _pathFinder = new Pathfinder(b.map, _unit);
     }
-  }
 
-  override void update(Battle b, float time, InputManager input) {
-    _unitCursor.update(time);
-    _moveCursor.update(time);
-    _pathCursor.update(time);
-    if (_tileHover.tileUnderMouseChanged) {
-      _path = _pathFinder.pathTo(_tileHover.tileUnderMouse);
+    void update(Battle b, float time, InputManager input) {
+      _unitCursor.update(time);
+      _moveCursor.update(time);
+      _pathCursor.update(time);
+      if (_tileHover.tileUnderMouseChanged) {
+        _path = _pathFinder.pathTo(_tileHover.tileUnderMouse);
+      }
+      if (input.select && _path !is null) {
+        b.states.pushState(new MoveUnit(_unit, _path));
+      }
     }
-  }
 
-  override void draw(Battle b, SpriteBatch sb) {
-    sb.draw(_unitCursor, _unit.center);
-    foreach(tile ; _pathFinder.tilesInRange) {
-      sb.draw(_moveCursor, tile.center);
-    }
-    if (_path !is null) {
+    void draw(Battle b, SpriteBatch sb) {
+      sb.draw(_unitCursor, _unit.center);
+      foreach(tile ; _pathFinder.tilesInRange) {
+        sb.draw(_moveCursor, tile.center);
+      }
       foreach(tile ; _path) {
         sb.draw(_pathCursor, tile.center);
       }
