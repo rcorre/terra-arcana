@@ -12,7 +12,7 @@ class Pathfinder {
     _unit = unit;
     djikstra();
     for(int i = 0; i < numTiles; ++i) {
-      if (_dist[i] < _unit.ap) {
+      if (_dist[i] <= _unit.ap) {
         auto tile = idxToTile(i);
         if (tile.entity is null) { // only include unoccupied tiles
           _tilesInRange ~= tile;
@@ -45,11 +45,11 @@ class Pathfinder {
   void djikstra() {
     _dist = new int[numTiles];
     _prev = new int[numTiles];
-    bool[] scanned;
+    bool[] scanned = new bool[numTiles];
     _dist.fill(Tile.unreachable);
     _prev.fill(noParent);
     _dist[tileToIdx(origin)] = 0;
-    auto queue = new RedBlackTree!(Node, "a.dist < b.dist");
+    auto queue = new RedBlackTree!(Node, "a.dist < b.dist", true); // true: allowDuplicates
     queue.insert(Node(origin, 0));
 
     while(!queue.empty) {

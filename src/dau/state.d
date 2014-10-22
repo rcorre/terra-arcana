@@ -36,28 +36,33 @@ class StateMachine(T) {
   /// pop the current state (if there is a current state) and push a new state
   void setState(State!T state) {
     if (!_stateStack.empty) {
-      _prevState = currentState;
       popState();
     }
     pushState(state);
   }
 
   void update(T object, float time, InputManager input) {
-    if (!currentState._active) { // call enter() is state is returning to activity
-      if (_prevState !is null) {
-        _prevState.exit(object);
-      }
-      currentState.enter(object);
-      currentState._active = true;
-    }
+    activateTop(object);
     currentState.update(object, time, input);
   }
 
   void draw(T object, SpriteBatch sb) {
+    activateTop(object);
     currentState.draw(object, sb);
   }
 
   private:
   SList!(State!T) _stateStack;
   State!T _prevState;
+
+  void activateTop(T object) {
+    if (!currentState._active) { // call enter() is state is returning to activity
+      if (_prevState !is null) {
+        _prevState.exit(object);
+      }
+      currentState.enter(object);
+      currentState._active = true;
+      _prevState = currentState;
+    }
+  }
 }
