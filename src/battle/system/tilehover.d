@@ -35,6 +35,7 @@ class TileHoverSystem : System!Battle {
     }
 
     void stop() {
+      _unitInfo.active = false;
     }
   }
 
