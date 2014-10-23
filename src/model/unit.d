@@ -1,6 +1,7 @@
 module model.unit;
 
 import std.string : format;
+import std.algorithm : canFind, max;
 import dau.setup;
 import dau.entity;
 import dau.util.jsonizer;
@@ -11,6 +12,13 @@ import model.tile;
 enum Team {
   player,
   pc
+}
+
+private enum {
+  damageFlashColor = Color.red,
+  damageFlashTime = 0.2f,
+  dodgeFlashColor = Color(1, 1, 1, 0.5),
+  dodgeFlashTime = 0.2f,
 }
 
 class Unit : Entity {
@@ -46,7 +54,15 @@ class Unit : Entity {
     int hp() { return _hp; }
     int ap() { return _ap; }
 
+    int evade() { return _evade; }
+    int armor() { return _armor; }
+
     bool canAct() { return _ap > 0; }
+  }
+
+  void passPhase() {
+    _evade = baseEvade;
+    _armor = baseArmor;
   }
 
   auto getAction(int num) {
@@ -57,6 +73,17 @@ class Unit : Entity {
   void consumeAp(int amount) {
     assert(amount <= _ap, "tried to consume %d ap when only %d available".format(amount, _ap));
     _ap -= amount;
+  }
+
+  void dealDamage(int amount) {
+    _hp = max(0, hp - amount);
+    _sprite.flash(damageFlashTime, damageFlashColor);
+  }
+
+  void dodgeAttack() {
+    assert(_evade > 0, "unit %s should not be evading with evade = %d".format(name, _evade));
+    _evade -= 1;
+    _sprite.flash(dodgeFlashTime, dodgeFlashColor);
   }
 
   bool canUseAnyAction(Tile target) {
@@ -86,8 +113,8 @@ class Unit : Entity {
   }
 
   void playAnimation(string animationKey, Animation.Action onAnimationEnd = null) {
-    auto idle = delegate() { 
-      _sprite = new Animation(_key, "idle", Animation.Repeat.loop); 
+    auto idle = delegate() {
+      _sprite = new Animation(_key, "idle", Animation.Repeat.loop);
       if (onAnimationEnd !is null) { onAnimationEnd(); }
     };
     _sprite = new Animation(_key, animationKey, Animation.Repeat.no, idle);
@@ -105,6 +132,7 @@ class Unit : Entity {
   private:
   Tile _tile;
   int _hp, _ap;
+  int _evade, _armor; // current evade and armor stats
   const string _key;
 }
 
@@ -145,6 +173,10 @@ class UnitAction {
     pierce,  /// ignore armor
     precise, /// ignore evasion
     blitz,   /// cannot be countered
+  }
+
+  bool hasSpecial(Special special) const {
+    return specials.canFind(special);
   }
 
   @jsonize {

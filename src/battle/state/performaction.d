@@ -20,7 +20,10 @@ class PerformAction : State!Battle {
       b.disableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
       auto onAnimationEnd = delegate() {
-        b.states.setState(new ApplyEffect(_action, _target));
+        b.states.popState();
+        for(int i = 0; i < _action.hits; ++i) {
+          b.states.pushState(new ApplyEffect(_action, _target));
+        }
       };
       _actor.playAnimation("action%d".format(_actionNum), onAnimationEnd);
       _effectAnim = _actor.getActionAnimation(_actionNum);
