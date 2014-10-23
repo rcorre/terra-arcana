@@ -57,6 +57,10 @@ class PlayerUnitSelected : State!Battle {
         }
       }
     }
+
+    void exit(Battle b) {
+      _path = null;
+    }
   }
 
   private:
