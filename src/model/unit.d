@@ -2,11 +2,7 @@ module model.unit;
 
 import std.string : format;
 import std.algorithm : canFind, max;
-import dau.setup;
-import dau.entity;
-import dau.util.jsonizer;
-import dau.graphics.all;
-import dau.geometry.all;
+import dau.all;
 import model.tile;
 
 enum Team {
@@ -36,6 +32,7 @@ class Unit : Entity {
     _ap = data.maxHp;
     this.team = team;
     _key = key;
+    _damageSound = new SoundSample("damage");
   }
 
   @property {
@@ -78,6 +75,7 @@ class Unit : Entity {
   void dealDamage(int amount) {
     _hp = max(0, hp - amount);
     _sprite.flash(damageFlashTime, damageFlashColor);
+    _damageSound.play();
   }
 
   void dodgeAttack() {
@@ -134,6 +132,7 @@ class Unit : Entity {
   int _hp, _ap;
   int _evade, _armor; // current evade and armor stats
   const string _key;
+  SoundSample _damageSound;
 }
 
 class UnitData {
