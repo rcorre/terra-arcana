@@ -17,7 +17,7 @@ class PipBar : GUIElement {
     auto sprite = new Sprite(textureName, spriteName);
     auto pos = sprite.size / 2; // relative to top left
     for(int i = 0; i < numPips; ++i) {
-      addChild(new Pip(sprite, pos));
+      _pips ~= addChild(new Pip(sprite, pos));
       pos.x += sprite.width;
       sprite = new Sprite(textureName, spriteName);
     }
@@ -25,13 +25,14 @@ class PipBar : GUIElement {
 
   void setVal(int val) {
     int idx = 0;
-    foreach(child ; children) {
-      child.sprite.tint = (idx++ < val) ? Color.white : pipDimShade;
+    foreach(pip ; _pips) {
+      pip.sprite.tint = (idx++ < val) ? Color.white : pipDimShade;
     }
   }
 
   private:
   int _maxVal;
+  GUIElement[] _pips;
 }
 
 private class Pip : GUIElement {
