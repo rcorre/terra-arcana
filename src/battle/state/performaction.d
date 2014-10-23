@@ -27,6 +27,7 @@ class PerformAction : State!Battle {
       };
       _actor.playAnimation("action%d".format(_actionNum), onAnimationEnd);
       _effectAnim = _actor.getActionAnimation(_actionNum);
+      _actor.getActionSound(_actionNum).play();
     }
 
     void update(Battle b, float time, InputManager input) {

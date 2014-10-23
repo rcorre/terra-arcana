@@ -1,15 +1,16 @@
 # Resource directories
-ASEDIR = resources/ase
-SVGDIR = resources/svg
-MMPZDIR = resources/mmpz
-TTFDIR = resources/font
+ASEDIR   = resources/ase
+SVGDIR   = resources/svg
+MMPZDIR  = resources/mmpz
+TTFDIR   = resources/font
+SOUNDSRC = resources/sound
 
 # Content directories
-PNGDIR  = content/image
-OGGDIR  = content/music
-WAVDIR  = content/sound
-GUIDIR  = $(PNGDIR)/gui
-FONTDIR = content/font
+PNGDIR    = content/image
+OGGDIR    = content/music
+GUIDIR    = $(PNGDIR)/gui
+FONTDIR   = content/font
+SOUNDDEST = content/sound
 
 # Source files
 #ASEFILES  := $(wildcard $(ASEDIR)/*.ase)
@@ -18,6 +19,7 @@ SPRITES    := $(notdir $(SPRITEDIRS:%/=%))
 MMPZFILES  := $(wildcard $(MMPZDIR)/*.mmpz)
 GUIFILES   := $(wildcard $(SVGDIR)/*.svg)
 FONTFILES  := $(wildcard $(TTFDIR)/*.ttf)
+SOUNDFILES := $(wildcard $(SOUNDSRC)/*.ogg)
 
 all: debug
 
@@ -30,7 +32,7 @@ release: content
 run: content
 	@dub run --quiet 
 
-content: dirs sprites gui music fonts
+content: dirs sprites gui music fonts sounds
 
 dirs:
 	@mkdir -p $(PNGDIR) $(OGGDIR) $(GUIDIR) $(WAVDIR) $(FONTDIR)
@@ -60,6 +62,12 @@ fonts: $(FONTFILES:$(TTFDIR)/%.ttf=$(FONTDIR)/%.ttf)
 $(FONTDIR)/%.ttf : $(TTFDIR)/%.ttf
 	@echo copying font $*
 	@cp $(TTFDIR)/$*.ttf $(FONTDIR)/$*.ttf
+
+sounds: $(SOUNDFILES:$(SOUNDSRC)/%.ogg=$(SOUNDDEST)/%.ogg)
+
+$(SOUNDDEST)/%.ogg : $(SOUNDSRC)/%.ogg
+	@echo copying sound $*
+	@cp $(SOUNDSRC)/$*.ogg $(SOUNDDEST)/$*.ogg
 
 clean:
 	@$(RM) $(PNGDIR)/*.png

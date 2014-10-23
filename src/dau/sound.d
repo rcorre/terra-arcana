@@ -7,7 +7,7 @@ import dau.allegro;
 import dau.setup;
 
 private enum {
-  fileFormat = Paths.soundDir ~ "/%s.wav", // TODO: support other extensions
+  fileFormat = Paths.soundDir ~ "/%s.ogg", // TODO: support other extensions
   soundVolume = 1f // TODO: set in user preferences
 }
 

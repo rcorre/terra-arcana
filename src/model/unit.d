@@ -15,6 +15,7 @@ private enum {
   damageFlashTime = 0.2f,
   dodgeFlashColor = Color(1, 1, 1, 0.5),
   dodgeFlashTime = 0.2f,
+  actionSoundFormat = "%s-action%d",
 }
 
 class Unit : Entity {
@@ -121,6 +122,11 @@ class Unit : Entity {
   auto getActionAnimation(int actionNum) {
     assert(actionNum == 1 || actionNum == 2, "%d is not a valid action number".format(actionNum));
     return new Animation(_key, "effect%d".format(actionNum));
+  }
+
+  auto getActionSound(int actionNum) {
+    assert(actionNum == 1 || actionNum == 2, "%d is not a valid action number".format(actionNum));
+    return new SoundSample(actionSoundFormat.format(_key, actionNum));
   }
 
   override void update(float time) {
