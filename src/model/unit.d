@@ -54,7 +54,7 @@ class Unit : Entity {
   }
 
   bool canUseAnyAction(Tile target) {
-    return canUseAction(0, target) || canUseAction(1, target);
+    return canUseAction(1, target) || canUseAction(2, target);
   }
 
   bool canUseAnyAction(Unit unit) {
@@ -62,11 +62,12 @@ class Unit : Entity {
   }
 
   bool canUseAction(int num, Tile target) {
-    auto action = num == 0 ? action1 : action2;
+    assert(num == 1 || num == 2, "action number %d is not valid".format(num));
+    auto action = num == 1 ? action1 : action2;
     if (action.apCost > ap) { return false; }
     int dist = tile.distance(target);
     bool inRange = dist <= action.maxRange && dist >= action.minRange;
-    auto other = cast(Unit) tile.entity;
+    auto other = cast(Unit) target.entity;
     final switch (action.target) with (UnitAction.Target) {
       case enemy:
         return other !is null && other.team != team && inRange;

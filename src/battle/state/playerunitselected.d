@@ -26,6 +26,7 @@ class PlayerUnitSelected : State!Battle {
 
     void update(Battle b, float time, InputManager input) {
       _allyCursor.update(time);
+      _enemyCursor.update(time);
       _moveCursor.update(time);
       _pathCursor.update(time);
       if (_tileHover.tileUnderMouseChanged) {
