@@ -34,6 +34,9 @@ class Unit : Entity {
     auto tile(Tile newTile) {
       assert(newTile.entity is null, "cannot place %s on tile %d,%d which already has entity"
           .format(name, newTile.row, newTile.col));
+      if (tile !is null) {
+        tile.entity = null; // remove self from previous tile
+      }
       _tile = newTile;
       _tile.entity = this;
       center = tile.center;
@@ -48,6 +51,32 @@ class Unit : Entity {
   void consumeAp(int amount) {
     assert(amount <= _ap, "tried to consume %d ap when only %d available".format(amount, _ap));
     _ap -= amount;
+  }
+
+  bool canUseAnyAction(Tile target) {
+    return canUseAction(0, target) || canUseAction(1, target);
+  }
+
+  bool canUseAnyAction(Unit unit) {
+    return canUseAnyAction(unit.tile);
+  }
+
+  bool canUseAction(int num, Tile target) {
+    auto action = num == 0 ? action1 : action2;
+    if (action.apCost > ap) { return false; }
+    int dist = tile.distance(target);
+    bool inRange = dist <= action.maxRange && dist >= action.minRange;
+    auto other = cast(Unit) tile.entity;
+    final switch (action.target) with (UnitAction.Target) {
+      case enemy:
+        return other !is null && other.team != team && inRange;
+      case ground:
+        return inRange;
+      case ally:
+        return other !is null && other.team == team && inRange;
+      case self:
+        return other !is null && other == this;
+    }
   }
 
   override void update(float time) {

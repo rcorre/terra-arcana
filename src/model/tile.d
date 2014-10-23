@@ -1,6 +1,7 @@
 module model.tile;
 
 import std.conv;
+import std.math : abs;
 import dau.entity;
 import dau.geometry.all;
 import dau.graphics.all;
@@ -21,6 +22,10 @@ class Tile : Entity {
     name = data.properties.get("name", "ground");
     cover = data.properties.get("cover", "0").to!int;
     moveCost = data.properties.get("moveCost", "1").to!int;
+  }
+
+  int distance(Tile other) {
+    return abs(row - other.row) + abs(col - other.col);
   }
 
   const {
