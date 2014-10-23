@@ -68,7 +68,8 @@ class Texture {
   void draw(Vector2i pos, int row = 0, int col = 0, Vector2f scale = Vector2f(1, 1),
       Color tint = Color.white, float angle = 0)
   {
-    assert(col >= 0 && col < numCols && row >= 0 && row < numRows);
+    assert(col >= 0 && col < numCols && row >= 0 && row < numRows,
+        "frame at %d,%d is out of texture bounds (%dx%d)".format(row, col, numRows, numCols));
     auto frame = Rect2i(col * frameWidth, row * frameHeight, frameWidth, frameHeight);
     al_draw_tinted_scaled_rotated_bitmap_region(_bmp, // bitmap
         frame.x, frame.y, frame.width, frame.height,  // bitmap region

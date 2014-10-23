@@ -19,7 +19,7 @@
     },
 
     "action2": {
-      "name"        : "Grenade",
+      "name"        : "Frag",
       "description" : "",
       "target"      : "enemy",
       "effect"      : "damage",
