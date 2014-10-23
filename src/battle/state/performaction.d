@@ -36,6 +36,10 @@ class PerformAction : State!Battle {
     void draw(Battle b, SpriteBatch sb) {
       sb.draw(_effectAnim, _target.center);
     }
+
+    void exit(Battle b) {
+      _actor.consumeAp(_action.apCost);
+    }
   }
 
   private:

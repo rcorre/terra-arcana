@@ -26,7 +26,7 @@ class PipBar : GUIElement {
   void setVal(int val) {
     int idx = 0;
     foreach(child ; children) {
-      child.sprite.tint = (idx++ < val) ? pipDimShade : Color.white;
+      child.sprite.tint = (idx++ < val) ? Color.white : pipDimShade;
     }
   }
 

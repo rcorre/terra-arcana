@@ -37,6 +37,8 @@ class UnitInfoGUI : GUIElement {
     addChild(_evadeText);
     addChild(new ActionInfo(actionBarOffset1, unit.action1));
     addChild(new ActionInfo(actionBarOffset2, unit.action2));
+    _hpBar.setVal(unit.hp);
+    _apBar.setVal(unit.ap);
   }
 
   private:
