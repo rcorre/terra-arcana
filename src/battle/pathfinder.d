@@ -26,15 +26,13 @@ class Pathfinder {
   auto pathTo(Tile tile) {
     int idx = tileToIdx(tile);
     int startIdx = tileToIdx(origin);
-    Tile[] path;
     if (_dist[idx] > _unit.ap || tile.entity !is null) {
-      return path;
+      return null;
     }
-    else {
-      while(idx != startIdx) {
-        path ~= idxToTile(idx);
-        idx = _prev[idx];
-      }
+    Tile[] path;
+    while(idx != startIdx) {
+      path ~= idxToTile(idx);
+      idx = _prev[idx];
     }
     return path;
   }

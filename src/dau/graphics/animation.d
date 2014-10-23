@@ -15,7 +15,7 @@ class Animation : Sprite {
     rebound      /// reverse animation direction
   }
 
-  this(string textureName, string key, Repeat repeat = Repeat.no, Action onAnimationEnd = null) { 
+  this(string textureName, string key, Repeat repeat = Repeat.no, Action onAnimationEnd = null) {
     auto texture = getTexture(textureName);
     super(texture, 0);
     _startCol       = 0;

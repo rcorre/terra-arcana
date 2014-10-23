@@ -27,6 +27,7 @@ class Unit : Entity {
     _hp = data.maxHp;
     _ap = data.maxHp;
     this.team = team;
+    _key = key;
   }
 
   @property {
@@ -48,6 +49,11 @@ class Unit : Entity {
     bool canAct() { return _ap > 0; }
   }
 
+  auto getAction(int num) {
+    assert(num == 1 || num == 2, "action number %d is not valid".format(num));
+    return (num == 1) ? action1 : action2;
+  }
+
   void consumeAp(int amount) {
     assert(amount <= _ap, "tried to consume %d ap when only %d available".format(amount, _ap));
     _ap -= amount;
@@ -62,8 +68,7 @@ class Unit : Entity {
   }
 
   bool canUseAction(int num, Tile target) {
-    assert(num == 1 || num == 2, "action number %d is not valid".format(num));
-    auto action = num == 1 ? action1 : action2;
+    auto action = getAction(num);
     if (action.apCost > ap) { return false; }
     int dist = tile.distance(target);
     bool inRange = dist <= action.maxRange && dist >= action.minRange;
@@ -80,6 +85,11 @@ class Unit : Entity {
     }
   }
 
+  void playAnimation(string animationKey) {
+    auto idle = delegate() { _sprite = new Animation(_key, "idle", Animation.Repeat.loop); };
+    _sprite = new Animation(_key, animationKey, Animation.Repeat.no, idle);
+  }
+
   override void update(float time) {
     if (canAct) { super.update(time); } // only animate sprite if ap > 0
   }
@@ -87,6 +97,7 @@ class Unit : Entity {
   private:
   Tile _tile;
   int _hp, _ap;
+  const string _key;
 }
 
 class UnitData {

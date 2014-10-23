@@ -6,6 +6,7 @@ import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
 import battle.state.moveunit;
+import battle.state.performaction;
 
 class PlayerUnitSelected : State!Battle {
   this(Unit unit) {
@@ -32,8 +33,14 @@ class PlayerUnitSelected : State!Battle {
       if (_tileHover.tileUnderMouseChanged) {
         _path = _pathFinder.pathTo(_tileHover.tileUnderMouse);
       }
-      if (input.select && _path !is null) {
-        b.states.pushState(new MoveUnit(_unit, _path));
+      if (input.select) { // TODO: use rmb for alternate action
+        auto tile = _tileHover.tileUnderMouse;
+        if (_unit.canUseAction(1, tile)) { // TODO: handle attack ground
+          b.states.pushState(new PerformAction(_unit, 1, cast(Unit) tile.entity));
+        }
+        else if (_path !is null) {
+          b.states.pushState(new MoveUnit(_unit, _path));
+        }
       }
     }
 

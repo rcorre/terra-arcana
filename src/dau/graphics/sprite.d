@@ -97,6 +97,8 @@ class Sprite {
 
     bool isJiggling() { return _jiggleEffect.active; }
     bool isFlashing() { return _totalFlashTime > 0; }
+
+    auto texture() { return _texture; }
   }
 
   protected:
