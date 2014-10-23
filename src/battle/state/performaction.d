@@ -5,6 +5,7 @@ import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
+import battle.state.applyeffect;
 
 class PerformAction : State!Battle {
   this(Unit actor, int actionNum, Unit target) {
@@ -18,13 +19,19 @@ class PerformAction : State!Battle {
     void enter(Battle b) {
       b.disableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
-      _actor.playAnimation("action%d".format(_actionNum));
+      auto onAnimationEnd = delegate() {
+        b.states.setState(new ApplyEffect(_action, _target));
+      };
+      _actor.playAnimation("action%d".format(_actionNum), onAnimationEnd);
+      _effectAnim = _actor.getActionAnimation(_actionNum);
     }
 
     void update(Battle b, float time, InputManager input) {
+      _effectAnim.update(time);
     }
 
     void draw(Battle b, SpriteBatch sb) {
+      sb.draw(_effectAnim, _target.center);
     }
   }
 
@@ -32,4 +39,5 @@ class PerformAction : State!Battle {
   Unit _actor, _target;
   const UnitAction _action;
   int _actionNum;
+  Animation _effectAnim;
 }

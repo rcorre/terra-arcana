@@ -85,9 +85,17 @@ class Unit : Entity {
     }
   }
 
-  void playAnimation(string animationKey) {
-    auto idle = delegate() { _sprite = new Animation(_key, "idle", Animation.Repeat.loop); };
+  void playAnimation(string animationKey, Animation.Action onAnimationEnd = null) {
+    auto idle = delegate() { 
+      _sprite = new Animation(_key, "idle", Animation.Repeat.loop); 
+      if (onAnimationEnd !is null) { onAnimationEnd(); }
+    };
     _sprite = new Animation(_key, animationKey, Animation.Repeat.no, idle);
+  }
+
+  auto getActionAnimation(int actionNum) {
+    assert(actionNum == 1 || actionNum == 2, "%d is not a valid action number".format(actionNum));
+    return new Animation(_key, "effect%d".format(actionNum));
   }
 
   override void update(float time) {
