@@ -15,7 +15,7 @@ enum Settings {
 enum Paths : string {
   bitmapDir   = "content/image",
   fontDir     = "content/font",
-  soundData   = "content/sounds.cfg",
+  soundDir    = "content/sound/",
   musicData   = "content/music.cfg",
   mapDir      = "data/maps",
   textureData = "data/textures.json",
