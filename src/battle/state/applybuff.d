@@ -5,15 +5,15 @@ import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
+import battle.state.delay;
 
 private enum waitTime = 0.2f;
 
-/// apply the result of a single hit of an action
+/// apply the result of a buff used on an ally
 class ApplyBuff : State!Battle {
   this(const UnitAction action, Unit target) {
     _target = target;
     _action = action;
-    _timer = waitTime;
   }
 
   override { // TODO: show effect on status bar
@@ -25,24 +25,12 @@ class ApplyBuff : State!Battle {
         default:
           assert(0, "no code to handle effect type");
       }
-    }
 
-    void update(Battle b, float time, InputManager input) {
-      _timer -= time;
-      if (_timer < 0) {
-        b.states.popState();
-      }
-    }
-
-    void draw(Battle b, SpriteBatch sb) {
-    }
-
-    void exit(Battle b) {
+      b.states.setState(new Delay); // pause briefly after applying buff
     }
   }
 
   private:
   Unit _target;
   const UnitAction _action;
-  float _timer;
 }

@@ -5,15 +5,13 @@ import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
-
-private enum waitTime = 0.2f;
+import battle.state.delay;
 
 /// apply the result of a single hit of an action
 class ApplyEffect : State!Battle {
   this(const UnitAction action, Unit target) {
     _target = target;
     _action = action;
-    _timer = waitTime;
   }
 
   override { // TODO: show effect on status bar
@@ -31,24 +29,11 @@ class ApplyEffect : State!Battle {
       else {
         _target.dodgeAttack();
       }
-    }
-
-    void update(Battle b, float time, InputManager input) {
-      _timer -= time;
-      if (_timer < 0) {
-        b.states.popState();
-      }
-    }
-
-    void draw(Battle b, SpriteBatch sb) {
-    }
-
-    void exit(Battle b) {
+      b.states.setState(new Delay); // pause briefly after applying effect
     }
   }
 
   private:
   Unit _target;
   const UnitAction _action;
-  float _timer;
 }
