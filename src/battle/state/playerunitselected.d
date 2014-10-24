@@ -30,17 +30,20 @@ class PlayerUnitSelected : State!Battle {
       _enemyCursor.update(time);
       _moveCursor.update(time);
       _pathCursor.update(time);
+      auto tile = _tileHover.tileUnderMouse;
       if (_tileHover.tileUnderMouseChanged) {
-        _path = _pathFinder.pathTo(_tileHover.tileUnderMouse);
+        _path = _pathFinder.pathTo(tile);
       }
       if (input.select) { // TODO: use rmb for alternate action
-        auto tile = _tileHover.tileUnderMouse;
         if (_unit.canUseAction(1, tile)) { // TODO: handle attack ground
           b.states.pushState(new PerformAction(_unit, 1, cast(Unit) tile.entity));
         }
         else if (_path !is null) {
           b.states.pushState(new MoveUnit(_unit, _path));
         }
+      }
+      else if (input.altSelect && _unit.canUseAction(2, tile)) { // TODO: handle attack ground
+        b.states.pushState(new PerformAction(_unit, 2, cast(Unit) tile.entity));
       }
     }
 

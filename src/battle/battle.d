@@ -30,6 +30,9 @@ class Battle : Scene!Battle {
       unit = new Unit("antlion", map.tileAt(5, 5), Team.pc);
       entities.registerEntity(unit);
       units ~= unit;
+      unit = new Unit("medic", map.tileAt(3, 5), Team.player);
+      entities.registerEntity(unit);
+      units ~= unit;
       states.pushState(new PlayerTurn);
     }
 

@@ -49,6 +49,7 @@ class InputManager {
     bool selectRight() { return keyPressed(Keymap.right); }
 
     bool select() { return mouseClicked(MouseButton.lmb); }
+    bool altSelect() { return mouseClicked(MouseButton.rmb); }
   }
 
   Vector2i mousePos() {

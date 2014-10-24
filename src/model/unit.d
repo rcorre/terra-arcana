@@ -12,9 +12,9 @@ enum Team {
 
 private enum {
   damageFlashColor = Color.red,
-  damageFlashTime = 0.2f,
+  healFlashColor = Color.green,
   dodgeFlashColor = Color(1, 1, 1, 0.5),
-  dodgeFlashTime = 0.2f,
+  flashTime = 0.2f,
   actionSoundFormat = "%s-action%d",
 }
 
@@ -34,6 +34,7 @@ class Unit : Entity {
     this.team = team;
     _key = key;
     _damageSound = new SoundSample("damage");
+    _healSound   = new SoundSample("heal");
   }
 
   @property {
@@ -75,14 +76,20 @@ class Unit : Entity {
 
   void dealDamage(int amount) {
     _hp = max(0, hp - amount);
-    _sprite.flash(damageFlashTime, damageFlashColor);
+    _sprite.flash(flashTime, damageFlashColor);
     _damageSound.play();
+  }
+
+  void restoreHealth(int amount) {
+    _hp = min(maxHp, hp + amount);
+    _sprite.flash(flashTime, healFlashColor);
+    _healSound.play();
   }
 
   void dodgeAttack() {
     assert(_evade > 0, "unit %s should not be evading with evade = %d".format(name, _evade));
     _evade -= 1;
-    _sprite.flash(dodgeFlashTime, dodgeFlashColor);
+    _sprite.flash(flashTime, dodgeFlashColor);
   }
 
   bool canUseAnyAction(Tile target) {
@@ -138,7 +145,7 @@ class Unit : Entity {
   int _hp, _ap;
   int _evade, _armor; // current evade and armor stats
   const string _key;
-  SoundSample _damageSound;
+  SoundSample _damageSound, _healSound;
 }
 
 class UnitData {

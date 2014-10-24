@@ -6,6 +6,7 @@ import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
 import battle.state.applyeffect;
+import battle.state.applybuff;
 
 class PerformAction : State!Battle {
   this(Unit actor, int actionNum, Unit target) {
@@ -19,12 +20,20 @@ class PerformAction : State!Battle {
     void enter(Battle b) {
       b.disableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
-      auto onAnimationEnd = delegate() {
-        b.states.popState();
-        for(int i = 0; i < _action.hits; ++i) {
-          b.states.pushState(new ApplyEffect(_action, _target));
-        }
-      };
+      void delegate() onAnimationEnd = null;
+      if (_actor.team == _target.team) {
+        onAnimationEnd = delegate() {
+          b.states.setState(new ApplyBuff(_action, _target));
+        };
+      }
+      else { // offensive ability
+        onAnimationEnd = delegate() {
+          b.states.popState();
+          for(int i = 0; i < _action.hits; ++i) {
+            b.states.pushState(new ApplyEffect(_action, _target));
+          }
+        };
+      }
       _actor.playAnimation("action%d".format(_actionNum), onAnimationEnd);
       _effectAnim = _actor.getActionAnimation(_actionNum);
       _actor.getActionSound(_actionNum).play();
