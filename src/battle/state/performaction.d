@@ -5,6 +5,7 @@ import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
+import battle.state.performcounter;
 import battle.state.applyeffect;
 import battle.state.applybuff;
 
@@ -19,7 +20,6 @@ class PerformAction : State!Battle {
   override {
     void enter(Battle b) {
       b.disableSystem!TileHoverSystem;
-      b.disableSystem!BattleCameraSystem;
       void delegate() onAnimationEnd = null;
       if (_actor.team == _target.team) {
         onAnimationEnd = delegate() {
@@ -29,10 +29,7 @@ class PerformAction : State!Battle {
       else { // offensive ability
         onAnimationEnd = delegate() {
           b.states.popState();
-          auto counter = _target.firstUseableAction(_actor);
-          if (counter != 0) {
-            b.states.pushState(new PerformAction(_target, counter, _actor));
-          }
+          b.states.pushState(new PerformCounter(_target, _actor));
           for(int i = 0; i < _action.hits; ++i) {
             b.states.pushState(new ApplyEffect(_action, _target));
           }
