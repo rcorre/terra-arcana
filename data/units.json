@@ -149,13 +149,16 @@
     },
 
     "action2": {
-      "name"        : "Harden",
+      "name"        : "Screech",
       "description" : "",
-      "target"      : "self",
-      "effect"      : "armor",
+      "target"      : "enemy",
+      "effect"      : "stun",
+      "specials"    : ["precise"],
       "apCost"      : 2,
-      "power"       : 1,
-      "hits"        : 1
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 2
     }
   },
 
