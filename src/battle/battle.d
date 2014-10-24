@@ -27,7 +27,7 @@ class Battle : Scene!Battle {
       auto unit = new Unit("assault", map.tileAt(3, 3), Team.player);
       entities.registerEntity(unit);
       units ~= unit;
-      unit = new Unit("antlion", map.tileAt(5, 5), Team.pc);
+      unit = new Unit("antlion", map.tileAt(5, 3), Team.pc);
       entities.registerEntity(unit);
       units ~= unit;
       unit = new Unit("medic", map.tileAt(3, 5), Team.player);

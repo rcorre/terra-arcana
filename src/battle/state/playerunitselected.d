@@ -17,6 +17,9 @@ class PlayerUnitSelected : State!Battle {
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
+      if (!_unit.canAct) {
+        b.states.popState();
+      }
       _tileHover = b.getSystem!TileHoverSystem;
       _pathFinder = new Pathfinder(b.map, _unit);
       _allyCursor  = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
@@ -40,6 +43,9 @@ class PlayerUnitSelected : State!Battle {
         }
         else if (_path !is null) {
           b.states.pushState(new MoveUnit(_unit, _path));
+        }
+        else {
+          b.states.popState();
         }
       }
       else if (input.altSelect && _unit.canUseAction(2, tile)) { // TODO: handle attack ground
