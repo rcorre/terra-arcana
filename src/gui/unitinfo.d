@@ -29,8 +29,8 @@ class UnitInfoGUI : GUIElement {
     super(new Sprite(spriteName), unit.area.bottomRight);
     _hpBar = new PipBar(hpArea, unit.maxHp, pipName, "hpPip");
     _apBar = new PipBar(apArea, unit.maxAp, pipName, "apPip");
-    _armorText = new TextBox(unit.baseArmor, _font, armorOffset, GUIElement.Anchor.center);
-    _evadeText = new TextBox(unit.baseEvade, _font, evadeOffset, GUIElement.Anchor.center);
+    _armorText = new TextBox(unit.armor, _font, armorOffset, GUIElement.Anchor.center);
+    _evadeText = new TextBox(unit.evade, _font, evadeOffset, GUIElement.Anchor.center);
     addChild(_hpBar);
     addChild(_apBar);
     addChild(_armorText);

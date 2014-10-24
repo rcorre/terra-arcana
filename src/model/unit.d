@@ -86,6 +86,14 @@ class Unit : Entity {
     _healSound.play();
   }
 
+  void adjustEvade(int amount) {
+    _evade = max(0, _evade + amount);
+  }
+
+  void adjustArmor(int amount) {
+    _armor = max(0, _armor + amount);
+  }
+
   void dodgeAttack() {
     assert(_evade > 0, "unit %s should not be evading with evade = %d".format(name, _evade));
     _evade -= 1;

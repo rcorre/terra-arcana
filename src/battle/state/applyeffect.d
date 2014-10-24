@@ -22,6 +22,12 @@ class ApplyEffect : State!Battle {
           case damage:
             _target.dealDamage(_action.power);
             break;
+          case evade:
+            _target.adjustEvade(_action.power);
+            break;
+          case armor:
+            _target.adjustEvade(_action.power);
+            break;
           default:
             assert(0, "no code to handle effect type");
         }
