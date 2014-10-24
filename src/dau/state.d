@@ -24,11 +24,13 @@ class StateMachine(T) {
 
   /// place a new state on the state stack
   void pushState(State!T state) {
+    printStateTrace();
     _stateStack.insertFront(state);
   }
 
   /// remove the current state
   void popState() {
+    printStateTrace();
     currentState._active = false;
     _stateStack.removeFront;
   }
@@ -64,6 +66,17 @@ class StateMachine(T) {
       currentState.enter(object);
       currentState._active = true;
       _prevState = currentState;
+    }
+  }
+
+  void printStateTrace() {
+    debug {
+      import std.stdio, std.path, std.conv;
+      string s;
+      foreach(state ; _stateStack) {
+        s ~= typeid(state).to!string.extension;
+      }
+      writeln("states: ", s);
     }
   }
 }
