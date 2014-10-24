@@ -29,6 +29,10 @@ class PerformAction : State!Battle {
       else { // offensive ability
         onAnimationEnd = delegate() {
           b.states.popState();
+          auto counter = _target.firstUseableAction(_actor);
+          if (counter != 0) {
+            b.states.pushState(new PerformAction(_target, counter, _actor));
+          }
           for(int i = 0; i < _action.hits; ++i) {
             b.states.pushState(new ApplyEffect(_action, _target));
           }

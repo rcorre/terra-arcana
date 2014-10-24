@@ -61,7 +61,7 @@ class PlayerUnitSelected : State!Battle {
         sb.draw(_pathCursor, tile.center);
       }
       foreach(unit ; b.units) {
-        if (_unit.canUseAnyAction(unit)) {
+        if (_unit.firstUseableAction(unit) != 0) {
           sb.draw(_unit.team == unit.team ? _allyCursor : _enemyCursor, unit.center);
         }
       }

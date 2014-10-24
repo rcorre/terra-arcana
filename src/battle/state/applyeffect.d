@@ -22,6 +22,9 @@ class ApplyEffect : State!Battle {
           case damage:
             _target.dealDamage(_action.power);
             break;
+          case stun:
+            _target.damageAp(_action.power);
+            break;
           case evade:
             _target.adjustEvade(_action.power);
             break;

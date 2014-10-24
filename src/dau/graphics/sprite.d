@@ -49,8 +49,8 @@ class Sprite {
     _colorSpectrum = _tint ~ colors; // append current color to start of spectrum
   }
 
-  void shift(Vector2i offset, float speed) {
-    _jiggleEffect = JiggleEffect(Vector2i.zero, offset, speed, 1);
+  void shake(Vector2i offset, float speed, int repetitions = 1) {
+    _jiggleEffect = JiggleEffect(Vector2i.zero, offset, speed, repetitions);
   }
 
   void update(float time) {

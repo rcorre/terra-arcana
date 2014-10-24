@@ -16,6 +16,10 @@ private enum {
   dodgeFlashColor = Color(1, 1, 1, 0.5),
   flashTime = 0.2f,
   actionSoundFormat = "%s-action%d",
+  // ap loss effect
+  shakeOffset = Vector2i(4, 0),
+  shakeSpeed = 30,
+  shakeRepetitions = 4,
 }
 
 class Unit : Entity {
@@ -80,6 +84,11 @@ class Unit : Entity {
     _damageSound.play();
   }
 
+  void damageAp(int amount) {
+    _ap -= amount; // TODO: negative ap handling
+    _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
+  }
+
   void restoreHealth(int amount) {
     _hp = min(maxHp, hp + amount);
     _sprite.flash(flashTime, healFlashColor);
@@ -100,12 +109,15 @@ class Unit : Entity {
     _sprite.flash(flashTime, dodgeFlashColor);
   }
 
-  bool canUseAnyAction(Tile target) {
-    return canUseAction(1, target) || canUseAction(2, target);
+  /// return first action useable on target, or null if no useable actions
+  int firstUseableAction(Tile target) {
+    if      (canUseAction(1, target)) { return 1; }
+    else if (canUseAction(2, target)) { return 2; }
+    else                              { return 0; }
   }
 
-  bool canUseAnyAction(Unit unit) {
-    return canUseAnyAction(unit.tile);
+  int firstUseableAction(Unit unit) {
+    return firstUseableAction(unit.tile);
   }
 
   bool canUseAction(int num, Tile target) {
