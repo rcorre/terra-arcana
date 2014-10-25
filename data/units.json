@@ -1,6 +1,6 @@
 {
   "assault": {
-    "deployCost" : 4,
+    "deployCost" : 2,
     "maxHp"      : 4,
     "maxAp"      : 4,
     "baseArmor"  : 0,
@@ -33,7 +33,7 @@
 
   "guardian": {
     "name"       : "Guardian",
-    "deployCost" : 4,
+    "deployCost" : 2,
     "maxHp"      : 4,
     "maxAp"      : 3,
     "baseArmor"  : 1,
@@ -66,7 +66,7 @@
 
   "sniper": {
     "name"       : "Sniper",
-    "deployCost" : 4,
+    "deployCost" : 2,
     "maxHp"      : 4,
     "maxAp"      : 4,
     "baseArmor"  : 0,
@@ -99,7 +99,7 @@
 
   "medic": {
     "name"       : "Medic",
-    "deployCost" : 4,
+    "deployCost" : 2,
     "maxHp"      : 4,
     "maxAp"      : 4,
     "baseArmor"  : 0,
@@ -130,11 +130,11 @@
 
   "antlion": {
     "name"       : "Antlion",
-    "deployCost" : 4,
+    "deployCost" : 2,
     "maxHp"      : 4,
-    "maxAp"      : 4,
+    "maxAp"      : 5,
     "baseArmor"  : 0,
-    "baseEvade"  : 0,
+    "baseEvade"  : 1,
 
     "action1": {
       "name"        : "Bite",
@@ -164,7 +164,7 @@
 
   "hornet": {
     "name"       : "Hornet",
-    "deployCost" : 4,
+    "deployCost" : 2,
     "maxHp"      : 2,
     "maxAp"      : 5,
     "baseArmor"  : 0,
@@ -196,9 +196,42 @@
     }
   },
 
+  "treant": {
+    "name"       : "Treant",
+    "deployCost" : 2,
+    "maxHp"      : 5,
+    "maxAp"      : 3,
+    "baseArmor"  : 1,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Smash",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 2,
+      "power"       : 2,
+      "hits"        : 2,
+      "minRange"    : 1,
+      "maxRange"    : 1
+    },
+
+    "action2": {
+      "name"        : "Entangle",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "slow",
+      "apCost"      : 2,
+      "power"       : 1,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 2
+    }
+  },
+
   "hellblossom": {
     "name"       : "Hell Blossom",
-    "deployCost" : 4,
+    "deployCost" : 2,
     "maxHp"      : 4,
     "maxAp"      : 3,
     "baseArmor"  : 0,
