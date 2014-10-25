@@ -162,33 +162,32 @@
     }
   },
 
-  "hornet": {
-    "name"       : "Hornet",
+  "wyvern": {
+    "name"       : "Wyvern",
     "deployCost" : 2,
-    "maxHp"      : 2,
-    "maxAp"      : 5,
+    "maxHp"      : 3,
+    "maxAp"      : 4,
     "baseArmor"  : 0,
-    "baseEvade"  : 2,
+    "baseEvade"  : 1,
 
     "action1": {
-      "name"        : "Sting",
+      "name"        : "Claw",
       "description" : "",
       "target"      : "enemy",
       "effect"      : "damage",
-      "apCost"      : 2,
+      "apCost"      : 3,
       "power"       : 2,
-      "hits"        : 1,
+      "hits"        : 2,
       "minRange"    : 1,
       "maxRange"    : 1
     },
 
     "action2": {
-      "name"        : "Screech",
+      "name"        : "Venom",
       "description" : "",
       "target"      : "enemy",
-      "effect"      : "stun",
-      "specials"    : ["precise"],
-      "apCost"      : 3,
+      "effect"      : "toxin",
+      "apCost"      : 2,
       "power"       : 3,
       "hits"        : 1,
       "minRange"    : 1,
