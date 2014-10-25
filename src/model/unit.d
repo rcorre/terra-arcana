@@ -4,6 +4,7 @@ import std.string : format;
 import std.algorithm : canFind, max;
 import dau.all;
 import model.tile;
+import model.unitaction;
 
 enum Team {
   player,
@@ -179,50 +180,6 @@ class UnitData {
     int baseArmor;
     int baseEvade;
     UnitAction action1, action2;
-  }
-}
-
-class UnitAction {
-  mixin JsonizeMe;
-
-  enum Target {
-    enemy,
-    ally,
-    self,
-    ground
-  }
-
-  enum Effect {
-    damage, /// reduce hp
-    stun,   /// reduce ap
-    heal,   /// restore hp
-    armor,  /// adjust armor
-    evade,  /// adjust evade
-    transform
-  }
-
-  enum Special {
-    pierce,  /// ignore armor
-    precise, /// ignore evasion
-    blitz,   /// cannot be countered
-  }
-
-  bool hasSpecial(Special special) const {
-    return specials.canFind(special);
-  }
-
-  @jsonize {
-    string name;
-    string description;
-    string transformTo; /// unit to transform to (transform type ability only)
-    Target target;
-    Effect effect;
-    int apCost;
-    int power;  /// damage or healing
-    int hits;   /// number of times to hit
-    int minRange;
-    int maxRange;
-    Special[] specials;
   }
 }
 

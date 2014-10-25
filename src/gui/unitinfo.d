@@ -6,7 +6,7 @@ import dau.setup;
 import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.all;
-import model.unit;
+import model.all;
 
 private enum {
   spriteName       = "gui/unit_status",
