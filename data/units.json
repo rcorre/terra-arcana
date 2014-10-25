@@ -175,7 +175,7 @@
       "description" : "",
       "target"      : "enemy",
       "effect"      : "damage",
-      "apCost"      : 3,
+      "apCost"      : 2,
       "power"       : 2,
       "hits"        : 1,
       "minRange"    : 1,
@@ -196,8 +196,8 @@
     }
   },
 
-  "mantrap": {
-    "name"       : "Mantrap",
+  "hellblossom": {
+    "name"       : "Hell Blossom",
     "deployCost" : 4,
     "maxHp"      : 4,
     "maxAp"      : 3,
@@ -205,88 +205,24 @@
     "baseEvade"  : 0,
 
     "action1": {
-      "name"        : "Spit",
-      "description" : "",
+      "name"        : "Thorns",
+      "description" : "Launch a barrage of spines",
       "target"      : "enemy",
       "effect"      : "damage",
-      "specials"    : ["pierce"],
       "apCost"      : 2,
-      "power"       : 2,
-      "hits"        : 1,
-      "minRange"    : 1,
-      "maxRange"    : 2
-    },
-
-    "action2": {
-      "name"        : "Overgrow",
-      "description" : "",
-      "target"      : "self",
-      "effect"      : "transform",
-      "apCost"      : 2,
-      "transformTo" : "mantrap-overgrown"
-    }
-  },
-
-  "mantrap-overgrown": {
-    "name"       : "Mantrap",
-    "maxHp"      : 4,
-    "maxAp"      : 3,
-    "baseArmor"  : 0,
-    "baseEvade"  : 0,
-
-    "action1": {
-      "name"        : "Spit",
-      "description" : "",
-      "target"      : "enemy",
-      "effect"      : "damage",
-      "specials"    : ["pierce"],
-      "apCost"      : 3,
-      "power"       : 2,
-      "hits"        : 1,
+      "power"       : 1,
+      "hits"        : 4,
       "minRange"    : 1,
       "maxRange"    : 3
     },
 
     "action2": {
-      "name"        : "Mobilize",
-      "description" : "",
+      "name"        : "Mend",
+      "description" : "Release healing pollen",
       "target"      : "self",
-      "effect"      : "transform",
-      "apCost"      : 3,
-      "transformTo" : "mantrap"
-    }
-  },
-
-  "manticore": {
-    "name"       : "Manticore",
-    "deployCost" : 4,
-    "maxHp"      : 4,
-    "maxAp"      : 4,
-    "baseArmor"  : 0,
-    "baseEvade"  : 0,
-
-    "action1": {
-      "name"        : "Spike",
-      "description" : "",
-      "target"      : "enemy",
-      "effect"      : "damage",
+      "effect"      : "heal",
       "apCost"      : 2,
-      "power"       : 3,
-      "hits"        : 1,
-      "minRange"    : 1,
-      "maxRange"    : 1
-    },
-
-    "action2": {
-      "name"        : "Spines",
-      "description" : "",
-      "target"      : "enemy",
-      "effect"      : "damage",
-      "apCost"      : 2,
-      "power"       : 1,
-      "hits"        : 3,
-      "minRange"    : 2,
-      "maxRange"    : 2
+      "power"       : 2
     }
   }
 }
