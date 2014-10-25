@@ -2,7 +2,7 @@
   {
     "sheets" : [
       "assault", "medic", "sniper", "guardian",
-      "antlion", "hornet", "mantrap"
+      "antlion", "wyvern", "treant", "hellblossom"
     ],
     "frameSize": 32,
     "frameTimeMs": 50,
