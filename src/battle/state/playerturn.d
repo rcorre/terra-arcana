@@ -24,10 +24,6 @@ class PlayerTurn : State!Battle {
     }
 
     void enter(Battle b) {
-      debug {
-        import std.stdio;
-        writeln("player turn enter");
-      }
       b.enableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
       _tileHoverSys = b.getSystem!TileHoverSystem;
