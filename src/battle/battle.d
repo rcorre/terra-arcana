@@ -33,7 +33,6 @@ class Battle : Scene!Battle {
       unit = new Unit("medic", map.tileAt(3, 5), Team.player);
       entities.registerEntity(unit);
       units ~= unit;
-      states.pushState(new PlayerTurn);
     }
 
     void update(float time) {
