@@ -7,7 +7,7 @@ import model.all;
 import battle.battle;
 import battle.system.all;
 
-private enum moveRate = 100;
+private enum moveRate = 200;
 
 class MoveUnit : State!Battle {
   this(Unit unit, Tile[] path) {
