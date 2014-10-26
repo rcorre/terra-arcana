@@ -1,24 +1,23 @@
-module battle.state.playerturn;
+module battle.state.pcturn;
 
-import std.algorithm : filter;
 import dau.all;
 import model.all;
 import battle.battle;
 import battle.system.all;
 import battle.state.playerunitselected;
-import battle.state.pcturn;
+import battle.state.playerturn;
 
-/// player may click on a unit to issue orders
-class PlayerTurn : State!Battle {
+/// the AI may begin moving units
+class PCTurn : State!Battle {
   override {
     void start(Battle b) {
-      foreach(unit ; b.units.filter!(x => x.team == Team.player)) {
+      foreach(unit ; b.units.filter!(x => x.team == Team.pc)) {
         unit.startTurn();
       }
     }
 
     void end(Battle b) {
-      foreach(unit ; b.units.filter!(x => x.team == Team.player)) {
+      foreach(unit ; b.units.filter!(x => x.team == Team.pc)) {
         unit.endTurn();
       }
     }
@@ -28,7 +27,7 @@ class PlayerTurn : State!Battle {
       b.enableSystem!BattleCameraSystem;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
-      if (b.moveableUnits(Team.player).empty) {
+      if (b.moveableUnits(Team.pc).empty) {
         b.states.setState(new PCTurn);
       }
     }
@@ -36,16 +35,16 @@ class PlayerTurn : State!Battle {
     void update(Battle b, float time, InputManager input) {
       _cursor.update(time);
       auto unit = _tileHoverSys.unitUnderMouse;
-      if (unit !is null && input.select && unit.team == Team.player) {
+      if (unit !is null && input.select && unit.team == Team.pc) {
         b.states.pushState(new PlayerUnitSelected(unit));
       }
-      if (input.skip) {
+      if (input.skip) { // TODO remove when ai implemented
         b.states.setState(new PCTurn);
       }
     }
 
     void draw(Battle b, SpriteBatch sb) {
-      foreach(unit ; b.moveableUnits(Team.player)) {
+      foreach(unit ; b.moveableUnits(Team.pc)) {
         sb.draw(_cursor, unit.center);
       }
     }

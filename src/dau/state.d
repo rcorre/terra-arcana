@@ -6,6 +6,10 @@ import dau.graphics.spritebatch;
 
 /// Generic behavioral state
 class State(T) {
+  /// called only once before the state is first updated
+  void start(T object) { }
+  /// called only once when the state is removed
+  void end(T object) { }
   /// called once whenever the state becomes active (pushed to top or state above is popped)
   void enter(T object) { }
   /// called once whenever the state becomes inactive (popped or new state pushed above)
@@ -15,7 +19,7 @@ class State(T) {
   /// called every frame between screen clear and screen flip
   void draw(T object, SpriteBatch sb) { }
 
-  private bool _active;
+  private bool _active, _started;
 }
 
 /// State stack for managing states
@@ -35,7 +39,7 @@ class StateMachine(T) {
   /// remove the current state
   void popState() {
     printStateTrace();
-    currentState._active = false;
+    currentState.end(_obj);
     _stateStack.removeFront;
   }
 
@@ -67,6 +71,10 @@ class StateMachine(T) {
       if (_prevState !is null) {
         _prevState.exit(_obj);
         _prevState._active = false;
+      }
+      if (!currentState._started) {
+        currentState.start(_obj);
+        currentState._started = true;
       }
       currentState.enter(_obj);
       currentState._active = true;

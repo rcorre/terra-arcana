@@ -64,7 +64,11 @@ class Unit : Entity {
     bool canAct() { return _ap > 0; }
   }
 
-  void passPhase() {
+  void endTurn() {
+  }
+
+  void startTurn() {
+    _ap = maxAp;
     _evade = baseEvade;
     _armor = baseArmor;
   }

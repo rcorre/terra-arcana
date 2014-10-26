@@ -15,6 +15,8 @@ private enum Keymap {
   right = [ALLEGRO_KEY_D],
   up    = [ALLEGRO_KEY_W],
   down  = [ALLEGRO_KEY_S],
+
+  skip  = [ALLEGRO_KEY_SPACE],
 }
 
 class InputManager {
@@ -47,6 +49,8 @@ class InputManager {
     bool selectDown()  { return keyPressed(Keymap.down); }
     bool selectLeft()  { return keyPressed(Keymap.left); }
     bool selectRight() { return keyPressed(Keymap.right); }
+
+    bool skip() { return keyPressed(Keymap.skip); }
 
     bool select() { return mouseClicked(MouseButton.lmb); }
     bool altSelect() { return mouseClicked(MouseButton.rmb); }
