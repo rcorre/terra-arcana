@@ -20,6 +20,10 @@ class State(T) {
 
 /// State stack for managing states
 class StateMachine(T) {
+  this(T obj) {
+    _obj = obj;
+  }
+
   @property auto currentState() { return _stateStack.front; }
 
   /// place a new state on the state stack
@@ -43,27 +47,28 @@ class StateMachine(T) {
     pushState(state);
   }
 
-  void update(T object, float time, InputManager input) {
-    activateTop(object);
-    currentState.update(object, time, input);
+  void update(float time, InputManager input) {
+    activateTop();
+    currentState.update(_obj, time, input);
   }
 
-  void draw(T object, SpriteBatch sb) {
-    activateTop(object);
-    currentState.draw(object, sb);
+  void draw(SpriteBatch sb) {
+    activateTop();
+    currentState.draw(_obj, sb);
   }
 
   private:
   SList!(State!T) _stateStack;
   State!T _prevState;
+  T _obj;
 
-  void activateTop(T object) {
+  void activateTop() {
     if (!currentState._active) { // call enter() is state is returning to activity
       if (_prevState !is null) {
-        _prevState.exit(object);
+        _prevState.exit(_obj);
         _prevState._active = false;
       }
-      currentState.enter(object);
+      currentState.enter(_obj);
       currentState._active = true;
       _prevState = currentState;
     }

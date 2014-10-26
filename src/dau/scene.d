@@ -26,11 +26,11 @@ class Scene(T) : IScene {
   this(State!T firstState, System!(T)[] systems) {
     _inputManager  = new InputManager;
     _entityManager = new EntityManager;
-    _stateMachine  = new StateMachine!T;
     _spriteBatch   = new SpriteBatch;
     _guiManager    = new GUIManager;
     _camera        = new Camera(Settings.screenW, Settings.screenH);
     _systems       = systems;
+    _stateMachine  = new StateMachine!T(cast(T) this);
     _stateMachine.pushState(firstState);
   }
 
@@ -49,7 +49,7 @@ class Scene(T) : IScene {
     void update(float time) {
       _inputManager.update(time);
       _entityManager.updateEntities(time);
-      _stateMachine.update(cast(T) this, time, _inputManager);
+      _stateMachine.update(time, _inputManager);
       _guiManager.update(time);
       foreach(sys ; _systems) {
         if (sys.active) {
@@ -61,7 +61,7 @@ class Scene(T) : IScene {
     /// called every frame between screen clear and screen flip
     void draw() {
       _entityManager.drawEntities(_spriteBatch);
-      _stateMachine.draw(cast(T) this, _spriteBatch);
+      _stateMachine.draw(_spriteBatch);
       _spriteBatch.render(camera);
       _guiManager.draw(); // gui draws over state & entities
     }
