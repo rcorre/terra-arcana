@@ -32,15 +32,17 @@ class StateMachine(T) {
 
   /// place a new state on the state stack
   void pushState(State!T state) {
-    printStateTrace();
     _stateStack.insertFront(state);
+    printStateTrace();
   }
 
   /// remove the current state
   void popState() {
-    printStateTrace();
+    currentState.exit(_obj);
     currentState.end(_obj);
     _stateStack.removeFront;
+    _prevState = null;
+    printStateTrace();
   }
 
   /// pop the current state (if there is a current state) and push a new state
@@ -67,18 +69,18 @@ class StateMachine(T) {
   T _obj;
 
   void activateTop() {
-    if (!currentState._active) { // call enter() is state is returning to activity
+    while (!currentState._active) { // call enter() is state is returning to activity
+      currentState._active = true;
       if (_prevState !is null) {
         _prevState.exit(_obj);
         _prevState._active = false;
       }
+      _prevState = currentState;
       if (!currentState._started) {
         currentState.start(_obj);
         currentState._started = true;
       }
       currentState.enter(_obj);
-      currentState._active = true;
-      _prevState = currentState;
     }
   }
 
