@@ -9,5 +9,11 @@
   },
   "subConfigurations": {
     "allegro": "all-addons"
+  },
+  "buildTypes": {
+    "trace": {
+      "buildOptions": ["debugMode", "debugInfo"],
+      "debugVersions": ["StateTrace"]
+    }
   }
 }
