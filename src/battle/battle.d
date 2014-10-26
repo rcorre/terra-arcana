@@ -40,8 +40,6 @@ class Battle : Scene!Battle {
     }
   }
 
-  auto moveableUnits(Team team) { return units.filter!(x => x.team == team && x.canAct); }
-
   package:
   TileMap map;
   Unit[]  units;

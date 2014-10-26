@@ -24,11 +24,15 @@ class PlayerTurn : State!Battle {
     }
 
     void enter(Battle b) {
+      debug {
+        import std.stdio;
+        writeln("player turn enter");
+      }
       b.enableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
-      if (b.moveableUnits(Team.player).empty) {
+      if (b.moveableUnits.empty) {
         b.states.setState(new PCTurn);
       }
     }
@@ -45,7 +49,7 @@ class PlayerTurn : State!Battle {
     }
 
     void draw(Battle b, SpriteBatch sb) {
-      foreach(unit ; b.moveableUnits(Team.player)) {
+      foreach(unit ; b.moveableUnits) {
         sb.draw(_cursor, unit.center);
       }
     }
@@ -55,3 +59,6 @@ class PlayerTurn : State!Battle {
   TileHoverSystem _tileHoverSys;
   Animation _cursor;
 }
+
+private:
+auto moveableUnits(Battle b) { return b.units.filter!(x => x.team == Team.player && x.canAct); }

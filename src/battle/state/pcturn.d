@@ -27,8 +27,8 @@ class PCTurn : State!Battle {
       b.enableSystem!BattleCameraSystem;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
-      if (b.moveableUnits(Team.pc).empty) {
-        b.states.setState(new PCTurn);
+      if (b.moveableUnits.empty) {
+        b.states.setState(new PlayerTurn);
       }
     }
 
@@ -39,12 +39,12 @@ class PCTurn : State!Battle {
         b.states.pushState(new PlayerUnitSelected(unit));
       }
       if (input.skip) { // TODO remove when ai implemented
-        b.states.setState(new PCTurn);
+        b.states.setState(new PlayerTurn);
       }
     }
 
     void draw(Battle b, SpriteBatch sb) {
-      foreach(unit ; b.moveableUnits(Team.pc)) {
+      foreach(unit ; b.moveableUnits) {
         sb.draw(_cursor, unit.center);
       }
     }
@@ -54,3 +54,6 @@ class PCTurn : State!Battle {
   TileHoverSystem _tileHoverSys;
   Animation _cursor;
 }
+
+private:
+auto moveableUnits(Battle b) { return b.units.filter!(x => x.team == Team.pc && x.canAct); }
