@@ -52,6 +52,15 @@ class Animation : Sprite {
     }
   }
 
+  void stop() {
+    _animate = false;
+  }
+
+  void start() {
+    _col = _startCol;
+    _animate = true;
+  }
+
   @property isStopped() { return !_animate; }
 
   private:

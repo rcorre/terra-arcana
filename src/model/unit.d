@@ -65,12 +65,14 @@ class Unit : Entity {
   }
 
   void endTurn() {
+    animation.start();
   }
 
   void startTurn() {
     _ap = maxAp;
     _evade = baseEvade;
     _armor = baseArmor;
+    animation.start();
   }
 
   auto getAction(int num) {
@@ -81,6 +83,7 @@ class Unit : Entity {
   void consumeAp(int amount) {
     assert(amount <= _ap, "tried to consume %d ap when only %d available".format(amount, _ap));
     _ap -= amount;
+    if (_ap == 0) { animation.stop(); }
   }
 
   void dealDamage(int amount) {
@@ -91,6 +94,7 @@ class Unit : Entity {
 
   void damageAp(int amount) {
     _ap -= amount; // TODO: negative ap handling
+    if (_ap <= 0) { animation.stop(); }
     _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
   }
 
@@ -162,7 +166,7 @@ class Unit : Entity {
   }
 
   override void update(float time) {
-    if (canAct) { super.update(time); } // only animate sprite if ap > 0
+    super.update(time);
   }
 
   private:
@@ -171,6 +175,9 @@ class Unit : Entity {
   int _evade, _armor; // current evade and armor stats
   const string _key;
   SoundSample _damageSound, _healSound;
+
+  @property auto animation() { return cast(Animation) _sprite; }
+
 }
 
 class UnitData {
