@@ -34,6 +34,9 @@ class ApplyEffect : State!Battle {
           case toxin:
             _target.applyToxin(_action.power);
             break;
+          case slow:
+            _target.applySlow(_action.power);
+            break;
           default:
             assert(0, "no code to handle effect type");
         }

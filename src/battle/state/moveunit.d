@@ -13,7 +13,7 @@ class MoveUnit : State!Battle {
   this(Unit unit, Tile[] path) {
     _unit = unit;
     _path = path;
-    _unit.consumeAp(path.map!(x => x.moveCost).sum);
+    _unit.consumeAp(path.map!(x => unit.computeMoveCost(x)).sum);
     _pos = cast(Vector2f) unit.center;
   }
 

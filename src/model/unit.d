@@ -61,8 +61,12 @@ class Unit : Entity {
 
     int evade() { return _evade; }
     int armor() { return _armor; }
+    int toxin() { return _toxin; }
+    int slow()  { return _slow; }
 
-    bool canAct() { return _ap > 0; }
+    bool canAct()   { return _ap > 0; }
+    bool isSlowed() { return _slow > 0; }
+    bool isToxic()  { return _toxin > 0; }
   }
 
   void endTurn() {
@@ -181,6 +185,14 @@ class Unit : Entity {
   auto getActionSound(int actionNum) {
     assert(actionNum == 1 || actionNum == 2, "%d is not a valid action number".format(actionNum));
     return new SoundSample(actionSoundFormat.format(_key, actionNum));
+  }
+
+  int computeMoveCost(Tile tile) {
+    auto other = cast(Unit) tile.entity;
+    if (other !is null && other.team != team) {
+      return Tile.unreachable;
+    }
+    return tile.moveCost * (isSlowed ? 2 : 1);
   }
 
   override void update(float time) {

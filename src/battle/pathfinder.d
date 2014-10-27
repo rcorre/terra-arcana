@@ -56,14 +56,6 @@ class Pathfinder {
     return _map.tileAt(i / _map.numCols, i % _map.numCols);
   }
 
-  int computeMoveCost(Tile tile) {
-    auto other = cast(Unit) tile.entity;
-    if (other !is null && other.team != _unit.team) {
-      return Tile.unreachable;
-    }
-    return tile.moveCost;
-  }
-
   void djikstra() {
     _dist = new int[numTiles];
     _prev = new int[numTiles];
@@ -83,7 +75,7 @@ class Pathfinder {
       foreach(neighbor ; _map.neighbors(node.tile)) {
         int neighborIdx = tileToIdx(neighbor);
         if (!scanned[neighborIdx]) {
-          int alt = _dist[nodeIdx] + computeMoveCost(neighbor);
+          int alt = _dist[nodeIdx] + _unit.computeMoveCost(neighbor);
           if (alt < _dist[neighborIdx]) {
             _prev[neighborIdx] = nodeIdx;
             _dist[neighborIdx] = alt;

@@ -32,7 +32,7 @@
     "sprites": [
       "range", "damage", "stun", "heal", "armor", "evade", "piercing", "precise", "blitz",
       "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", "toxin",
-      "thorns", "regrowth", "claw", "venom", "bite", "screech", "crush", "entangle", "slow"
+      "thorns", "regrowth", "claw", "venom", "bite", "screech", "smash", "entangle", "slow"
     ]
   },
 
