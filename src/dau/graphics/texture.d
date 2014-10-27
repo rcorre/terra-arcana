@@ -18,6 +18,7 @@ class Texture {
   const int frameWidth, frameHeight;
   const int defaultDepth;
   const float frameTime;
+  const string name;
   @property {
     /// width of entire bitmap
     int width() { return al_get_bitmap_width(_bmp); }
@@ -69,7 +70,8 @@ class Texture {
       Color tint = Color.white, float angle = 0)
   {
     assert(col >= 0 && col < numCols && row >= 0 && row < numRows,
-        "frame at %d,%d is out of texture bounds (%dx%d)".format(row, col, numRows, numCols));
+        "frame at %d,%d is out of texture bounds (%dx%d) for texture %s"
+        .format(row, col, numRows, numCols, name));
     auto frame = Rect2i(col * frameWidth, row * frameHeight, frameWidth, frameHeight);
     al_draw_tinted_scaled_rotated_bitmap_region(_bmp, // bitmap
         frame.x, frame.y, frame.width, frame.height,  // bitmap region
@@ -92,7 +94,7 @@ class Texture {
   ALLEGRO_BITMAP* _bmp;
   const string[] _rows, _sprites;
 
-  this(ALLEGRO_BITMAP *bmp, TextureData data) {
+  this(ALLEGRO_BITMAP *bmp, TextureData data, string name) {
     _bmp         = bmp;
     frameWidth   = data.frameWidth;
     frameHeight  = data.frameHeight;
@@ -100,9 +102,10 @@ class Texture {
     defaultDepth = data.defaultDepth;
     _rows        = data.rows;
     _sprites     = data.sprites;
+    this.name    = name;
   }
 
-  this(ALLEGRO_BITMAP *bmp) {
+  this(ALLEGRO_BITMAP *bmp, string name) {
     _bmp         = bmp;
     frameWidth   = width;
     frameHeight  = height;
@@ -110,13 +113,14 @@ class Texture {
     defaultDepth = 0;
     _rows        = [];
     _sprites     = [];
+    this.name    = name;
   }
 }
 
 Texture getTexture(string name) {
   if (name !in _textureStore) {
     auto bmp = loadBitmap(name);
-    _textureStore[name] = new Texture(bmp);
+    _textureStore[name] = new Texture(bmp, name);
   }
   return _textureStore[name];
 }
@@ -133,7 +137,7 @@ void loadTextures() {
   foreach (data ; textureData) {
     foreach(name ; data.sheets) {
       auto bmp = loadBitmap(name);
-      _textureStore[name] = new Texture(bmp, data);
+      _textureStore[name] = new Texture(bmp, data, name);
     }
   }
 }
