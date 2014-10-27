@@ -31,6 +31,9 @@ class ApplyEffect : State!Battle {
           case armor:
             _target.adjustEvade(_action.power);
             break;
+          case toxin:
+            _target.applyToxin(_action.power);
+            break;
           default:
             assert(0, "no code to handle effect type");
         }

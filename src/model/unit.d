@@ -15,6 +15,7 @@ private enum {
   damageFlashColor = Color.red,
   healFlashColor = Color.green,
   dodgeFlashColor = Color(1, 1, 1, 0.5),
+  toxinFlashColor = Color(0.5, 0, 0.5),
   flashTime = 0.2f,
   actionSoundFormat = "%s-action%d",
   // ap loss effect
@@ -66,12 +67,19 @@ class Unit : Entity {
 
   void endTurn() {
     animation.start();
+    _slow = max(0, _slow - 1);
   }
 
   void startTurn() {
     _ap = maxAp;
     _evade = baseEvade;
     _armor = baseArmor;
+    if (_toxin > 0) {
+      _hp = max(0, hp - 1);
+      _sprite.flash(flashTime, toxinFlashColor);
+      _damageSound.play();
+      --_toxin;
+    }
     animation.start();
   }
 
@@ -95,6 +103,16 @@ class Unit : Entity {
   void damageAp(int amount) {
     _ap -= amount; // TODO: negative ap handling
     if (_ap <= 0) { animation.stop(); }
+    _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
+  }
+
+  void applyToxin(int amount) {
+    _toxin += amount;
+    _sprite.flash(flashTime, toxinFlashColor);
+  }
+
+  void applySlow(int amount) {
+    _slow += amount;
     _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
   }
 
@@ -173,6 +191,7 @@ class Unit : Entity {
   Tile _tile;
   int _hp, _ap;
   int _evade, _armor; // current evade and armor stats
+  int _toxin, _slow;
   const string _key;
   SoundSample _damageSound, _healSound;
 
