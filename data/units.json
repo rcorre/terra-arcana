@@ -48,7 +48,7 @@
       "power"       : 3,
       "hits"        : 1,
       "minRange"    : 1,
-      "maxRange"    : 1
+      "maxRange"    : 2
     },
 
     "action2": {
