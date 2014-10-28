@@ -26,6 +26,7 @@ class PlayerTurn : State!Battle {
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
+      b.leftUnitInfoLock = false;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
       if (b.moveableUnits.empty) {
