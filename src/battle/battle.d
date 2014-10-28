@@ -1,24 +1,34 @@
 module battle.battle;
 
+import std.range;
 import dau.all;
 import model.all;
 import battle.state.playerturn;
+import battle.state.pcturn;
 import battle.system.all;
 import gui.battlepanel;
 
 private enum {
   cameraScrollSpeed = 12,
+  baseCommandPoints = 6  // TODO: set based on map
 }
 
 class Battle : Scene!Battle {
+  //this(Player[] players) { // TODO: load players from previous state
   this() {
+    auto players = [
+      new Player(getFaction("Human"), true, baseCommandPoints),
+      new Player(getFaction("Gaia"), false, baseCommandPoints),
+    ];
     System!Battle[] systems = [
       new TileHoverSystem(this),
       new BattleCameraSystem(this),
     ];
-    super(new PlayerTurn, systems);
+    super(systems);
     _battlePanel = new BattlePanel;
     gui.addElement(_battlePanel);
+    _players = cycle(players);
+    startNewTurn;
   }
 
   override {
@@ -46,6 +56,7 @@ class Battle : Scene!Battle {
   TileMap map;
   Unit[]  units;
   bool leftUnitInfoLock;
+  Cycle!(Player[]) _players;
 
   void displayUnitInfo(Unit unit) {
     if (leftUnitInfoLock) {
@@ -54,6 +65,16 @@ class Battle : Scene!Battle {
     else {
       _battlePanel.setLeftUnitInfo(unit);
     }
+  }
+
+  void startNewTurn() {
+    auto player = _players.front;
+    _players.popFront;
+    if (!states.empty) {
+      states.popState();
+    }
+    assert(states.empty, "extra states on stack when starting new turn");
+    states.pushState(player.isHuman ? new PlayerTurn(player) : new PCTurn(player));
   }
 
   private:

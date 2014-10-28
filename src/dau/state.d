@@ -28,7 +28,10 @@ class StateMachine(T) {
     _obj = obj;
   }
 
-  @property auto currentState() { return _stateStack.front; }
+  @property {
+    auto currentState() { return _stateStack.front; }
+    bool empty() { return _stateStack.empty; }
+  }
 
   /// place a new state on the state stack
   void pushState(State!T state) {

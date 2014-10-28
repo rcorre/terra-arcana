@@ -10,6 +10,10 @@ import battle.state.pcturn;
 
 /// player may click on a unit to issue orders
 class PlayerTurn : State!Battle {
+  this(Player player) {
+    _player = player;
+  }
+
   override {
     void start(Battle b) {
       foreach(unit ; b.units.filter!(x => x.team == Team.player)) {
@@ -30,7 +34,7 @@ class PlayerTurn : State!Battle {
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
       if (b.moveableUnits.empty) {
-        b.states.setState(new PCTurn);
+        b.startNewTurn;
       }
     }
 
@@ -41,7 +45,7 @@ class PlayerTurn : State!Battle {
         b.states.pushState(new PlayerUnitSelected(unit));
       }
       if (input.skip) {
-        b.states.setState(new PCTurn);
+        b.startNewTurn;
       }
     }
 
@@ -55,6 +59,7 @@ class PlayerTurn : State!Battle {
   private:
   TileHoverSystem _tileHoverSys;
   Animation _cursor;
+  Player _player;
 }
 
 private:

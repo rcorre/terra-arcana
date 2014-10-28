@@ -1,11 +1,12 @@
 module model.faction;
 
-import std.algorithm;
+import std.algorithm, std.range;
 import model.unit;
 import dau.all;
 
 class Faction {
-  @jsonize const {
+  mixin JsonizeMe;
+  @jsonize {
     string name;
     string description;
     string[] standardUnitKeys;
@@ -14,9 +15,9 @@ class Faction {
   }
 }
 
-auto getFactionData(string name) {
+auto getFaction(string name) {
   auto faction = _factions.find!(x => x.name == name);
-  assert(faction !is null, "no faction named " ~ name);
+  assert(!faction.empty, "no faction named " ~ name);
   return faction.front;
 }
 

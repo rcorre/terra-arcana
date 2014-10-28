@@ -1,8 +1,16 @@
 [
   {
-    "name": "Gaea",
+    "name": "Gaia",
     "description": "",
     "standardUnitKeys": ["hellblossom", "antlion", "treant", "wyvern"],
+    "advancedUnitKeys": [],
+    "eliteUnitKeys": []
+  },
+
+  {
+    "name": "Human",
+    "description": "",
+    "standardUnitKeys": ["assault", "medic", "sniper", "guardian"],
     "advancedUnitKeys": [],
     "eliteUnitKeys": []
   }

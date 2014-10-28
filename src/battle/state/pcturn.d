@@ -9,6 +9,10 @@ import battle.state.playerturn;
 
 /// the AI may begin moving units
 class PCTurn : State!Battle {
+  this(Player pc) {
+    _pc = pc;
+  }
+
   override {
     void start(Battle b) {
       foreach(unit ; b.units.filter!(x => x.team == Team.pc)) {
@@ -28,7 +32,7 @@ class PCTurn : State!Battle {
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
       if (b.moveableUnits.empty) {
-        b.states.setState(new PlayerTurn);
+        b.startNewTurn;
       }
     }
 
@@ -39,7 +43,7 @@ class PCTurn : State!Battle {
         b.states.pushState(new PlayerUnitSelected(unit));
       }
       if (input.skip) { // TODO remove when ai implemented
-        b.states.setState(new PlayerTurn);
+        b.startNewTurn;
       }
     }
 
@@ -53,6 +57,7 @@ class PCTurn : State!Battle {
   private:
   TileHoverSystem _tileHoverSys;
   Animation _cursor;
+  Player _pc;
 }
 
 private:

@@ -23,7 +23,7 @@ void setScene(T)(Scene!T newScene) {
 @property auto currentScene() { return _currentScene; }
 
 class Scene(T) : IScene {
-  this(State!T firstState, System!(T)[] systems) {
+  this(System!(T)[] systems) {
     _inputManager  = new InputManager;
     _entityManager = new EntityManager;
     _spriteBatch   = new SpriteBatch;
@@ -31,7 +31,6 @@ class Scene(T) : IScene {
     _camera        = new Camera(Settings.screenW, Settings.screenH);
     _systems       = systems;
     _stateMachine  = new StateMachine!T(cast(T) this);
-    _stateMachine.pushState(firstState);
   }
 
   @property {
