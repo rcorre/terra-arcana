@@ -20,6 +20,7 @@ enum Paths : string {
   mapDir      = "data/maps",
   textureData = "data/textures.json",
   unitData    = "data/units.json",
+  factionData = "data/factions.json",
 }
 
 void onInit(InitFunction fn) {

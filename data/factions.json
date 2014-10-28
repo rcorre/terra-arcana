@@ -1,0 +1,9 @@
+[
+  {
+    "name": "Gaea",
+    "description": "",
+    "standardUnitKeys": ["hellblossom", "antlion", "treant", "wyvern"],
+    "advancedUnitKeys": [],
+    "eliteUnitKeys": []
+  }
+]
