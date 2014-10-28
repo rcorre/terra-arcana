@@ -68,7 +68,6 @@ class Unit : Entity {
   }
 
   void endTurn() {
-    animation.start();
     _slow = max(0, _slow - 1);
   }
 
@@ -82,7 +81,6 @@ class Unit : Entity {
       _damageSound.play();
       --_toxin;
     }
-    animation.start();
   }
 
   auto getAction(int num) {
@@ -93,7 +91,6 @@ class Unit : Entity {
   void consumeAp(int amount) {
     assert(amount <= _ap, "tried to consume %d ap when only %d available".format(amount, _ap));
     _ap -= amount;
-    if (_ap == 0) { animation.stop(); }
   }
 
   void dealDamage(int amount) {
@@ -110,7 +107,6 @@ class Unit : Entity {
 
   void damageAp(int amount) {
     _ap -= amount; // TODO: negative ap handling
-    if (_ap <= 0) { animation.stop(); }
     _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
   }
 
