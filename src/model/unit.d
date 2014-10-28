@@ -27,6 +27,7 @@ private enum {
 class Unit : Entity {
   const Team team;
   const UnitData data;
+  const string key;
   alias data this;
 
   this(string key, Tile tile, Team team) {
@@ -38,7 +39,7 @@ class Unit : Entity {
     _hp = data.maxHp;
     _ap = data.maxHp;
     this.team = team;
-    _key = key;
+    this.key = key;
     _damageSound   = new SoundSample("damage");
     _noDamageSound = new SoundSample("no-damage");
     _healSound     = new SoundSample("heal");
@@ -179,20 +180,20 @@ class Unit : Entity {
 
   void playAnimation(string animationKey, Animation.Action onAnimationEnd = null) {
     auto idle = delegate() {
-      _sprite = new Animation(_key, "idle", Animation.Repeat.loop);
+      _sprite = new Animation(key, "idle", Animation.Repeat.loop);
       if (onAnimationEnd !is null) { onAnimationEnd(); }
     };
-    _sprite = new Animation(_key, animationKey, Animation.Repeat.no, idle);
+    _sprite = new Animation(key, animationKey, Animation.Repeat.no, idle);
   }
 
   auto getActionAnimation(int actionNum) {
     assert(actionNum == 1 || actionNum == 2, "%d is not a valid action number".format(actionNum));
-    return new Animation(_key, "effect%d".format(actionNum));
+    return new Animation(key, "effect%d".format(actionNum));
   }
 
   auto getActionSound(int actionNum) {
     assert(actionNum == 1 || actionNum == 2, "%d is not a valid action number".format(actionNum));
-    return new SoundSample(actionSoundFormat.format(_key, actionNum));
+    return new SoundSample(actionSoundFormat.format(key, actionNum));
   }
 
   int computeMoveCost(Tile tile) {
@@ -212,7 +213,6 @@ class Unit : Entity {
   int _hp, _ap;
   int _evade, _armor; // current evade and armor stats
   int _toxin, _slow;
-  const string _key;
   SoundSample _damageSound, _noDamageSound, _healSound;
 
   @property auto animation() { return cast(Animation) _sprite; }

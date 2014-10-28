@@ -11,14 +11,16 @@ import model.all;
 private enum {
   spriteName       = "gui/unit_status",
   pipName          = "gui/pip",
-  armorOffset      = Vector2i(21, 53),
-  evadeOffset      = Vector2i(180, 53),
-  hpArea           = Rect2i(41, 38, 63, 13),
-  apArea           = Rect2i(108, 38, 51, 13),
-  statOffset       = Vector2i(41, 53),
-  actionBarOffset1 = Vector2i(0, 77),
-  actionBarOffset2 = Vector2i(0, 105),
+  armorOffset      = Vector2i(18, 52),
+  evadeOffset      = Vector2i(118, 51),
+  hpArea           = Rect2i(37, 37, 63, 13),
+  apArea           = Rect2i(37, 53, 63, 13),
+  conditionOffset  = Vector2i(5, 73),
+  actionBarOffset1 = Vector2i(137, 9),
+  actionBarOffset2 = Vector2i(137, 57),
   actionBarSize    = Vector2i(200, 24),
+  spriteOffset     = Vector2i(13, 0),
+  nameOffset       = Vector2i(49, 12),
   iconSheetName    = "gui/icons"
 }
 
@@ -38,6 +40,8 @@ class UnitInfoGUI : GUIElement {
       addChild(_evadeText);
       addChild(new ActionInfo(actionBarOffset1, unit.action1));
       addChild(new ActionInfo(actionBarOffset2, unit.action2));
+      addChild(new Icon(new Animation(unit.key, "idle", Animation.Repeat.loop), spriteOffset));
+      addChild(new TextBox(unit.name, _font, nameOffset));
       _hpBar.setVal(unit.hp);
       _apBar.setVal(unit.ap);
     }
@@ -114,5 +118,5 @@ class ActionInfo : GUIElement {
 Font _font;
 
 static this() {
-  onInit({ _font = Font("Mecha", 20); });
+  onInit({ _font = Font("Mecha", 16); });
 }

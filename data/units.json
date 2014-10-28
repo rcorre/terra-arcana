@@ -1,5 +1,6 @@
 {
   "assault": {
+    "name"       : "Assault",
     "deployCost" : 2,
     "maxHp"      : 4,
     "maxAp"      : 4,
