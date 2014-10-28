@@ -24,21 +24,23 @@ private enum {
 
 /// bar that displays progress as discrete elements (pips)
 class UnitInfoGUI : GUIElement {
-  this(Unit unit) {
+  this(Unit unit, Vector2i offset) {
     // TODO: choose corner of unit based on screen positioning
-    super(new Sprite(spriteName), unit.area.bottomRight);
-    _hpBar = new PipBar(hpArea, unit.maxHp, pipName, "hpPip");
-    _apBar = new PipBar(apArea, unit.maxAp, pipName, "apPip");
-    _armorText = new TextBox(unit.armor, _font, armorOffset, GUIElement.Anchor.center);
-    _evadeText = new TextBox(unit.evade, _font, evadeOffset, GUIElement.Anchor.center);
-    addChild(_hpBar);
-    addChild(_apBar);
-    addChild(_armorText);
-    addChild(_evadeText);
-    addChild(new ActionInfo(actionBarOffset1, unit.action1));
-    addChild(new ActionInfo(actionBarOffset2, unit.action2));
-    _hpBar.setVal(unit.hp);
-    _apBar.setVal(unit.ap);
+    super(new Sprite(spriteName), offset);
+    if (unit !is null) {
+      _hpBar = new PipBar(hpArea, unit.maxHp, pipName, "hpPip");
+      _apBar = new PipBar(apArea, unit.maxAp, pipName, "apPip");
+      _armorText = new TextBox(unit.armor, _font, armorOffset, GUIElement.Anchor.center);
+      _evadeText = new TextBox(unit.evade, _font, evadeOffset, GUIElement.Anchor.center);
+      addChild(_hpBar);
+      addChild(_apBar);
+      addChild(_armorText);
+      addChild(_evadeText);
+      addChild(new ActionInfo(actionBarOffset1, unit.action1));
+      addChild(new ActionInfo(actionBarOffset2, unit.action2));
+      _hpBar.setVal(unit.hp);
+      _apBar.setVal(unit.ap);
+    }
   }
 
   private:

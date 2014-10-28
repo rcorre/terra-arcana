@@ -2,9 +2,9 @@ module battle.battle;
 
 import dau.all;
 import model.all;
-import gui.unitinfo;
 import battle.state.playerturn;
 import battle.system.all;
+import gui.battlepanel;
 
 private enum {
   cameraScrollSpeed = 12,
@@ -17,6 +17,8 @@ class Battle : Scene!Battle {
       new BattleCameraSystem(this),
     ];
     super(new PlayerTurn, systems);
+    _battlePanel = new BattlePanel;
+    gui.addElement(_battlePanel);
   }
 
   override {
@@ -43,4 +45,17 @@ class Battle : Scene!Battle {
   package:
   TileMap map;
   Unit[]  units;
+  bool leftUnitInfoLock;
+
+  void displayUnitInfo(Unit unit) {
+    if (leftUnitInfoLock) {
+      _battlePanel.setRightUnitInfo(unit);
+    }
+    else {
+      _battlePanel.setLeftUnitInfo(unit);
+    }
+  }
+
+  private:
+  BattlePanel _battlePanel;
 }

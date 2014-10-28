@@ -24,7 +24,7 @@ SOUNDFILES := $(wildcard $(SOUNDSRC)/*.ogg)
 all: debug
 
 debug: content
-	@dub build --quiet
+	@dub build --build=debug --quiet
 
 release: content
 	@dub build release --quiet

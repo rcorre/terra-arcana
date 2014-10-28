@@ -3,7 +3,6 @@ module battle.system.tilehover;
 import dau.all;
 import battle.battle;
 import model.all;
-import gui.unitinfo;
 
 class TileHoverSystem : System!Battle {
   this(Battle b) {
@@ -35,26 +34,19 @@ class TileHoverSystem : System!Battle {
     }
 
     void stop() {
-      _unitInfo.active = false;
     }
   }
 
   private:
   Tile _tileUnderMouse;
   Unit _unitUnderMouse;
-  UnitInfoGUI _unitInfo;
   bool _newTileUnderMouse;
 
   void clearUnitInfo() {
-    if (_unitInfo !is null) {
-      _unitInfo.active = false;
-    }
-    _unitInfo = null;
+    scene.displayUnitInfo(null);
   }
 
   void setUnitInfo() {
-    clearUnitInfo();
-    _unitInfo = new UnitInfoGUI(_unitUnderMouse);
-    scene.gui.addElement(_unitInfo);
+    scene.displayUnitInfo(_unitUnderMouse);
   }
 }
