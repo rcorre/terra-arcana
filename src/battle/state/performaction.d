@@ -9,6 +9,8 @@ import battle.state.performcounter;
 import battle.state.applyeffect;
 import battle.state.applybuff;
 
+private enum apBarFadeDuration = 0.2f;
+
 class PerformAction : State!Battle {
   this(Unit actor, int actionNum, Unit target) {
     _actor = actor;
@@ -38,6 +40,12 @@ class PerformAction : State!Battle {
       _actor.playAnimation("action%d".format(_actionNum), onAnimationEnd);
       _effectAnim = _actor.getActionAnimation(_actionNum);
       _actor.getActionSound(_actionNum).play();
+
+      // drain ap and animate ap change
+      auto ui = b.unitInfoFor(_actor);
+      int prevAp = _actor.ap;
+      _actor.consumeAp(_action.apCost);
+      ui.animateApChange(prevAp, _actor.ap, apBarFadeDuration);
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -48,8 +56,7 @@ class PerformAction : State!Battle {
       sb.draw(_effectAnim, _target.center);
     }
 
-    void exit(Battle b) {
-      _actor.consumeAp(_action.apCost);
+    void exit(Battle b) { // TODO: move to start after getting
     }
   }
 

@@ -54,6 +54,10 @@ class UnitInfoGUI : GUIElement {
     _hpBar.transitionVal(from, to, duration);
   }
 
+  void animateApChange(int from, int to, float duration) {
+    _apBar.transitionVal(from, to, duration);
+  }
+
   private:
   Unit _unit;
   PipBar _hpBar, _apBar;
