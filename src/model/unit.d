@@ -39,8 +39,10 @@ class Unit : Entity {
     _ap = data.maxHp;
     this.team = team;
     _key = key;
-    _damageSound = new SoundSample("damage");
-    _healSound   = new SoundSample("heal");
+    _damageSound   = new SoundSample("damage");
+    _noDamageSound = new SoundSample("no-damage");
+    _healSound     = new SoundSample("heal");
+    startTurn();
   }
 
   @property {
@@ -99,9 +101,15 @@ class Unit : Entity {
   }
 
   void dealDamage(int amount) {
-    _hp = max(0, hp - amount);
-    _sprite.flash(flashTime, damageFlashColor);
-    _damageSound.play();
+    amount -= armor;
+    if (amount > 0) {
+      _hp = max(0, hp - amount);
+      _sprite.flash(flashTime, damageFlashColor);
+      _damageSound.play();
+    }
+    else { // no damage
+      _noDamageSound.play();
+    }
   }
 
   void damageAp(int amount) {
@@ -205,7 +213,7 @@ class Unit : Entity {
   int _evade, _armor; // current evade and armor stats
   int _toxin, _slow;
   const string _key;
-  SoundSample _damageSound, _healSound;
+  SoundSample _damageSound, _noDamageSound, _healSound;
 
   @property auto animation() { return cast(Animation) _sprite; }
 

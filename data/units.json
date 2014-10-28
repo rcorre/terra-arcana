@@ -198,7 +198,7 @@
   "treant": {
     "name"       : "Treant",
     "deployCost" : 2,
-    "maxHp"      : 5,
+    "maxHp"      : 4,
     "maxAp"      : 3,
     "baseArmor"  : 1,
     "baseEvade"  : 0,

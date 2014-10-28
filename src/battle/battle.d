@@ -24,7 +24,7 @@ class Battle : Scene!Battle {
       map = new TileMap("test", entities);
       entities.registerEntity(map);
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
-      auto unit = new Unit("sniper", map.tileAt(3, 3), Team.player);
+      auto unit = new Unit("assault", map.tileAt(3, 3), Team.player);
       entities.registerEntity(unit);
       units ~= unit;
       unit = new Unit("treant", map.tileAt(5, 3), Team.pc);
