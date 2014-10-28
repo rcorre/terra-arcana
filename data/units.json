@@ -250,7 +250,7 @@
     },
 
     "action2": {
-      "name"        : "Mend",
+      "name"        : "Regrowth",
       "description" : "Release healing pollen",
       "target"      : "self",
       "effect"      : "heal",
