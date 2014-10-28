@@ -17,7 +17,7 @@ class PlayerUnitSelected : State!Battle {
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
-      b.leftUnitInfoLock = true;
+      b.lockLeftUnitInfo = true;
       if (!_unit.canAct) {
         b.states.popState();
       }

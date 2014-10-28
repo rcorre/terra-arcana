@@ -47,9 +47,12 @@ class Battle : Scene!Battle {
 
   package:
   TileMap map;
-  bool leftUnitInfoLock;
   
   @property auto players() { return _players[]; }
+  @property void lockLeftUnitInfo(bool val) {
+    _lockLeftUnitInfo = val;
+    displayUnitInfo(null);
+  }
 
   void spawnUnit(string key, Player player, Tile tile) {
     auto unit = new Unit(key, tile, player.teamIdx);
@@ -58,7 +61,7 @@ class Battle : Scene!Battle {
   }
 
   void displayUnitInfo(Unit unit) {
-    if (leftUnitInfoLock) {
+    if (_lockLeftUnitInfo) {
       _battlePanel.setRightUnitInfo(unit);
     }
     else {
@@ -88,4 +91,5 @@ class Battle : Scene!Battle {
   Cycle!(Player[]) _turnCycle;
   Player _activePlayer;
   Player[] _players;
+  bool _lockLeftUnitInfo;
 }
