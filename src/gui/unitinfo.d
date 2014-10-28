@@ -58,6 +58,7 @@ class ActionInfo : GUIElement {
   private enum {
     actionIconOffset = Vector2i(2, 2),
     infoOffset = Vector2i(34, 2),
+    apArea = Rect2i(37, 28, 51, 12),
     iconSeparation = 4
   }
 
@@ -65,6 +66,7 @@ class ActionInfo : GUIElement {
     super(Rect2i(topLeft, actionBarSize));
     auto actionName = action.name.toLower;
     addChild(new Icon(new Sprite(iconSheetName, actionName), actionIconOffset));
+    addChild(new PipBar(apArea, action.apCost, pipName, "apPip"));
     Vector2i offset = infoOffset;
     addEffectIcon(action, offset);
     addRangeIcon(action, offset);
