@@ -6,7 +6,6 @@ import model.all;
 import battle.battle;
 import battle.system.all;
 import battle.state.playerunitselected;
-import battle.state.pcturn;
 
 /// player may click on a unit to issue orders
 class PlayerTurn : State!Battle {
@@ -15,25 +14,13 @@ class PlayerTurn : State!Battle {
   }
 
   override {
-    void start(Battle b) {
-      foreach(unit ; b.units.filter!(x => x.team == Team.player)) {
-        unit.startTurn();
-      }
-    }
-
-    void end(Battle b) {
-      foreach(unit ; b.units.filter!(x => x.team == Team.player)) {
-        unit.endTurn();
-      }
-    }
-
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
       b.leftUnitInfoLock = false;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
-      if (b.moveableUnits.empty) {
+      if (_player.moveableUnits.empty) {
         b.startNewTurn;
       }
     }
@@ -41,7 +28,7 @@ class PlayerTurn : State!Battle {
     void update(Battle b, float time, InputManager input) {
       _cursor.update(time);
       auto unit = _tileHoverSys.unitUnderMouse;
-      if (unit !is null && input.select && unit.team == Team.player) {
+      if (unit !is null && input.select && unit.team == _player.teamIdx) {
         b.states.pushState(new PlayerUnitSelected(unit));
       }
       if (input.skip) {
@@ -50,7 +37,7 @@ class PlayerTurn : State!Battle {
     }
 
     void draw(Battle b, SpriteBatch sb) {
-      foreach(unit ; b.moveableUnits) {
+      foreach(unit ; _player.moveableUnits) {
         sb.draw(_cursor, unit.center);
       }
     }
@@ -61,6 +48,3 @@ class PlayerTurn : State!Battle {
   Animation _cursor;
   Player _player;
 }
-
-private:
-auto moveableUnits(Battle b) { return b.units.filter!(x => x.team == Team.player && x.canAct); }

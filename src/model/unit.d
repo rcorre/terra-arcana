@@ -6,11 +6,6 @@ import dau.all;
 import model.tile;
 import model.unitaction;
 
-enum Team {
-  player,
-  pc
-}
-
 private enum {
   damageFlashColor = Color.red,
   healFlashColor = Color.green,
@@ -25,12 +20,12 @@ private enum {
 }
 
 class Unit : Entity {
-  const Team team;
+  const int team;
   const UnitData data;
   const string key;
   alias data this;
 
-  this(string key, Tile tile, Team team) {
+  this(string key, Tile tile, int team) {
     auto sprite = new Animation(key, "idle", Animation.Repeat.loop);
     super(tile.center, sprite, "unit");
     assert(key in _data, "no unit data matches key "  ~ key);

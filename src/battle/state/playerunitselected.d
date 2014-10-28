@@ -61,9 +61,12 @@ class PlayerUnitSelected : State!Battle {
       foreach(tile ; _path) {
         sb.draw(_pathCursor, tile.center);
       }
-      foreach(unit ; b.units) {
-        if (_unit.firstUseableAction(unit) != 0) {
-          sb.draw(_unit.team == unit.team ? _allyCursor : _enemyCursor, unit.center);
+      foreach(player ; b.players) {
+        auto cursor = player.teamIdx == _unit.team ? _allyCursor : _enemyCursor;
+        foreach(target ; player.units) {
+          if (_unit.firstUseableAction(target) != 0) {
+            sb.draw(cursor, target.center);
+          }
         }
       }
     }

@@ -1,6 +1,6 @@
 module battle.battle;
 
-import std.range;
+import std.range, std.algorithm;
 import dau.all;
 import model.all;
 import battle.state.playerturn;
@@ -16,9 +16,9 @@ private enum {
 class Battle : Scene!Battle {
   //this(Player[] players) { // TODO: load players from previous state
   this() {
-    auto players = [
-      new Player(getFaction("Human"), true, baseCommandPoints),
-      new Player(getFaction("Gaia"), false, baseCommandPoints),
+    _players = [ 
+      new Player(getFaction("Human"), 0, true,  baseCommandPoints),
+      new Player(getFaction("Gaia"),  1, false, baseCommandPoints)
     ];
     System!Battle[] systems = [
       new TileHoverSystem(this),
@@ -27,7 +27,7 @@ class Battle : Scene!Battle {
     super(systems);
     _battlePanel = new BattlePanel;
     gui.addElement(_battlePanel);
-    _players = cycle(players);
+    _turnCycle = cycle(_players);
     startNewTurn;
   }
 
@@ -36,15 +36,8 @@ class Battle : Scene!Battle {
       map = new TileMap("test", entities);
       entities.registerEntity(map);
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
-      auto unit = new Unit("assault", map.tileAt(3, 3), Team.player);
-      entities.registerEntity(unit);
-      units ~= unit;
-      unit = new Unit("treant", map.tileAt(5, 3), Team.pc);
-      entities.registerEntity(unit);
-      units ~= unit;
-      unit = new Unit("guardian", map.tileAt(3, 5), Team.player);
-      entities.registerEntity(unit);
-      units ~= unit;
+      spawnUnit("sniper", _players[0], map.tileAt(3,3));
+      spawnUnit("hellblossom", _players[1], map.tileAt(3,5));
     }
 
     void update(float time) {
@@ -54,9 +47,15 @@ class Battle : Scene!Battle {
 
   package:
   TileMap map;
-  Unit[]  units;
   bool leftUnitInfoLock;
-  Cycle!(Player[]) _players;
+  
+  @property auto players() { return _players[]; }
+
+  void spawnUnit(string key, Player player, Tile tile) {
+    auto unit = new Unit(key, tile, player.teamIdx);
+    entities.registerEntity(unit);
+    player.registerUnit(unit);
+  }
 
   void displayUnitInfo(Unit unit) {
     if (leftUnitInfoLock) {
@@ -68,15 +67,25 @@ class Battle : Scene!Battle {
   }
 
   void startNewTurn() {
-    auto player = _players.front;
-    _players.popFront;
-    if (!states.empty) {
-      states.popState();
+    if (_activePlayer !is null) {
+      foreach(unit ; _activePlayer.units) {
+        unit.endTurn();
+      }
+      states.popState(); // pop previous player's turn state
     }
+    auto player = _turnCycle.front;
+    _turnCycle.popFront;
     assert(states.empty, "extra states on stack when starting new turn");
     states.pushState(player.isHuman ? new PlayerTurn(player) : new PCTurn(player));
+    foreach(unit ; player.units) {
+      unit.startTurn();
+    }
+    _activePlayer = player;
   }
 
   private:
   BattlePanel _battlePanel;
+  Cycle!(Player[]) _turnCycle;
+  Player _activePlayer;
+  Player[] _players;
 }

@@ -8,10 +8,12 @@ import model.unit;
 class Player {
   const Faction faction;
   const bool isHuman;
+  const int teamIdx;
   int mana;
 
-  this(const Faction faction, bool isHuman, int baseCommandPoints) {
+  this(const Faction faction, int teamIdx, bool isHuman, int baseCommandPoints) {
     this.faction          = faction;
+    this.teamIdx          = teamIdx;
     this.isHuman          = isHuman;
     this.maxCommandPoints = baseCommandPoints;
     this.commandPoints    = baseCommandPoints;
@@ -33,7 +35,7 @@ class Player {
     auto moveableUnits() { return _units.filter!(x => x.canAct); }
   }
 
-  void spawnUnit(Unit unit) {
+  void registerUnit(Unit unit) {
     _units ~= unit;
   }
 
