@@ -45,9 +45,17 @@ class UnitInfoGUI : GUIElement {
       _hpBar.setVal(unit.hp);
       _apBar.setVal(unit.ap);
     }
+    _unit = unit;
+  }
+
+  @property auto unit() { return _unit; }
+
+  void animateHpChange(int from, int to, float duration) {
+    _hpBar.transitionVal(from, to, duration);
   }
 
   private:
+  Unit _unit;
   PipBar _hpBar, _apBar;
   TextBox _armorText, _evadeText;
   ActionInfo _actionInfo1, _actionInfo2;

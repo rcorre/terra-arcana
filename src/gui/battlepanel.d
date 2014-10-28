@@ -24,23 +24,28 @@ class BattlePanel : GUIElement {
     setRightUnitInfo(null);
   }
 
+  @property auto leftUnitInfo() { return _leftUnitInfo; }
+  @property auto rightUnitInfo() { return _rightUnitInfo; }
+
   void setLeftUnitInfo(Unit unit) {
     if (_leftUnitInfo !is null) {
       _leftUnitInfo.active = false;
     }
-    _leftUnitInfo = addChild(new UnitInfoGUI(unit, leftUnitOffset));
+    _leftUnitInfo = new UnitInfoGUI(unit, leftUnitOffset);
+    addChild(_leftUnitInfo);
   }
 
   void setRightUnitInfo(Unit unit) {
     if (_rightUnitInfo !is null) {
       _rightUnitInfo.active = false;
     }
-    _rightUnitInfo = addChild(new UnitInfoGUI(unit, rightUnitOffset));
+    _rightUnitInfo = new UnitInfoGUI(unit, rightUnitOffset);
+    addChild(_rightUnitInfo);
   }
 
   private:
   TextBox _commandCounter, _manaCounter;
-  GUIElement _leftUnitInfo, _rightUnitInfo;
+  UnitInfoGUI _leftUnitInfo, _rightUnitInfo;
 }
 
 private:

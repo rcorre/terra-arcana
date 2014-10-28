@@ -1,5 +1,6 @@
 module dau.gui.pipbar;
 
+import std.algorithm : min, max;
 import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.element;
@@ -30,6 +31,25 @@ class PipBar : GUIElement {
     }
   }
 
+  void transitionVal(int from, int to, float time) {
+    int bottom = min(from, to);
+    int top = max(from, to);
+    int idx = 0;
+    foreach(pip ; _pips) {
+      if (idx <= bottom) {
+        pip.sprite.tint =  Color.white;
+      }
+      else if (idx > top) {
+        pip.sprite.tint =  pipDimShade;
+      }
+      else {
+        pip.sprite.tint = (from > to) ? Color.white : pipDimShade;
+        pip.sprite.fade(time, (from > to) ? pipDimShade : Color.white);
+      }
+      ++idx;
+    }
+  }
+
   private:
   int _maxVal;
   GUIElement[] _pips;
@@ -38,9 +58,5 @@ class PipBar : GUIElement {
 private class Pip : GUIElement {
   this(Sprite sprite, Vector2i pos) {
     super(sprite, pos, Anchor.center);
-  }
-
-  @property void dimmed(bool dim) {
-    sprite.tint = dim ? pipDimShade : Color.white;
   }
 }

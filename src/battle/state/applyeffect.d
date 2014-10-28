@@ -7,6 +7,8 @@ import battle.pathfinder;
 import battle.system.all;
 import battle.state.delay;
 
+private enum delayDuration = 0.2f;
+
 /// apply the result of a single hit of an action
 class ApplyEffect : State!Battle {
   this(const UnitAction action, Unit target) {
@@ -17,10 +19,13 @@ class ApplyEffect : State!Battle {
   override { // TODO: show effect on status bar
     void enter(Battle b) {
       bool hit = _target.evade == 0 || _action.hasSpecial(UnitAction.Special.precise);
+      auto unitInfo = b.unitInfoFor(_target);
       if (hit) {
         switch (_action.effect) with (UnitAction.Effect) {
           case damage:
+            int prevHp = _target.hp;
             _target.dealDamage(_action.power);
+            unitInfo.animateHpChange(prevHp, _target.hp, delayDuration);
             break;
           case stun:
             _target.damageAp(_action.power);
@@ -44,7 +49,7 @@ class ApplyEffect : State!Battle {
       else {
         _target.dodgeAttack();
       }
-      b.states.setState(new Delay); // pause briefly after applying effect
+      b.states.setState(new Delay(delayDuration)); // pause briefly after applying effect
     }
   }
 

@@ -54,6 +54,18 @@ class Battle : Scene!Battle {
     displayUnitInfo(null);
   }
 
+  auto unitInfoFor(Unit unit) {
+    if (_battlePanel.leftUnitInfo.unit == unit) {
+      return _battlePanel.leftUnitInfo;
+    }
+    else if (_battlePanel.rightUnitInfo.unit == unit) {
+      return _battlePanel.rightUnitInfo;
+    }
+    else {
+      assert(0, "no unit info gui found for unit " ~ unit.name);
+    }
+  }
+
   void spawnUnit(string key, Player player, Tile tile) {
     auto unit = new Unit(key, tile, player.teamIdx);
     entities.registerEntity(unit);
