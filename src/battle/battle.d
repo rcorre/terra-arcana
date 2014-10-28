@@ -36,7 +36,7 @@ class Battle : Scene!Battle {
       map = new TileMap("test", entities);
       entities.registerEntity(map);
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
-      spawnUnit("sniper", _players[0], map.tileAt(3,3));
+      spawnUnit("assault", _players[0], map.tileAt(3,3));
       spawnUnit("hellblossom", _players[1], map.tileAt(3,5));
     }
 

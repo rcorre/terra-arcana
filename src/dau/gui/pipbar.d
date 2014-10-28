@@ -36,10 +36,10 @@ class PipBar : GUIElement {
     int top = max(from, to);
     int idx = 0;
     foreach(pip ; _pips) {
-      if (idx <= bottom) {
+      if (idx < bottom) {
         pip.sprite.tint =  Color.white;
       }
-      else if (idx > top) {
+      else if (idx >= top) {
         pip.sprite.tint =  pipDimShade;
       }
       else {
