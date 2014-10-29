@@ -65,6 +65,12 @@ class GUIElement {
       _children.insert(el);
       return el;
     }
+
+    void addChildren(GUIElement[] elements ...) {
+      foreach(el ; elements) {
+        _children.insert(el);
+      }
+    }
   }
 
   private:
