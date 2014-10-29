@@ -27,6 +27,11 @@ class TextBox : GUIElement {
     super(textArea);
   }
 
+  @property {
+    auto text() { return _text; }
+    void text(string text) { _text = text; }
+  }
+
   /// create a textbox with text centered in the specified area
   this(T)(T text, Font font, Rect2i area, Anchor anchor = Anchor.topLeft,
       Color color = Color.black)
