@@ -25,8 +25,8 @@ class Battle : Scene!Battle {
       new BattleCameraSystem(this),
     ];
     super(systems);
-    _battlePanel = new BattlePanel;
-    gui.addElement(_battlePanel);
+    _panel = new BattlePanel;
+    gui.addElement(_panel);
     _turnCycle = cycle(_players);
     startNewTurn;
   }
@@ -40,6 +40,7 @@ class Battle : Scene!Battle {
       foreach(obj ; mapData.layerTileData("spawn")) {
         _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), obj.objectType.to!int);
       }
+      camera.area = Rect2f(0, 0, Settings.screenW, Settings.screenH - _panel.area.height);
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
       spawnUnit("assault", _players[0], map.tileAt(3,3));
       spawnUnit("hellblossom", _players[1], map.tileAt(3,5));
@@ -60,11 +61,11 @@ package:
   }
 
   auto unitInfoFor(Unit unit) {
-    if (_battlePanel.leftUnitInfo.unit == unit) {
-      return _battlePanel.leftUnitInfo;
+    if (_panel.leftUnitInfo.unit == unit) {
+      return _panel.leftUnitInfo;
     }
-    else if (_battlePanel.rightUnitInfo.unit == unit) {
-      return _battlePanel.rightUnitInfo;
+    else if (_panel.rightUnitInfo.unit == unit) {
+      return _panel.rightUnitInfo;
     }
     else {
       assert(0, "no unit info gui found for unit " ~ unit.name);
@@ -83,10 +84,10 @@ package:
 
   void displayUnitInfo(Unit unit) {
     if (_lockLeftUnitInfo) {
-      _battlePanel.setRightUnitInfo(unit);
+      _panel.setRightUnitInfo(unit);
     }
     else {
-      _battlePanel.setLeftUnitInfo(unit);
+      _panel.setLeftUnitInfo(unit);
     }
   }
 
@@ -109,12 +110,12 @@ package:
   }
 
   void updateBattlePanel() {
-    _battlePanel.setCommandCounter(_activePlayer.commandPoints, _activePlayer.maxCommandPoints);
-    _battlePanel.setManaCounter(_activePlayer.mana);
+    _panel.setCommandCounter(_activePlayer.commandPoints, _activePlayer.maxCommandPoints);
+    _panel.setManaCounter(_activePlayer.mana);
   }
 
   private:
-  BattlePanel _battlePanel;
+  BattlePanel _panel;
   Cycle!(Player[]) _turnCycle;
   Player _activePlayer;
   Player[] _players;

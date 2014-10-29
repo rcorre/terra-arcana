@@ -11,11 +11,16 @@ class Camera {
   }
 
   @property {
-    auto area() { return _area; }
     auto transform() {
       al_identity_transform(&_transform);
       al_translate_transform(&_transform, -_area.left, -_area.top);
       return &_transform;
+    }
+
+    auto area() { return _area; }
+    void area(T)(Rect2!T area) {
+      _area = cast(Rect2f) area;
+      _area.keepInside(bounds);
     }
 
     auto bounds() { return _bounds; }
