@@ -1,10 +1,7 @@
 module model.tilemap;
 
 import std.string;
-import dau.geometry.all;
-import dau.setup;
-import dau.entity;
-import dau.tool.tiled;
+import dau.all;
 import model.tile;
 
 class TileMap : Entity {
@@ -12,9 +9,7 @@ class TileMap : Entity {
     int numRows, numCols;
   }
 
-  this(string key, EntityManager entities) {
-    auto path = "%s/%s.json".format(cast(string) Paths.mapDir, key);
-    auto map = loadTiledMap(path);
+  this(MapData map, EntityManager entities) {
     numCols = map.width;
     numRows = map.height;
     auto terrain = map.layerTileData("terrain");

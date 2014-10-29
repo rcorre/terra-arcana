@@ -40,6 +40,9 @@ class PlayerTurn : State!Battle {
       foreach(unit ; _player.moveableUnits) {
         sb.draw(_cursor, unit.center);
       }
+      foreach(spawnPoint ; b.spawnPointsFor(_player.teamIdx)) {
+        sb.draw(_cursor, spawnPoint.center);
+      }
     }
   }
 

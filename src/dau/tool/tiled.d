@@ -17,6 +17,8 @@ class TileData {
   int row, col;
   int tilesetIdx;
   string tilesetName;
+  string objectName;
+  string objectType;
   string[string] properties;
 }
 
@@ -57,18 +59,39 @@ class MapData {
 
     @property {
       bool empty() {
-        return _idx == _layer.width * _layer.height;
+        return _idx == (isObjectLayer ? _layer.objects.length : _layer.data.length);
+      }
+
+      bool isObjectLayer() {
+        return _layer.type == MapLayer.Type.objectgroup;
+      }
+
+      int numTiles() {
+        return cast(int) (isObjectLayer ? _layer.objects.length : _layer.data.length);
       }
 
       TileData front() {
         auto data = new TileData;
-        auto gid = _layer.data[_idx];
-        auto tileset = gidToTileset(gid);
-        data.row = _idx / _layer.width;
-        data.col = _idx % _layer.width;
-        data.tilesetIdx = gid - tileset.firstgid;
-        data.tilesetName = tileset.name;
-        data.properties = tileset.properties;
+        if (isObjectLayer) {
+          auto obj = _layer.objects[_idx];
+          auto tileset = gidToTileset(obj.gid);
+          data.row = obj.y / tileset.tileheight; // TODO: is tiled off by 1? I think it is...
+          data.col = obj.x / tileset.tilewidth;
+          data.tilesetIdx = obj.gid - tileset.firstgid;
+          data.tilesetName = tileset.name;
+          data.properties = obj.properties;
+          data.objectName = obj.name;
+          data.objectType = obj.type;
+        }
+        else {
+          auto gid = _layer.data[_idx];
+          auto tileset = gidToTileset(gid);
+          data.row = _idx / _layer.width;
+          data.col = _idx % _layer.width;
+          data.tilesetIdx = gid - tileset.firstgid;
+          data.tilesetName = tileset.name;
+          data.properties = tileset.tileproperties[data.tilesetIdx.to!string];
+        }
         return data;
       }
     }

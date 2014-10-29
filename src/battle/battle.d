@@ -1,6 +1,6 @@
 module battle.battle;
 
-import std.range, std.algorithm;
+import std.range, std.algorithm, std.conv;
 import dau.all;
 import model.all;
 import battle.state.playerturn;
@@ -17,8 +17,8 @@ class Battle : Scene!Battle {
   //this(Player[] players) { // TODO: load players from previous state
   this() {
     _players = [
-      new Player(getFaction("Human"), 0, true,  baseCommandPoints),
-      new Player(getFaction("Gaia"),  1, false, baseCommandPoints)
+      new Player(getFaction("Human"), 1, true,  baseCommandPoints),
+      new Player(getFaction("Gaia"),  2, false, baseCommandPoints)
     ];
     System!Battle[] systems = [
       new TileHoverSystem(this),
@@ -33,8 +33,13 @@ class Battle : Scene!Battle {
 
   override {
     void enter() {
-      map = new TileMap("test", entities);
+      auto mapPath = "%s/%s.json".format(cast(string) Paths.mapDir, "test");
+      auto mapData = loadTiledMap(mapPath);
+      map = new TileMap(mapData, entities);
       entities.registerEntity(map);
+      foreach(obj ; mapData.layerTileData("spawn")) {
+        _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), obj.objectType.to!int);
+      }
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
       spawnUnit("assault", _players[0], map.tileAt(3,3));
       spawnUnit("hellblossom", _players[1], map.tileAt(3,5));
@@ -45,7 +50,7 @@ class Battle : Scene!Battle {
     }
   }
 
-  package:
+package:
   TileMap map;
 
   @property auto players() { return _players[]; }
@@ -64,6 +69,10 @@ class Battle : Scene!Battle {
     else {
       assert(0, "no unit info gui found for unit " ~ unit.name);
     }
+  }
+
+  auto spawnPointsFor(int teamIdx) {
+    return _spawnPoints.filter!(x => x.team == teamIdx).map!(x => x.tile);
   }
 
   void spawnUnit(string key, Player player, Tile tile) {
@@ -110,4 +119,14 @@ class Battle : Scene!Battle {
   Player _activePlayer;
   Player[] _players;
   bool _lockLeftUnitInfo;
+  SpawnPoint[] _spawnPoints;
+
+  class SpawnPoint {
+    this(Tile tile, int team) {
+      this.tile = tile;
+      this.team = team;
+    }
+    Tile tile;
+    int team;
+  }
 }
