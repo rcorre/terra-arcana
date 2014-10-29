@@ -16,7 +16,7 @@ private enum {
 class Battle : Scene!Battle {
   //this(Player[] players) { // TODO: load players from previous state
   this() {
-    _players = [ 
+    _players = [
       new Player(getFaction("Human"), 0, true,  baseCommandPoints),
       new Player(getFaction("Gaia"),  1, false, baseCommandPoints)
     ];
@@ -47,7 +47,7 @@ class Battle : Scene!Battle {
 
   package:
   TileMap map;
-  
+
   @property auto players() { return _players[]; }
   @property void lockLeftUnitInfo(bool val) {
     _lockLeftUnitInfo = val;
@@ -96,6 +96,12 @@ class Battle : Scene!Battle {
       unit.startTurn();
     }
     _activePlayer = player;
+    updateBattlePanel();
+  }
+
+  void updateBattlePanel() {
+    _battlePanel.setCommandCounter(_activePlayer.commandPoints, _activePlayer.maxCommandPoints);
+    _battlePanel.setManaCounter(_activePlayer.mana);
   }
 
   private:
