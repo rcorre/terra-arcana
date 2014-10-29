@@ -28,6 +28,9 @@ class Camera {
       _bounds = cast(Rect2f) bounds;
       _area.keepInside(bounds);
     }
+
+    int clipWidth()  { return cast(int) _area.width; }
+    int clipHeight() { return cast(int) _area.height; }
   }
 
   void move(T)(Vector2!T disp) {

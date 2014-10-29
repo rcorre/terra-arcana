@@ -25,14 +25,18 @@ class SpriteBatch {
   void render(Camera camera) {
     // use camera transform, store previous transform
     ALLEGRO_TRANSFORM prevTrans;
+    int x, y, w, h; // prev clipping rect
     al_copy_transform(&prevTrans, al_get_current_transform());
+    al_get_clipping_rectangle(&x, &y, &w, &h);
     al_use_transform(camera.transform);
+    al_set_clipping_rectangle(0 ,0, camera.clipWidth, camera.clipHeight);
 
     foreach(entry ; _sprites) {
       entry.sprite.draw(entry.pos);
     }
 
     al_use_transform(&prevTrans); // restore old transform
+    al_set_clipping_rectangle(x, y, w, h);
     _sprites.clear();
   }
 
