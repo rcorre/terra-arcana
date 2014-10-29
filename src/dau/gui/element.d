@@ -2,6 +2,7 @@ module dau.gui.element;
 
 import dau.geometry.all;
 import dau.graphics.all;
+import dau.input;
 import dau.util.removal_list;
 
 class GUIElement {
@@ -42,6 +43,9 @@ class GUIElement {
     auto children() { return _children[]; }
   }
 
+  bool onHover() { return false; } // return false to indicate event not handled
+  bool onClick() { return false; } // return false to indicate event not handled
+
   void update(float time) {
     if (_sprite !is null) {
       _sprite.update(time);
@@ -70,6 +74,28 @@ class GUIElement {
       foreach(el ; elements) {
         _children.insert(el);
       }
+    }
+
+    bool handleMouseHover(Vector2i pos) {
+      if (!area.contains(pos)) { return false; }
+      auto localPos = pos - area.topLeft;
+      foreach(child ; children) {
+        if (child.handleMouseHover(localPos)) {
+          return true;
+        }
+      }
+      return onHover();
+    }
+
+    bool handleMouseClick(Vector2i pos) {
+      if (!area.contains(pos)) { return false; }
+      auto localPos = pos - area.topLeft;
+      foreach(child ; children) {
+        if (child.handleMouseClick(localPos)) {
+          return true;
+        }
+      }
+      return onClick();
     }
   }
 

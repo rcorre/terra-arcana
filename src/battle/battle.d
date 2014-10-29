@@ -10,7 +10,7 @@ import gui.battlepanel;
 
 private enum {
   cameraScrollSpeed = 12,
-  baseCommandPoints = 6  // TODO: set based on map
+  baseCommandPoints = 6
 }
 
 class Battle : Scene!Battle {
