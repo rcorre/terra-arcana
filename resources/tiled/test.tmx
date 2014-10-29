@@ -80,7 +80,7 @@
   </tile>
   <tile id="18">
    <properties>
-    <property name="name" value="Ground"/>
+    <property name="name" value="Spawn"/>
    </properties>
   </tile>
   <tile id="19" terrain="0,1,0,0">
@@ -779,4 +779,10 @@
    <tile gid="1"/>
   </data>
  </layer>
+ <objectgroup name="spawn">
+  <object name="spawn" type="0" gid="18" x="512" y="704"/>
+  <object name="spawn" type="0" gid="18" x="448" y="704"/>
+  <object name="spawn" type="1" gid="18" x="448" y="448"/>
+  <object name="spawn" type="1" gid="18" x="512" y="448"/>
+ </objectgroup>
 </map>

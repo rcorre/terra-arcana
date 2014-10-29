@@ -10,6 +10,78 @@
          "width":26,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":26,
+         "name":"spawn",
+         "objects":[
+                {
+                 "gid":18,
+                 "height":0,
+                 "name":"spawn",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":0,
+                 "x":512,
+                 "y":704
+                }, 
+                {
+                 "gid":18,
+                 "height":0,
+                 "name":"spawn",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":0,
+                 "x":448,
+                 "y":704
+                }, 
+                {
+                 "gid":18,
+                 "height":0,
+                 "name":"spawn",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"1",
+                 "visible":true,
+                 "width":0,
+                 "x":448,
+                 "y":448
+                }, 
+                {
+                 "gid":18,
+                 "height":0,
+                 "name":"spawn",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"1",
+                 "visible":true,
+                 "width":0,
+                 "x":512,
+                 "y":448
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":26,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":
@@ -21,7 +93,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/..\/content\/image\/terrain.png",
+         "image":"..\/image\/terrain.png",
          "imageheight":256,
          "imagewidth":256,
          "margin":0,
@@ -78,7 +150,7 @@
                 },
              "18":
                 {
-                 "name":"Ground"
+                 "name":"Spawn"
                 },
              "19":
                 {
