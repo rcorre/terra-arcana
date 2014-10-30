@@ -15,7 +15,7 @@ private enum {
   evadeOffset      = Vector2i(118, 51),
   hpArea           = Rect2i(37, 37, 63, 13),
   apArea           = Rect2i(37, 53, 63, 13),
-  conditionOffset  = Vector2i(5, 73),
+  effectsOffset    = Vector2i(5, 73),
   actionBarOffset1 = Vector2i(137, 9),
   actionBarOffset2 = Vector2i(137, 57),
   actionBarSize    = Vector2i(200, 24),
@@ -29,6 +29,7 @@ class UnitInfoGUI : GUIElement {
   this(Unit unit, Vector2i offset) {
     // TODO: choose corner of unit based on screen positioning
     super(new Sprite(spriteName), offset);
+    _nextEffectOffset = effectsOffset;
     if (unit !is null) {
       _hpBar = new PipBar(hpArea, unit.maxHp, pipName, "hpPip");
       _apBar = new PipBar(apArea, unit.maxAp, pipName, "apPip");
@@ -42,6 +43,12 @@ class UnitInfoGUI : GUIElement {
       addChild(new ActionInfo(actionBarOffset2, unit.action2));
       addChild(new Icon(new Animation(unit.key, "idle", Animation.Repeat.loop), spriteOffset));
       addChild(new TextBox(unit.name, _font, nameOffset));
+      if (unit.isToxic) {
+        addEffectIcon("toxin", unit.toxin);
+      }
+      if (unit.isSlowed) {
+        addEffectIcon("slow", unit.slow);
+      }
       _hpBar.setVal(unit.hp);
       _apBar.setVal(unit.ap);
     }
@@ -58,11 +65,23 @@ class UnitInfoGUI : GUIElement {
     _apBar.transitionVal(from, to, duration);
   }
 
+  void addEffectIcon(string iconName) {
+    // TODO: use for inherent traits
+  }
+
+  void addEffectIcon(string iconName, int val) {
+    auto sprite = new Sprite(iconSheetName, iconName);
+    auto icon = addChild(new Icon(sprite, _nextEffectOffset, val, _font));
+    _nextEffectOffset.x += icon.width;
+  }
+
   private:
   Unit _unit;
   PipBar _hpBar, _apBar;
   TextBox _armorText, _evadeText;
   ActionInfo _actionInfo1, _actionInfo2;
+  Icon _toxinIcon, _slowIcon, _flyingIcon;
+  Vector2i _nextEffectOffset;
 }
 
 private:
