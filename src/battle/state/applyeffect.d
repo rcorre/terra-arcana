@@ -38,6 +38,7 @@ class ApplyEffect : State!Battle {
             break;
           case toxin:
             _target.applyToxin(_action.power);
+            unitInfo.animateEffect("toxin", _target.toxin);
             break;
           case slow:
             _target.applySlow(_action.power);

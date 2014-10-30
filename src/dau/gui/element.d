@@ -65,6 +65,15 @@ class GUIElement {
     }
   }
 
+  void flash(float time, Color color) {
+    if (sprite !is null) {
+      sprite.flash(time, color);
+    }
+    foreach(child ; children) {
+      child.flash(time, color);
+    }
+  }
+
   final {
     auto addChild(GUIElement el) {
       _children.insert(el);

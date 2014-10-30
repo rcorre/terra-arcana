@@ -21,7 +21,9 @@ private enum {
   actionBarSize    = Vector2i(200, 24),
   spriteOffset     = Vector2i(13, 0),
   nameOffset       = Vector2i(49, 12),
-  iconSheetName    = "gui/icons"
+  iconSheetName    = "gui/icons",
+  effectFlashTime  = 0.5f,
+  effectFlashColor = Color.red
 }
 
 /// bar that displays progress as discrete elements (pips)
@@ -65,14 +67,20 @@ class UnitInfoGUI : GUIElement {
     _apBar.transitionVal(from, to, duration);
   }
 
+  void animateEffect(string name, int val) {
+    auto icon = addEffectIcon(name, val);
+    icon.flash(effectFlashTime, effectFlashColor);
+  }
+
   void addEffectIcon(string iconName) {
     // TODO: use for inherent traits
   }
 
-  void addEffectIcon(string iconName, int val) {
+  auto addEffectIcon(string iconName, int val) {
     auto sprite = new Sprite(iconSheetName, iconName);
     auto icon = addChild(new Icon(sprite, _nextEffectOffset, val, _font));
     _nextEffectOffset.x += icon.width;
+    return icon;
   }
 
   private:
