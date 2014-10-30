@@ -2,7 +2,6 @@ module dau.gui.element;
 
 import dau.geometry.all;
 import dau.graphics.all;
-import dau.input;
 import dau.util.removal_list;
 
 class GUIElement {
