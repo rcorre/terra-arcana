@@ -31,8 +31,9 @@
     "frameHeight": 20,
     "sprites": [
       "range", "damage", "stun", "heal", "armor", "evade", "piercing", "precise", "blitz",
-      "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", "toxin",
-      "thorns", "regrowth", "claw", "venom", "bite", "screech", "smash", "entangle", "slow"
+      "toxin", "slow", "guerilla", "flight", "", "", "", "", "",
+      "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", "",
+      "thorns", "regrowth", "claw", "venom", "bite", "screech", "smash", "entangle", ""
     ]
   },
 
