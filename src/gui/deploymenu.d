@@ -27,25 +27,31 @@ class DeployButton : MenuButton!string {
     costOffset   = Vector2i(172, 10),
     spriteOffset = Vector2i(0, 0),
     nameOffset   = Vector2i(48, 4),
-    brightShade = Color.white,
-    dullShade = Color(0.9, 0.9, 0.9, 0.5)
+    brightShade = Color(1, 1, 1, 0.9),
+    dullShade = Color(0.9, 0.9, 0.9, 0.6)
   }
 
   this(string unitKey, Vector2i pos) {
+    _animation = new Animation(unitKey, "idle", Animation.Repeat.loop);
     super(unitKey, new Sprite(buttonName), pos);
     auto data = getUnitData(unitKey);
-    addChild(new Icon(new Animation(unitKey, "idle", Animation.Repeat.loop), spriteOffset));
+    addChild(new Icon(_animation, spriteOffset));
     addChild(new TextBox(data.name, _font, nameOffset));
     addChild(new TextBox(Unit.basicUnitDeployCost, _font, costOffset));
   }
 
   override void onMouseEnter() {
     sprite.tint = brightShade;
+    _animation.start();
   }
 
   override void onMouseLeave() {
     sprite.tint = dullShade;
+    _animation.stop();
   }
+
+  private:
+  Animation _animation;
 }
 
 Font _font;
