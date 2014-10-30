@@ -13,7 +13,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":26,
+         "height":0,
          "name":"spawn",
          "objects":[
                 {
@@ -25,7 +25,7 @@
 
                     },
                  "rotation":0,
-                 "type":"1",
+                 "type":"0",
                  "visible":true,
                  "width":0,
                  "x":512,
@@ -40,7 +40,7 @@
 
                     },
                  "rotation":0,
-                 "type":"1",
+                 "type":"0",
                  "visible":true,
                  "width":0,
                  "x":448,
@@ -55,7 +55,7 @@
 
                     },
                  "rotation":0,
-                 "type":"2",
+                 "type":"1",
                  "visible":true,
                  "width":0,
                  "x":448,
@@ -70,7 +70,7 @@
 
                     },
                  "rotation":0,
-                 "type":"2",
+                 "type":"1",
                  "visible":true,
                  "width":0,
                  "x":512,
@@ -79,7 +79,7 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":26,
+         "width":0,
          "x":0,
          "y":0
         }],
@@ -93,7 +93,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/image\/terrain.png",
+         "image":"..\/..\/content\/image\/terrain.png",
          "imageheight":256,
          "imagewidth":256,
          "margin":0,
@@ -122,6 +122,7 @@
              "1":
                 {
                  "cover":"1",
+                 "moveCost":"1",
                  "name":"Flora"
                 },
              "10":
@@ -130,14 +131,17 @@
                 },
              "11":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "12":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "13":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "16":
@@ -154,31 +158,38 @@
                 },
              "19":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "2":
                 {
                  "cover":"2",
+                 "moveCost":"2",
                  "name":"Foliage"
                 },
              "20":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "21":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "3":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "4":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "5":
                 {
+                 "moveCost":"99",
                  "name":"Ground"
                 },
              "8":
