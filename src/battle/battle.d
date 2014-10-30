@@ -95,18 +95,14 @@ package:
 
   void startNewTurn() {
     if (_activePlayer !is null) {
-      foreach(unit ; _activePlayer.units) {
-        unit.endTurn();
-      }
+      _activePlayer.endTurn();
       states.popState(); // pop previous player's turn state
     }
     auto player = _turnCycle.front;
     _turnCycle.popFront;
     assert(states.empty, "extra states on stack when starting new turn");
     states.pushState(player.isHuman ? new PlayerTurn(player) : new PCTurn(player));
-    foreach(unit ; player.units) {
-      unit.startTurn();
-    }
+    player.beginTurn();
     _activePlayer = player;
     updateBattlePanel();
   }

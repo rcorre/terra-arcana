@@ -33,7 +33,16 @@ class Player {
     _commandPoints -= amount;
   }
 
-  void restoreCommandPoints() {
+  void endTurn() {
+    foreach(unit ; units) {
+      unit.endTurn();
+    }
+  }
+
+  void beginTurn() {
+    foreach(unit ; units) {
+      unit.startTurn();
+    }
     _commandPoints = maxCommandPoints;
   }
 
