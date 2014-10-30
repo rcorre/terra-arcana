@@ -16,7 +16,8 @@ class TileHoverSystem : System!Battle {
   override {
     void update(float time, InputManager input) {
       _newTileUnderMouse = false;
-      auto tile = scene.map.tileAt(input.mousePos);
+      auto worldMousePos = cast(Vector2i) (input.mousePos + scene.camera.area.topLeft);
+      auto tile = scene.map.tileAt(worldMousePos);
       if (tile !is null && _tileUnderMouse != tile) { // moved cursor to new tile
         _newTileUnderMouse = true;
         _tileUnderMouse = tile;

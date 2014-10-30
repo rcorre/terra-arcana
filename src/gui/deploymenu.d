@@ -12,20 +12,20 @@ private enum {
 }
 
 /// bar that displays progress as discrete elements (pips)
-class DeployMenu : Menu!(Unit, DeployButton) {
-  this(Unit[] units, Vector2i offset) {
+class DeployMenu : Menu!(string, DeployButton) {
+  this(const string[] unitKeys, Vector2i offset) {
     // TODO: choose corner of unit based on screen positioning
     super(new Sprite(bgName), offset, firstButtonOffset);
   }
 }
 
-class DeployButton : MenuButton!Unit {
+class DeployButton : MenuButton!string {
   private enum {
     costOffset = Vector2i(172, 10),
   }
 
-  this(Unit unit, Vector2i pos) {
-    super(unit, new Sprite(buttonName), pos);
+  this(string unitKey, Vector2i pos) {
+    super(unitKey, new Sprite(buttonName), pos);
   }
 }
 

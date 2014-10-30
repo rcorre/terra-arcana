@@ -8,7 +8,7 @@ import dau.util.removal_list;
 
 abstract class Menu(EntryType, ButtonType) : GUIElement {
   this(Sprite bgSprite, Vector2i pos, Vector2i firstButtonOffset) {
-    super(sprite, pos, Anchor.topLeft);
+    super(bgSprite, pos, Anchor.topLeft);
     _nextButtonOffset = firstButtonOffset;
   }
 

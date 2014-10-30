@@ -1,11 +1,12 @@
 module battle.state.playerturn;
 
-import std.algorithm : filter;
+import std.algorithm;
 import dau.all;
 import model.all;
 import battle.battle;
 import battle.system.all;
 import battle.state.playerunitselected;
+import battle.state.chooseunittodeploy;
 
 /// player may click on a unit to issue orders
 class PlayerTurn : State!Battle {
@@ -27,11 +28,17 @@ class PlayerTurn : State!Battle {
 
     void update(Battle b, float time, InputManager input) {
       _cursor.update(time);
-      auto unit = _tileHoverSys.unitUnderMouse;
-      if (unit !is null && input.select && unit.team == _player.teamIdx) {
-        b.states.pushState(new PlayerUnitSelected(unit));
+      if (input.select) {
+        auto tile = _tileHoverSys.tileUnderMouse;
+        auto unit = _tileHoverSys.unitUnderMouse;
+        if (unit !is null && unit.team == _player.teamIdx) {
+          b.states.pushState(new PlayerUnitSelected(unit));
+        }
+        else if (b.spawnPointsFor(_player.teamIdx).canFind(tile)) {
+          b.states.pushState(new ChooseUnitToDeploy(_player, tile));
+        }
       }
-      if (input.skip) {
+      else if (input.skip) {
         b.startNewTurn;
       }
     }
