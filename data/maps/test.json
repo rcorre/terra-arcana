@@ -131,7 +131,7 @@
                 },
              "11":
                 {
-                 "moveCost":"99",
+                 "moveCost":"1",
                  "name":"Ground"
                 },
              "12":
@@ -141,7 +141,7 @@
                 },
              "13":
                 {
-                 "moveCost":"99",
+                 "moveCost":"1",
                  "name":"Ground"
                 },
              "16":
@@ -158,7 +158,7 @@
                 },
              "19":
                 {
-                 "moveCost":"99",
+                 "moveCost":"1",
                  "name":"Ground"
                 },
              "2":
@@ -169,27 +169,27 @@
                 },
              "20":
                 {
-                 "moveCost":"99",
+                 "moveCost":"1",
                  "name":"Ground"
                 },
              "21":
                 {
-                 "moveCost":"99",
+                 "moveCost":"1",
                  "name":"Ground"
                 },
              "3":
                 {
-                 "moveCost":"99",
+                 "moveCost":"1",
                  "name":"Ground"
                 },
              "4":
                 {
-                 "moveCost":"99",
+                 "moveCost":"1",
                  "name":"Ground"
                 },
              "5":
                 {
-                 "moveCost":"99",
+                 "moveCost":"1",
                  "name":"Ground"
                 },
              "8":

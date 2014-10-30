@@ -194,6 +194,9 @@ class Unit : Entity {
     if (other !is null && other.team != team) {
       return Tile.unreachable;
     }
+    if (hasTrait(UnitData.Trait.flight)) { // flight costs 1 for all tiles
+      return isSlowed ? 2 : 1;
+    }
     return tile.moveCost * (isSlowed ? 2 : 1);
   }
 
@@ -249,7 +252,7 @@ class UnitData {
     }
   }
 
-  bool hasTrait(Trait trait) {
+  bool hasTrait(Trait trait) const {
     return traits.canFind(trait);
   }
 }
