@@ -37,7 +37,7 @@ class DeployButton : MenuButton!string {
     auto data = getUnitData(unitKey);
     addChild(new Icon(_animation, spriteOffset));
     addChild(new TextBox(data.name, _font, nameOffset));
-    addChild(new TextBox(Unit.basicUnitDeployCost, _font, costOffset));
+    addChild(new TextBox(data.deployCost, _font, costOffset));
   }
 
   override void onMouseEnter() {

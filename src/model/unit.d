@@ -20,12 +20,6 @@ private enum {
 }
 
 class Unit : Entity {
-  enum {
-    basicUnitDeployCost = 2,
-    advancedUnitDeployCost = 3,
-    eliteUnitDeployCost = 4
-  }
-
   const int team;
   const UnitData data;
   const string key;
@@ -219,13 +213,31 @@ class Unit : Entity {
 class UnitData {
   mixin JsonizeMe;
 
+  enum Tier {
+    basic,
+    advanced,
+    elite
+  }
+
   @jsonize {
     string name;
+    Tier tier;
     int maxHp;
     int maxAp;
     int baseArmor;
     int baseEvade;
     UnitAction action1, action2;
+  }
+
+  @property int deployCost() const {
+    final switch (tier) with (Tier) {
+      case basic:
+        return 2;
+      case advanced:
+        return 3;
+      case elite:
+        return 4;
+    }
   }
 }
 

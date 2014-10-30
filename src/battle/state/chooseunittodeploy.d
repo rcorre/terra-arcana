@@ -20,8 +20,10 @@ class ChooseUnitToDeploy : State!Battle {
       b.disableSystem!BattleCameraSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
       auto deploy = delegate(string key) {
-        b.spawnUnit(key, _player, _tile);
+        auto unit = b.spawnUnit(key, _player, _tile);
         _menu.active = false;
+        _player.consumeCommandPoints(unit.deployCost);
+        b.updateBattlePanel();
         b.states.popState();
       };
       _menu = new DeployMenu(_player.faction.standardUnitKeys, Vector2i.zero, deploy);

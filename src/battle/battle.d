@@ -76,10 +76,11 @@ package:
     return _spawnPoints.filter!(x => x.team == teamIdx).map!(x => x.tile);
   }
 
-  void spawnUnit(string key, Player player, Tile tile) {
+  auto spawnUnit(string key, Player player, Tile tile) {
     auto unit = new Unit(key, tile, player.teamIdx);
     entities.registerEntity(unit);
     player.registerUnit(unit);
+    return unit;
   }
 
   void displayUnitInfo(Unit unit) {
