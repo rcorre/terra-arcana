@@ -45,6 +45,8 @@ class PerformAction : State!Battle {
       auto ui = b.unitInfoFor(_actor);
       int prevAp = _actor.ap;
       _actor.consumeAp(_action.apCost);
+      b.activePlayer.consumeCommandPoints(1);
+      b.updateBattlePanel();
       ui.animateApChange(prevAp, _actor.ap, apBarFadeDuration);
     }
 

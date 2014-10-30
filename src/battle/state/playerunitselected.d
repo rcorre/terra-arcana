@@ -40,7 +40,7 @@ class PlayerUnitSelected : State!Battle {
       if (_tileHover.tileUnderMouseChanged) {
         _path = _pathFinder.pathTo(tile);
       }
-      if (input.select) { // TODO: use rmb for alternate action
+      if (input.select) {
         if (_unit.canUseAction(1, tile)) { // TODO: handle attack ground
           b.states.pushState(new PerformAction(_unit, 1, cast(Unit) tile.entity));
         }
@@ -84,4 +84,5 @@ class PlayerUnitSelected : State!Battle {
   TileHoverSystem _tileHover;
   Pathfinder _pathFinder;
   Tile[] _path;
+  Player _player;
 }

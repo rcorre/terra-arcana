@@ -18,6 +18,11 @@ class MoveUnit : State!Battle {
   }
 
   override {
+    void enter(Battle b) {
+      b.activePlayer.consumeCommandPoints(1);
+      b.updateBattlePanel();
+    }
+
     void update(Battle b, float time, InputManager input) {
       auto disp = _path.back.center - _unit.center;
       auto dist = moveRate * time;

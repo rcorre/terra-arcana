@@ -55,6 +55,7 @@ package:
   TileMap map;
 
   @property auto players() { return _players[]; }
+  @property auto activePlayer() { return _activePlayer; }
   @property void lockLeftUnitInfo(bool val) {
     _lockLeftUnitInfo = val;
     displayUnitInfo(null);
