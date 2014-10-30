@@ -16,7 +16,6 @@ class Player {
     this.teamIdx = teamIdx;
     this.isHuman = isHuman;
     _maxCommandPoints = baseCommandPoints;
-    _commandPoints    = baseCommandPoints;
   }
 
   @property {
