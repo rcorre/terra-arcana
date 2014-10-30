@@ -13,9 +13,9 @@ private enum {
 
 /// bar that displays progress as discrete elements (pips)
 class DeployMenu : Menu!(string, DeployButton) {
-  this(const string[] unitKeys, Vector2i offset) {
+  this(const string[] unitKeys, Vector2i offset, DeployButton.Action onClick) {
     // TODO: choose corner of unit based on screen positioning
-    super(new Sprite(bgName), offset, firstButtonOffset);
+    super(new Sprite(bgName), offset, firstButtonOffset, onClick);
     foreach(key ; unitKeys) {
       addEntry(key);
     }
@@ -31,9 +31,9 @@ class DeployButton : MenuButton!string {
     dullShade = Color(0.9, 0.9, 0.9, 0.6)
   }
 
-  this(string unitKey, Vector2i pos) {
+  this(string unitKey, Vector2i pos, Action onClick) {
     _animation = new Animation(unitKey, "idle", Animation.Repeat.loop);
-    super(unitKey, new Sprite(buttonName), pos);
+    super(unitKey, new Sprite(buttonName), pos, onClick);
     auto data = getUnitData(unitKey);
     addChild(new Icon(_animation, spriteOffset));
     addChild(new TextBox(data.name, _font, nameOffset));
