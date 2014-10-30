@@ -60,6 +60,10 @@ class InputManager {
     return Vector2i(_curMouseState.x, _curMouseState.y);
   }
 
+  Vector2i prevMousePos() {
+    return Vector2i(_prevMouseState.x, _prevMouseState.y);
+  }
+
   private:
   bool keyHeld(Keymap buttons) {
     return buttons.any!(key => al_key_down(&_curKeyboardState, key));

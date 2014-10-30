@@ -27,6 +27,8 @@ class DeployButton : MenuButton!string {
     costOffset   = Vector2i(172, 10),
     spriteOffset = Vector2i(0, 0),
     nameOffset   = Vector2i(48, 4),
+    brightShade = Color.white,
+    dullShade = Color(0.9, 0.9, 0.9, 0.5)
   }
 
   this(string unitKey, Vector2i pos) {
@@ -35,6 +37,14 @@ class DeployButton : MenuButton!string {
     addChild(new Icon(new Animation(unitKey, "idle", Animation.Repeat.loop), spriteOffset));
     addChild(new TextBox(data.name, _font, nameOffset));
     addChild(new TextBox(Unit.basicUnitDeployCost, _font, costOffset));
+  }
+
+  override void onMouseEnter() {
+    sprite.tint = brightShade;
+  }
+
+  override void onMouseLeave() {
+    sprite.tint = dullShade;
   }
 }
 

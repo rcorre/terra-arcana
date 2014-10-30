@@ -49,7 +49,7 @@ class Scene(T) : IScene {
       _inputManager.update(time);
       _entityManager.updateEntities(time);
       _stateMachine.update(time, _inputManager);
-      _guiManager.update(time);
+      _guiManager.update(time, input);
       foreach(sys ; _systems) {
         if (sys.active) {
           sys.update(time, input);

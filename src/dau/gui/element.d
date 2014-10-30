@@ -27,6 +27,7 @@ class GUIElement {
   this(Rect2i area) {
     _area = area;
     _children = new ChildList;
+    onMouseLeave(); // assume mouse not in area to begin with
   }
 
   @property {
@@ -42,7 +43,8 @@ class GUIElement {
     auto children() { return _children[]; }
   }
 
-  bool onHover() { return false; } // return false to indicate event not handled
+  void onMouseEnter() {}
+  void onMouseLeave() {}
   bool onClick() { return false; } // return false to indicate event not handled
 
   void update(float time) {
@@ -75,15 +77,19 @@ class GUIElement {
       }
     }
 
-    bool handleMouseHover(Vector2i pos) {
-      if (!area.contains(pos)) { return false; }
-      auto localPos = pos - area.topLeft;
-      foreach(child ; children) {
-        if (child.handleMouseHover(localPos)) {
-          return true;
-        }
+    void handleMouseHover(Vector2i pos, Vector2i prevPos) {
+      if (area.contains(pos) && !area.contains(prevPos)) {
+        onMouseEnter();
       }
-      return onHover();
+      else if (!area.contains(pos) && area.contains(prevPos)) {
+        onMouseLeave();
+      }
+
+      auto localPos = pos - area.topLeft;
+      auto prevLocalPos = prevPos - area.topLeft;
+      foreach(child ; children) {
+        child.handleMouseHover(localPos, prevLocalPos);
+      }
     }
 
     bool handleMouseClick(Vector2i pos) {
