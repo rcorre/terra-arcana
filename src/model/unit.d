@@ -229,6 +229,8 @@ class UnitData {
   }
 }
 
+const(UnitData) getUnitData(string key) { return _data[key]; }
+
 private:
 UnitData[string] _data;
 

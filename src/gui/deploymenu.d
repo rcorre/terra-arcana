@@ -24,11 +24,16 @@ class DeployMenu : Menu!(string, DeployButton) {
 
 class DeployButton : MenuButton!string {
   private enum {
-    costOffset = Vector2i(172, 10),
+    costOffset   = Vector2i(172, 10),
+    spriteOffset = Vector2i(0, 0),
+    nameOffset   = Vector2i(48, 4),
   }
 
   this(string unitKey, Vector2i pos) {
     super(unitKey, new Sprite(buttonName), pos);
+    auto data = getUnitData(unitKey);
+    addChild(new Icon(new Animation(unitKey, "idle", Animation.Repeat.loop), spriteOffset));
+    addChild(new TextBox(data.name, _font, nameOffset));
     addChild(new TextBox(Unit.basicUnitDeployCost, _font, costOffset));
   }
 }
@@ -36,5 +41,5 @@ class DeployButton : MenuButton!string {
 Font _font;
 
 static this() {
-  onInit({ _font = Font("Mecha", 16); });
+  onInit({ _font = Font("Mecha", 20); });
 }
