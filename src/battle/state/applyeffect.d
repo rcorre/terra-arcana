@@ -42,6 +42,7 @@ class ApplyEffect : State!Battle {
             break;
           case slow:
             _target.applySlow(_action.power);
+            unitInfo.animateEffect("slow", _target.slow);
             break;
           default:
             assert(0, "no code to handle effect type");
