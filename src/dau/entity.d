@@ -22,6 +22,8 @@ class Entity {
 
   @property {
     auto area() { return _area; }
+    auto sprite() { return _sprite; }
+
     auto center() { return _area.center; }
     void center(Vector2i pos) { _area.center = pos; }
   }

@@ -21,6 +21,7 @@ class MoveUnit : State!Battle {
     void enter(Battle b) {
       b.activePlayer.consumeCommandPoints(1);
       b.updateBattlePanel();
+      _unit.sprite.depth += 1;  // make sure it passes over other units
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -41,6 +42,7 @@ class MoveUnit : State!Battle {
 
     void exit(Battle b) {
       _unit.tile = b.map.tileAt(_unit.center);
+      _unit.sprite.depth -= 1;  // return to normal depth
     }
   }
 
