@@ -191,11 +191,11 @@ class Unit : Entity {
 
   int computeMoveCost(Tile tile) {
     auto other = cast(Unit) tile.entity;
-    if (other !is null && other.team != team) {
-      return Tile.unreachable;
-    }
     if (hasTrait(UnitData.Trait.flight)) { // flight costs 1 for all tiles
       return isSlowed ? 2 : 1;
+    }
+    if (other !is null && other.team != team) {
+      return Tile.unreachable;
     }
     return tile.moveCost * (isSlowed ? 2 : 1);
   }
