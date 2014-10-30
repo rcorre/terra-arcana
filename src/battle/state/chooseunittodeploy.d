@@ -19,7 +19,13 @@ class ChooseUnitToDeploy : State!Battle {
       b.disableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
-      b.gui.addElement(new DeployMenu(_player.faction.standardUnitKeys, Vector2i.zero));
+      auto deploy = delegate(string key) {
+        b.spawnUnit(key, _player, _tile);
+        _menu.active = false;
+        b.states.popState();
+      };
+      _menu = new DeployMenu(_player.faction.standardUnitKeys, Vector2i.zero, deploy);
+      b.gui.addElement(_menu);
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -32,7 +38,8 @@ class ChooseUnitToDeploy : State!Battle {
   }
 
   private:
-  Tile _tile;
-  Animation _cursor;
-  Player _player;
+  Tile       _tile;
+  Animation  _cursor;
+  Player     _player;
+  GUIElement _menu;
 }
