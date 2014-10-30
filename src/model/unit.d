@@ -38,6 +38,7 @@ class Unit : Entity {
     _damageSound   = new SoundSample("damage");
     _noDamageSound = new SoundSample("no-damage");
     _healSound     = new SoundSample("heal");
+    _evadeSound    = new SoundSample("evade");
     startTurn();
   }
 
@@ -138,6 +139,7 @@ class Unit : Entity {
     assert(_evade > 0, "unit %s should not be evading with evade = %d".format(name, _evade));
     _evade -= 1;
     _sprite.flash(flashTime, dodgeFlashColor);
+    _evadeSound.play();
   }
 
   /// return first action useable on target, or null if no useable actions
@@ -204,7 +206,7 @@ class Unit : Entity {
   int _hp, _ap;
   int _evade, _armor; // current evade and armor stats
   int _toxin, _slow;
-  SoundSample _damageSound, _noDamageSound, _healSound;
+  SoundSample _damageSound, _noDamageSound, _healSound, _evadeSound;
 
   @property auto animation() { return cast(Animation) _sprite; }
 
