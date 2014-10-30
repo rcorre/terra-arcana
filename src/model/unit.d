@@ -53,12 +53,14 @@ class Unit : Entity {
       _tile = newTile;
       _tile.entity = this;
       center = tile.center;
+      // reset cover bonus unless have guerilla trait and on tile with cover
+      _coverBonus = (hasTrait(UnitData.Trait.guerilla) && newTile.cover > 0) ? 1 : 0;
     }
 
     int hp() { return _hp; }
     int ap() { return _ap; }
 
-    int evade() { return _evade; }
+    int evade() { return _evade + _coverBonus; }
     int armor() { return _armor; }
     int toxin() { return _toxin; }
     int slow()  { return _slow; }
@@ -70,6 +72,9 @@ class Unit : Entity {
 
   void endTurn() {
     _slow = max(0, _slow - 1);
+    if (!hasTrait(UnitData.Trait.flight)) { // no cover bonus for flying units
+      _coverBonus = min(_coverBonus + 1, tile.cover);
+    }
   }
 
   void startTurn() {
@@ -137,7 +142,12 @@ class Unit : Entity {
 
   void dodgeAttack() {
     assert(_evade > 0, "unit %s should not be evading with evade = %d".format(name, _evade));
-    _evade -= 1;
+    if (_coverBonus > 0) {
+      --_coverBonus;
+    }
+    else {
+      --_evade;
+    }
     _sprite.flash(flashTime, dodgeFlashColor);
     _evadeSound.play();
   }
@@ -208,6 +218,7 @@ class Unit : Entity {
   Tile _tile;
   int _hp, _ap;
   int _evade, _armor; // current evade and armor stats
+  int _coverBonus;    // evasion granted by cover
   int _toxin, _slow;
   SoundSample _damageSound, _noDamageSound, _healSound, _evadeSound;
 
