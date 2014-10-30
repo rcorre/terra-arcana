@@ -131,6 +131,7 @@
     "maxAp"      : 5,
     "baseArmor"  : 0,
     "baseEvade"  : 1,
+    "traits"     : ["guerilla"],
 
     "action1": {
       "name"        : "Bite",
@@ -164,6 +165,7 @@
     "maxAp"      : 4,
     "baseArmor"  : 0,
     "baseEvade"  : 1,
+    "traits"     : ["flight"],
 
     "action1": {
       "name"        : "Claw",
@@ -228,6 +230,7 @@
     "maxAp"      : 3,
     "baseArmor"  : 0,
     "baseEvade"  : 0,
+    "traits"     : ["warp"],
 
     "action1": {
       "name"        : "Thorns",

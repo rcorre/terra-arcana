@@ -45,6 +45,9 @@ class UnitInfoGUI : GUIElement {
       addChild(new ActionInfo(actionBarOffset2, unit.action2));
       addChild(new Icon(new Animation(unit.key, "idle", Animation.Repeat.loop), spriteOffset));
       addChild(new TextBox(unit.name, _font, nameOffset));
+      foreach(trait ; unit.traits) {
+        addEffectIcon(trait.to!string);
+      }
       if (unit.isToxic) {
         addEffectIcon("toxin", unit.toxin);
       }
@@ -72,8 +75,11 @@ class UnitInfoGUI : GUIElement {
     icon.flash(effectFlashTime, effectFlashColor);
   }
 
-  void addEffectIcon(string iconName) {
-    // TODO: use for inherent traits
+  auto addEffectIcon(string iconName) {
+    auto sprite = new Sprite(iconSheetName, iconName);
+    auto icon = addChild(new Icon(sprite, _nextEffectOffset));
+    _nextEffectOffset.x += icon.width;
+    return icon;
   }
 
   auto addEffectIcon(string iconName, int val) {

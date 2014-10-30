@@ -221,6 +221,12 @@ class UnitData {
     elite
   }
 
+  enum Trait {
+    guerilla, /// get immediate cover bonus upon entering tile with cover
+    flight,   /// ignore most tile move costs
+    warp,     /// ignore some tile move costs
+  }
+
   @jsonize {
     string name;
     Tier tier;
@@ -229,6 +235,7 @@ class UnitData {
     int baseArmor;
     int baseEvade;
     UnitAction action1, action2;
+    Trait[] traits;
   }
 
   @property int deployCost() const {
@@ -240,6 +247,10 @@ class UnitData {
       case elite:
         return 4;
     }
+  }
+
+  bool hasTrait(Trait trait) {
+    return traits.canFind(trait);
   }
 }
 
