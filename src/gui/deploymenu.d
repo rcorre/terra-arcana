@@ -16,6 +16,9 @@ class DeployMenu : Menu!(string, DeployButton) {
   this(const string[] unitKeys, Vector2i offset) {
     // TODO: choose corner of unit based on screen positioning
     super(new Sprite(bgName), offset, firstButtonOffset);
+    foreach(key ; unitKeys) {
+      addEntry(key);
+    }
   }
 }
 
@@ -26,6 +29,7 @@ class DeployButton : MenuButton!string {
 
   this(string unitKey, Vector2i pos) {
     super(unitKey, new Sprite(buttonName), pos);
+    addChild(new TextBox(Unit.basicUnitDeployCost, _font, costOffset));
   }
 }
 

@@ -20,6 +20,12 @@ private enum {
 }
 
 class Unit : Entity {
+  enum {
+    basicUnitDeployCost = 2,
+    advancedUnitDeployCost = 3,
+    eliteUnitDeployCost = 4
+  }
+
   const int team;
   const UnitData data;
   const string key;
@@ -215,7 +221,6 @@ class UnitData {
 
   @jsonize {
     string name;
-    int deployCost;
     int maxHp;
     int maxAp;
     int baseArmor;
