@@ -33,9 +33,13 @@ class Camera {
     int clipHeight() { return cast(int) _area.height; }
   }
 
-  void move(T)(Vector2!T disp) {
+  /// move camera by disp, but not outside its bounds
+  /// return the distance moved
+  auto move(T)(Vector2!T disp) {
+    auto prevPos = area.center;
     _area.center = _area.center + cast(Vector2f) disp;
     _area.keepInside(_bounds);
+    return _area.center - prevPos;
   }
 
   void place(T)(Vector!T center) {

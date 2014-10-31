@@ -9,10 +9,6 @@ import battle.state.checkunitdestruction;
 import battle.system.all;
 import gui.battlepanel;
 
-private enum {
-  cameraScrollSpeed = 12,
-}
-
 class Battle : Scene!Battle {
   //this(Player[] players) { // TODO: load players from previous state
   this() {
