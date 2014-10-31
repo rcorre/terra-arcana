@@ -5,6 +5,7 @@ import dau.all;
 import model.all;
 import battle.state.playerturn;
 import battle.state.pcturn;
+import battle.state.checkunitdestruction;
 import battle.system.all;
 import gui.battlepanel;
 
@@ -128,6 +129,9 @@ package:
     }
 
     player.beginTurn();
+    foreach(unit ; player.units) { // check if any units were killed by poison
+      states.pushState(new CheckUnitDestruction(unit));
+    }
     updateBattlePanel();
   }
 
