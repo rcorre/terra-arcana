@@ -137,13 +137,25 @@ package:
   }
 
   void captureObelisk(Obelisk obelisk, int team) {
-    auto player = _players.find!(x => x.teamIdx == team).front;
+    auto player = playerByTeam(team);
     if (obelisk.team != 0) { // was not neutral before
       auto prevOwner = _players.find!(x => x.teamIdx == obelisk.team).front;
       prevOwner.maxCommandPoints -= obelisk.commandBonus;
     }
     obelisk.setTeam(player.teamIdx, player.faction.name);
     player.maxCommandPoints += obelisk.commandBonus;
+  }
+
+  void destroyUnit(Unit unit) {
+    auto player = playerByTeam(unit.team);
+    player.destroyUnit(unit);
+    entities.removeEntity(unit);
+  }
+
+  auto playerByTeam(int team) {
+    auto r = _players.find!(x => x.teamIdx == team);
+    assert(!r.empty, "no player with teamIdx = %d".format(team));
+    return r.front;
   }
 
   private:

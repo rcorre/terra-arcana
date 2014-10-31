@@ -17,6 +17,8 @@ private enum {
   shakeOffset = Vector2i(4, 0),
   shakeSpeed = 30,
   shakeRepetitions = 4,
+  destroyFadeTime = 0.5f,
+  destroyFadeSpectrum = [Color.black, Color.clear]
 }
 
 class Unit : Entity {
@@ -39,6 +41,7 @@ class Unit : Entity {
     _noDamageSound = new SoundSample("no-damage");
     _healSound     = new SoundSample("heal");
     _evadeSound    = new SoundSample("evade");
+    _destroySound  = new SoundSample("destroy-unit");
     startTurn();
   }
 
@@ -210,6 +213,11 @@ class Unit : Entity {
     return tile.moveCost * (isSlowed ? 2 : 1);
   }
 
+  void destroy() {
+    sprite.fade(destroyFadeTime, destroyFadeSpectrum);
+    _destroySound.play();
+  }
+
   override void update(float time) {
     super.update(time);
   }
@@ -220,7 +228,7 @@ class Unit : Entity {
   int _evade, _armor; // current evade and armor stats
   int _coverBonus;    // evasion granted by cover
   int _toxin, _slow;
-  SoundSample _damageSound, _noDamageSound, _healSound, _evadeSound;
+  SoundSample _damageSound, _noDamageSound, _healSound, _evadeSound, _destroySound;
 
   @property auto animation() { return cast(Animation) _sprite; }
 
