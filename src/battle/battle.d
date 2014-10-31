@@ -17,7 +17,7 @@ class Battle : Scene!Battle {
   //this(Player[] players) { // TODO: load players from previous state
   this() {
     _players = [
-      new Player(getFaction("Human"), 1, true,  baseCommandPoints),
+      new Player(getFaction("Federation"), 1, true,  baseCommandPoints),
       new Player(getFaction("Gaia"),  2, false, baseCommandPoints)
     ];
     System!Battle[] systems = [

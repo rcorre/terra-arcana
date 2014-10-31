@@ -5,6 +5,7 @@
   <terraintypes>
    <terrain name="ground" tile="0"/>
    <terrain name="chasm" tile="12"/>
+   <terrain name="cliff" tile="36"/>
   </terraintypes>
   <tile id="0" terrain="0,0,0,0">
    <properties>
@@ -109,6 +110,15 @@
     <property name="name" value="Ground"/>
    </properties>
   </tile>
+  <tile id="27" terrain="0,0,0,2"/>
+  <tile id="28" terrain="0,0,2,2"/>
+  <tile id="29" terrain="0,0,2,0"/>
+  <tile id="35" terrain="0,2,0,2"/>
+  <tile id="36" terrain="2,2,2,2"/>
+  <tile id="37" terrain="2,0,2,0"/>
+  <tile id="43" terrain="0,2,0,0"/>
+  <tile id="44" terrain="2,2,0,0"/>
+  <tile id="45" terrain="2,0,0,0"/>
  </tileset>
  <layer name="terrain" width="26" height="26">
   <data>

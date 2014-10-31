@@ -8,7 +8,7 @@
   },
 
   {
-    "name": "Human",
+    "name": "Federation",
     "description": "",
     "standardUnitKeys": ["assault", "medic", "sniper", "guardian"],
     "advancedUnitKeys": [],
