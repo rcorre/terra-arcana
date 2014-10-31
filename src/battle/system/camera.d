@@ -4,7 +4,7 @@ import dau.all;
 import battle.battle;
 import dau.graphics.camera;
 
-private enum scrollSpeed = 500f;
+private enum scrollSpeed = 700f;
 
 class BattleCameraSystem : System!Battle {
   this(Battle b) {

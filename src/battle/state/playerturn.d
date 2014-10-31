@@ -1,6 +1,6 @@
 module battle.state.playerturn;
 
-import std.algorithm;
+import std.algorithm, std.array;
 import dau.all;
 import model.all;
 import battle.battle;
@@ -21,6 +21,7 @@ class PlayerTurn : State!Battle {
       b.lockLeftUnitInfo = false;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
+      _unitJumpList = bicycle(_player.moveableUnits.array);
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -38,6 +39,14 @@ class PlayerTurn : State!Battle {
       else if (input.skip) {
         b.startNewTurn;
       }
+      else if (input.next) {
+        auto unit = _unitJumpList.advance();
+        b.getSystem!BattleCameraSystem.autoScrollTo(unit.center);
+      }
+      else if (input.prev) {
+        auto unit = _unitJumpList.reverse();
+        b.getSystem!BattleCameraSystem.autoScrollTo(unit.center);
+      }
     }
 
     void draw(Battle b, SpriteBatch sb) {
@@ -54,4 +63,5 @@ class PlayerTurn : State!Battle {
   TileHoverSystem _tileHoverSys;
   Animation _cursor;
   Player _player;
+  Bicycle!(Unit[]) _unitJumpList;
 }
