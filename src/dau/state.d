@@ -75,13 +75,13 @@ class StateMachine(T) {
     while (!currentState._active) { // call enter() is state is returning to activity
       currentState._active = true;
       if (_prevState !is null) {
-        _prevState.exit(_obj);
         _prevState._active = false;
+        _prevState.exit(_obj);
       }
       _prevState = currentState;
       if (!currentState._started) {
-        currentState.start(_obj);
         currentState._started = true;
+        currentState.start(_obj);
       }
       currentState.enter(_obj);
     }
