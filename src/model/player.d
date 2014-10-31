@@ -11,11 +11,10 @@ class Player {
   const int teamIdx;
   int mana;
 
-  this(const Faction faction, int teamIdx, bool isHuman, int baseCommandPoints) {
+  this(const Faction faction, int teamIdx, bool isHuman) {
     this.faction = faction;
     this.teamIdx = teamIdx;
     this.isHuman = isHuman;
-    _maxCommandPoints = baseCommandPoints;
   }
 
   @property {

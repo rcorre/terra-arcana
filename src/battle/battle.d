@@ -10,15 +10,14 @@ import gui.battlepanel;
 
 private enum {
   cameraScrollSpeed = 12,
-  baseCommandPoints = 6
 }
 
 class Battle : Scene!Battle {
   //this(Player[] players) { // TODO: load players from previous state
   this() {
     _players = [
-      new Player(getFaction("Federation"), 1, true,  baseCommandPoints),
-      new Player(getFaction("Gaia"),  2, false, baseCommandPoints)
+      new Player(getFaction("Federation"), 1, true),
+      new Player(getFaction("Gaia"),  2, false)
     ];
     System!Battle[] systems = [
       new TileHoverSystem(this),
