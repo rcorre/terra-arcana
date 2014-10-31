@@ -78,7 +78,7 @@ class MapData {
           auto tileset = gidToTileset(obj.gid);
           data.y = obj.y;
           data.x = obj.x;
-          data.row = obj.y / tileset.tileheight; // TODO: is tiled off by 1? I think it is...
+          data.row = obj.y / tileset.tileheight - 1; // tiled is off by 1
           data.col = obj.x / tileset.tilewidth;
           data.tilesetIdx = obj.gid - tileset.firstgid;
           data.tilesetName = tileset.name;
