@@ -20,7 +20,7 @@ class Player {
 
   @property {
     int commandPoints() { return _commandPoints; }
-    int maxCommandPoints() { return _maxCommandPoints; }
+    ref int maxCommandPoints() { return _maxCommandPoints; }
 
     auto units() { return _units[]; }
     auto moveableUnits() { return _units.filter!(x => x.canAct); }

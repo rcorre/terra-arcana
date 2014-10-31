@@ -28,7 +28,6 @@ class Battle : Scene!Battle {
     _panel = new BattlePanel;
     gui.addElement(_panel);
     _turnCycle = cycle(_players);
-    startNewTurn;
   }
 
   override {
@@ -45,16 +44,11 @@ class Battle : Scene!Battle {
             break;
           case "obelisk":
             auto pos = map.tileAt(obj.row, obj.col).center;
-            string faction;
-            if (team == 0) {
-              faction = "neutral";
+            auto obelisk = new Obelisk(pos, obj.row, obj.col);
+            entities.registerEntity(obelisk);
+            if (team != 0) {
+              captureObelisk(obelisk, team);
             }
-            else {
-              auto player = _players.find!(x => x.teamIdx == team).front;
-              faction = player.faction.name;
-            }
-            auto obelisk = entities.registerEntity(new Obelisk(pos, team, faction));
-            map.tileAt(obj.row, obj.col).feature = obelisk;
             break;
           default:
             assert(0, "invalid object named " ~ obj.objectName);
@@ -65,6 +59,7 @@ class Battle : Scene!Battle {
       spawnUnit("assault", _players[0], map.tileAt(3,3));
       spawnUnit("wyvern", _players[1], map.tileAt(3,5));
       spawnUnit("treant", _players[1], map.tileAt(5,3));
+      startNewTurn;
     }
 
     void update(float time) {
@@ -123,14 +118,33 @@ package:
     _turnCycle.popFront;
     assert(states.empty, "extra states on stack when starting new turn");
     states.pushState(player.isHuman ? new PlayerTurn(player) : new PCTurn(player));
-    player.beginTurn();
     _activePlayer = player;
+
+    foreach(obelisk ; entities.findEntities("obelisk").map!(x => cast(Obelisk) x)) {
+      auto tile = map.tileAt(obelisk.row, obelisk.col);
+      auto unit = cast(Unit) tile.entity;
+      if (unit !is null && unit.team != obelisk.team) { // switch obelisk team
+        captureObelisk(obelisk, unit.team);
+      }
+    }
+
+    player.beginTurn();
     updateBattlePanel();
   }
 
   void updateBattlePanel() {
     _panel.setCommandCounter(_activePlayer.commandPoints, _activePlayer.maxCommandPoints);
     _panel.setManaCounter(_activePlayer.mana);
+  }
+
+  void captureObelisk(Obelisk obelisk, int team) {
+    auto player = _players.find!(x => x.teamIdx == team).front;
+    if (obelisk.team != 0) { // was not neutral before
+      auto prevOwner = _players.find!(x => x.teamIdx == obelisk.team).front;
+      prevOwner.maxCommandPoints -= obelisk.commandBonus;
+    }
+    obelisk.setTeam(player.teamIdx, player.faction.name);
+    player.maxCommandPoints += obelisk.commandBonus;
   }
 
   private:
