@@ -42,8 +42,9 @@ class Entity {
 }
 
 class EntityManager {
-  void registerEntity(Entity entity) {
+  auto registerEntity(Entity entity) {
     _entityMap[entity.tag] ~= entity;
+    return entity;
   }
 
   auto findEntities(string tag) {

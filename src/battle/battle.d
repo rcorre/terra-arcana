@@ -37,8 +37,28 @@ class Battle : Scene!Battle {
       auto mapData = loadTiledMap(mapPath);
       map = new TileMap(mapData, entities);
       entities.registerEntity(map);
-      foreach(obj ; mapData.layerTileData("spawn")) {
-        _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), obj.objectType.to!int);
+      foreach(obj ; mapData.layerTileData("feature")) {
+        int team = obj.objectType.to!int;
+        switch(obj.objectName) {
+          case "spawn":
+            _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), team);
+            break;
+          case "obelisk":
+            auto pos = map.tileAt(obj.row, obj.col).center;
+            string faction;
+            if (team == 0) {
+              faction = "neutral";
+            }
+            else {
+              auto player = _players.find!(x => x.teamIdx == team).front;
+              faction = player.faction.name;
+            }
+            auto obelisk = entities.registerEntity(new Obelisk(pos, team, faction));
+            map.tileAt(obj.row, obj.col).feature = obelisk;
+            break;
+          default:
+            assert(0, "invalid object named " ~ obj.objectName);
+        }
       }
       camera.area = Rect2f(0, 0, Settings.screenW, Settings.screenH - _panel.area.height);
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);

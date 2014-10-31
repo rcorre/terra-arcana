@@ -800,10 +800,14 @@
    <tile gid="1"/>
   </data>
  </layer>
- <objectgroup name="spawn">
-  <object name="spawn" type="0" gid="18" x="512" y="704"/>
-  <object name="spawn" type="0" gid="18" x="448" y="704"/>
-  <object name="spawn" type="1" gid="18" x="448" y="448"/>
-  <object name="spawn" type="1" gid="18" x="512" y="448"/>
+ <objectgroup name="feature">
+  <object name="spawn" type="1" gid="18" x="512" y="704"/>
+  <object name="spawn" type="1" gid="18" x="448" y="704"/>
+  <object name="spawn" type="2" gid="18" x="448" y="448"/>
+  <object name="spawn" type="2" gid="18" x="512" y="448"/>
+  <object name="obelisk" type="0" gid="9" x="512" y="608"/>
+  <object name="obelisk" type="0" gid="9" x="512" y="544"/>
+  <object name="obelisk" type="1" gid="10" x="480" y="704"/>
+  <object name="obelisk" type="2" gid="10" x="480" y="448"/>
  </objectgroup>
 </map>

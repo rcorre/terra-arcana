@@ -14,7 +14,7 @@
         {
          "draworder":"topdown",
          "height":0,
-         "name":"spawn",
+         "name":"feature",
          "objects":[
                 {
                  "gid":18,
@@ -25,7 +25,7 @@
 
                     },
                  "rotation":0,
-                 "type":"0",
+                 "type":"1",
                  "visible":true,
                  "width":0,
                  "x":512,
@@ -40,7 +40,7 @@
 
                     },
                  "rotation":0,
-                 "type":"0",
+                 "type":"1",
                  "visible":true,
                  "width":0,
                  "x":448,
@@ -55,7 +55,7 @@
 
                     },
                  "rotation":0,
-                 "type":"1",
+                 "type":"2",
                  "visible":true,
                  "width":0,
                  "x":448,
@@ -70,10 +70,70 @@
 
                     },
                  "rotation":0,
-                 "type":"1",
+                 "type":"2",
                  "visible":true,
                  "width":0,
                  "x":512,
+                 "y":448
+                }, 
+                {
+                 "gid":9,
+                 "height":0,
+                 "name":"obelisk",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":0,
+                 "x":512,
+                 "y":608
+                }, 
+                {
+                 "gid":9,
+                 "height":0,
+                 "name":"obelisk",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":0,
+                 "x":512,
+                 "y":544
+                }, 
+                {
+                 "gid":10,
+                 "height":0,
+                 "name":"obelisk",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"1",
+                 "visible":true,
+                 "width":0,
+                 "x":480,
+                 "y":704
+                }, 
+                {
+                 "gid":10,
+                 "height":0,
+                 "name":"obelisk",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"2",
+                 "visible":true,
+                 "width":0,
+                 "x":480,
                  "y":448
                 }],
          "opacity":1,
@@ -111,6 +171,10 @@
                 {
                  "name":"chasm",
                  "tile":12
+                }, 
+                {
+                 "name":"cliff",
+                 "tile":36
                 }],
          "tileheight":32,
          "tileproperties":
@@ -231,13 +295,49 @@
                 {
                  "terrain":[1, 0, 0, 0]
                 },
+             "27":
+                {
+                 "terrain":[0, 0, 0, 2]
+                },
+             "28":
+                {
+                 "terrain":[0, 0, 2, 2]
+                },
+             "29":
+                {
+                 "terrain":[0, 0, 2, 0]
+                },
              "3":
                 {
                  "terrain":[0, 0, 0, 1]
                 },
+             "35":
+                {
+                 "terrain":[0, 2, 0, 2]
+                },
+             "36":
+                {
+                 "terrain":[2, 2, 2, 2]
+                },
+             "37":
+                {
+                 "terrain":[2, 0, 2, 0]
+                },
              "4":
                 {
                  "terrain":[0, 0, 1, 1]
+                },
+             "43":
+                {
+                 "terrain":[0, 2, 0, 0]
+                },
+             "44":
+                {
+                 "terrain":[2, 2, 0, 0]
+                },
+             "45":
+                {
+                 "terrain":[2, 0, 0, 0]
                 },
              "5":
                 {

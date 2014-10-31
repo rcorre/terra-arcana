@@ -46,8 +46,9 @@
   {
     "sheets" : ["obelisk"],
     "defaultDepth": 1,
-    "frameSize": 32
-    "rows": ["Neutral", "Federation", "Gaia"]
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "rows": ["neutral", "Gaia", "Federation"]
   }
 
 ]

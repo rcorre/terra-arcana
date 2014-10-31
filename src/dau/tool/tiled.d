@@ -14,6 +14,7 @@ auto loadTiledMap(string path) {
 }
 
 class TileData {
+  int x, y;
   int row, col;
   int tilesetIdx;
   string tilesetName;
@@ -75,6 +76,8 @@ class MapData {
         if (isObjectLayer) {
           auto obj = _layer.objects[_idx];
           auto tileset = gidToTileset(obj.gid);
+          data.y = obj.y;
+          data.x = obj.x;
           data.row = obj.y / tileset.tileheight; // TODO: is tiled off by 1? I think it is...
           data.col = obj.x / tileset.tilewidth;
           data.tilesetIdx = obj.gid - tileset.firstgid;

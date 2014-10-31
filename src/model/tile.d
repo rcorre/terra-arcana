@@ -13,6 +13,16 @@ class Tile : Entity {
     unreachable = 9999
   }
 
+  const {
+    string name;
+    int row, col;
+    int cover;
+    int moveCost;
+  }
+
+  Entity entity; /// a unit or a wall
+  Entity feature; /// an obelisk, mana pool, or spawn point
+
   this(TileData data) {
     auto pos = Vector2i(data.col, data.row) * size + Vector2i(size, size) / 2;
     auto sprite = new Sprite(getTexture(data.tilesetName), data.tilesetIdx);
@@ -27,12 +37,4 @@ class Tile : Entity {
   int distance(Tile other) {
     return abs(row - other.row) + abs(col - other.col);
   }
-
-  const {
-    string name;
-    int row, col;
-    int cover;
-    int moveCost;
-  }
-  Entity entity;
 }
