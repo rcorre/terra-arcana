@@ -17,8 +17,6 @@ private enum {
   shakeOffset = Vector2i(4, 0),
   shakeSpeed = 30,
   shakeRepetitions = 4,
-  destroyFadeTime = 0.5f,
-  destroyFadeSpectrum = [Color.black, Color.clear]
 }
 
 class Unit : Entity {
@@ -68,7 +66,8 @@ class Unit : Entity {
     int toxin() { return _toxin; }
     int slow()  { return _slow; }
 
-    bool canAct()   { return _ap > 0; }
+    bool canAct()   { return _ap > 0 && isAlive; }
+    bool isAlive()  { return _hp > 0; }
     bool isSlowed() { return _slow > 0; }
     bool isToxic()  { return _toxin > 0; }
   }
@@ -213,8 +212,8 @@ class Unit : Entity {
     return tile.moveCost * (isSlowed ? 2 : 1);
   }
 
-  void destroy() {
-    sprite.fade(destroyFadeTime, destroyFadeSpectrum);
+  void destroy(float fadeTime, Color[] fadeSpectrum) {
+    sprite.fade(fadeTime, fadeSpectrum);
     _destroySound.play();
   }
 

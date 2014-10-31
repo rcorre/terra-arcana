@@ -16,7 +16,7 @@ class PerformCounter : State!Battle {
 
   override {
     void enter(Battle b) {
-      if (_actionNum == 0) { // no viable counter attack
+      if (_actionNum == 0 || !_actor.isAlive) { // no viable counter attack
         b.states.popState();
       }
       else {

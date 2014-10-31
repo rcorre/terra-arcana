@@ -8,6 +8,7 @@ import battle.system.all;
 import battle.state.performcounter;
 import battle.state.applyeffect;
 import battle.state.applybuff;
+import battle.state.checkunitdestruction;
 
 private enum apBarFadeDuration = 0.2f;
 
@@ -20,7 +21,7 @@ class PerformAction : State!Battle {
   }
 
   override {
-    void enter(Battle b) {
+    void start(Battle b) {
       b.disableSystem!TileHoverSystem;
       void delegate() onAnimationEnd = null;
       if (_actor.team == _target.team) {
@@ -31,6 +32,8 @@ class PerformAction : State!Battle {
       else { // offensive ability
         onAnimationEnd = delegate() {
           b.states.popState();
+          b.states.pushState(new CheckUnitDestruction(_actor));
+          b.states.pushState(new CheckUnitDestruction(_target));
           b.states.pushState(new PerformCounter(_target, _actor));
           for(int i = 0; i < _action.hits; ++i) {
             b.states.pushState(new ApplyEffect(_action, _target));
@@ -56,9 +59,6 @@ class PerformAction : State!Battle {
 
     void draw(Battle b, SpriteBatch sb) {
       sb.draw(_effectAnim, _target.center);
-    }
-
-    void exit(Battle b) { // TODO: move to start after getting
     }
   }
 
