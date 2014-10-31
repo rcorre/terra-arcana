@@ -21,9 +21,6 @@ class PlayerTurn : State!Battle {
       b.lockLeftUnitInfo = false;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
-      if (_player.moveableUnits.empty) {
-        b.startNewTurn;
-      }
     }
 
     void update(Battle b, float time, InputManager input) {
