@@ -1,0 +1,10 @@
+{
+  "balanced": {
+    "claimObelisk": 1.0,
+    "stealObelisk": 1.0,
+    "protectObelisk": 1.0,
+    "deploy": 1.0,
+    "move": 1.0,
+    "attack": 1.0
+  }
+}
