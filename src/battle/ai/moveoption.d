@@ -15,7 +15,7 @@ class MoveOption : AIOption {
   }
 
   override float computeScore(Battle b, AIProfile profile) {
-    float score = profile.move;
+    float score = profile.mobility;
     return score;
   }
 }

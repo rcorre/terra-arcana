@@ -1,0 +1,34 @@
+{
+  "assault": {
+    "wyvern": 1.0
+  },
+
+  "sniper": {
+    "treant": 1.0
+  },
+
+  "guardian": {
+    "hellblossom": 1.0
+  },
+
+  "medic": {
+    "all": -1
+  },
+
+  "hellblossom": {
+    "assault": 1.0
+  },
+
+  "wyvern": {
+    "guardian": 1.0,
+    "sniper": 0.5
+  },
+
+  "antlion": {
+    "sniper": 0.5
+  },
+
+  "treant": {
+    "assault": 1.0
+  }
+}
