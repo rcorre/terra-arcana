@@ -14,11 +14,11 @@ class Battle : Scene!Battle {
   this() {
     _players = [
       new Player(getFaction("Federation"), 1, true),
-      new Player(getFaction("Gaia"),  2, false)
+          new Player(getFaction("Gaia"),  2, false)
     ];
     System!Battle[] systems = [
       new TileHoverSystem(this),
-      new BattleCameraSystem(this),
+          new BattleCameraSystem(this),
     ];
     super(systems);
     _panel = new BattlePanel;
@@ -66,11 +66,14 @@ class Battle : Scene!Battle {
 package:
   TileMap map;
 
-  @property auto players() { return _players[]; }
-  @property auto activePlayer() { return _activePlayer; }
-  @property void lockLeftUnitInfo(bool val) {
-    _lockLeftUnitInfo = val;
-    displayUnitInfo(null);
+  @property {
+    auto players() { return _players[]; }
+    auto activePlayer() { return _activePlayer; }
+    auto obelisks() { return entities.findEntities("obelisk").map!(x => cast(Obelisk) x); }
+    void lockLeftUnitInfo(bool val) {
+      _lockLeftUnitInfo = val;
+      displayUnitInfo(null);
+    }
   }
 
   auto unitInfoFor(Unit unit) {
@@ -116,7 +119,7 @@ package:
     states.pushState(player.isHuman ? new PlayerTurn(player) : new PCTurn(player));
     _activePlayer = player;
 
-    foreach(obelisk ; entities.findEntities("obelisk").map!(x => cast(Obelisk) x)) {
+    foreach(obelisk ; obelisks) {
       auto tile = map.tileAt(obelisk.row, obelisk.col);
       auto unit = cast(Unit) tile.entity;
       if (unit !is null && unit.team != obelisk.team) { // switch obelisk team

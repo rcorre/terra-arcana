@@ -35,6 +35,10 @@ class Tile : Entity {
   }
 
   int distance(Tile other) {
-    return abs(row - other.row) + abs(col - other.col);
+    return distance(other.row, other.col);
+  }
+
+  int distance(int otherRow, int otherCol) {
+    return abs(row - otherRow) + abs(col - otherCol);
   }
 }

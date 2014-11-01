@@ -35,6 +35,15 @@ class AIPlayer {
   private:
   AIProfile _profile;
   Player    _player;
+  Unit[]    _enemyUnits;
+
+  void setEnemyUnits(Battle b) {
+    _enemyUnits = [];
+    auto others = b.players.filter!(x => x != _player);
+    foreach(other ; others) {
+      _enemyUnits ~= other.units;
+    }
+  }
 
   auto allOptions(Battle battle) {
     return deployOptions(battle) ~ allUnitOptions(battle);
@@ -73,14 +82,12 @@ class AIPlayer {
   auto actOptions(Unit unit, Battle battle) {
     AIOption[] options;
     auto others = battle.players.filter!(x => x != _player);
-    foreach(player ; others) {
-      foreach(other ; player.units) {
-        if (unit.canUseAction(1, other.tile)) {
-          options ~= new ActOption(unit, other, 1);
-        }
-        if (unit.canUseAction(2, other.tile)) {
-          options ~= new ActOption(unit, other, 2);
-        }
+    foreach(enemy ; _enemyUnits) {
+      if (unit.canUseAction(1, enemy.tile)) {
+        options ~= new ActOption(unit, enemy, 1);
+      }
+      if (unit.canUseAction(2, other.tile)) {
+        options ~= new ActOption(unit, enemy, 2);
       }
     }
     return options;
