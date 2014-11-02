@@ -10,7 +10,6 @@ import battle.ai.actoption;
 import battle.ai.moveoption;
 import battle.ai.deployoption;
 
-
 class AIPlayer : Player {
   this(const Faction faction, int teamIdx, AIProfile profile) {
     super(faction, teamIdx, false);

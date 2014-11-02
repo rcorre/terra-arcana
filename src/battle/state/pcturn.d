@@ -20,7 +20,7 @@ class PCTurn : State!Battle {
     void enter(Battle b) {
       b.disableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
-      if (_pc.moveableUnits.empty || _pc.commandPoints == 0) {
+      if (_pc.commandPoints == 0) {
         b.startNewTurn;
         return;
       }
