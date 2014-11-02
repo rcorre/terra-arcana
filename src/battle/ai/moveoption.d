@@ -1,5 +1,6 @@
 module battle.ai.moveoption;
 
+import dau.util.math;
 import battle.battle;
 import battle.pathfinder;
 import battle.ai.profile;
@@ -27,26 +28,19 @@ class MoveOption : AIOption {
   }
 
   static float computeTilePriority(Battle b, AIProfile profile, Tile tile, int team) {
-    float score = 0;
+    float[] scores;
     /*
     foreach(enemy ; _enemyUnits) {
       float distFactor = 1.0f / _target.distance(enemy.tile);
       score += getAdvantage(enemy.key, unit.key) * distFactor;
     }
     */
+
     foreach(obelisk ; b.obelisks) {
       float distFactor = 1.0f / tile.distance(obelisk.row, obelisk.col);
-      if (obelisk.team == team) {
-        score += profile.protectObelisk * distFactor;
-      }
-      else if (obelisk.team == 0) {
-        score += profile.claimObelisk * distFactor;
-      }
-      else {
-        score += profile.stealObelisk * distFactor;
-      }
+      scores ~= ((obelisk.team == team) ? profile.protectObelisk : profile.claimObelisk) * distFactor;
     }
-    return score * profile.mobility;
+    return scores.average * profile.mobility;
   }
 
   private:

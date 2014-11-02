@@ -1,7 +1,7 @@
 module dau.util.math;
 
 import std.math : ceil, floor;
-import std.algorithm : min, max;
+import std.algorithm : min, max, sum;
 
 /// add amount to start, but don't let it go past end
 T approach(T, U, V)(T start, U end, V amount) {
