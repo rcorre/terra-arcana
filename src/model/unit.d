@@ -143,11 +143,11 @@ class Unit : Entity {
   }
 
   void dodgeAttack() {
-    assert(_evade > 0, "unit %s should not be evading with evade = %d".format(name, _evade));
     if (_coverBonus > 0) {
       --_coverBonus;
     }
     else {
+      assert(_evade > 0, "unit %s should not be evading with evade = %d".format(name, _evade));
       --_evade;
     }
     _sprite.flash(flashTime, dodgeFlashColor);

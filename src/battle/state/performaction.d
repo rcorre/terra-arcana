@@ -23,6 +23,12 @@ class PerformAction : State!Battle {
   override {
     void start(Battle b) {
       b.disableSystem!TileHoverSystem;
+      // place actor in left unit info slot, target in right
+      b.lockLeftUnitInfo = false;
+      b.displayUnitInfo(_actor);
+      b.lockLeftUnitInfo = true;
+      b.displayUnitInfo(_target);
+      // trigger new state once animation ends
       void delegate() onAnimationEnd = null;
       if (_actor.team == _target.team) {
         onAnimationEnd = delegate() {
@@ -40,6 +46,7 @@ class PerformAction : State!Battle {
           }
         };
       }
+      // play animation and sound
       _actor.playAnimation("action%d".format(_actionNum), onAnimationEnd);
       _effectAnim = _actor.getActionAnimation(_actionNum);
       _actor.getActionSound(_actionNum).play();
