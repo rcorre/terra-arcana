@@ -18,6 +18,10 @@ T clamp(T, U, V)(T val, U lower, V upper) if (is(typeof(min(V.init, max(U.init, 
   return min(upper, max(lower, val));
 }
 
+T average(T)(T[] vals ...) if (is(typeof(((T.init + T.init) / T.init)) : T)) {
+  return vals.sum / vals.length;
+}
+
 int roundUp(real val) {
   return cast(int) ceil(val);
 }
