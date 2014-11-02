@@ -129,6 +129,11 @@ class Unit : Entity {
   }
 
   void restoreHealth(int amount) {
+    if (_toxin > 0) {amount = max(0, _toxin);
+      int toxinReduce = min(_toxin, amount);
+      _toxin -= toxinReduce;
+      amount -= toxinReduce;
+    }
     _hp = min(maxHp, hp + amount);
     _sprite.flash(flashTime, healFlashColor);
     _healSound.play();
