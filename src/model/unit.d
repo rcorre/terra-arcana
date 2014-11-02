@@ -213,6 +213,7 @@ class Unit : Entity {
   }
 
   void destroy(float fadeTime, Color[] fadeSpectrum) {
+    tile.entity = null;
     sprite.fade(fadeTime, fadeSpectrum);
     _destroySound.play();
   }

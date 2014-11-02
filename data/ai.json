@@ -1,10 +1,10 @@
 {
   "balanced": {
-    "claimObelisk": 20.0,
-    "stealObelisk": 5.0,
-    "protectObelisk": 2.0,
-    "deploy": 2.0,
-    "mobility": 0.6,
-    "agression": 8.0
+    "claimObelisk": 15.0,
+    "stealObelisk": 35.0,
+    "protectObelisk": 0.5,
+    "deploy": 1.5,
+    "mobility": 0.5,
+    "agression": 150.0
   }
 }
