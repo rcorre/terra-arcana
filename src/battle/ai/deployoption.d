@@ -20,7 +20,7 @@ class DeployOption : AIOption {
   }
 
   override float computeScore(Battle b, AIProfile profile) {
-    return _command - _allies.length;
+    return (_command - _allies.length) * profile.deploy;
   }
 
   string _unitKey; /// unit to deploy

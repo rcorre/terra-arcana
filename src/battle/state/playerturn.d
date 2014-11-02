@@ -22,6 +22,9 @@ class PlayerTurn : State!Battle {
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
       _unitJumpList = bicycle(_player.moveableUnits.array);
+      if (_player.commandPoints == 0) {
+        b.startNewTurn();
+      }
     }
 
     void update(Battle b, float time, InputManager input) {

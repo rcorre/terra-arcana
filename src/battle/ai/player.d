@@ -50,7 +50,7 @@ class AIPlayer : Player {
 
   auto deployOptions(Battle battle) {
     AIOption[] options;
-    foreach(tile ; battle.spawnPointsFor(teamIdx)) {
+    foreach(tile ; battle.spawnPointsFor(teamIdx).filter!(x => x.entity is null)) {
       foreach(key ; faction.standardUnitKeys) {
         auto data = getUnitData(key);
         if (data.deployCost <= commandPoints) {
@@ -82,7 +82,6 @@ class AIPlayer : Player {
 
   auto actOptions(Unit unit, Battle battle) {
     AIOption[] options;
-    auto others = battle.players.filter!(x => x != this);
     foreach(enemy ; _enemies) {
       if (unit.canUseAction(1, enemy.tile)) {
         options ~= new ActOption(unit, enemy, 1);
