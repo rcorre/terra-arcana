@@ -49,12 +49,13 @@ class AIPlayer : Player {
   }
 
   auto deployOptions(Battle battle) {
+    int excessCommand = maxCommandPoints - units.map!(x => x.deployCost).sum;
     AIOption[] options;
     foreach(tile ; battle.spawnPointsFor(teamIdx).filter!(x => x.entity is null)) {
       foreach(key ; faction.standardUnitKeys) {
         auto data = getUnitData(key);
         if (data.deployCost <= commandPoints) {
-          options ~= new DeployOption(key, tile, units, _enemies, maxCommandPoints);
+          options ~= new DeployOption(key, tile, units, _enemies, excessCommand);
         }
       }
     }

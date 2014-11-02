@@ -11,21 +11,23 @@ class DeployOption : AIOption {
     Tile target()    { return _target; }
   }
 
-  this(string unitKey, Tile target, Unit[] allies, Unit[] enemies, int command) {
+  /// excess command is maxCommand - units.sum(deployCost)
+  this(string unitKey, Tile target, Unit[] allies, Unit[] enemies, int excessCommand) {
     _unitKey = unitKey;
     _target  = target;
     _allies  = allies;
     _enemies = enemies;
-    _command = command;
+    _excessCommand = excessCommand;
   }
 
   override float computeScore(Battle b, AIProfile profile) {
-    return (_command - _allies.length) * profile.deploy;
+    int cost = getUnitData(_unitKey).deployCost;
+    return (_excessCommand - cost) + profile.deploy;
   }
 
   string _unitKey; /// unit to deploy
   Tile   _target;  /// tile to deploy on
   Unit[] _allies;
   Unit[] _enemies;
-  int    _command;
+  int    _excessCommand;
 }
