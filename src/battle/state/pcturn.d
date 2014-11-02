@@ -22,6 +22,7 @@ class PCTurn : State!Battle {
       b.enableSystem!BattleCameraSystem;
       if (_pc.moveableUnits.empty || _pc.commandPoints == 0) {
         b.startNewTurn;
+        return;
       }
 
       auto decision = _pc.getDecision(b);

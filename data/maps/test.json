@@ -453,14 +453,17 @@
                 },
              "27":
                 {
+                 "moveCost":"99",
                  "name":"Cliff"
                 },
              "28":
                 {
+                 "moveCost":"99",
                  "name":"Cliff"
                 },
              "29":
                 {
+                 "moveCost":"99",
                  "name":"Cliff"
                 },
              "3":
@@ -470,6 +473,7 @@
                 },
              "35":
                 {
+                 "moveCost":"99",
                  "name":"Cliff"
                 },
              "36":
@@ -478,6 +482,7 @@
                 },
              "37":
                 {
+                 "moveCost":"99",
                  "name":"Cliff"
                 },
              "4":
@@ -487,14 +492,17 @@
                 },
              "43":
                 {
+                 "moveCost":"99",
                  "name":"Cliff"
                 },
              "44":
                 {
+                 "moveCost":"99",
                  "name":"Cliff"
                 },
              "45":
                 {
+                 "moveCost":"99",
                  "name":"Cliff"
                 },
              "5":

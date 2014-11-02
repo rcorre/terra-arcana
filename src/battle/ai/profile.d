@@ -15,7 +15,7 @@ class AIProfile {
   }
 }
 
-auto getProfile(string key) {
+auto getAIProfile(string key) {
   assert(key in _profiles, "no ai profile named " ~ key);
   return _profiles[key];
 }

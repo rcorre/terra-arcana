@@ -7,6 +7,7 @@ import battle.state.playerturn;
 import battle.state.pcturn;
 import battle.state.checkunitdestruction;
 import battle.system.all;
+import battle.ai.all;
 import gui.battlepanel;
 
 class Battle : Scene!Battle {
@@ -14,7 +15,7 @@ class Battle : Scene!Battle {
   this() {
     _players = [
       new Player(getFaction("Federation"), 1, true),
-          new Player(getFaction("Gaia"),  2, false)
+          new AIPlayer(getFaction("Gaia"),  2, getAIProfile("balanced"))
     ];
     System!Battle[] systems = [
       new TileHoverSystem(this),
