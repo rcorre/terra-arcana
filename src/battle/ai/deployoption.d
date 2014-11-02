@@ -1,9 +1,15 @@
 module battle.ai.deployoption;
 
+import std.random;
 import battle.battle;
 import battle.ai.profile;
 import battle.ai.option;
 import model.all;
+
+private enum {
+  randMin = 0.8,
+  randMax = 1.2
+}
 
 class DeployOption : AIOption {
   @property {
@@ -22,7 +28,7 @@ class DeployOption : AIOption {
 
   override float computeScore(Battle b, AIProfile profile) {
     int cost = getUnitData(_unitKey).deployCost;
-    return (_excessCommand - cost) + profile.deploy;
+    return ((_excessCommand - cost) + profile.deploy) * uniform(randMin, randMax);
   }
 
   string _unitKey; /// unit to deploy
