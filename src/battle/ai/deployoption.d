@@ -6,16 +6,26 @@ import battle.ai.option;
 import model.all;
 
 class DeployOption : AIOption {
-  const string unitKey; /// unit to deploy
-  const Tile target;    /// tile to deploy on
+  @property {
+    string unitKey() { return _unitKey; }
+    Tile target()    { return _target; }
+  }
 
-  this(string unitKey, Tile target) {
-    this.unitKey = unitKey;
-    this.target = target;
+  this(string unitKey, Tile target, Unit[] allies, Unit[] enemies, int command) {
+    _unitKey = unitKey;
+    _target  = target;
+    _allies  = allies;
+    _enemies = enemies;
+    _command = command;
   }
 
   override float computeScore(Battle b, AIProfile profile) {
-    float score = profile.deploy;
-    return score;
+    return _command - _allies.length;
   }
+
+  string _unitKey; /// unit to deploy
+  Tile   _target;  /// tile to deploy on
+  Unit[] _allies;
+  Unit[] _enemies;
+  int    _command;
 }

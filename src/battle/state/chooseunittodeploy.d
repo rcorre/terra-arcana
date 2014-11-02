@@ -5,6 +5,7 @@ import dau.all;
 import model.all;
 import battle.battle;
 import battle.system.all;
+import battle.state.deployunit;
 import gui.deploymenu;
 
 /// player may click on a unit to issue orders
@@ -20,11 +21,8 @@ class ChooseUnitToDeploy : State!Battle {
       b.disableSystem!BattleCameraSystem;
       _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
       auto deploy = delegate(string key) {
-        auto unit = b.spawnUnit(key, _player, _tile);
         _menu.active = false;
-        _player.consumeCommandPoints(unit.deployCost);
-        b.updateBattlePanel();
-        b.states.popState();
+        b.states.setState(new DeployUnit(_player, _tile, key));
       };
       _menu = new DeployMenu(_player.faction.standardUnitKeys, Vector2i.zero, deploy);
       b.gui.addElement(_menu);

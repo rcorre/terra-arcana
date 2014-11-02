@@ -11,13 +11,14 @@ import battle.ai.moveoption;
 import battle.ai.deployoption;
 
 
-class AIPlayer {
-  this(Player player, AIProfile profile) {
+class AIPlayer : Player {
+  this(const Faction faction, int teamIdx, AIProfile profile) {
+    super(faction, teamIdx, false);
     _profile = profile;
-    _player = player;
   }
 
   AIOption getDecision(Battle battle) {
+    setEnemies(battle);
     auto options = allOptions(battle);
     AIOption bestOption = null;
     float bestScore = 0;
@@ -34,14 +35,13 @@ class AIPlayer {
 
   private:
   AIProfile _profile;
-  Player    _player;
-  Unit[]    _enemyUnits;
+  Unit[]    _enemies;
 
-  void setEnemyUnits(Battle b) {
-    _enemyUnits = [];
-    auto others = b.players.filter!(x => x != _player);
+  void setEnemies(Battle b) {
+    _enemies = [];
+    auto others = b.players.filter!(x => x != this);
     foreach(other ; others) {
-      _enemyUnits ~= other.units;
+      _enemies ~= other.units;
     }
   }
 
@@ -51,11 +51,11 @@ class AIPlayer {
 
   auto deployOptions(Battle battle) {
     AIOption[] options;
-    foreach(tile ; battle.spawnPointsFor(_player.teamIdx)) {
-      foreach(key ; _player.faction.standardUnitKeys) {
+    foreach(tile ; battle.spawnPointsFor(teamIdx)) {
+      foreach(key ; faction.standardUnitKeys) {
         auto data = getUnitData(key);
-        if (data.deployCost <= _player.commandPoints) {
-          options ~= new DeployOption(key, tile);
+        if (data.deployCost <= commandPoints) {
+          options ~= new DeployOption(key, tile, units, _enemies, maxCommandPoints);
         }
       }
     }
@@ -64,7 +64,7 @@ class AIPlayer {
 
   auto allUnitOptions(Battle battle) {
     AIOption[] options;
-    foreach(unit ; _player.moveableUnits) {
+    foreach(unit ; moveableUnits) {
       options ~= unitOptions(unit, battle);
     }
     return options;
@@ -76,17 +76,19 @@ class AIPlayer {
 
   auto moveOptions(Unit unit, Battle battle) {
     auto pathFinder = new Pathfinder(battle.map, unit);
-    return pathFinder.tilesInRange.map!(tile => cast(AIOption) new MoveOption(unit, tile)).array;
+    return pathFinder.tilesInRange
+      .map!(tile => cast(AIOption) new MoveOption(unit, tile, _enemies, teamIdx, pathFinder))
+      .array;
   }
 
   auto actOptions(Unit unit, Battle battle) {
     AIOption[] options;
-    auto others = battle.players.filter!(x => x != _player);
-    foreach(enemy ; _enemyUnits) {
+    auto others = battle.players.filter!(x => x != this);
+    foreach(enemy ; _enemies) {
       if (unit.canUseAction(1, enemy.tile)) {
         options ~= new ActOption(unit, enemy, 1);
       }
-      if (unit.canUseAction(2, other.tile)) {
+      if (unit.canUseAction(2, enemy.tile)) {
         options ~= new ActOption(unit, enemy, 2);
       }
     }
