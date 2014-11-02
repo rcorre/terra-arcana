@@ -240,17 +240,19 @@
       "apCost"      : 2,
       "power"       : 1,
       "hits"        : 4,
-      "minRange"    : 1,
+      "minRange"    : 2,
       "maxRange"    : 3
     },
 
     "action2": {
       "name"        : "Regrowth",
       "description" : "Release healing pollen",
-      "target"      : "self",
+      "target"      : "ally",
       "effect"      : "heal",
       "apCost"      : 2,
-      "power"       : 2
+      "power"       : 2,
+      "minRange"    : 1,
+      "maxRange"    : 1
     }
   }
 }
