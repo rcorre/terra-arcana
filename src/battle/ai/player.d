@@ -74,9 +74,10 @@ class AIPlayer : Player {
   }
 
   auto moveOptions(Unit unit, Battle battle) {
-    auto pathFinder = new Pathfinder(battle.map, unit);
-    return pathFinder.tilesInRange
-      .map!(tile => cast(AIOption) new MoveOption(unit, tile, _enemies, teamIdx, pathFinder))
+    float current = MoveOption.computeTilePriority(battle, _profile, unit.tile, teamIdx);
+    auto finder = new Pathfinder(battle.map, unit);
+    return finder.tilesInRange
+      .map!(tile => cast(AIOption) new MoveOption(unit, tile, _enemies, teamIdx, finder, current))
       .array;
   }
 
