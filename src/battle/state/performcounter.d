@@ -16,21 +16,27 @@ class PerformCounter : State!Battle {
 
   override {
     void enter(Battle b) {
-      if (_actionNum == 0 || !_actor.isAlive) { // no viable counter attack
+      // no viable counter attack
+      if (_actionNum == 0 || !_actor.isAlive) {
         b.states.popState();
       }
       else {
         auto action = _actor.getAction(_actionNum);
-        auto onAnimationEnd = delegate() {
+        if (action.apCost > _actor.ap) {
           b.states.popState();
-          for(int i = 0; i < action.hits; ++i) {
-            b.states.pushState(new ApplyEffect(action, _target));
-          }
-          _actor.consumeAp(action.apCost);
-        };
-        _actor.playAnimation("action%d".format(_actionNum), onAnimationEnd);
-        _effectAnim = _actor.getActionAnimation(_actionNum);
-        _actor.getActionSound(_actionNum).play();
+        }
+        else {
+          auto onAnimationEnd = delegate() {
+            b.states.popState();
+            for(int i = 0; i < action.hits; ++i) {
+              b.states.pushState(new ApplyEffect(action, _target));
+            }
+            _actor.consumeAp(action.apCost);
+          };
+          _actor.playAnimation("action%d".format(_actionNum), onAnimationEnd);
+          _effectAnim = _actor.getActionAnimation(_actionNum);
+          _actor.getActionSound(_actionNum).play();
+        }
       }
     }
 
