@@ -66,18 +66,37 @@ bool willDisableDefender(const UnitAction action, Unit defender) {
   }
 }
 
-float computeTilePriority(Battle b, AIProfile profile, Tile tile, int team) {
+auto idealAttack(Unit attacker, Unit defender, AIProfile profile) {
+  int idealAction = 0;
+  float idealScore = 0;
+  if (attacker.canUseAction(1, defender)) {
+    idealAction = 1;
+    idealScore = attackScore(attacker, defender, attacker.getAction(1), profile);
+  }
+  if (attacker.canUseAction(2, defender)) {
+    if (attackScore(attacker, defender, attacker.getAction(1), profile) > idealScore) {
+      idealAction = 2;
+    }
+  }
+
+  return attacker.getAction(idealAction);
+}
+
+float computeTilePriority(Battle b, AIProfile profile, Tile tile, Unit unit) {
   float[] scores;
-  /*
-     foreach(enemy ; _enemyUnits) {
-     float distFactor = 1.0f / _target.distance(enemy.tile);
-     score += getAdvantage(enemy.key, unit.key) * distFactor;
-     }
-   */
+  float[] weights;
+  foreach(enemy ; b.enemiesTo(unit.team)) {
+    auto attack = idealAttack(unit, enemy, profile);
+    if (attack !is null) {
+      scores ~= attackScore(unit, enemy, attack, profile);
+      weights ~= 1.0f;
+    }
+  }
 
   foreach(obelisk ; b.obelisks) {
     float distFactor = 1.0f / tile.distance(obelisk.row, obelisk.col);
-    scores ~= ((obelisk.team == team) ? profile.protectObelisk : profile.claimObelisk) * distFactor;
+    scores ~= ((obelisk.team == unit.team) ? profile.protectObelisk : profile.claimObelisk);
+    weights ~= distFactor;
   }
-  return scores.average * profile.mobility;
+  return scores.weightedAverage(weights) * profile.mobility;
 }

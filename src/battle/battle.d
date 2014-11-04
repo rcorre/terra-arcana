@@ -159,6 +159,15 @@ package:
     return r.front;
   }
 
+  auto enemiesTo(int team) {
+    Unit[] enemies;
+    auto others = players.filter!(x => x.teamIdx != team);
+    foreach(other ; others) {
+      enemies ~= other.units;
+    }
+    return enemies;
+  }
+
   private:
   BattlePanel _panel;
   Cycle!(Player[]) _turnCycle;

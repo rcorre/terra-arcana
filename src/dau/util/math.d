@@ -1,7 +1,8 @@
 module dau.util.math;
 
 import std.math : ceil, floor;
-import std.algorithm : min, max, sum;
+import std.algorithm : min, max, sum, map;
+import std.range : zip;
 
 /// add amount to start, but don't let it go past end
 T approach(T, U, V)(T start, U end, V amount) {
@@ -21,6 +22,12 @@ T clamp(T, U, V)(T val, U lower, V upper) if (is(typeof(min(V.init, max(U.init, 
 T average(T)(T[] vals ...) if (is(typeof(((T.init + T.init) / T.init)) : T)) {
   return vals.sum / vals.length;
 }
+
+auto weightedAverage(T, U)(T[] vals, U[] weights) if (is(typeof(((T.init * U.init) / U.init)) : real)) {
+  assert(vals.length == weights.length, "vals and weights must be equal size");
+  return vals.zip(weights).map!(x => x[0] * x[1]).sum / weights.sum;
+}
+
 
 int roundUp(real val) {
   return cast(int) ceil(val);

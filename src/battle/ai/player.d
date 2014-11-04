@@ -18,7 +18,6 @@ class AIPlayer : Player {
   }
 
   AIOption getDecision(Battle battle) {
-    setEnemies(battle);
     auto options = allOptions(battle);
     AIOption bestOption = null;
     float bestScore = 0;
@@ -35,16 +34,6 @@ class AIPlayer : Player {
 
   private:
   AIProfile _profile;
-  Unit[]    _enemies;
-
-  void setEnemies(Battle b) {
-    _enemies = [];
-    auto others = b.players.filter!(x => x != this);
-    foreach(other ; others) {
-      _enemies ~= other.units;
-    }
-  }
-
   auto allOptions(Battle battle) {
     return deployOptions(battle) ~ allUnitOptions(battle);
   }
@@ -56,7 +45,7 @@ class AIPlayer : Player {
       foreach(key ; faction.standardUnitKeys) {
         auto data = getUnitData(key);
         if (data.deployCost <= commandPoints) {
-          options ~= new DeployOption(key, tile, units, _enemies, excessCommand);
+          options ~= new DeployOption(key, tile, units, excessCommand);
         }
       }
     }
@@ -76,16 +65,16 @@ class AIPlayer : Player {
   }
 
   auto moveOptions(Unit unit, Battle battle) {
-    float current = computeTilePriority(battle, _profile, unit.tile, teamIdx);
+    float current = computeTilePriority(battle, _profile, unit.tile, unit);
     auto finder = new Pathfinder(battle.map, unit);
     return finder.tilesInRange
-      .map!(tile => cast(AIOption) new MoveOption(unit, tile, _enemies, teamIdx, finder, current))
+      .map!(tile => cast(AIOption) new MoveOption(unit, tile, teamIdx, finder, current))
       .array;
   }
 
   auto actOptions(Unit unit, Battle battle) {
     AIOption[] options;
-    foreach(enemy ; _enemies) {
+    foreach(enemy ; battle.enemiesTo(teamIdx)) {
       if (unit.canUseAction(1, enemy.tile)) {
         options ~= new ActOption(unit, enemy, 1);
       }
