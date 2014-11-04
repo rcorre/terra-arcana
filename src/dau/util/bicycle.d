@@ -14,19 +14,19 @@ struct Bicycle(R) if (isRandomAccessRange!R && hasLength!R) {
     return _range[_idx];
   }
 
-  auto advance(long steps = 1) {
+  auto advance(size_t steps = 1) {
     _idx = (_idx + steps + _len) % (_len); // add _len to keep idx positive
     return _range[_idx];
   }
 
-  auto reverse(long steps = 1) {
+  auto reverse(size_t steps = 1) {
     return advance(-steps);
   }
 
   private:
     R _range;
-    long _idx;
-    long _len;
+    size_t _idx;
+    size_t _len;
 }
 
 auto bicycle(R)(R range) if (isRandomAccessRange!R && hasLength!R) {
