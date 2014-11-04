@@ -92,8 +92,9 @@ class Unit : Entity {
   }
 
   auto getAction(int num) {
-    assert(num == 1 || num == 2, "action number %d is not valid".format(num));
-    return (num == 1) ? action1 : action2;
+    if      (num == 1) { return action1; }
+    else if (num == 2) { return action2; }
+    else               { return null; }
   }
 
   void consumeAp(int amount) {
@@ -168,6 +169,10 @@ class Unit : Entity {
 
   int firstUseableAction(Unit unit) {
     return firstUseableAction(unit.tile);
+  }
+
+  bool canUseAction(int num, Unit unit) {
+    return canUseAction(num, unit.tile);
   }
 
   bool canUseAction(int num, Tile target) {

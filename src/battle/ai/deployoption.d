@@ -18,11 +18,10 @@ class DeployOption : AIOption {
   }
 
   /// excess command is maxCommand - units.sum(deployCost)
-  this(string unitKey, Tile target, Unit[] allies, Unit[] enemies, int excessCommand) {
+  this(string unitKey, Tile target, Unit[] allies, int excessCommand) {
     _unitKey = unitKey;
     _target  = target;
     _allies  = allies;
-    _enemies = enemies;
     _excessCommand = excessCommand;
   }
 
@@ -34,6 +33,5 @@ class DeployOption : AIOption {
   string _unitKey; /// unit to deploy
   Tile   _target;  /// tile to deploy on
   Unit[] _allies;
-  Unit[] _enemies;
   int    _excessCommand;
 }

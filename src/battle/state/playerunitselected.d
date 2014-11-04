@@ -20,7 +20,7 @@ class PlayerUnitSelected : State!Battle {
       b.lockLeftUnitInfo = false;
       b.displayUnitInfo(_unit);
       b.lockLeftUnitInfo = true;
-      if (!_unit.canAct) {
+      if (!_unit.canAct || b.activePlayer.commandPoints <= 0) {
         b.states.popState();
       }
       _tileHover = b.getSystem!TileHoverSystem;
