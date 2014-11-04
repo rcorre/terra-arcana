@@ -33,7 +33,7 @@ class ActOption : AIOption {
 
   override float computeScore(Battle b, AIProfile profile) {
     if (target.team != unit.team) {
-      return attackScore() * profile.agression;
+      return attackScore(profile);
     }
     else {
       return buffScore();
@@ -41,17 +41,17 @@ class ActOption : AIOption {
   }
 
   private:
-  float attackScore() {
+  float attackScore(AIProfile profile) {
     auto action = unit.getAction(_actionNum);
-    float score = action.effectScore(_target);
+    float score = action.effectScore(_target) ;
     if (!action.willDisableDefender(_target)) {
       int counterNum = _target.firstUseableAction(_unit);
       if (counterNum != 0) {
         auto counter = _target.getAction(counterNum);
-        score -= counter.predictEffect(_unit);
+        score -= counter.effectScore(_unit) * profile.avoidCounter;
       }
     }
-    return score;
+    return score * profile.agression;
   }
 
   float buffScore() {
@@ -67,7 +67,7 @@ class ActOption : AIOption {
 // calculation helpers
 private:
 float effectScore(const UnitAction action, Unit defender) {
-  return action.predictEffect(defender) * effectFactor[action.effect];
+  return max((action.predictEffect(defender) * effectFactor[action.effect]) / defender.hp, 1);
 }
 
 int predictNumHits(const UnitAction action, Unit defender) {

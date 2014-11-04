@@ -4,6 +4,7 @@
     "protectObelisk": 0.0,
     "deploy": 1.0,
     "mobility": 0.5,
-    "agression": 1.0
+    "agression": 1.0,
+    "avoidCounter": 0.2
   }
 }

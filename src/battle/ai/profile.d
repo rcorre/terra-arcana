@@ -12,6 +12,7 @@ class AIProfile {
     float deploy;         /// desire to deploy more units
     float mobility;       /// desire to move units
     float agression;      /// desire to attack
+    float avoidCounter;   /// desire to avoid counter attacks
   }
 }
 
