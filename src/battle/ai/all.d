@@ -6,3 +6,4 @@ public import battle.ai.moveoption;
 public import battle.ai.actoption;
 public import battle.ai.deployoption;
 public import battle.ai.player;
+public import battle.ai.helpers;

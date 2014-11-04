@@ -9,6 +9,7 @@ import battle.ai.profile;
 import battle.ai.actoption;
 import battle.ai.moveoption;
 import battle.ai.deployoption;
+import battle.ai.helpers;
 
 class AIPlayer : Player {
   this(const Faction faction, int teamIdx, AIProfile profile) {
@@ -75,7 +76,7 @@ class AIPlayer : Player {
   }
 
   auto moveOptions(Unit unit, Battle battle) {
-    float current = MoveOption.computeTilePriority(battle, _profile, unit.tile, teamIdx);
+    float current = computeTilePriority(battle, _profile, unit.tile, teamIdx);
     auto finder = new Pathfinder(battle.map, unit);
     return finder.tilesInRange
       .map!(tile => cast(AIOption) new MoveOption(unit, tile, _enemies, teamIdx, finder, current))

@@ -4,8 +4,8 @@ import dau.util.math;
 import battle.battle;
 import battle.pathfinder;
 import battle.ai.profile;
+import battle.ai.helpers;
 import battle.ai.option;
-import battle.ai.advantage;
 import model.all;
 
 class MoveOption : AIOption {
@@ -25,22 +25,6 @@ class MoveOption : AIOption {
 
   override float computeScore(Battle b, AIProfile profile) {
     return computeTilePriority(b, profile, _target, _team) - _currentTilePriority;
-  }
-
-  static float computeTilePriority(Battle b, AIProfile profile, Tile tile, int team) {
-    float[] scores;
-    /*
-    foreach(enemy ; _enemyUnits) {
-      float distFactor = 1.0f / _target.distance(enemy.tile);
-      score += getAdvantage(enemy.key, unit.key) * distFactor;
-    }
-    */
-
-    foreach(obelisk ; b.obelisks) {
-      float distFactor = 1.0f / tile.distance(obelisk.row, obelisk.col);
-      scores ~= ((obelisk.team == team) ? profile.protectObelisk : profile.claimObelisk) * distFactor;
-    }
-    return scores.average * profile.mobility;
   }
 
   private:
