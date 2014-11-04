@@ -11,3 +11,6 @@ __dummy.html
 *.o
 *.obj
 resources/icons/
+*.dll
+*.lib
+*.exe
