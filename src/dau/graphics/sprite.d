@@ -68,9 +68,10 @@ class Sprite {
     _jiggleEffect.update(time);
   }
 
-  void draw(Vector2i pos) {
+  /// rotation in radians
+  void draw(Vector2i pos, float rotation = 0) {
     auto adjustedPos = pos + _jiggleEffect.offset;
-    _texture.draw(adjustedPos, _row, _col, scale, _tint, _angle);
+    _texture.draw(adjustedPos, _row, _col, scale, _tint, rotation);
   }
 
   @property {
@@ -87,9 +88,6 @@ class Sprite {
       _totalFlashTime = 0;
       return _tint = color;
     }
-    /// get the rotation angle of the sprite (radians)
-    auto angle()            { return _angle; }
-    auto angle(float angle) { return _angle = angle; }
     /// the scale factor of the sprite
     auto scale()             { return _scaleFactor; }
     void scale(float scale)  { _scaleFactor = Vector2f(scale, scale); }
@@ -108,7 +106,6 @@ class Sprite {
   int _depth;
   Texture _texture;
   Vector2f _scaleFactor = Vector2f(1, 1);
-  float _angle          = 0;
   Color _tint           = Color.white;
 
   float _flashTimer, _totalFlashTime;
