@@ -1,5 +1,6 @@
 module battle.state.playerunitselected;
 
+import std.range;
 import dau.all;
 import model.all;
 import battle.battle;
@@ -60,8 +61,8 @@ class PlayerUnitSelected : State!Battle {
       foreach(tile ; _pathFinder.tilesInRange) {
         sb.draw(_moveCursor, tile.center);
       }
-      foreach(tile ; _path) {
-        sb.draw(_pathCursor, tile.center);
+      if (_path !is null && !_path.empty) {
+        drawPath(sb, _unit.tile, _path, _pathCursor);
       }
       foreach(player ; b.players) {
         auto cursor = player.teamIdx == _unit.team ? _allyCursor : _enemyCursor;
@@ -85,4 +86,16 @@ class PlayerUnitSelected : State!Battle {
   Pathfinder _pathFinder;
   Tile[] _path;
   Player _player;
+
+  void drawPath(SpriteBatch sb, Tile start, Tile[] tiles, Sprite icon) {
+    auto r1 = chain(only(start), tiles.retro);
+    auto r2 = tiles.retro;
+    foreach(prev, next ; lockstep(r1, r2)) {
+      auto dir = (next.center - prev.center);
+      auto pos = prev.center + dir / 2;
+      auto angle = dir.angle;
+      sb.draw(icon, pos, angle);
+    }
+
+  }
 }
