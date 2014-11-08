@@ -32,11 +32,13 @@ class MoveDecison : AIDecision {
 class ActDecison : AIDecision {
   Unit actor;
   Tile target;
+  Tile[] movePath;
   int actionNum;
 
-  this(Unit actor, Tile target, int actionNum, float score) {
+  this(Unit actor, Tile[] movePath, Tile target, int actionNum, float score) {
     super(Type.action, score);
     this.actor = actor;
+    this.movePath = movePath;
     this.target = target;
     this.actionNum = actionNum;
   }

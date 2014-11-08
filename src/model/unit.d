@@ -167,6 +167,12 @@ class Unit : Entity {
     else                              { return 0; }
   }
 
+  int firstUseableActionFrom(Tile target, Tile position) {
+    if      (canUseActionFrom(1, target, position)) { return 1; }
+    else if (canUseActionFrom(2, target, position)) { return 2; }
+    else                                            { return 0; }
+  }
+
   int firstUseableAction(Unit unit) {
     return firstUseableAction(unit.tile);
   }
@@ -176,9 +182,14 @@ class Unit : Entity {
   }
 
   bool canUseAction(int num, Tile target) {
+    return canUseActionFrom(num, target, tile);
+  }
+
+  /// return true if can use action num from position on target
+  bool canUseActionFrom(int num, Tile target, Tile position) {
     auto action = getAction(num);
     if (action.apCost > ap) { return false; }
-    int dist = tile.distance(target);
+    int dist = position.distance(target);
     bool inRange = dist <= action.maxRange && dist >= action.minRange;
     auto other = cast(Unit) target.entity;
     final switch (action.target) with (UnitAction.Target) {

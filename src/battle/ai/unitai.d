@@ -26,6 +26,20 @@ struct UnitAI {
     return new MoveDecison(_unit, path, score);
   }
 
+  auto attackOptions(Unit enemy) {
+    AIDecision[] options;
+    auto target = enemy.tile;
+    foreach (tile ; _pathfinder.tilesInRange) {
+      int act = _unit.firstUseableActionFrom(target, tile);
+      if (act != 0) {
+        auto path = _pathfinder.pathTo(tile);
+        // TODO : score using helpers
+        options ~= new ActDecison(_unit, path, target, act, 1.0f);
+      }
+    }
+    return options;
+  }
+
   private:
   Unit _unit;
   Pathfinder _pathfinder;
