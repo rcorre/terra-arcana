@@ -5,7 +5,7 @@ import dau.all;
 import model.all;
 import battle.battle;
 import battle.system.all;
-import battle.state.playerunitselected;
+import battle.state.considermove;
 import battle.state.chooseunittodeploy;
 
 /// player may click on a unit to issue orders
@@ -33,7 +33,7 @@ class PlayerTurn : State!Battle {
         auto tile = _tileHoverSys.tileUnderMouse;
         auto unit = _tileHoverSys.unitUnderMouse;
         if (unit !is null && unit.team == _player.teamIdx) {
-          b.states.pushState(new PlayerUnitSelected(unit));
+          b.states.pushState(new ConsiderMove(unit));
         }
         else if (b.spawnPointsFor(_player.teamIdx).canFind(tile)) {
           b.states.pushState(new ChooseUnitToDeploy(_player, tile));

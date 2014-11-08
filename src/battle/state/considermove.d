@@ -1,4 +1,4 @@
-module battle.state.playerunitselected;
+module battle.state.considermove;
 
 import std.range;
 import dau.all;
@@ -6,10 +6,11 @@ import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
+import battle.state.consideract;
 import battle.state.moveunit;
-import battle.state.performaction;
 
-class PlayerUnitSelected : State!Battle {
+/// player may click to move a unit
+class ConsiderMove : State!Battle {
   this(Unit unit) {
     _unit = unit;
   }
@@ -41,19 +42,17 @@ class PlayerUnitSelected : State!Battle {
       if (_tileHover.tileUnderMouseChanged) {
         _path = _pathFinder.pathTo(tile);
       }
-      if (input.select) {
-        if (_unit.canUseAction(1, tile)) { // TODO: handle attack ground
-          b.states.pushState(new PerformAction(_unit, 1, cast(Unit) tile.entity));
-        }
-        else if (_path !is null) {
-          b.states.pushState(new MoveUnit(_unit, _path));
-        }
-        else {
-          b.states.popState();
-        }
+      if (input.select && _path !is null) {
+        b.states.pushState(new MoveUnit(_unit, _path));
       }
-      else if (input.altSelect && _unit.canUseAction(2, tile)) { // TODO: handle attack ground
-        b.states.pushState(new PerformAction(_unit, 2, cast(Unit) tile.entity));
+      else if (input.altSelect) {
+        b.states.popState();
+      }
+      else if (input.action1) {
+        b.states.pushState(new ConsiderAct(_unit, 1));
+      }
+      else if (input.action2) {
+        b.states.pushState(new ConsiderAct(_unit, 2));
       }
     }
 

@@ -16,8 +16,8 @@ private enum Keymap {
   up    = [ALLEGRO_KEY_W],
   down  = [ALLEGRO_KEY_S],
 
-  action1  = [ALLEGRO_KEY_E],
-  action2  = [ALLEGRO_KEY_Q],
+  action1  = [ALLEGRO_KEY_Q],
+  action2  = [ALLEGRO_KEY_E],
 
   skip  = [ALLEGRO_KEY_SPACE],
 }

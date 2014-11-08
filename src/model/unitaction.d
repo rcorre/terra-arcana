@@ -31,6 +31,10 @@ class UnitAction {
     blitz,   /// cannot be countered
   }
 
+  @property bool isAttack() const { 
+    return target == Target.enemy || target == Target.ground; 
+  }
+
   bool hasSpecial(Special special) const {
     return specials.canFind(special);
   }
