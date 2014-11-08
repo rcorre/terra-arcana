@@ -42,14 +42,6 @@ class PlayerTurn : State!Battle {
       else if (input.skip) {
         b.startNewTurn;
       }
-      else if (input.next) {
-        auto unit = _unitJumpList.advance();
-        b.getSystem!BattleCameraSystem.autoScrollTo(unit.center);
-      }
-      else if (input.prev) {
-        auto unit = _unitJumpList.reverse();
-        b.getSystem!BattleCameraSystem.autoScrollTo(unit.center);
-      }
     }
 
     void draw(Battle b, SpriteBatch sb) {
