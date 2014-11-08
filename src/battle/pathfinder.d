@@ -1,6 +1,6 @@
 module battle.pathfinder;
 
-import std.container : RedBlackTree;
+import std.array, std.container : RedBlackTree;
 import std.algorithm;
 import model.all;
 
@@ -84,6 +84,71 @@ class Pathfinder {
         }
       }
     }
+  }
+
+  /// use to find a route between a single pair of tiles
+  Tile[] aStar(Tile startTile, Tile endTile) {
+    int start = tileToIdx(startTile);
+    int goal  = tileToIdx(endTile);
+
+    int[] closedset;
+    int[] openset = [start];
+    int[int] parent;
+    int[] gscore = new int[numTiles];
+    int[] fscore = new int[numTiles];
+
+    gscore[start] = 0;
+    fscore[start] = 0;
+
+    while(!openset.empty) {
+      openset.sort!((a,b) => fscore[a] < fscore[b]);
+      auto current = openset.front;
+
+      if (current == goal) {
+        return reconstructPath(parent, goal);
+      }
+
+      openset.popFront;
+      closedset ~= current;
+
+      foreach(tile ; _map.neighbors(idxToTile(current))) {
+        auto neighbor = tileToIdx(tile);
+        if (closedset.canFind(neighbor)) { continue; }
+        auto tentative_gscore = gscore[current] + _unit.computeMoveCost(tile);
+
+        if (!openset.canFind(neighbor) || tentative_gscore < gscore[neighbor]) {
+          parent[neighbor] = current;
+          gscore[neighbor] = tentative_gscore;
+          fscore[neighbor] = gscore[neighbor] + manhattan(neighbor, goal);
+          if (!openset.canFind(neighbor)) {
+            openset ~= neighbor;
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+
+  int manhattan(int start, int end) {
+    return abs(idxToRow(start) - idxToRow(end)) + abs(idxToCol(start) - idxToCol(end));
+  }
+
+  int idxToRow(int idx) {
+    return idx / _map.numCols;
+  }
+
+  int idxToCol(int idx) {
+    return idx % _map.numCols;
+  }
+
+  Tile[] reconstructPath(int[int] parents, int current) {
+    Tile[] path;
+    if (current in parents) {
+      path = reconstructPath(parents, parents[current]);
+      return path ~ idxToTile(current);
+    }
+    return [idxToTile(current)];
   }
 
   struct Node {
