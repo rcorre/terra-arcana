@@ -1,7 +1,7 @@
 module battle.pathfinder;
 
-import std.array, std.container : RedBlackTree;
-import std.algorithm;
+import std.array, std.range, std.algorithm;
+import std.container : RedBlackTree;
 import model.all;
 
 private enum noParent = -1;
@@ -35,6 +35,28 @@ class Pathfinder {
       idx = _prev[idx];
     }
     return path;
+  }
+
+  /// return best path towards tile, clamped at moveRange
+  Tile[] pathToward(Tile end) {
+    auto fullPath = aStar(_unit.tile, end);
+    if (!fullPath) { return null; } // not reachable
+
+    auto path = [_unit.tile];
+    int cost = 0;
+    // skip start as it will be seen as occupied
+    foreach(tile ; fullPath.drop(1)) {
+      cost += _unit.computeMoveCost(tile);
+      if (cost <= _unit.ap) {
+        path ~= tile;
+      }
+    }
+    // strip occupied tiles from back
+    while (!path.empty && path.back.entity !is null) {
+      path.popBack();
+    }
+
+    return path.reverse;
   }
 
   private:
