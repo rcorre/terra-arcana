@@ -26,10 +26,10 @@ class PlayerUnitSelected : State!Battle {
       }
       _tileHover = b.getSystem!TileHoverSystem;
       _pathFinder = new Pathfinder(b.map, _unit);
-      _allyCursor  = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
-      _enemyCursor = new Animation("gui/tilecursor", "enemy", Animation.Repeat.loop);
-      _moveCursor  = new Animation("gui/tilecursor", "move", Animation.Repeat.loop);
-      _pathCursor  = new Animation("gui/tilecursor", "path", Animation.Repeat.loop);
+      _allyCursor  = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
+      _enemyCursor = new Animation("gui/overlay", "enemy", Animation.Repeat.loop);
+      _moveCursor  = new Animation("gui/overlay", "move", Animation.Repeat.loop);
+      _pathCursor  = new Animation("gui/overlay", "path", Animation.Repeat.loop);
     }
 
     void update(Battle b, float time, InputManager input) {

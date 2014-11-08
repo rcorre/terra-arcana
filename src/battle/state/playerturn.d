@@ -20,7 +20,7 @@ class PlayerTurn : State!Battle {
       b.enableSystem!BattleCameraSystem;
       b.lockLeftUnitInfo = false;
       _tileHoverSys = b.getSystem!TileHoverSystem;
-      _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
+      _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       _unitJumpList = bicycle(_player.moveableUnits.array);
       if (_player.commandPoints == 0) {
         b.startNewTurn();

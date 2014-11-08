@@ -19,7 +19,7 @@ class ChooseUnitToDeploy : State!Battle {
     void enter(Battle b) {
       b.disableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
-      _cursor = new Animation("gui/tilecursor", "ally", Animation.Repeat.loop);
+      _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       auto deploy = delegate(string key) {
         _menu.active = false;
         b.states.setState(new DeployUnit(_player, _tile, key));

@@ -18,9 +18,9 @@
   },
 
   {
-    "sheets" : ["gui/tilecursor"],
+    "sheets" : ["gui/overlay"],
     "frameSize": 32,
-    "frameTimeMs": 50,
+    "frameTimeMs": 20,
     "defaultDepth": 5,
     "rows": ["move",  "enemy", "ally", "path"]
   },
