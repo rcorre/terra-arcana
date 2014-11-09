@@ -16,6 +16,12 @@ private enum effectFactor = [
 
 private enum wasteEvadeScore = 0.3; /// score for degrading the targets evasion
 
+float attackScore(Unit attacker, Tile target, int actionNum, AIProfile profile) {
+  auto defender = cast(Unit) target.entity;
+  auto action = attacker.getAction(actionNum);
+  return attackScore(attacker, defender, action, profile);
+}
+
 float attackScore(Unit attacker, Unit defender, const UnitAction action, AIProfile profile) {
   float score = action.effectScore(defender) ;
   if (!action.willDisableDefender(defender)) {

@@ -17,7 +17,7 @@ class AIPlayer : Player {
   }
 
   AIDecision getDecision(Battle battle) {
-    auto unitAIs = units.map!(x => UnitAI(x, battle));
+    auto unitAIs = units.map!(x => UnitAI(x, battle, _profile));
     auto goals = _profile.expandGoals(teamIdx, battle);
     AIDecision bestOption = null;
     float bestScore = 0;

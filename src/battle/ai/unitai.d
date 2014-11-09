@@ -1,19 +1,22 @@
 module battle.ai.unitai;
 
 import std.array;
-import dau.util.range;
+import dau.util.all;
 import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.ai.decision;
 import battle.ai.goal;
 import battle.ai.helpers;
+import battle.ai.profile;
 
 struct UnitAI {
-  this(Unit unit, Battle battle) {
+  this(Unit unit, Battle battle, AIProfile profile) {
     _unit = unit;
     _pathfinder = new Pathfinder(battle.map, unit);
+    _battle = battle;
     _map = battle.map;
+    _profile = profile;
   }
 
   auto bestSolutionTo(AIGoal goal) {
@@ -47,7 +50,10 @@ struct UnitAI {
       if (act != 0) {
         auto path = _pathfinder.pathTo(tile);
         // TODO : score using helpers
-        options ~= new ActDecison(_unit, path, target, act, 1.0f);
+        auto tileScore = computeTilePriority(_battle, _profile, tile, _unit);
+        auto attackScore = attackScore(_unit, target, act, _profile);
+        auto score = average(tileScore, attackScore);
+        options ~= new ActDecison(_unit, path, target, act, score);
       }
     }
     return options.frontOr(null);
@@ -57,4 +63,6 @@ struct UnitAI {
   Unit _unit;
   Pathfinder _pathfinder;
   TileMap _map;
+  AIProfile _profile;
+  Battle _battle;
 }
