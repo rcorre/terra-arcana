@@ -25,10 +25,12 @@ class AIPlayer : Player {
       AIDecision[] options;
       foreach(ai ; unitAIs) {
         auto option = ai.bestSolutionTo(goal);
-        float score = option.score * goal.priority;
-        if (score > bestScore) {
-          bestScore = score;
-          bestOption = option;
+        if (option !is null) {
+          float score = option.score * goal.priority;
+          if (score > bestScore) {
+            bestScore = score;
+            bestOption = option;
+          }
         }
       }
       foreach(option ; deployOptions(battle, goal.target)) {

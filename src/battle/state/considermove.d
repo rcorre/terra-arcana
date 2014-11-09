@@ -38,9 +38,12 @@ class ConsiderMove : State!Battle {
       _enemyCursor.update(time);
       _moveCursor.update(time);
       _pathCursor.update(time);
-      auto tile = _tileHover.tileUnderMouse;
       if (_tileHover.tileUnderMouseChanged) {
+        auto tile = _tileHover.tileUnderMouse;
         _path = _pathFinder.pathTo(tile);
+        if (_path is null) {
+          _path = _pathFinder.pathToward(tile);
+        }
       }
       if (input.select && _path !is null) {
         b.states.pushState(new MoveUnit(_unit, _path));

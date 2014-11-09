@@ -37,12 +37,16 @@ class Pathfinder {
     return path;
   }
 
+  auto costTo(Tile tile) {
+    return pathTo(tile).map!(x => _unit.computeMoveCost(x)).sum;
+  }
+
   /// return best path towards tile, clamped at moveRange
   Tile[] pathToward(Tile end) {
     auto fullPath = aStar(_unit.tile, end);
     if (!fullPath) { return null; } // not reachable
 
-    auto path = [_unit.tile];
+    Tile[] path;
     int cost = 0;
     // skip start as it will be seen as occupied
     foreach(tile ; fullPath.drop(1)) {

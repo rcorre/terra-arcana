@@ -87,7 +87,9 @@ package:
   }
 
   auto spawnPointsFor(int teamIdx) {
-    return _spawnPoints.filter!(x => x.team == teamIdx).map!(x => x.tile);
+    return _spawnPoints.filter!(x => x.team == teamIdx)
+                       .filter!(x => x.tile.entity is null)
+                       .map!(x => x.tile);
   }
 
   auto spawnUnit(string key, Player player, Tile tile) {

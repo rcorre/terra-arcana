@@ -42,7 +42,8 @@ struct UnitAI {
   auto bestAttackOption(Tile target) {
     AIDecision[] options;
     foreach (tile ; _pathfinder.tilesInRange) {
-      int act = _unit.firstUseableActionFrom(target, tile);
+      int apLeft = _unit.ap - _pathfinder.costTo(tile);
+      int act = _unit.firstUseableActionFrom(target, tile, apLeft);
       if (act != 0) {
         auto path = _pathfinder.pathTo(tile);
         // TODO : score using helpers
