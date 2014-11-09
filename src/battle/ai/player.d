@@ -1,6 +1,6 @@
 module battle.ai.player;
 
-import std.algorithm, std.range, std.array;
+import std.algorithm, std.range, std.array, std.random;
 import dau.util.math;
 import model.all;
 import battle.battle;
@@ -9,6 +9,8 @@ import battle.ai.unitai;
 import battle.ai.helpers;
 import battle.ai.profile;
 import battle.ai.decision;
+
+private enum deployVariance = 0.1f;
 
 class AIPlayer : Player {
   this(const Faction faction, int teamIdx, string profileKey) {
@@ -52,9 +54,12 @@ class AIPlayer : Player {
     AIDecision[] options;
     foreach(tile ; battle.spawnPointsFor(teamIdx)) {
       foreach(key ; faction.standardUnitKeys) {
+        auto data = getUnitData(key);
+        if (data.deployCost > commandPoints) { continue; }
         float cmdScore = 1 - units.length / maxCommandPoints;
         float distScore = proximityScore(tile, target);
-        float score = average(cmdScore, distScore) * _profile.deploy;
+        float variance = uniform(0f, deployVariance);
+        float score = average(cmdScore, distScore) * _profile.deploy + variance;
         options ~= new DeployDecison(key, tile, score);
       }
     }
