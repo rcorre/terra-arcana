@@ -43,10 +43,10 @@ class PCTurn : State!Battle {
           break;
         case action:
           auto ad = cast(ActDecison) decision;
+          b.states.pushState(new PerformAction(ad.actor, ad.actionNum, ad.target));
           if (ad.movePath !is null && !ad.movePath.empty) {
             b.states.pushState(new MoveUnit(ad.actor, ad.movePath));
           }
-          b.states.pushState(new PerformAction(ad.actor, ad.actionNum, ad.target));
           break;
       }
     }

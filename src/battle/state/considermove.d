@@ -45,7 +45,7 @@ class ConsiderMove : State!Battle {
           _path = _pathFinder.pathToward(tile);
         }
       }
-      if (input.select && _path !is null) {
+      if (input.select && _path !is null && _path !is empty) {
         b.states.pushState(new MoveUnit(_unit, _path));
       }
       else if (input.altSelect) {
