@@ -24,7 +24,7 @@ class AIPlayer : Player {
     foreach(goal ; goals) {
       AIDecision[] options;
       foreach(ai ; unitAIs) {
-        auto option = ai.bestSolutionTo(goal);
+        auto option = ai.bestSolutionTo(goal, commandPoints);
         if (option !is null) {
           float score = option.score * goal.priority;
           if (score > bestScore) {
@@ -54,7 +54,7 @@ class AIPlayer : Player {
       foreach(key ; faction.standardUnitKeys) {
         float cmdScore = 1 - units.length / maxCommandPoints;
         float distScore = proximityScore(tile, target);
-        float score = average(cmdScore, distScore);
+        float score = average(cmdScore, distScore) * _profile.deploy;
         options ~= new DeployDecison(key, tile, score);
       }
     }

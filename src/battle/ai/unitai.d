@@ -19,10 +19,11 @@ struct UnitAI {
     _profile = profile;
   }
 
-  auto bestSolutionTo(AIGoal goal) {
+  auto bestSolutionTo(AIGoal goal, int cmdPoints) {
+    bool canMoveAndAttack = cmdPoints >= 2;
     final switch (goal.type) with (AIGoal.Type) {
       case attack:
-        return bestAttackOption(goal.target);
+        return bestAttackOption(goal.target, canMoveAndAttack);
       case aid:
         return null;
       case capture:
@@ -42,9 +43,10 @@ struct UnitAI {
     return new MoveDecison(_unit, path, score);
   }
 
-  auto bestAttackOption(Tile target) {
+  auto bestAttackOption(Tile target, bool canMove) {
     AIDecision[] options;
     foreach (tile ; _pathfinder.tilesInRange) {
+      if (tile != _unit.tile && !canMove) { continue; }
       int apLeft = _unit.ap - _pathfinder.costTo(tile);
       int act = _unit.firstUseableActionFrom(target, tile, apLeft);
       if (act != 0) {
