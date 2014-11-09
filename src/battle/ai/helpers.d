@@ -100,3 +100,8 @@ float computeTilePriority(Battle b, AIProfile profile, Tile tile, Unit unit) {
   }
   return scores.weightedAverage(weights) * profile.mobility;
 }
+
+float proximityScore(Tile src, Tile dest) {
+  int dist = src.distance(dest);
+  return 1.0f / (dist + 1.0f);
+}

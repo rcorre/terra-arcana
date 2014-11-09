@@ -45,12 +45,12 @@ class ActDecison : AIDecision {
 }
 
 class DeployDecison : AIDecision {
-  Unit unit;
+  string unitKey;
   Tile location;
 
-  this(Unit actor, Tile location, float score) {
+  this(string unitKey, Tile location, float score) {
     super(Type.deploy, score);
-    this.unit = unit;
+    this.unitKey = unitKey;
     this.location = location;
   }
 }

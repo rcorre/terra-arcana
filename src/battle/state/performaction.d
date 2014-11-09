@@ -20,6 +20,13 @@ class PerformAction : State!Battle {
     _target = target;
   }
 
+  this(Unit actor, int actionNum, Tile target) {
+    _actor = actor;
+    _actionNum = actionNum;
+    _action = actor.getAction(actionNum);
+    _target = cast(Unit) target.entity;
+  }
+
   override {
     void start(Battle b) {
       b.disableSystem!TileHoverSystem;

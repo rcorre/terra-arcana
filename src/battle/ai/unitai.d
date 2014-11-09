@@ -1,10 +1,13 @@
 module battle.ai.unitai;
 
 import std.array;
+import dau.util.range;
 import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.ai.decision;
+import battle.ai.goal;
+import battle.ai.helpers;
 
 struct UnitAI {
   this(Unit unit, Battle battle) {
@@ -13,8 +16,18 @@ struct UnitAI {
     _map = battle.map;
   }
 
-  auto captureOption(Obelisk obelisk) {
-    auto tile = _map.tileAt(obelisk.row, obelisk.col);
+  auto bestSolutionTo(AIGoal goal) {
+    final switch (goal.type) with (AIGoal.Type) {
+      case attack:
+        return bestAttackOption(goal.target);
+      case aid:
+        return null;
+      case capture:
+        return bestCaptureOption(goal.target);
+    }
+  }
+
+  auto bestCaptureOption(Tile tile) {
     auto path = _pathfinder.pathTo(tile);
     if (path is null) {
       path = _pathfinder.pathToward(tile);
@@ -26,9 +39,8 @@ struct UnitAI {
     return new MoveDecison(_unit, path, score);
   }
 
-  auto attackOptions(Unit enemy) {
+  auto bestAttackOption(Tile target) {
     AIDecision[] options;
-    auto target = enemy.tile;
     foreach (tile ; _pathfinder.tilesInRange) {
       int act = _unit.firstUseableActionFrom(target, tile);
       if (act != 0) {
@@ -37,16 +49,11 @@ struct UnitAI {
         options ~= new ActDecison(_unit, path, target, act, 1.0f);
       }
     }
-    return options;
+    return options.frontOr(null);
   }
 
   private:
   Unit _unit;
   Pathfinder _pathfinder;
   TileMap _map;
-
-  float proximityScore(Tile src, Tile dest) {
-    int dist = src.distance(dest);
-    return 1.0f / (dist + 1.0f);
-  }
 }

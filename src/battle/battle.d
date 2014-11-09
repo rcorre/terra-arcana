@@ -15,7 +15,7 @@ class Battle : Scene!Battle {
   this() {
     _players = [
       new Player(getFaction("Federation"), 1, true),
-          new AIPlayer(getFaction("Gaia"),  2, getAIProfile("balanced"))
+          new AIPlayer(getFaction("Gaia"),  2, "balanced")
     ];
     System!Battle[] systems = [
       new TileHoverSystem(this),

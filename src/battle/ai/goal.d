@@ -12,6 +12,7 @@ struct AIGoal {
   this(Type type, Tile target, float priority) {
     this.type = type;
     this.target = target;
+    this.priority = priority;
   }
 
   Type type;

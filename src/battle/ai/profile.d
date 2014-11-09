@@ -5,6 +5,7 @@ import std.range, std.algorithm;
 import model.all;
 import battle.battle;
 import battle.ai.goal;
+import battle.ai.decision;
 
 /// An AI profile prioritizes certain actions over others
 class AIProfile {
@@ -20,6 +21,7 @@ class AIProfile {
   }
 
   auto expandGoals(int team, Battle battle) {
+    auto player = battle.playerByTeam(team);
     return chain(
         battle.enemiesTo(team).map!(x => makeAttackGoal(x)),
         battle.obelisks.filter!(x => x.team != team).map!(x => makeObeliskGoal(x, battle))
