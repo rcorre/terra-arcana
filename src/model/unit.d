@@ -80,7 +80,7 @@ class Unit : Entity {
   }
 
   void startTurn() {
-    _ap = maxAp;
+    _ap = min(_ap + maxAp, maxAp);
     _evade = baseEvade;
     _armor = baseArmor;
     if (_toxin > 0) {
@@ -115,7 +115,7 @@ class Unit : Entity {
   }
 
   void damageAp(int amount) {
-    _ap -= amount; // TODO: negative ap handling
+    _ap = max(_ap - amount, -maxAp);
     _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
   }
 

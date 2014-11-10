@@ -56,7 +56,7 @@
       "target"      : "enemy",
       "effect"      : "stun",
       "apCost"      : 2,
-      "power"       : 0,
+      "power"       : 2,
       "hits"        : 1,
       "minRange"    : 1,
       "maxRange"    : 2

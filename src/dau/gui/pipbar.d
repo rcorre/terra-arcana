@@ -6,7 +6,8 @@ import dau.graphics.all;
 import dau.gui.element;
 
 private enum {
-  pipDimShade = Color(0.25, 0.25, 0.25), /// shade to tint 'dimmed' pips with
+  dimShade = color(0.25, 0.25, 0.25), /// shade to tint 'dimmed' pips with
+  negativeShade = color(1.00, 0, 0), /// shade to tint 'negative' pips with
 }
 
 /// bar that displays progress as discrete elements (pips)
@@ -27,7 +28,12 @@ class PipBar : GUIElement {
   void setVal(int val) {
     int idx = 0;
     foreach(pip ; _pips) {
-      pip.sprite.tint = (idx++ < val) ? Color.white : pipDimShade;
+      if (val < 0) {
+        pip.sprite.tint = (idx++ < -val) ? negativeShade : dimShade;
+      }
+      else {
+        pip.sprite.tint = (idx++ < val) ? Color.white : dimShade;
+      }
     }
   }
 
@@ -40,11 +46,11 @@ class PipBar : GUIElement {
         pip.sprite.tint =  Color.white;
       }
       else if (idx >= top) {
-        pip.sprite.tint =  pipDimShade;
+        pip.sprite.tint =  dimShade;
       }
       else {
-        pip.sprite.tint = (from > to) ? Color.white : pipDimShade;
-        pip.sprite.fade(time, (from > to) ? pipDimShade : Color.white);
+        pip.sprite.tint = (from > to) ? Color.white : dimShade;
+        pip.sprite.fade(time, (from > to) ? dimShade : Color.white);
       }
       ++idx;
     }
