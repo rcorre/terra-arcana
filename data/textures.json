@@ -6,8 +6,16 @@
     ],
     "frameSize": 32,
     "frameTimeMs": 50,
-    "defaultDepth": 2,
+    "defaultDepth": 3,
     "rows": ["idle", "action1", "action2", "effect1", "effect2"]
+  },
+
+  {
+    "sheets" : ["sniper_trap"],
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "defaultDepth": 2,
+    "rows": ["idle", "trigger"]
   },
 
   {

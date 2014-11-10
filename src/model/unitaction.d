@@ -11,7 +11,9 @@ class UnitAction {
     enemy,
     ally,
     self,
-    ground
+    burst,
+    trap,
+    line
   }
 
   enum Effect {
@@ -32,7 +34,7 @@ class UnitAction {
   }
 
   @property bool isAttack() const { 
-    return target == Target.enemy || target == Target.ground; 
+    return target == Target.enemy || target == Target.burst || target == Target.line; 
   }
 
   bool hasSpecial(Special special) const {

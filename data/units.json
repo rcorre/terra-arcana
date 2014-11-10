@@ -87,7 +87,7 @@
     "action2": {
       "name"        : "Mine",
       "description" : "",
-      "target"      : "ground",
+      "target"      : "trap",
       "effect"      : "damage",
       "apCost"      : 2,
       "power"       : 3,

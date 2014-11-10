@@ -123,31 +123,20 @@ class ActionInfo : GUIElement {
   void addEffectIcon(const UnitAction action, ref Vector2i offset) {
     auto sprite = new Sprite(iconSheetName, action.effect.to!string);
     string text;
-    switch (action.target) with (UnitAction.Target) {
-      case enemy:
-      case ground:
-        text = "%dx%d".format(action.power, action.hits);
-        break;
-      case ally:
-      case self:
-        text = "%d".format(action.power);
-        break;
-      default:
-        text = "";
+    if (action.hits > 1) {
+      text = "%dx%d".format(action.power, action.hits);
+    }
+    else {
+      text = "%d".format(action.power);
     }
     addInfo(new Icon(sprite, offset, text, _font), offset);
   }
 
   void addRangeIcon(const UnitAction action, ref Vector2i offset) {
-    switch (action.target) with (UnitAction.Target) {
-      case enemy:
-      case ground:
-      case ally:
-        auto sprite = new Sprite(iconSheetName, "range");
-        auto text = "%d-%d".format(action.minRange, action.maxRange);
-        addInfo(new Icon(sprite, offset, text, _font), offset);
-        break;
-      default:
+    if (action.maxRange > 0) {
+      auto sprite = new Sprite(iconSheetName, "range");
+      auto text = "%d-%d".format(action.minRange, action.maxRange);
+      addInfo(new Icon(sprite, offset, text, _font), offset);
     }
   }
 

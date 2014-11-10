@@ -195,7 +195,9 @@ class Unit : Entity {
     final switch (action.target) with (UnitAction.Target) {
       case enemy:
         return other !is null && other.team != team && inRange;
-      case ground:
+      case burst:
+      case trap:
+      case line:
         return inRange;
       case ally:
         return other !is null && other.team == team && inRange;

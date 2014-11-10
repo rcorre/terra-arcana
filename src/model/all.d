@@ -7,3 +7,4 @@ public import model.faction;
 public import model.unit;
 public import model.unitaction;
 public import model.obelisk;
+public import model.trap;

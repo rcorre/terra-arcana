@@ -35,7 +35,7 @@ class ConsiderAct : State!Battle {
       _targetOverlay.update(time);
       auto tile = _tileHover.tileUnderMouse;
       if (input.select && _unit.canUseAction(_actionNum, tile)) {
-        b.states.setState(new PerformAction(_unit, _actionNum, cast(Unit) tile.entity));
+        b.states.setState(new PerformAction(_unit, _actionNum, tile));
       }
       else if (input.action1) {
         if (_actionNum == 1) {

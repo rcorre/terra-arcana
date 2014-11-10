@@ -8,6 +8,7 @@ import battle.system.all;
 import battle.state.performcounter;
 import battle.state.applyeffect;
 import battle.state.applybuff;
+import battle.state.deploytrap;
 import battle.state.checkunitdestruction;
 
 private enum apBarFadeDuration = 0.2f;
@@ -24,6 +25,7 @@ class PerformAction : State!Battle {
     _actor = actor;
     _actionNum = actionNum;
     _action = actor.getAction(actionNum);
+    _tileTarget = target;
     _target = cast(Unit) target.entity;
   }
 
@@ -37,7 +39,11 @@ class PerformAction : State!Battle {
       b.displayUnitInfo(_target);
       // trigger new state once animation ends
       void delegate() onAnimationEnd = null;
-      if (_actor.team == _target.team) {
+      if (_action.target == UnitAction.Target.trap) {
+        assert(_tileTarget !is null, "trap must target a tile");
+        b.states.setState(new DeployTrap(_actor, _action, _tileTarget));
+      }
+      else if (_actor.team == _target.team) {
         onAnimationEnd = delegate() {
           b.states.setState(new ApplyBuff(_action, _target));
         };
@@ -78,6 +84,7 @@ class PerformAction : State!Battle {
 
   private:
   Unit _actor, _target;
+  Tile _tileTarget;
   const UnitAction _action;
   int _actionNum;
   Animation _effectAnim;
