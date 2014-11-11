@@ -2,7 +2,7 @@ module dau.graphics.cursor;
 
 import dau.allegro;
 import dau.engine;
-import dau.input;
+import dau.geometry.vector;
 import dau.graphics.sprite;
 
 class CursorManager {
@@ -13,6 +13,7 @@ class CursorManager {
   void setSprite(string key) {
     if (key is null) {
       al_show_mouse_cursor(mainDisplay);
+      _currentSprite = null;
     }
     else {
       assert(key in _cursorSprites, "no cursor sprite named " ~ key ~ " was registered");
@@ -22,11 +23,15 @@ class CursorManager {
   }
 
   void update(float time) {
-    _currentSprite.update(time);
+    if (_currentSprite !is null) {
+      _currentSprite.update(time);
+    }
   }
 
-  void draw(InputManager input) {
-    _currentSprite.draw(input.mousePos);
+  void draw(Vector2i pos) {
+    if (_currentSprite !is null) {
+      _currentSprite.draw(pos);
+    }
   }
 
   private:

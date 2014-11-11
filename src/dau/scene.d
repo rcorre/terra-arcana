@@ -7,8 +7,7 @@ import dau.input;
 import dau.entity;
 import dau.system;
 import dau.gui.manager;
-import dau.graphics.spritebatch;
-import dau.graphics.camera;
+import dau.graphics.all;
 
 private IScene _currentScene;
 
@@ -23,7 +22,7 @@ void setScene(T)(Scene!T newScene) {
 @property auto currentScene() { return _currentScene; }
 
 class Scene(T) : IScene {
-  this(System!(T)[] systems) {
+  this(System!(T)[] systems, Sprite[string] cursorSpriteMap) {
     _inputManager  = new InputManager;
     _entityManager = new EntityManager;
     _spriteBatch   = new SpriteBatch;
@@ -31,12 +30,14 @@ class Scene(T) : IScene {
     _camera        = new Camera(Settings.screenW, Settings.screenH);
     _systems       = systems;
     _stateMachine  = new StateMachine!T(cast(T) this);
+    _cursorManager = new CursorManager(cursorSpriteMap);
   }
 
   @property {
     auto entities() { return _entityManager; }
     auto states()   { return _stateMachine; }
     auto input()    { return _inputManager; }
+    auto cursor()   { return _cursorManager; }
     auto camera()   { return _camera; }
     auto gui()      { return _guiManager; }
   }
@@ -50,6 +51,7 @@ class Scene(T) : IScene {
       _entityManager.updateEntities(time);
       _stateMachine.update(time, _inputManager);
       _guiManager.update(time, input);
+      _cursorManager.update(time);
       foreach(sys ; _systems) {
         if (sys.active) {
           sys.update(time, input);
@@ -63,6 +65,7 @@ class Scene(T) : IScene {
       _stateMachine.draw(_spriteBatch);
       _spriteBatch.render(camera);
       _guiManager.draw(); // gui draws over state & entities
+      _cursorManager.draw(input.mousePos);
     }
   }
 
@@ -85,9 +88,10 @@ class Scene(T) : IScene {
   GUIManager     _guiManager;
   StateMachine!T _stateMachine;
   InputManager   _inputManager;
+  CursorManager  _cursorManager;
   SpriteBatch    _spriteBatch;
   Camera         _camera;
-  System!(T)[]     _systems;
+  System!(T)[]   _systems;
 
   private:
   bool _started;

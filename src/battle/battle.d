@@ -21,17 +21,17 @@ class Battle : Scene!Battle {
       new TileHoverSystem(this),
           new BattleCameraSystem(this),
     ];
-    super(systems);
-    _panel = new BattlePanel;
-    gui.addElement(_panel);
-    _turnCycle = cycle(_players);
-    _cursor = new CursorManager([
+    Sprite[string] cursorSprites = [
       "inactive" : new Animation("gui/cursor", "inactive", Animation.Repeat.loop),
       "active"   : new Animation("gui/cursor", "active", Animation.Repeat.loop),
       "ally"     : new Animation("gui/cursor", "ally", Animation.Repeat.loop),
       "enemy"    : new Animation("gui/cursor", "enemy", Animation.Repeat.loop)
-    ]);
-    _cursor.setSprite("inactive");
+    ];
+    super(systems, cursorSprites);
+    _panel = new BattlePanel;
+    gui.addElement(_panel);
+    _turnCycle = cycle(_players);
+    cursor.setSprite("inactive");
   }
 
   override {
@@ -62,16 +62,6 @@ class Battle : Scene!Battle {
       camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
       startNewTurn;
     }
-
-    void update(float time) {
-      super.update(time);
-      _cursor.update(time);
-    }
-
-    void draw() {
-      super.draw();
-      _cursor.draw(input);
-    }
   }
 
 package:
@@ -85,7 +75,6 @@ package:
       _lockLeftUnitInfo = val;
       displayUnitInfo(null);
     }
-    auto cursor() { return _cursor; }
   }
 
   auto unitInfoFor(Unit unit) {
@@ -191,7 +180,6 @@ package:
   Player[] _players;
   bool _lockLeftUnitInfo;
   SpawnPoint[] _spawnPoints;
-  CursorManager _cursor;
 
   class SpawnPoint {
     this(Tile tile, int team) {
