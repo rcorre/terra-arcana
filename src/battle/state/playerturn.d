@@ -29,9 +29,9 @@ class PlayerTurn : State!Battle {
 
     void update(Battle b, float time, InputManager input) {
       _cursor.update(time);
+      auto tile = _tileHoverSys.tileUnderMouse;
+      auto unit = _tileHoverSys.unitUnderMouse;
       if (input.select) {
-        auto tile = _tileHoverSys.tileUnderMouse;
-        auto unit = _tileHoverSys.unitUnderMouse;
         if (unit !is null && unit.team == _player.teamIdx) {
           b.states.pushState(new ConsiderMove(unit));
         }
@@ -41,6 +41,18 @@ class PlayerTurn : State!Battle {
       }
       else if (input.skip) {
         b.startNewTurn;
+      }
+
+      if (unit is null) {
+        b.cursor.setSprite("inactive");
+      }
+      else {
+        if (unit.team == _player.teamIdx) {
+          b.cursor.setSprite("ally");
+        }
+        else {
+          b.cursor.setSprite("enemy");
+        }
       }
     }
 
