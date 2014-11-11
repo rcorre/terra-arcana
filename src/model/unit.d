@@ -196,13 +196,14 @@ class Unit : Entity {
       case enemy:
         return other !is null && other.team != team && inRange;
       case burst:
-      case trap:
       case line:
         return inRange;
       case ally:
         return other !is null && other.team == team && inRange;
       case self:
         return other !is null && other == this;
+      case trap:
+        return inRange && target.trap is null;
     }
   }
 
