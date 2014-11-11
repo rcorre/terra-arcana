@@ -25,6 +25,13 @@ class Battle : Scene!Battle {
     _panel = new BattlePanel;
     gui.addElement(_panel);
     _turnCycle = cycle(_players);
+    _cursor = new CursorManager([
+      "inactive" : new Animation("gui/cursor", "inactive", Animation.Repeat.loop),
+      "active"   : new Animation("gui/cursor", "active", Animation.Repeat.loop),
+      "ally"     : new Animation("gui/cursor", "ally", Animation.Repeat.loop),
+      "enemy"    : new Animation("gui/cursor", "enemy", Animation.Repeat.loop)
+    ]);
+    _cursor.setSprite("inactive");
   }
 
   override {
@@ -58,6 +65,12 @@ class Battle : Scene!Battle {
 
     void update(float time) {
       super.update(time);
+      _cursor.update(time);
+    }
+
+    void draw() {
+      super.draw();
+      _cursor.draw(input);
     }
   }
 
@@ -72,6 +85,7 @@ package:
       _lockLeftUnitInfo = val;
       displayUnitInfo(null);
     }
+    auto cursor() { return _cursor; }
   }
 
   auto unitInfoFor(Unit unit) {
@@ -177,6 +191,7 @@ package:
   Player[] _players;
   bool _lockLeftUnitInfo;
   SpawnPoint[] _spawnPoints;
+  CursorManager _cursor;
 
   class SpawnPoint {
     this(Tile tile, int team) {

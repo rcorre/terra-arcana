@@ -19,6 +19,14 @@
   },
 
   {
+    "sheets" : ["gui/cursor"],
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "defaultDepth": 10,
+    "rows": ["inactive", "active", "enemy", "ally"]
+  },
+
+  {
     "sheets" : ["gui/pip"],
     "frameWidth": 6,
     "frameHeight": 10,
