@@ -41,7 +41,9 @@ class PerformAction : State!Battle {
       void delegate() onAnimationEnd = null;
       if (_action.target == UnitAction.Target.trap) {
         assert(_tileTarget !is null, "trap must target a tile");
-        b.states.setState(new DeployTrap(_actor, _action, _tileTarget));
+        onAnimationEnd = delegate() {
+          b.states.setState(new DeployTrap(_actor, _action, _tileTarget));
+        };
       }
       else if (_actor.team == _target.team) {
         onAnimationEnd = delegate() {

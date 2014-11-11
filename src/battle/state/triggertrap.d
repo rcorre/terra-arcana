@@ -9,38 +9,40 @@ import battle.state.checkunitdestruction;
 
 class TriggerTrap : State!Battle {
   this(Tile tile) {
-    assert(tile.trap !is null, "no trap found on tile");
     _tile = tile;
-    _unit = cast(Unit) tile.entity;
-    _trap = cast(Trap) tile.trap;
   }
 
   override {
     void start(Battle b) {
-      _animation = _trap.getTriggerAnimation(delegate() { b.states.popState; });
-      b.lockLeftUnitInfo = false;
-      b.displayUnitInfo(_unit);
-      b.lockLeftUnitInfo = true;
+      assert(_tile.trap !is null, "no trap found on tile");
+      auto unit = cast(Unit) _tile.entity;
       auto trap = cast(Trap) _tile.trap;
+      auto onEnd = delegate() {
+        b.states.popState();
+        b.states.pushState(new CheckUnitDestruction(unit));
+        for(int i = 0; i < trap.effect.hits; ++i) {
+          b.states.pushState(new ApplyEffect(trap.effect, unit));
+        }
+      };
+      _animation = trap.getTriggerAnimation(onEnd);
+      b.lockLeftUnitInfo = false;
+      b.displayUnitInfo(unit);
+      b.lockLeftUnitInfo = true;
       _tile.trap = null;
       b.entities.removeEntity(trap);
+      trap.getTriggerSound().play();
     }
 
     void update(Battle b, float time, InputManager input) {
       _animation.update(time);
     }
 
-    void exit(Battle b) {
-      for(int i = 0; i < _trap.effect.hits; ++i) {
-        b.states.pushState(new CheckUnitDestruction(_unit));
-        b.states.pushState(new ApplyEffect(_trap.effect, _unit));
-      }
+    void draw(Battle b, SpriteBatch sb) {
+      sb.draw(_animation, _tile.center);
     }
   }
 
   private:
   Tile _tile;
-  Unit _unit;
-  Trap _trap;
   Animation _animation;
 }

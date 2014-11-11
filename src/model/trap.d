@@ -4,7 +4,11 @@ import std.string : format;
 import dau.all;
 import model.unitaction;
 
-private enum spriteFormat = "%s_trap";
+private enum {
+  spriteFormat = "%s_trap",
+  soundFormat = "%s-trap",
+  effectDepth = 6,
+}
 
 class Trap : Entity {
   const int team;
@@ -20,6 +24,12 @@ class Trap : Entity {
   }
 
   auto getTriggerAnimation(Animation.Action onEnd) {
-    return new Animation(spriteFormat.format(key), "trigger", Animation.Repeat.no, onEnd);
+    auto anim = new Animation(spriteFormat.format(key), "trigger", Animation.Repeat.no, onEnd);
+    anim.depth = effectDepth;
+    return anim;
+  }
+
+  auto getTriggerSound() {
+    return new SoundSample(soundFormat.format(key));
   }
 }
