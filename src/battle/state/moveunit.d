@@ -58,10 +58,8 @@ class MoveUnit : State!Battle {
 
   void checkForTrap(Battle b) {
     auto trap = cast(Trap) _path.back.trap;
-    //if (trap !is null && trap.team != _unit.team) {
-    if (trap !is null) {
-      // TODO: avoid if flying?
-      b.states.pushState(new TriggerTrap(_path.back)); // TODO: check for each turn
+    if (trap !is null && trap.team != _unit.team && !unit.hasTrait(UnitData.Trait.flight)) {
+      b.states.pushState(new TriggerTrap(_path.back));
     }
   }
 }
