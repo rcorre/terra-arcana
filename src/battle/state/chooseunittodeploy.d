@@ -26,6 +26,8 @@ class ChooseUnitToDeploy : State!Battle {
       };
       _menu = new DeployMenu(_player.faction.standardUnitKeys, Vector2i.zero, deploy);
       b.gui.addElement(_menu);
+      auto menuHover = delegate(bool on) { b.cursor.setSprite(on ? "active" : "inactive"); };
+      _menu.onHover(menuHover);
     }
 
     void update(Battle b, float time, InputManager input) {

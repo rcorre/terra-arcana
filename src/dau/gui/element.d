@@ -5,6 +5,8 @@ import dau.graphics.all;
 import dau.util.removal_list;
 
 class GUIElement {
+  alias HoverHandler = void delegate(bool);
+
   enum Anchor {
     center,
     topLeft
@@ -27,6 +29,7 @@ class GUIElement {
   this(Rect2i area) {
     _area = area;
     _children = new ChildList;
+    _hoverHandler = delegate(bool) { };
     onMouseLeave(); // assume mouse not in area to begin with
   }
 
@@ -86,19 +89,26 @@ class GUIElement {
       }
     }
 
-    void handleMouseHover(Vector2i pos, Vector2i prevPos) {
-      if (area.contains(pos) && !area.contains(prevPos)) {
+    bool handleMouseHover(Vector2i pos, Vector2i prevPos) {
+      bool mouseInArea = area.contains(pos);
+      bool mouseWasInArea = area.contains(prevPos);
+      if (mouseInArea && !mouseWasInArea) {
         onMouseEnter();
+        _hoverHandler(true);
       }
-      else if (!area.contains(pos) && area.contains(prevPos)) {
+      else if (!mouseInArea && mouseWasInArea) {
         onMouseLeave();
+        _hoverHandler(false);
       }
 
       auto localPos = pos - area.topLeft;
       auto prevLocalPos = prevPos - area.topLeft;
       foreach(child ; children) {
-        child.handleMouseHover(localPos, prevLocalPos);
+        bool inChildArea = child.handleMouseHover(localPos, prevLocalPos);
+        if (inChildArea) { _childUnderMouse = child; }
       }
+      if (!mouseInArea) { _childUnderMouse = null; }
+      return area.contains(pos);
     }
 
     bool handleMouseClick(Vector2i pos) {
@@ -111,12 +121,20 @@ class GUIElement {
       }
       return onClick();
     }
+
+    void onHover(HoverHandler handler) {
+      _hoverHandler = handler;
+    }
   }
+
+  @property childUnderMouse() { return _childUnderMouse; }
 
   private:
   alias ChildList = RemovalList!(GUIElement, x => !x.active);
   Sprite _sprite;
   Rect2i _area;
   ChildList _children;
+  GUIElement _childUnderMouse;
   bool _active = true;
+  HoverHandler _hoverHandler;
 }
