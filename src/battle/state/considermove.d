@@ -49,7 +49,7 @@ class ConsiderMove : State!Battle {
       if (input.select && _path !is null && !_path.empty) {
         b.states.pushState(new MoveUnit(_unit, _path));
       }
-      else if (input.altSelect) {
+      else if (input.altSelect || input.skip) {
         b.states.popState();
       }
       else if (input.action1) {
