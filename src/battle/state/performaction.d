@@ -4,6 +4,7 @@ import dau.all;
 import model.all;
 import battle.battle;
 import battle.pathfinder;
+import battle.util;
 import battle.system.all;
 import battle.state.performcounter;
 import battle.state.applyeffect;
@@ -18,15 +19,14 @@ class PerformAction : State!Battle {
     _actor = actor;
     _actionNum = actionNum;
     _action = actor.getAction(actionNum);
-    _target = target;
+    _target = target.tile;
   }
 
   this(Unit actor, int actionNum, Tile target) {
     _actor = actor;
     _actionNum = actionNum;
     _action = actor.getAction(actionNum);
-    _tileTarget = target;
-    _target = cast(Unit) target.entity;
+    _target = target;
   }
 
   override {
@@ -36,28 +36,33 @@ class PerformAction : State!Battle {
       b.lockLeftUnitInfo = false;
       b.displayUnitInfo(_actor);
       b.lockLeftUnitInfo = true;
-      b.displayUnitInfo(_target);
+      _tilesAffected = tilesAffected(b.map, _target, _actor, _action);
+      auto unitsAffected = unitsAffected(b.map, _target, _actor, _action);
+
       // trigger new state once animation ends
       void delegate() onAnimationEnd = null;
       if (_action.target == UnitAction.Target.trap) {
-        assert(_tileTarget !is null, "trap must target a tile");
         onAnimationEnd = delegate() {
-          b.states.setState(new DeployTrap(_actor, _action, _tileTarget));
+          b.states.setState(new DeployTrap(_actor, _action, _target));
         };
       }
-      else if (_actor.team == _target.team) {
-        onAnimationEnd = delegate() {
-          b.states.setState(new ApplyBuff(_action, _target));
-        };
-      }
-      else { // offensive ability
+      else if (_action.isAttack) {
         onAnimationEnd = delegate() {
           b.states.popState();
           b.states.pushState(new CheckUnitDestruction(_actor));
-          b.states.pushState(new CheckUnitDestruction(_target));
-          b.states.pushState(new PerformCounter(_target, _actor));
-          for(int i = 0; i < _action.hits; ++i) {
-            b.states.pushState(new ApplyEffect(_action, _target));
+          foreach(unit ; unitsAffected) {
+            b.states.pushState(new PerformCounter(unit, _actor));
+          }
+          foreach(unit ; unitsAffected) {
+            b.states.pushState(new CheckUnitDestruction(unit));
+            b.states.pushState(new ApplyEffect(_action, unit));
+          }
+        };
+      }
+      else {
+        onAnimationEnd = delegate() {
+          foreach(unit ; unitsAffected) {
+            b.states.setState(new ApplyBuff(_action, unit));
           }
         };
       }
@@ -80,13 +85,16 @@ class PerformAction : State!Battle {
     }
 
     void draw(Battle b, SpriteBatch sb) {
-      sb.draw(_effectAnim, _target.center);
+      foreach(tile ; _tilesAffected) {
+        sb.draw(_effectAnim, tile.center);
+      }
     }
   }
 
   private:
-  Unit _actor, _target;
-  Tile _tileTarget;
+  Unit _actor;
+  Tile _target;
+  Tile[] _tilesAffected;
   const UnitAction _action;
   int _actionNum;
   Animation _effectAnim;
