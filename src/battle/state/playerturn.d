@@ -25,17 +25,22 @@ class PlayerTurn : State!Battle {
       if (_player.commandPoints == 0) {
         b.startNewTurn();
       }
+      checkMouse(b);
     }
 
     void update(Battle b, float time, InputManager input) {
       _cursor.update(time);
       auto tile = _tileHoverSys.tileUnderMouse;
       auto unit = _tileHoverSys.unitUnderMouse;
+      if (_tileHoverSys.tileUnderMouseChanged) {
+        checkMouse(b);
+      }
+      
       if (input.select) {
         if (unit !is null && unit.team == _player.teamIdx) {
           b.states.pushState(new ConsiderMove(unit));
         }
-        else if (b.spawnPointsFor(_player.teamIdx).canFind(tile)) {
+        else if (_mouseOverSpawnPoint) {
           b.states.pushState(new ChooseUnitToDeploy(_player, tile));
         }
       }
@@ -43,17 +48,6 @@ class PlayerTurn : State!Battle {
         b.startNewTurn;
       }
 
-      if (unit is null) {
-        b.cursor.setSprite("inactive");
-      }
-      else {
-        if (unit.team == _player.teamIdx) {
-          b.cursor.setSprite("ally");
-        }
-        else {
-          b.cursor.setSprite("enemy");
-        }
-      }
     }
 
     void draw(Battle b, SpriteBatch sb) {
@@ -71,4 +65,22 @@ class PlayerTurn : State!Battle {
   Animation _cursor;
   Player _player;
   Bicycle!(Unit[]) _unitJumpList;
+  bool _mouseOverSpawnPoint;
+
+  void checkMouse(Battle b) {
+    auto tile = _tileHoverSys.tileUnderMouse;
+    auto unit = _tileHoverSys.unitUnderMouse;
+    _mouseOverSpawnPoint = b.spawnPointsFor(_player.teamIdx).canFind(tile);
+    if (unit is null) {
+      b.cursor.setSprite(_mouseOverSpawnPoint ? "active" : "inactive");
+    }
+    else {
+      if (unit.team == _player.teamIdx) {
+        b.cursor.setSprite("ally");
+      }
+      else {
+        b.cursor.setSprite("enemy");
+      }
+    }
+  }
 }
