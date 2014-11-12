@@ -27,6 +27,7 @@ class ConsiderMove : State!Battle {
       }
       _tileHover = b.getSystem!TileHoverSystem;
       _pathFinder = new Pathfinder(b.map, _unit);
+      b.cursor.setSprite((_pathFinder.tilesInRange.empty) ? "inactive" : "active");
       _allyCursor  = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       _enemyCursor = new Animation("gui/overlay", "enemy", Animation.Repeat.loop);
       _moveCursor  = new Animation("gui/overlay", "move", Animation.Repeat.loop);

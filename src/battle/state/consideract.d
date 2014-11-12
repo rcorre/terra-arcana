@@ -26,6 +26,7 @@ class ConsiderAct : State!Battle {
         b.states.popState();
       }
       _tileHover = b.getSystem!TileHoverSystem;
+      adjustCursor(b);
       auto overlayName = _action.isAttack ? "enemy" : "ally";
       _targetOverlay = new Animation("gui/overlay", overlayName, Animation.Repeat.loop);
       _tilesInRange = b.map.tilesInRange(_unit.tile, _action.minRange, _action.maxRange);
@@ -34,6 +35,9 @@ class ConsiderAct : State!Battle {
     void update(Battle b, float time, InputManager input) {
       _targetOverlay.update(time);
       auto tile = _tileHover.tileUnderMouse;
+      if (_tileHover.tileUnderMouseChanged) {
+        adjustCursor(b);
+      }
       if (input.select && _unit.canUseAction(_actionNum, tile)) {
         b.states.setState(new PerformAction(_unit, _actionNum, tile));
       }
@@ -69,4 +73,17 @@ class ConsiderAct : State!Battle {
   Animation _targetOverlay;
   TileHoverSystem _tileHover;
   Tile[] _tilesInRange;
+
+  void adjustCursor(Battle b) {
+    auto unit = _tileHover.unitUnderMouse;
+    if (unit is null) {
+      b.cursor.setSprite("inactive");
+    }
+    else if (unit.team == _unit.team) {
+      b.cursor.setSprite("ally");
+    }
+    else {
+      b.cursor.setSprite("enemy");
+    }
+  }
 }
