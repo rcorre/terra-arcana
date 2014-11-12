@@ -49,7 +49,6 @@ class PerformAction : State!Battle {
       else if (_action.isAttack) {
         onAnimationEnd = delegate() {
           b.states.popState();
-          b.states.pushState(new CheckUnitDestruction(_actor));
           foreach(unit ; unitsAffected) {
             b.states.pushState(new PerformCounter(unit, _actor));
           }
