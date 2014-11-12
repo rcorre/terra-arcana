@@ -23,7 +23,7 @@ class ChooseUnitToDeploy : State!Battle {
       auto deploy = delegate(string key) {
         b.states.setState(new DeployUnit(_player, _tile, key));
       };
-      _menu = new DeployMenu(_player.faction.standardUnitKeys, Vector2i.zero, deploy);
+      _menu = new DeployMenu(_player.faction, Vector2i.zero, deploy, _player.commandPoints);
       b.gui.addElement(_menu);
       auto menuHover = delegate(bool on) { b.cursor.setSprite(on ? "active" : "inactive"); };
       _menu.onHover(menuHover);

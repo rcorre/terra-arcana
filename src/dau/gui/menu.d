@@ -13,8 +13,8 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
     _onClick = onClick;
   }
 
-  protected void addEntry(EntryType entry) {
-    auto button = new ButtonType(entry, _nextButtonOffset, _onClick);
+  protected void addEntry(EntryType entry, bool enabled = true) {
+    auto button = new ButtonType(entry, _nextButtonOffset, _onClick, enabled);
     addChild(button);
     _nextButtonOffset.y += button.height;
   }
@@ -26,16 +26,23 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
 
 abstract class MenuButton(EntryType) : GUIElement {
   alias Action = void delegate(EntryType);
-  this(EntryType entry, Sprite sprite, Vector2i pos, Action onClick) {
+  this(EntryType entry, Sprite sprite, Vector2i pos, Action onClick, bool enabled) {
     super(sprite, pos, Anchor.topLeft);
     _onClick = onClick;
     _value = entry;
+    _enabled = enabled;
   }
 
   override bool onClick() {
-    _onClick(_value);
-    return true;
+    if (_enabled) {
+      _onClick(_value);
+      return true;
+    }
+    return false;
   }
+
+  protected:
+  bool _enabled;
 
   private:
   Action _onClick;
