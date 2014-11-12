@@ -21,7 +21,6 @@ class ChooseUnitToDeploy : State!Battle {
       b.disableSystem!BattleCameraSystem;
       _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       auto deploy = delegate(string key) {
-        _menu.active = false;
         b.states.setState(new DeployUnit(_player, _tile, key));
       };
       _menu = new DeployMenu(_player.faction.standardUnitKeys, Vector2i.zero, deploy);
@@ -32,10 +31,17 @@ class ChooseUnitToDeploy : State!Battle {
 
     void update(Battle b, float time, InputManager input) {
       _cursor.update(time);
+      if (input.skip || input.altSelect) {
+        b.states.popState();
+      }
     }
 
     void draw(Battle b, SpriteBatch sb) {
       sb.draw(_cursor, _tile.center);
+    }
+
+    void exit(Battle b) {
+      _menu.active = false;
     }
   }
 
