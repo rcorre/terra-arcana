@@ -55,7 +55,9 @@ class PerformAction : State!Battle {
           }
           foreach(unit ; unitsAffected) {
             b.states.pushState(new CheckUnitDestruction(unit));
-            b.states.pushState(new ApplyEffect(_action, unit));
+            for(int i = 0 ; i < _action.hits ; i++) {
+              b.states.pushState(new ApplyEffect(_action, unit));
+            }
           }
         };
       }
