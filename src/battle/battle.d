@@ -25,7 +25,8 @@ class Battle : Scene!Battle {
       "inactive" : new Animation("gui/cursor", "inactive", Animation.Repeat.loop),
       "active"   : new Animation("gui/cursor", "active", Animation.Repeat.loop),
       "ally"     : new Animation("gui/cursor", "ally", Animation.Repeat.loop),
-      "enemy"    : new Animation("gui/cursor", "enemy", Animation.Repeat.loop)
+      "enemy"    : new Animation("gui/cursor", "enemy", Animation.Repeat.loop),
+      "wait"    : new Animation("gui/cursor", "wait", Animation.Repeat.loop),
     ];
     super(systems, cursorSprites);
     _panel = new BattlePanel;

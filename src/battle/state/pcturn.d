@@ -19,6 +19,7 @@ class PCTurn : State!Battle {
 
   override {
     void enter(Battle b) {
+      b.cursor.setSprite("wait");
       b.disableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
       if (_pc.commandPoints == 0) {
@@ -49,6 +50,10 @@ class PCTurn : State!Battle {
           }
           break;
       }
+    }
+
+    void end(Battle b) {
+      b.cursor.setSprite("inactive");
     }
   }
 

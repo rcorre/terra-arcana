@@ -23,7 +23,7 @@
     "frameSize": 32,
     "frameTimeMs": 50,
     "defaultDepth": 10,
-    "rows": ["inactive", "active", "enemy", "ally"]
+    "rows": ["inactive", "active", "enemy", "ally", "wait"]
   },
 
   {
