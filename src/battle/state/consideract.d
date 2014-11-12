@@ -28,11 +28,14 @@ class ConsiderAct : State!Battle {
       _tileHover = b.getSystem!TileHoverSystem;
       adjustCursor(b);
       auto overlayName = _action.isAttack ? "enemy" : "ally";
-      _targetOverlay = new Animation("gui/overlay", overlayName, Animation.Repeat.loop);
+      auto targetName = _action.isAttack ? "enemy-target" : "ally-target";
+      _rangeOverlay = new Animation("gui/overlay", overlayName, Animation.Repeat.loop);
+      _targetOverlay = new Animation("gui/overlay", targetName, Animation.Repeat.loop);
       _tilesInRange = b.map.tilesInRange(_unit.tile, _action.minRange, _action.maxRange);
     }
 
     void update(Battle b, float time, InputManager input) {
+      _rangeOverlay.update(time);
       _targetOverlay.update(time);
       auto tile = _tileHover.tileUnderMouse;
       if (_tileHover.tileUnderMouseChanged) {
@@ -64,7 +67,14 @@ class ConsiderAct : State!Battle {
 
     void draw(Battle b, SpriteBatch sb) {
       foreach(tile ; _tilesInRange) {
+        sb.draw(_rangeOverlay, tile.center);
+      }
+      auto tile = _tileHover.tileUnderMouse;
+      if (_tilesInRange.canFind(tile) && _action.target == UnitAction.target.burst) {
         sb.draw(_targetOverlay, tile.center);
+        foreach(neighbor ; b.map.neighbors(tile)) {
+          sb.draw(_targetOverlay, neighbor.center);
+        }
       }
     }
   }
@@ -73,20 +83,16 @@ class ConsiderAct : State!Battle {
   Unit _unit;
   int _actionNum;
   const UnitAction _action;
-  Animation _targetOverlay;
+  Animation _targetOverlay, _rangeOverlay;
   TileHoverSystem _tileHover;
   Tile[] _tilesInRange;
 
   void adjustCursor(Battle b) {
-    auto unit = _tileHover.unitUnderMouse;
-    if (unit is null) {
-      b.cursor.setSprite("inactive");
-    }
-    else if (unit.team == _unit.team) {
-      b.cursor.setSprite("ally");
+    if (_unit.canUseAction(_actionNum, _tileHover.tileUnderMouse)) {
+      b.cursor.setSprite(_action.isAttack ? "enemy" : "ally");
     }
     else {
-      b.cursor.setSprite("enemy");
+      b.cursor.setSprite("inactive");
     }
   }
 }

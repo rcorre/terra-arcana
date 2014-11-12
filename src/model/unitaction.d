@@ -34,7 +34,7 @@ class UnitAction {
   }
 
   @property bool isAttack() const { 
-    return target == Target.enemy || target == Target.burst || target == Target.line; 
+    return effect != Effect.heal && effect != effect.armor && effect != effect.evade; 
   }
 
   bool hasSpecial(Special special) const {

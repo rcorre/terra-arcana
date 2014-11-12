@@ -21,10 +21,10 @@
     "action2": {
       "name"        : "Frag",
       "description" : "",
-      "target"      : "enemy",
+      "target"      : "burst",
       "effect"      : "damage",
       "apCost"      : 3,
-      "power"       : 3,
+      "power"       : 2,
       "hits"        : 1,
       "minRange"    : 2,
       "maxRange"    : 2

@@ -36,9 +36,9 @@
   {
     "sheets" : ["gui/overlay"],
     "frameSize": 32,
-    "frameTimeMs": 20,
+    "frameTimeMs": 30,
     "defaultDepth": 5,
-    "rows": ["move",  "enemy", "ally", "path"]
+    "rows": ["move",  "enemy", "ally", "enemy-target", "ally-target", "path"]
   },
 
   {
