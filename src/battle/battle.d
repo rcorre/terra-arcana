@@ -31,6 +31,7 @@ class Battle : Scene!Battle {
     super(systems, cursorSprites);
     _panel = new BattlePanel;
     gui.addElement(_panel);
+    gui.toolTipSpec = toolTipSpec;
     _turnCycle = cycle(_players);
     cursor.setSprite("inactive");
   }
@@ -92,8 +93,8 @@ package:
 
   auto spawnPointsFor(int teamIdx) {
     return _spawnPoints.filter!(x => x.team == teamIdx)
-                       .filter!(x => x.tile.entity is null)
-                       .map!(x => x.tile);
+      .filter!(x => x.tile.entity is null)
+      .map!(x => x.tile);
   }
 
   auto spawnUnit(string key, Player player, Tile tile) {
@@ -189,5 +190,15 @@ package:
     }
     Tile tile;
     int team;
+  }
+
+  @property auto toolTipSpec() {
+    ToolTipSpec spec = new ToolTipSpec;
+    spec.spriteName  = "gui/tooltip";
+    spec.titleFont   = Font("Mecha_Bold", 28);
+    spec.textFont    = Font("Mecha_Condensed", 20);
+    spec.titleOffset = Vector2i(43, 11);
+    spec.textOffset  = Vector2i(7, 43);
+    return spec;
   }
 }

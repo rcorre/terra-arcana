@@ -44,6 +44,9 @@ class GUIElement {
     void active(bool val) { _active = val; }
 
     auto children() { return _children[]; }
+
+    string toolTipText() { return null; }
+    string toolTipTitle() { return null; }
   }
 
   void onMouseEnter() {}
@@ -89,9 +92,11 @@ class GUIElement {
       }
     }
 
-    bool handleMouseHover(Vector2i pos, Vector2i prevPos) {
+    /// return most-nested element under mouse
+    GUIElement handleMouseHover(Vector2i pos, Vector2i prevPos) {
       bool mouseInArea = area.contains(pos);
       bool mouseWasInArea = area.contains(prevPos);
+      GUIElement hoveredElement = mouseInArea ? this : null;
       if (mouseInArea && !mouseWasInArea) {
         onMouseEnter();
         _hoverHandler(true);
@@ -104,11 +109,10 @@ class GUIElement {
       auto localPos = pos - area.topLeft;
       auto prevLocalPos = prevPos - area.topLeft;
       foreach(child ; children) {
-        bool inChildArea = child.handleMouseHover(localPos, prevLocalPos);
-        if (inChildArea) { _childUnderMouse = child; }
+        auto underMouse = child.handleMouseHover(localPos, prevLocalPos);
+        hoveredElement = (underMouse is null) ? hoveredElement : underMouse;
       }
-      if (!mouseInArea) { _childUnderMouse = null; }
-      return area.contains(pos);
+      return hoveredElement;
     }
 
     bool handleMouseClick(Vector2i pos) {
@@ -127,14 +131,11 @@ class GUIElement {
     }
   }
 
-  @property childUnderMouse() { return _childUnderMouse; }
-
   private:
   alias ChildList = RemovalList!(GUIElement, x => !x.active);
   Sprite _sprite;
   Rect2i _area;
   ChildList _children;
-  GUIElement _childUnderMouse;
   bool _active = true;
   HoverHandler _hoverHandler;
 }
