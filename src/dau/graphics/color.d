@@ -1,5 +1,6 @@
 module dau.graphics.color;
 
+import std.algorithm, std.conv, std.string, std.array;
 import dau.allegro;
 import dau.util.math;
 
@@ -32,6 +33,32 @@ struct Color {
 /// shortcut to create colors from unsigned byte values
 Color ucolor(ubyte r, ubyte g, ubyte b, ubyte a = 255u) {
   return Color(r / 255f, g / 255f, b / 255f, a / 255f);
+}
+
+/// parse color from string of form "r,g,b" or "r,g,b,a" with values given as floats
+Color parseColor(string csvSpec) {
+  auto vals = csvSpec.splitter(",").map!(x => x.strip.to!float).array;
+  switch (vals.length) {
+    case 3:
+      return color(vals[0], vals[1], vals[2]);
+    case 4:
+      return color(vals[0], vals[1], vals[2], vals[3]);
+    default:
+      assert(0, "failed to parse color from %s (%d entries)".format(csvSpec, vals.length));
+  }
+}
+
+/// parse color from string of form "r,g,b" or "r,g,b,a" with values given as ubytes
+Color parseUColor(string csvSpec) {
+  auto vals = csvSpec.splitter(",").map!(x => x.strip.to!ubyte).array;
+  switch (vals.length) {
+    case 3:
+      return ucolor(vals[0], vals[1], vals[2]);
+    case 4:
+      return ucolor(vals[0], vals[1], vals[2], vals[3]);
+    default:
+      assert(0, "failed to parse color from %s (%d entries)".format(csvSpec, vals.length));
+  }
 }
 
 Color lerp(Color start, Color end, float factor) {
@@ -92,4 +119,12 @@ unittest {
   assert(lerp([Color.black, Color.white, Color.red], 0.5) == Color.white);
   assert(approxEqual(lerp([Color.black, Color.white, Color.red], 0.6), Color(1, 0.8, 0.8)));
   assert(approxEqual(lerp([Color.black, Color.white, Color.red], 1), Color.red));
+
+  // parsing from strings
+  assert(parseColor("1.0,0.5,0.2") == color(1.0, 0.5, 0.2));
+  assert(parseColor("1.0, 0.5, 0.2") == color(1.0, 0.5, 0.2));
+  assert(parseColor("1.0, 0.5, 0.2, 0.7") == color(1.0, 0.5, 0.2, 0.7));
+  assert(parseColor("1.0,0.5,0.2,0.7") == color(1.0, 0.5, 0.2, 0.7));
+  assert(parseColor("1,0,1") == color(1.0, 0.0, 1.0));
+  assert(parseUColor("255, 128, 64") == ucolor(255, 128, 64));
 }
