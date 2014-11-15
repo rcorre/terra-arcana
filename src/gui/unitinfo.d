@@ -25,8 +25,8 @@ class UnitInfoGUI : GUIElement {
       auto actionBarOffset2 = data["actionBarOffset2"].parseVector!int;
       auto nameOffset = data["nameOffset"].parseVector!int;
       auto actionBarSize = data["actionBarSize"].parseVector!int;
-      _hpBar = new PipBar(data.child["hpBar"], hpArea, unit.maxHp);
-      _apBar = new PipBar(data.child["apBar"], apArea, unit.maxAp);
+      _hpBar = new PipBar(getGUIData("hpBar"), hpArea, unit.maxHp);
+      _apBar = new PipBar(getGUIData("apBar"), apArea, unit.maxAp);
       _armorText = new TextBox(data.child["text"], unit.armor, armorOffset, GUIElement.Anchor.center);
       _evadeText = new TextBox(data.child["text"], unit.evade, evadeOffset, GUIElement.Anchor.center);
       addChild(_hpBar);
@@ -112,7 +112,7 @@ class ActionInfo : GUIElement {
 
   void addApCostBar(int amount) {
     auto apArea = data["apArea"].parseRect!int;
-    addChild(new PipBar(data.child["apBar"], apArea, amount));
+    addChild(new PipBar(getGUIData("apBar"), apArea, amount));
   }
 
   void addActionIcon(string name) {

@@ -24,7 +24,6 @@
   "battlePanel": {
     "properties": {
       "texture"              : "gui/battle_panel",
-      "iconSheetName"        : "gui/icons",
       "leftUnitOffset"       : "108, 7",
       "rightUnitOffset"      : "446, 10",
       "commandCounterOffset" : "46, 21",
@@ -80,31 +79,10 @@
       "actionBarSize": "200, 24",
       "spriteOffset": "13, 0",
       "nameOffset": "49, 12",
-      "iconSheetName": "gui/icons",
       "effectFlashTime": "0.5",
       "effectFlashColor": "1, 0, 0, 0"
     },
     "child": {
-      "hpBar": {
-        "child": {
-          "pip": {
-            "properties": {
-              "texture": "gui/pip",
-              "sprite": "hpPip"
-            }
-          }
-        }
-      },
-      "apBar": {
-        "child": {
-          "pip": {
-            "properties": {
-              "texture": "gui/pip",
-              "sprite": "apPip"
-            }
-          }
-        }
-      },
       "text": {
         "properties": {
           "fontName": "Mecha",
@@ -119,8 +97,7 @@
       "actionIconOffset": "2, 2",
       "infoOffset": "34, 2",
       "apArea": "37, 28, 51, 12",
-      "iconSeparation": "4",
-      "iconSheetName": "gui/icons"
+      "iconSeparation": "4"
     },
     "child": {
       "text": {
@@ -128,15 +105,27 @@
           "fontName": "Mecha",
           "fontSize": "16"
         }
-      },
-      "apBar": {
-        "child": {
-          "pip": {
-            "properties": {
-              "texture": "gui/pip",
-              "sprite": "apPip"
-            }
-          }
+      }
+    }
+  },
+
+  "apBar": {
+    "child": {
+      "pip": {
+        "properties": {
+          "texture": "gui/pip",
+          "sprite": "apPip"
+        }
+      }
+    }
+  },
+
+  "hpBar": {
+    "child": {
+      "pip": {
+        "properties": {
+          "texture": "gui/pip",
+          "sprite": "hpPip"
         }
       }
     }
