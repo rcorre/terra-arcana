@@ -4,6 +4,7 @@ import std.algorithm : min, max;
 import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.element;
+import dau.gui.data;
 
 private enum {
   dimShade = color(0.25, 0.25, 0.25), /// shade to tint 'dimmed' pips with
@@ -12,16 +13,17 @@ private enum {
 
 /// bar that displays progress as discrete elements (pips)
 class PipBar : GUIElement {
-  this(Rect2i area, int numPips, string textureName, string spriteName) {
-    super(area);
+  this(GUIData data, Rect2i area, int numPips) {
+    super(data, area);
     _maxVal = numPips;
     // insert pips, moving horizontally from left to right
-    auto sprite = new Sprite(textureName, spriteName);
-    auto pos = sprite.size / 2; // relative to top left
+    auto pipData = data.child["pip"];
+    auto pip = new Pip(pipData, Vector2i.zero);
+    auto pos = pip.size / 2; // relative to top left
     for(int i = 0; i < numPips; ++i) {
-      _pips ~= addChild(new Pip(sprite, pos));
-      pos.x += sprite.width;
-      sprite = new Sprite(textureName, spriteName);
+      pip = new Pip(pipData, pos);
+      _pips ~= addChild(pip);
+      pos.x += pip.width;
     }
   }
 
@@ -62,7 +64,7 @@ class PipBar : GUIElement {
 }
 
 private class Pip : GUIElement {
-  this(Sprite sprite, Vector2i pos) {
-    super(sprite, pos, Anchor.center);
+  this(GUIData data, Vector2i pos) {
+    super(data, pos, Anchor.center);
   }
 }

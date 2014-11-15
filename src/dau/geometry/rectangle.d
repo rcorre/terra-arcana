@@ -1,5 +1,6 @@
 module dau.geometry.rectangle;
 
+import std.string, std.algorithm, std.conv, std.array;
 import dau.geometry.vector;
 import dau.util.math : clamp;
 
@@ -110,6 +111,14 @@ void keepInside(T)(ref Vector2!T point, Rect2!T area) {
   point.y = clamp(point.y, area.top, area.bottom);
 }
 
+auto parseRect(T : real)(string csvSpec) {
+  auto entries = csvSpec.splitter(",").map!(x => x.strip.to!T);
+  auto vals = entries.array;
+  assert(vals.length == 4, "failed to parse rectangle from %s (need 4 values)".format(csvSpec));
+  return Rect2!T(vals[0], vals[1], vals[2], vals[3]);
+}
+
+
 // int rects
 unittest {
   auto r1 = Rect2i(1, 2, 3, 4);
@@ -135,4 +144,10 @@ unittest {
 
   r1.bottom = 5.5;
   assert(r1.y == 1.5 && r1.center == Vector2f(2.5, 3.5));
+}
+
+// parsing
+unittest {
+  assert("1,2,3,4".parseRect!int == Rect2i(1, 2, 3, 4));
+  assert("-1.4,2.6, 1.8, 42.7".parseRect!float == Rect2f(-1.4, 2.6, 1.8, 42.7));
 }

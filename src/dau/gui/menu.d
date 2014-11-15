@@ -3,18 +3,19 @@ module dau.gui.menu;
 import std.algorithm;
 import dau.geometry.all;
 import dau.graphics.all;
-import dau.gui.all;
+import dau.gui.element;
+import dau.gui.data;
 import dau.util.removal_list;
 
 abstract class Menu(EntryType, ButtonType) : GUIElement {
-  this(Sprite bgSprite, Vector2i pos, Vector2i firstButtonOffset, ButtonType.Action onClick) {
-    super(bgSprite, pos, Anchor.topLeft);
+  this(GUIData data, Vector2i pos, Vector2i firstButtonOffset, ButtonType.Action onClick) {
+    super(data, pos, Anchor.topLeft);
     _nextButtonOffset = firstButtonOffset;
     _onClick = onClick;
   }
 
-  protected void addEntry(EntryType entry, bool enabled = true) {
-    auto button = new ButtonType(entry, _nextButtonOffset, _onClick, enabled);
+  protected void addEntry(GUIData data, EntryType entry, bool enabled = true) {
+    auto button = new ButtonType(data, entry, _nextButtonOffset, _onClick, enabled);
     addChild(button);
     _nextButtonOffset.y += button.height;
   }
@@ -26,8 +27,8 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
 
 abstract class MenuButton(EntryType) : GUIElement {
   alias Action = void delegate(EntryType);
-  this(EntryType entry, Sprite sprite, Vector2i pos, Action onClick, bool enabled) {
-    super(sprite, pos, Anchor.topLeft);
+  this(GUIData data, EntryType entry, Vector2i pos, Action onClick, bool enabled) {
+    super(data, pos, Anchor.topLeft);
     _onClick = onClick;
     _value = entry;
     _enabled = enabled;

@@ -19,6 +19,7 @@ enum Paths : string {
   musicData   = "content/music.cfg",
   mapDir      = "data/maps",
   textureData = "data/textures.json",
+  guiData     = "data/gui.json",
   unitData    = "data/units.json",
   factionData = "data/factions.json",
   aiData      = "data/ai.json",

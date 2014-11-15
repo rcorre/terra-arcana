@@ -1,0 +1,325 @@
+{
+  "toolTip": {
+    "properties": {
+      "texture": "gui/tooltip",
+      "titleOffset": "43, 11",
+      "textOffset":  "7, 43"
+    },
+    "child": {
+      "title": {
+        "properties": {
+          "fontName": "Mecha_Bold",
+          "fontSize": "28"
+        }
+      },
+      "text": {
+        "properties": {
+          "fontName": "Mecha_Condensed",
+          "fontSize": "20"
+        }
+      }
+    }
+  },
+
+  "battlePanel": {
+    "properties": {
+      "texture"              : "gui/battle_panel",
+      "iconSheetName"        : "gui/icons",
+      "leftUnitOffset"       : "108, 7",
+      "rightUnitOffset"      : "446, 10",
+      "commandCounterOffset" : "46, 21",
+      "manaCounterOffset"    : "46, 70"
+    },
+    "child": {
+      "counter": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "20"
+        }
+      }
+    }
+  },
+
+  "deployMenu": {
+    "properties": {
+      "texture": "gui/deploy_menu"
+    },
+    "child": {
+      "deployButton": {
+        "properties": {
+          "texture"       : "gui/deploy_button",
+          "costOffset"    : "172, 10",
+          "spriteOffset"  : "0, 0",
+          "nameOffset"    : "48, 4",
+          "brightShade"   : "1, 1, 1, 0.9",
+          "dullShade"     : "0.9, 0.9, 0.9, 0.6",
+          "disabledShade" : "0.5, 0.5, 0.5, 0.5"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "20"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "unitInfo": {
+    "properties": {
+      "texture": "gui/unit_status",
+      "armorOffset": "18, 52",
+      "evadeOffset": "118, 51",
+      "hpArea": "37, 37, 63, 13",
+      "apArea": "37, 53, 63, 13",
+      "effectsOffset": "5, 73",
+      "actionBarOffset1": "137, 9",
+      "actionBarOffset2": "137, 57",
+      "actionBarSize": "200, 24",
+      "spriteOffset": "13, 0",
+      "nameOffset": "49, 12",
+      "iconSheetName": "gui/icons",
+      "effectFlashTime": "0.5",
+      "effectFlashColor": "1, 0, 0, 0"
+    },
+    "child": {
+      "hpBar": {
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip",
+              "sprite": "hpPip"
+            }
+          }
+        }
+      },
+      "apBar": {
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip",
+              "sprite": "apPip"
+            }
+          }
+        }
+      },
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "16"
+        }
+      }
+    }
+  },
+
+  "actionInfo": {
+    "properties": {
+      "actionIconOffset": "2, 2",
+      "infoOffset": "34, 2",
+      "apArea": "37, 28, 51, 12",
+      "iconSeparation": "4",
+      "iconSheetName": "gui/icons"
+    },
+    "child": {
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "16"
+        }
+      },
+      "apBar": {
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip",
+              "sprite": "apPip"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "icon_range": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "range"
+    }
+  }, 
+  "icon_damage": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "damage"
+    }
+  }, 
+  "icon_stun": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "stun"
+    }
+  }, 
+  "icon_heal": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "heal"
+    }
+  }, 
+  "icon_armor": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "armor"
+    }
+  }, 
+  "icon_evade": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "evade"
+    }
+  }, 
+  "icon_piercing": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "piercing"
+    }
+  }, 
+  "icon_precise": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "precise"
+    }
+  }, 
+  "icon_blitz": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "blitz"
+    }
+  }, 
+  "icon_toxin": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "toxin"
+    }
+  }, 
+  "icon_slow": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "slow"
+    }
+  }, 
+  "icon_guerilla": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "guerilla"
+    }
+  }, 
+  "icon_flight": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "flight"
+    }
+  }, 
+  "icon_warp": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "warp"
+    }
+  }, 
+  "icon_rifle": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "rifle"
+    }
+  }, 
+  "icon_frag": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "frag"
+    }
+  }, 
+  "icon_sniper": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "sniper"
+    }
+  }, 
+  "icon_mine": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "mine"
+    }
+  }, 
+  "icon_shotgun": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "shotgun"
+    }
+  }, 
+  "icon_concussor": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "concussor"
+    }
+  }, 
+  "icon_aid": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "aid"
+    }
+  }, 
+  "icon_smoke": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "smoke"
+    }
+  }, 
+  "icon_thorns": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "thorns"
+    }
+  }, 
+  "icon_regrowth": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "regrowth"
+    }
+  }, 
+  "icon_claw": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "claw"
+    }
+  }, 
+  "icon_venom": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "venom"
+    }
+  }, 
+  "icon_bite": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "bite"
+    }
+  }, 
+  "icon_screech": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "screech"
+    }
+  }, 
+  "icon_smash": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "smash"
+    }
+  }, 
+  "icon_entangle": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "entangle"
+    }
+  }
+}

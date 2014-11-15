@@ -4,11 +4,10 @@ import dau.setup;
 import dau.input;
 import dau.gui.element;
 import dau.gui.tooltip;
+import dau.gui.data;
 import dau.geometry.all;
 
 class GUIManager {
-  ToolTipSpec toolTipSpec;
-
   this() {
     clear(); // set up initial guielement
   }
@@ -18,14 +17,14 @@ class GUIManager {
   }
 
   void clear() {
-    _topElement = new GUIElement(Rect2i(0, 0, Settings.screenW, Settings.screenH));
+    _topElement = new GUIElement(new GUIData, Rect2i(0, 0, Settings.screenW, Settings.screenH));
   }
 
   void update(float time, InputManager input) {
     _topElement.update(time);
     _mousePos = input.mousePos;
     auto underMouse = _topElement.handleMouseHover(input.mousePos, input.prevMousePos);
-    if (underMouse != _elementUnderMouse && toolTipSpec !is null) {
+    if (underMouse != _elementUnderMouse) {
       if (underMouse is null) {
         _toolTip = null;
       }
@@ -36,7 +35,7 @@ class GUIManager {
           _toolTip = null;
         }
         else {
-          _toolTip = new ToolTip(title, text, toolTipSpec,);
+          _toolTip = new ToolTip(title, text);
         }
       }
     }

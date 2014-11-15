@@ -2,17 +2,16 @@ module dau.gui.textbox;
 
 import std.conv;
 import dau.gui.element;
+import dau.gui.data;
 import dau.geometry.all;
 import dau.graphics.color;
 import dau.graphics.font;
 
 class TextBox : GUIElement {
-  this(T)(T text, Font font, Vector2i pos, Anchor anchor = Anchor.topLeft,
-      Color color = Color.black)
-  {
+  this(T)(GUIData data, T text, Vector2i pos, Anchor anchor = Anchor.topLeft) {
     _text = text.to!string;
-    _font = font;
-    _color = color;
+    _font = Font(data["fontName"], data["fontSize"].to!int);
+    _color = parseColor(data.get("textColor", "0,0,0"));
     Rect2i textArea;
     int width = _font.widthOf(_text);
     int height = _font.heightOf(_text);
@@ -24,19 +23,12 @@ class TextBox : GUIElement {
         textArea = Rect2i.centeredAt(pos, width, height);
         break;
     }
-    super(textArea);
+    super(data, textArea);
   }
 
   @property {
     auto text() { return _text; }
     void text(string text) { _text = text; }
-  }
-
-  /// create a textbox with text centered in the specified area
-  this(T)(T text, Font font, Rect2i area, Anchor anchor = Anchor.topLeft,
-      Color color = Color.black)
-  {
-    //TODO use for icon text (to make it centered)
   }
 
   override void draw(Vector2i parentTopLeft) {

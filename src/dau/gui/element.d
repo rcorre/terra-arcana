@@ -1,5 +1,6 @@
 module dau.gui.element;
 
+import dau.gui.data;
 import dau.geometry.all;
 import dau.graphics.all;
 import dau.util.removal_list;
@@ -12,8 +13,13 @@ class GUIElement {
     topLeft
   }
 
-  this(Sprite sprite, Vector2i pos, Anchor anchor = Anchor.topLeft) {
-    _sprite = sprite;
+  const string toolTipText;
+  const string toolTipTitle;
+
+  this(GUIData data, Vector2i pos, Anchor anchor = Anchor.topLeft) {
+    auto textureName = data.get("texture", null);
+    auto spriteName = data.get("sprite", null);
+    _sprite = (textureName is null) ? null : new Sprite(textureName, spriteName);
     Rect2i area;
     final switch (anchor) with (Anchor) {
       case topLeft:
@@ -23,20 +29,24 @@ class GUIElement {
         area = Rect2i.centeredAt(pos, _sprite.width, _sprite.height);
         break;
     }
-    this(area);
+    this(data, area);
   }
 
-  this(Rect2i area) {
+  this(GUIData data, Rect2i area) {
     _area = area;
     _children = new ChildList;
     _hoverHandler = delegate(bool) { };
     onMouseLeave(); // assume mouse not in area to begin with
+    toolTipText = data.get("toolTipText", null);
+    toolTipTitle = data.get("toolTipTitle", null);
+    _data = data;
   }
 
   @property {
     auto area() { return _area; }
     auto width() { return _area.width; }
     auto height() { return _area.height; }
+    auto size() { return Vector2i(width, height); }
 
     auto sprite() { return _sprite; }
 
@@ -45,8 +55,7 @@ class GUIElement {
 
     auto children() { return _children[]; }
 
-    string toolTipText() { return null; }
-    string toolTipTitle() { return null; }
+    auto data() { return _data; }
   }
 
   void onMouseEnter() {}
@@ -138,4 +147,5 @@ class GUIElement {
   ChildList _children;
   bool _active = true;
   HoverHandler _hoverHandler;
+  GUIData _data;
 }
