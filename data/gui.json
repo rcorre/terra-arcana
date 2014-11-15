@@ -2,20 +2,20 @@
   "toolTip": {
     "properties": {
       "texture": "gui/tooltip",
-      "titleOffset": "43, 11",
+      "titleOffset": "43, 8",
       "textOffset":  "7, 43"
     },
     "child": {
       "title": {
         "properties": {
           "fontName": "Mecha_Bold",
-          "fontSize": "28"
+          "fontSize": "16"
         }
       },
       "text": {
         "properties": {
-          "fontName": "Mecha_Condensed",
-          "fontSize": "20"
+          "fontName": "Mecha",
+          "fontSize": "16"
         }
       }
     }
@@ -145,181 +145,241 @@
   "icon_range": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "range"
+      "sprite": "range",
+      "toolTipTitle": "Range",
+      "toolTipText": "min range - max range"
     }
-  }, 
+  },
   "icon_damage": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "damage"
+      "sprite": "damage",
+      "toolTipTitle": "Damage",
+      "toolTipText": "Damage"
     }
-  }, 
+  },
   "icon_stun": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "stun"
+      "sprite": "stun",
+      "toolTipTitle": "Stun",
+      "toolTipText": "Reduce AP"
     }
-  }, 
+  },
   "icon_heal": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "heal"
+      "sprite": "heal",
+      "toolTipTitle": "Heal",
+      "toolTipText": "Restore health"
     }
-  }, 
+  },
   "icon_armor": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "armor"
+      "sprite": "armor",
+      "toolTipTitle": "Armor",
+      "toolTipText": "Improve armor"
     }
-  }, 
+  },
   "icon_evade": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "evade"
+      "sprite": "evade",
+      "toolTipTitle": "Evade",
+      "toolTipText": "Boost evasion"
     }
-  }, 
+  },
   "icon_piercing": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "piercing"
+      "sprite": "piercing",
+      "toolTipTitle": "Piercing",
+      "toolTipText": "Ignore armor"
     }
-  }, 
+  },
   "icon_precise": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "precise"
+      "sprite": "precise",
+      "toolTipTitle": "Precise",
+      "toolTipText": "Ignore evasion"
     }
-  }, 
+  },
   "icon_blitz": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "blitz"
+      "sprite": "blitz",
+      "toolTipTitle": "Blitz",
+      "toolTipText": "Cannot be countered"
     }
-  }, 
+  },
   "icon_toxin": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "toxin"
+      "sprite": "toxin",
+      "toolTipTitle": "Toxin",
+      "toolTipText": "1 damage per turn"
     }
-  }, 
+  },
   "icon_slow": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "slow"
+      "sprite": "slow",
+      "toolTipTitle": "Slow",
+      "toolTipText": "Halve move range"
     }
-  }, 
+  },
   "icon_guerilla": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "guerilla"
+      "sprite": "guerilla",
+      "toolTipTitle": "Guerilla",
+      "toolTipText": "Gain evasion on entering cover"
     }
-  }, 
+  },
   "icon_flight": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "flight"
+      "sprite": "flight",
+      "toolTipTitle": "Flight",
+      "toolTipText": "Fly over obstacles"
     }
-  }, 
+  },
   "icon_warp": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "warp"
+      "sprite": "warp",
+      "toolTipTitle": "Warp",
+      "toolTipText": "Move instantly to destination"
     }
-  }, 
+  },
   "icon_rifle": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "rifle"
+      "sprite": "rifle",
+      "toolTipTitle": "Rifle",
+      "toolTipText": "Assault rifle"
     }
-  }, 
+  },
   "icon_frag": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "frag"
+      "sprite": "frag",
+      "toolTipTitle": "Frag",
+      "toolTipText": "Explosive grenade"
     }
-  }, 
+  },
   "icon_sniper": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "sniper"
+      "sprite": "sniper",
+      "toolTipTitle": "Sniper",
+      "toolTipText": "Long range weapon"
     }
-  }, 
+  },
   "icon_mine": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "mine"
+      "sprite": "mine",
+      "toolTipTitle": "Mine",
+      "toolTipText": "Explosive trap"
     }
-  }, 
+  },
   "icon_shotgun": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "shotgun"
+      "sprite": "shotgun",
+      "toolTipTitle": "Shotgun",
+      "toolTipText": "High power CQC weapon"
     }
-  }, 
+  },
   "icon_concussor": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "concussor"
+      "sprite": "concussor",
+      "toolTipTitle": "Concussor",
+      "toolTipText": "Stunning grenade"
     }
-  }, 
+  },
   "icon_aid": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "aid"
+      "sprite": "aid",
+      "toolTipTitle": "Aid",
+      "toolTipText": "Administer first aid"
     }
-  }, 
+  },
   "icon_smoke": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "smoke"
+      "sprite": "smoke",
+      "toolTipTitle": "Smoke",
+      "toolTipText": "Smoke providing evasion"
     }
-  }, 
+  },
   "icon_thorns": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "thorns"
+      "sprite": "thorns",
+      "toolTipTitle": "Thorns",
+      "toolTipText": "Barrage of spines"
     }
-  }, 
+  },
   "icon_regrowth": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "regrowth"
+      "sprite": "regrowth",
+      "toolTipTitle": "Regrowth",
+      "toolTipText": "Regenerate nearby allies"
     }
-  }, 
+  },
   "icon_claw": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "claw"
+      "sprite": "claw",
+      "toolTipTitle": "Claw",
+      "toolTipText": "Melee attack"
     }
-  }, 
+  },
   "icon_venom": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "venom"
+      "sprite": "venom",
+      "toolTipTitle": "Venom",
+      "toolTipText": "Toxic breath"
     }
-  }, 
+  },
   "icon_bite": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "bite"
+      "sprite": "bite",
+      "toolTipTitle": "Bite",
+      "toolTipText": "Melee attack"
     }
-  }, 
+  },
   "icon_screech": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "screech"
+      "sprite": "screech",
+      "toolTipTitle": "Screech",
+      "toolTipText": "Paralyzing sonic wave"
     }
-  }, 
+  },
   "icon_smash": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "smash"
+      "sprite": "smash",
+      "toolTipTitle": "Smash",
+      "toolTipText": "Melee attack"
     }
-  }, 
+  },
   "icon_entangle": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "entangle"
+      "sprite": "entangle",
+      "toolTipTitle": "Entangle",
+      "toolTipText": "Movement-slowing vines"
     }
   }
 }

@@ -116,10 +116,7 @@ class ActionInfo : GUIElement {
   }
 
   void addActionIcon(string name) {
-    auto actionName = name.toLower;
-    auto iconData = new GUIData;
-    iconData["texture"] = data["iconSheetName"];
-    iconData["sprite"] = actionName;
+    auto iconData = getGUIData(iconFmt.format(name.toLower));
     auto offset = data["actionIconOffset"].parseVector!int;
     addChild(new Icon(iconData, offset));
   }
