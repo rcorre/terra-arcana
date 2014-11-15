@@ -41,18 +41,19 @@
 
   "deployMenu": {
     "properties": {
-      "texture": "gui/deploy_menu"
+      "texture": "gui/deploy_menu",
+      "firstButtonOffset" : "0, 22"
     },
     "child": {
       "deployButton": {
         "properties": {
-          "texture"       : "gui/deploy_button",
-          "costOffset"    : "172, 10",
-          "spriteOffset"  : "0, 0",
-          "nameOffset"    : "48, 4",
-          "brightShade"   : "1, 1, 1, 0.9",
-          "dullShade"     : "0.9, 0.9, 0.9, 0.6",
-          "disabledShade" : "0.5, 0.5, 0.5, 0.5"
+          "texture"           : "gui/deploy_button",
+          "costOffset"        : "172, 10",
+          "spriteOffset"      : "0, 0",
+          "nameOffset"        : "48, 4",
+          "brightShade"       : "1, 1, 1, 0.9",
+          "dullShade"         : "0.9, 0.9, 0.9, 0.6",
+          "disabledShade"     : "0.5, 0.5, 0.5, 0.5"
         },
         "child": {
           "text": {
