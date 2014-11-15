@@ -370,5 +370,70 @@
       "toolTipTitle": "Entangle",
       "toolTipText": "Movement-slowing vines"
     }
+  },
+
+  "icon_assault": {
+    "properties": {
+      "texture": "assault",
+      "animation": "idle",
+      "toolTipTitle": "Assault",
+      "toolTipText": "Versatile attacker"
+    }
+  },
+  "icon_guardian": {
+    "properties": {
+      "texture": "guardian",
+      "animation": "idle",
+      "toolTipTitle": "Guardian",
+      "toolTipText": "Armored support"
+    }
+  },
+  "icon_sniper": {
+    "properties": {
+      "texture": "sniper",
+      "animation": "idle",
+      "toolTipTitle": "Sniper",
+      "toolTipText": "Long-range marksman"
+    }
+  },
+  "icon_medic": {
+    "properties": {
+      "texture": "medic",
+      "animation": "idle",
+      "toolTipTitle": "Medic",
+      "toolTipText": "Healing and support"
+    }
+  },
+  "icon_antlion": {
+    "properties": {
+      "texture": "antlion",
+      "animation": "idle",
+      "toolTipTitle": "Antlion",
+      "toolTipText": "Fast Scout"
+    }
+  },
+  "icon_wyvern": {
+    "properties": {
+      "texture": "wyvern",
+      "animation": "idle",
+      "toolTipTitle": "Wyvern",
+      "toolTipText": "Flying and venemous"
+    }
+  },
+  "icon_treant": {
+    "properties": {
+      "texture": "treant",
+      "animation": "idle",
+      "toolTipTitle": "Treant",
+      "toolTipText": "Armored melee"
+    }
+  },
+  "icon_hellblossom": {
+    "properties": {
+      "texture": "hellblossom",
+      "animation": "idle",
+      "toolTipTitle": "hellblossom",
+      "toolTipText": "Ranged attack and healing"
+    }
   }
 }

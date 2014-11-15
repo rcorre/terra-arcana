@@ -8,7 +8,9 @@ import dau.graphics.all;
 import dau.gui.all;
 import model.all;
 
-private enum iconFmt = "icon_%s";
+private enum {
+  iconFmt = "icon_%s",
+}
 
 /// bar that displays progress as discrete elements (pips)
 class UnitInfoGUI : GUIElement {
@@ -17,26 +19,30 @@ class UnitInfoGUI : GUIElement {
     super(getGUIData("unitInfo"), offset);
     _nextEffectOffset = data["effectsOffset"].parseVector!int;
     if (unit !is null) {
-      auto hpArea = data["hpArea"].parseRect!int;
-      auto apArea = data["apArea"].parseRect!int;
-      auto armorOffset = data["armorOffset"].parseVector!int;
-      auto evadeOffset = data["evadeOffset"].parseVector!int;
+      auto hpArea           = data["hpArea"].parseRect!int;
+      auto apArea           = data["apArea"].parseRect!int;
+      auto spriteOffset     = data["spriteOffset"].parseVector!int;
+      auto armorOffset      = data["armorOffset"].parseVector!int;
+      auto evadeOffset      = data["evadeOffset"].parseVector!int;
       auto actionBarOffset1 = data["actionBarOffset1"].parseVector!int;
       auto actionBarOffset2 = data["actionBarOffset2"].parseVector!int;
-      auto nameOffset = data["nameOffset"].parseVector!int;
-      auto actionBarSize = data["actionBarSize"].parseVector!int;
+      auto nameOffset       = data["nameOffset"].parseVector!int;
+      auto actionBarSize    = data["actionBarSize"].parseVector!int;
+      auto textData         = data.child["text"];
+      auto unitIconData     = getGUIData(iconFmt.format(unit.key));
+
       _hpBar = new PipBar(getGUIData("hpBar"), hpArea, unit.maxHp);
       _apBar = new PipBar(getGUIData("apBar"), apArea, unit.maxAp);
-      _armorText = new TextBox(data.child["text"], unit.armor, armorOffset, GUIElement.Anchor.center);
-      _evadeText = new TextBox(data.child["text"], unit.evade, evadeOffset, GUIElement.Anchor.center);
+      _armorText = new TextBox(textData, unit.armor, armorOffset, GUIElement.Anchor.center);
+      _evadeText = new TextBox(textData, unit.evade, evadeOffset, GUIElement.Anchor.center);
       addChild(_hpBar);
       addChild(_apBar);
       addChild(_armorText);
       addChild(_evadeText);
       addChild(new ActionInfo(actionBarOffset1, actionBarSize, unit.action1));
       addChild(new ActionInfo(actionBarOffset2, actionBarSize, unit.action2));
-      //addChild(new Icon(new Animation(unit.key, "idle", Animation.Repeat.loop), spriteOffset));
-      addChild(new TextBox(data.child["text"], unit.name, nameOffset));
+      addChild(new Icon(unitIconData, spriteOffset));
+      addChild(new TextBox(textData, unit.name, nameOffset));
       foreach(trait ; unit.traits) {
         addEffectIcon(trait.to!string);
       }

@@ -18,8 +18,16 @@ class GUIElement {
 
   this(GUIData data, Vector2i pos, Anchor anchor = Anchor.topLeft) {
     auto textureName = data.get("texture", null);
-    auto spriteName = data.get("sprite", null);
-    _sprite = (textureName is null) ? null : new Sprite(textureName, spriteName);
+    if (textureName !is null) {
+      auto animName = data.get("animation", null);
+      if (animName !is null) {
+        _sprite = new Animation(textureName, animName, Animation.Repeat.loop);
+      }
+      else {
+        auto spriteName = data.get("sprite", null);
+        _sprite = new Sprite(textureName, spriteName);
+      }
+    }
     Rect2i area;
     final switch (anchor) with (Anchor) {
       case topLeft:
