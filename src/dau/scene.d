@@ -2,6 +2,7 @@ module dau.scene;
 
 import std.algorithm;
 import dau.setup;
+import dau.allegro;
 import dau.state;
 import dau.input;
 import dau.entity;
@@ -22,7 +23,7 @@ void setScene(T)(Scene!T newScene) {
 @property auto currentScene() { return _currentScene; }
 
 class Scene(T) : IScene {
-  this(System!(T)[] systems, Sprite[string] cursorSpriteMap) {
+  this(System!(T)[] systems, Sprite[string] cursorSpriteMap, Color bgColor = Color.black) {
     _inputManager  = new InputManager;
     _entityManager = new EntityManager;
     _spriteBatch   = new SpriteBatch;
@@ -31,6 +32,7 @@ class Scene(T) : IScene {
     _systems       = systems;
     _stateMachine  = new StateMachine!T(cast(T) this);
     _cursorManager = new CursorManager(cursorSpriteMap);
+    _backgroundColor = bgColor;
   }
 
   @property {
@@ -61,11 +63,13 @@ class Scene(T) : IScene {
 
     /// called every frame between screen clear and screen flip
     void draw() {
+      al_clear_to_color(_backgroundColor);
       _entityManager.drawEntities(_spriteBatch);
       _stateMachine.draw(_spriteBatch);
       _spriteBatch.render(camera);
       _guiManager.draw(); // gui draws over state & entities
       _cursorManager.draw(input.mousePos);
+      al_flip_display();
     }
   }
 
@@ -92,6 +96,7 @@ class Scene(T) : IScene {
   SpriteBatch    _spriteBatch;
   Camera         _camera;
   System!(T)[]   _systems;
+  Color          _backgroundColor;
 
   private:
   bool _started;

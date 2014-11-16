@@ -39,9 +39,51 @@
     }
   },
 
+  "selectBattle": {
+    "properties": {
+      "texture": "gui/select_battle",
+      "playerOffset": "33, 73",
+      "pcOffset": "545, 73",
+      "factionTitleOffset": "350, 37",
+      "playerTitleOffset": "33, 20",
+      "pcTitleOffset": "715, 20",
+      "startButtonOffset": "289, 537"
+    },
+    "child": {
+      "playerText": {
+        "properties": {
+          "fontName": "Mecha_Bold",
+          "fontSize": "48"
+        }
+      },
+      "factionText": {
+        "properties": {
+          "fontName": "Mecha_Bold",
+          "fontSize": "32"
+        }
+      },
+      "startButton": {
+        "properties": {
+          "texture": "start_button"
+        },
+        "child": {
+          "startText": {
+            "properties": {
+              "fontName": "Mecha_Bold",
+              "fontSize": "32"
+            }
+          }
+        }
+      }
+    }
+  },
+
   "factionMenu": {
-    "firstButtonOffset" : "0, 0",
-    "menuSpacingY": "32",
+    "properties": {
+      "firstButtonOffset" : "17, 17",
+      "menuSpacingY": "32",
+      "texture": "gui/faction_menu"
+    },
     "child": {
       "factionButton": {
         "properties": {

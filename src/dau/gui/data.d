@@ -13,7 +13,8 @@ class GUIData {
 }
 
 auto getGUIData(string key) {
-  return _data.get(key, new GUIData);
+  assert(key in _data, "no gui data for key " ~ key);
+  return _data[key];
 }
 
 private:

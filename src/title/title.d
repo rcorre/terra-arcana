@@ -2,8 +2,9 @@ module title.title;
 
 import dau.all;
 import model.all;
-import gui.factionmenu;
 import title.state.selectbattle;
+
+private enum bgColor = color(0, 0.5, 0.5, 0.8);
 
 class Title : Scene!Title {
   //this(Player[] players) { // TODO: load players from previous state
@@ -18,21 +19,11 @@ class Title : Scene!Title {
     ];
     super(systems, cursorSprites);
     cursor.setSprite("inactive");
-    /*
-    _playerFactionMenu = new FactionMenu(Vector2i(100, 100), &selectPlayerFaction);
-    gui.addElement(_playerFactionMenu);
-    */
   }
 
   override {
     void enter() {
       states.setState(new SelectBattle);
     }
-  }
-
-  private:
-  FactionMenu _playerFactionMenu, _pcFactionMenu;
-
-  void selectPlayerFaction(Faction faction) {
   }
 }

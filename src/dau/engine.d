@@ -132,7 +132,5 @@ void mainUpdate() {
 }
 
 void mainDraw() {
-  al_clear_to_color(al_map_rgb(0,0,0));
   currentScene.draw();
-  al_flip_display();
 }

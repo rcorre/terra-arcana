@@ -24,15 +24,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.80521785"
-     inkscape:cx="290.22246"
-     inkscape:cy="238.99024"
+     inkscape:zoom="0.89272231"
+     inkscape:cx="171.9422"
+     inkscape:cy="256.58278"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer5"
      showgrid="true"
-     inkscape:window-width="1438"
+     inkscape:window-width="1150"
      inkscape:window-height="1059"
-     inkscape:window-x="480"
+     inkscape:window-x="0"
      inkscape:window-y="19"
      inkscape:window-maximized="0">
     <inkscape:grid
@@ -53,7 +53,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -81,17 +81,38 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="factionmenu">
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.94935893999999998;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5978"
+       width="224"
+       height="288"
+       x="32"
+       y="72"
+       ry="24" />
+    <rect
+       ry="24"
+       y="72"
+       x="544"
+       height="288"
+       width="224"
+       id="rect5980"
+       style="fill:none;stroke:#000000;stroke-width:1.94935894;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="factionbutton">
     <path
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 96,152 32,-32 160,0 -32,32 z"
+       d="m 46,152 32,-32 160,0 -32,32 z"
        id="path3002"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 128,120 32,-32 128,0 -32,32"
+       d="m 78,120 32,-32 128,0 -32,32"
        id="path3004"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
@@ -99,23 +120,23 @@
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="path3021"
-       d="m 96,248 32,-32 160,0 -32,32 z"
+       d="m 46,248 32,-32 160,0 -32,32 z"
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cccc"
        inkscape:connector-curvature="0"
        id="path3023"
-       d="m 128,216 32,-32 128,0 -32,32"
+       d="m 78,216 32,-32 128,0 -32,32"
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 96,344 32,-32 160,0 -32,32 z"
+       d="m 46,344 32,-32 160,0 -32,32 z"
        id="path3025"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 128,312 32,-32 128,0 -32,32"
+       d="m 78,312 32,-32 128,0 -32,32"
        id="path3027"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
@@ -123,23 +144,23 @@
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="path3041"
-       d="m 512,152 32,-32 160,0 -32,32 z"
+       d="m 562,152 32,-32 160,0 -32,32 z"
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cccc"
        inkscape:connector-curvature="0"
        id="path3043"
-       d="m 544,120 32,-32 128,0 -32,32"
+       d="m 594,120 32,-32 128,0 -32,32"
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 512,248 32,-32 160,0 -32,32 z"
+       d="m 562,248 32,-32 160,0 -32,32 z"
        id="path3045"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 544,216 32,-32 128,0 -32,32"
+       d="m 594,216 32,-32 128,0 -32,32"
        id="path3047"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
@@ -147,13 +168,13 @@
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="path3049"
-       d="m 512,344 32,-32 160,0 -32,32 z"
+       d="m 562,344 32,-32 160,0 -32,32 z"
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cccc"
        inkscape:connector-curvature="0"
        id="path3051"
-       d="m 544,312 32,-32 128,0 -32,32"
+       d="m 594,312 32,-32 128,0 -32,32"
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
   <g
@@ -175,13 +196,13 @@
     <text
        xml:space="preserve"
        style="font-size:48.62310791px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
-       x="96"
+       x="64"
        y="56"
        id="text3054"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3056"
-         x="96"
+         x="64"
          y="56">Player</tspan></text>
     <text
        sodipodi:linespacing="125%"
