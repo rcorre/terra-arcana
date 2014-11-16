@@ -33,9 +33,3 @@ class DeployButton : MenuButton!string {
     addChild = new Icon(iconData, spriteOffset);
   }
 }
-
-Font _font;
-
-static this() {
-  onInit({ _font = Font("Mecha", 20); });
-}

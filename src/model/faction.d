@@ -21,6 +21,10 @@ auto getFaction(string name) {
   return faction.front;
 }
 
+auto allFactions() {
+  return _factions;
+}
+
 private:
 Faction[] _factions;
 
