@@ -89,7 +89,7 @@
         "properties": {
           "texture"       : "gui/faction_button",
           "spritesOffset" : "32, 32",
-          "nameOffset"    : "65, 5",
+          "nameOffset"    : "60, 5",
           "brightShade"   : "1, 1, 1, 0.9",
           "dullShade"     : "0.9, 0.9, 0.9, 0.6",
           "disabledShade" : "0.5, 0.5, 0.5, 0.5"
@@ -98,7 +98,7 @@
           "text": {
             "properties": {
               "fontName": "Mecha",
-              "fontSize": "20"
+              "fontSize": "24"
             }
           }
         }
