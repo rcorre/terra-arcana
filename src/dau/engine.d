@@ -33,6 +33,7 @@ int runGame(FirstSceneType)() {
     // initialize
     al_init();
 
+    al_set_new_display_option(ALLEGRO_DISPLAY_OPTIONS.ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
     mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
     mainEventQueue = al_create_event_queue();
     mainTimer = al_create_timer(1.0 / Settings.fps);
