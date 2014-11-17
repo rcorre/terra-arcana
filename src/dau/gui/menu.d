@@ -21,7 +21,7 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
 
   /// the currently selected entry, or the default value of EntryType if none selected
   @property EntryType selection() {
-    auto selected = buttons.find!(x => x.isSelected);
+    auto selected = childrenOfType!ButtonType.find!(x => x.isSelected);
     if (selected.empty) { // return default value if no button selected
       return is(typeof(null) : EntryType) ? null : EntryType.init;
     }
@@ -29,8 +29,8 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
   }
 
   void setSelection(EntryType entry) {
-    foreach(button ; buttons) {
-        button.isSelected = button.entry == entry;
+    foreach(button ; childrenOfType!ButtonType) {
+        button.setSelected(button.entry == entry);
     }
   }
 
@@ -44,10 +44,6 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
   Vector2i _nextButtonOffset;
   int _menuSpacingY;
   ButtonType.Action _onClick;
-
-  @property auto buttons() {
-    return children.map!(x => cast(ButtonType) x).filter!(x => x !is null);
-  }
 }
 
 abstract class MenuButton(EntryType) : GUIElement {
@@ -65,15 +61,14 @@ abstract class MenuButton(EntryType) : GUIElement {
 
   @property {
     EntryType entry() { return _entry; }
-
     bool isSelected() { return _selected; }
+  }
 
-    void isSelected(bool val) {
-      if (_enabled) {
-        sprite.tint = val ? _brightShade : _dullShade;
-      }
-      _selected = val;
+  void setSelected(bool val) {
+    if (_enabled) {
+      sprite.tint = val ? _brightShade : _dullShade;
     }
+    _selected = val;
   }
 
   override bool onClick() {

@@ -1,7 +1,6 @@
 module gui.factionmenu;
 
-import std.string;
-import std.conv;
+import std.string, std.algorithm;
 import dau.all;
 import model.all;
 
@@ -28,7 +27,20 @@ class FactionButton : MenuButton!Faction {
     foreach(unitKey ; faction.standardUnitKeys) {
       auto iconData = getGUIData(iconFmt.format(unitKey));
       auto icon = addChild(new Icon(iconData, spriteOffset));
+      icon.animation.stop();
       spriteOffset.x += icon.width;
+    }
+  }
+
+  override void setSelected(bool val) {
+    super.setSelected(val);
+    foreach(icon ; childrenOfType!Icon) {
+      if (val) {
+        icon.animation.start();
+      }
+      else {
+        icon.animation.stop();
+      }
     }
   }
 }

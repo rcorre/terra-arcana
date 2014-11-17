@@ -1,5 +1,6 @@
 module dau.gui.element;
 
+import std.algorithm;
 import dau.gui.data;
 import dau.geometry.all;
 import dau.graphics.all;
@@ -57,6 +58,7 @@ class GUIElement {
     auto size() { return Vector2i(width, height); }
 
     auto sprite() { return _sprite; }
+    auto animation() { return cast(Animation) _sprite; }
 
     bool active() { return _active; }
     void active(bool val) { _active = val; }
@@ -64,6 +66,10 @@ class GUIElement {
     auto children() { return _children[]; }
 
     auto data() { return _data; }
+  }
+
+  auto childrenOfType(T)() {
+    return children.map!(x => cast(T) x).filter!(x => x !is null);
   }
 
   void onMouseEnter() {}
