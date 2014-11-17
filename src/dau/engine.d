@@ -1,23 +1,5 @@
 module dau.engine;
 
-// library setup
-pragma(lib, "dallegro5");
-version(none)
-{
-
-}
-else
-{
-	pragma(lib, "allegro");
-	pragma(lib, "allegro_primitives");
-	pragma(lib, "allegro_image");
-	pragma(lib, "allegro_font");
-	pragma(lib, "allegro_ttf");
-	pragma(lib, "allegro_color");
-	pragma(lib, "allegro_audio");
-	pragma(lib, "allegro_acodec");
-}
-
 import dau.allegro;
 import dau.setup;
 import dau.scene;
