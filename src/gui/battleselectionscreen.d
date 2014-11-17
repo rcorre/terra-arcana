@@ -1,7 +1,6 @@
 module gui.battleselectionscreen;
 
-import std.string;
-import std.conv;
+import std.algorithm, std.range;
 import dau.all;
 import model.all;
 import gui.factionmenu;
@@ -21,8 +20,8 @@ class BattleSelectionScreen : GUIElement {
       addChild(new TextBox(data.child["playerText"], "PC", pcTitleOffset));
       addChild(new TextBox(data.child["factionText"], "Faction", factionTitleOffset));
 
-      auto _playerFactionMenu = new FactionMenu(playerOffset, &selectPlayerFaction);
-      auto _pcFactionMenu     = new FactionMenu(pcOffset, &selectPlayerFaction);
+      _playerFactionMenu = new FactionMenu(playerOffset, &selectPlayerFaction);
+      _pcFactionMenu     = new FactionMenu(pcOffset, &selectPCFaction);
 
       addChildren(_playerFactionMenu, _pcFactionMenu);
 
@@ -36,5 +35,14 @@ class BattleSelectionScreen : GUIElement {
   FactionMenu _playerFactionMenu, _pcFactionMenu;
 
   void selectPlayerFaction(Faction faction) {
+    if (_pcFactionMenu.selection == faction) {
+      _pcFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
+    }
+  }
+
+  void selectPCFaction(Faction faction) {
+    if (_playerFactionMenu.selection == faction) {
+      _playerFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
+    }
   }
 }
