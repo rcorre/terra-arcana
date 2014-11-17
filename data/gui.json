@@ -500,7 +500,7 @@
     "properties": {
       "texture": "hellblossom",
       "animation": "idle",
-      "toolTipTitle": "hellblossom",
+      "toolTipTitle": "Hellblossom",
       "toolTipText": "Ranged attack and healing"
     }
   }
