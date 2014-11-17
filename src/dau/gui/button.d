@@ -39,9 +39,9 @@ class Button : GUIElement {
       if (_enabled) { sprite.tint = _offShade; }
     }
 
-    bool onClick() { 
+    bool onClick() {
       _onClick();
-      return true; 
+      return true;
     }
   }
 
