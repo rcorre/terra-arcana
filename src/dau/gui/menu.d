@@ -1,6 +1,6 @@
 module dau.gui.menu;
 
-import std.algorithm, std.conv;
+import std.algorithm, std.conv, std.traits;
 import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.element;
@@ -12,7 +12,26 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
     super(data, pos, Anchor.topLeft);
     _nextButtonOffset = data.get("firstButtonOffset", "0,0").parseVector!int;
     _menuSpacingY = data.get("menuSpacingY", "0").to!int;
-    _onClick = onClick;
+    _onClick = delegate(EntryType entry) {
+      onClick(entry);
+      setSelection(entry);
+    };
+  }
+
+
+  /// the currently selected entry, or the default value of EntryType if none selected
+  @property EntryType selection() {
+    auto selected = buttons.find!(x => x.isSelected);
+    if (selected.empty) { // return default value if no button selected
+      return is(typeof(null) : EntryType) ? null : EntryType.init;
+    }
+    return selected.front.entry;
+  }
+
+  void setSelection(EntryType entry) {
+    foreach(button ; buttons) {
+        button.isSelected = button.entry == entry;
+    }
   }
 
   protected void addEntry(GUIData data, EntryType entry, bool enabled = true) {
@@ -25,6 +44,10 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
   Vector2i _nextButtonOffset;
   int _menuSpacingY;
   ButtonType.Action _onClick;
+
+  @property auto buttons() {
+    return children.map!(x => cast(ButtonType) x).filter!(x => x !is null);
+  }
 }
 
 abstract class MenuButton(EntryType) : GUIElement {
@@ -35,14 +58,27 @@ abstract class MenuButton(EntryType) : GUIElement {
     _brightShade = data["brightShade"].parseColor;
     _disabledShade = data["disabledShade"].parseColor;
     _onClick = onClick;
-    _value = entry;
+    _entry = entry;
     _enabled = enabled;
     sprite.tint = enabled ? _dullShade : _disabledShade;
   }
 
+  @property {
+    EntryType entry() { return _entry; }
+
+    bool isSelected() { return _selected; }
+
+    void isSelected(bool val) {
+      if (_enabled) {
+        sprite.tint = val ? _brightShade : _dullShade;
+      }
+      _selected = val;
+    }
+  }
+
   override bool onClick() {
     if (_enabled) {
-      _onClick(_value);
+      _onClick(_entry);
       return true;
     }
     return false;
@@ -55,7 +91,7 @@ abstract class MenuButton(EntryType) : GUIElement {
   }
 
   override void onMouseLeave() {
-    if (_enabled) {
+    if (_enabled && !_selected) {
       sprite.tint = _dullShade;
     }
   }
@@ -64,9 +100,9 @@ abstract class MenuButton(EntryType) : GUIElement {
   Color _dullShade, _brightShade, _disabledShade;
 
   protected:
-  bool _enabled;
+  bool _enabled, _selected;
 
   private:
   Action _onClick;
-  EntryType _value;
+  EntryType _entry;
 }
