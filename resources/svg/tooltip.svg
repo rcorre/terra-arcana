@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="323.30078"
-   height="67.312508"
+   width="224.98482"
+   height="41.002201"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
@@ -24,11 +24,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="89.985366"
-     inkscape:cy="29.545987"
+     inkscape:zoom="3.6312934"
+     inkscape:cx="90.466625"
+     inkscape:cy="8.200962"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1918"
      inkscape:window-height="1059"
@@ -39,7 +39,7 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:snap-global="false">
+     inkscape:snap-global="true">
     <inkscape:grid
        type="xygrid"
        id="grid3058"
@@ -49,8 +49,8 @@
        snapvisiblegridlinesonly="true"
        spacingx="4px"
        spacingy="4px"
-       originx="1.656254px"
-       originy="1.6505939px" />
+       originx="0.5px"
+       originy="-23.50561px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -60,7 +60,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -68,7 +68,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(1.656254,-2039.0625)">
+     transform="translate(0.5,-2040.2165)">
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 0,0 0,100"
@@ -76,8 +76,8 @@
        inkscape:connector-curvature="0"
        transform="translate(0,952.36218)" />
     <path
-       style="fill:#008080;fill-opacity:0.72077924;stroke:#00005a;stroke-width:3.30494547;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 0,2072.7244 0,32 320,0 -81.06667,-64 -206.089584,0 -0.843746,32 z"
+       style="fill:#008080;fill-opacity:0.72077924;stroke:#00005a;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 0,2072.7244 0,8 224,0 -32,-40 -176,-10e-5 -16,16 z"
        id="path9945"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccc" />
@@ -86,34 +86,35 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="mock"
-     style="display:none">
+     style="display:none"
+     transform="translate(-1.156254,-1.1540681)">
     <text
-       transform="translate(1.656254,-2039.0625)"
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
-       x="4"
-       y="2096.7244"
+       x="5.6562538"
+       y="37.661915"
        id="text10715"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="4"
-         y="2096.7244"
-         id="tspan10719">Rapid fire ranged attack</tspan></text>
+         x="5.6562538"
+         y="37.661915"
+         id="tspan10719"
+         style="font-size:16px">Rapid fire ranged attack</tspan></text>
     <text
-       transform="translate(1.656254,-2039.0625)"
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
-       x="39"
-       y="2070.7244"
+       x="65.656258"
+       y="17.661913"
        id="text10723"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan10725"
-         x="39"
-         y="2070.7244">Assault</tspan></text>
+         x="65.656258"
+         y="17.661913"
+         style="font-size:16px">Assault</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M -0.1767767,-0.21619006 6.1871841,41.856663"
+       d="m 1.656254,1.6618792 4,23.9999998"
        id="path10770"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />

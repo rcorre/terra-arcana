@@ -2,8 +2,8 @@
   "toolTip": {
     "properties": {
       "texture": "gui/tooltip",
-      "titleOffset": "43, 8",
-      "textOffset":  "7, 43"
+      "titleCenter": "97, 10",
+      "textOffset":  "5, 22"
     },
     "child": {
       "title": {

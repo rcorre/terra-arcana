@@ -10,9 +10,9 @@ import dau.graphics.all;
 class ToolTip : GUIElement {
   this(string title, string text) {
     super(getGUIData("toolTip"), Vector2i.zero, Anchor.topLeft);
-    auto titleOffset = data["titleOffset"].parseVector!int;
+    auto titleCenter = data["titleCenter"].parseVector!int;
     auto textOffset = data["textOffset"].parseVector!int;
-    addChild(new TextBox(data.child["title"], title, titleOffset));
+    addChild(new TextBox(data.child["title"], title, titleCenter, Anchor.center));
     addChild(new TextBox(data.child["text"], text, textOffset));
   }
 }
