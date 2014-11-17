@@ -19,6 +19,7 @@ class BattleSelectionScreen : GUIElement {
       addChild(new TextBox(data.child["playerText"], "Player", playerTitleOffset));
       addChild(new TextBox(data.child["playerText"], "PC", pcTitleOffset));
       addChild(new TextBox(data.child["factionText"], "Faction", factionTitleOffset));
+      addChild(new Button(data.child["startButton"], startButtonOffset, &startBattle));
 
       _playerFactionMenu = new FactionMenu(playerOffset, &selectPlayerFaction);
       _pcFactionMenu     = new FactionMenu(pcOffset, &selectPCFaction);
@@ -44,5 +45,8 @@ class BattleSelectionScreen : GUIElement {
     if (_playerFactionMenu.selection == faction) {
       _playerFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
     }
+  }
+
+  void startBattle() {
   }
 }
