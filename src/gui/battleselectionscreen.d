@@ -48,6 +48,8 @@ class BattleSelectionScreen : GUIElement {
   }
 
   void startBattle() {
-    setScene(new Battle);
+    auto playerFaction = _playerFactionMenu.selection;
+    auto pcFaction = _pcFactionMenu.selection;
+    setScene(new Battle(playerFaction, pcFaction));
   }
 }

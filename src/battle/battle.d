@@ -11,11 +11,10 @@ import battle.ai.all;
 import gui.battlepanel;
 
 class Battle : Scene!Battle {
-  //this(Player[] players) { // TODO: load players from previous state
-  this() {
+  this(Faction playerFaction, Faction pcFaction) {
     _players = [
-      new Player(getFaction("Federation"), 1, true),
-          new AIPlayer(getFaction("Gaia"),  2, "balanced")
+      new Player(playerFaction, 1, true),
+          new AIPlayer(pcFaction,  2, "balanced")
     ];
     System!Battle[] systems = [
       new TileHoverSystem(this),
