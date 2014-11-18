@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="terrain" tilewidth="32" tileheight="32">
- <image source="../../content/image/terrain.png" width="256" height="256"/>
+ <image source="../../content/image/terrain.png" width="256" height="352"/>
  <terraintypes>
   <terrain name="ground" tile="0"/>
   <terrain name="chasm" tile="12"/>
@@ -43,6 +43,16 @@
    <property name="name" value="Ground"/>
   </properties>
  </tile>
+ <tile id="6" terrain="1,1,1,0">
+  <properties>
+   <property name="name" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="7" terrain="1,1,0,1">
+  <properties>
+   <property name="name" value="ground"/>
+  </properties>
+ </tile>
  <tile id="8">
   <properties>
    <property name="name" value="Obelisk"/>
@@ -67,13 +77,23 @@
  <tile id="12" terrain="1,1,1,1">
   <properties>
    <property name="moveCost" value="99"/>
-   <property name="name" value="Ground"/>
+   <property name="name" value="Chasm"/>
   </properties>
  </tile>
  <tile id="13" terrain="1,0,1,0">
   <properties>
    <property name="moveCost" value="1"/>
    <property name="name" value="Ground"/>
+  </properties>
+ </tile>
+ <tile id="14" terrain="1,0,1,1">
+  <properties>
+   <property name="name" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="15" terrain="0,1,1,1">
+  <properties>
+   <property name="name" value="ground"/>
   </properties>
  </tile>
  <tile id="16">
@@ -127,6 +147,18 @@
    <property name="name" value="Cliff"/>
   </properties>
  </tile>
+ <tile id="30" terrain="2,2,2,0">
+  <properties>
+   <property name="moveCost" value="99"/>
+   <property name="name" value="Cliff"/>
+  </properties>
+ </tile>
+ <tile id="31" terrain="2,2,0,2">
+  <properties>
+   <property name="moveCost" value="99"/>
+   <property name="name" value="Cliff"/>
+  </properties>
+ </tile>
  <tile id="35" terrain="0,2,0,2">
   <properties>
    <property name="moveCost" value="99"/>
@@ -139,6 +171,18 @@
   </properties>
  </tile>
  <tile id="37" terrain="2,0,2,0">
+  <properties>
+   <property name="moveCost" value="99"/>
+   <property name="name" value="Cliff"/>
+  </properties>
+ </tile>
+ <tile id="38" terrain="2,0,2,2">
+  <properties>
+   <property name="moveCost" value="99"/>
+   <property name="name" value="Cliff"/>
+  </properties>
+ </tile>
+ <tile id="39" terrain="0,2,2,2">
   <properties>
    <property name="moveCost" value="99"/>
    <property name="name" value="Cliff"/>
