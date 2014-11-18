@@ -39,6 +39,33 @@
     }
   },
 
+  "selectMap": {
+    "properties": {
+      "texture": "gui/mapTextBox",
+      "buttonSpacingX": "32"
+    },
+    "child": {
+      "nextButton": {
+        "properties": {
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
+        }
+      },
+      "prevButton": {
+        "properties": {
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
+        }
+      },
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "26"
+        }
+      }
+    }
+  },
+
   "selectBattle": {
     "properties": {
       "texture": "gui/select_battle",
@@ -47,7 +74,8 @@
       "factionTitleOffset": "350, 37",
       "playerTitleOffset": "33, 20",
       "pcTitleOffset": "715, 20",
-      "startButtonOffset": "289, 537"
+      "startButtonOffset": "289, 537",
+      "mapSelectOffset": "402, 472"
     },
     "child": {
       "playerText": {

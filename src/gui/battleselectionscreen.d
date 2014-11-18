@@ -16,6 +16,7 @@ class BattleSelectionScreen : GUIElement {
       auto playerTitleOffset  = data["playerTitleOffset"].parseVector!int;
       auto pcTitleOffset      = data["pcTitleOffset"].parseVector!int;
       auto startButtonOffset  = data["startButtonOffset"].parseVector!int;
+      auto mapOffset          = data["mapSelectOffset"].parseVector!int;
 
       addChild(new TextBox(data.child["playerText"], "Player", playerTitleOffset));
       addChild(new TextBox(data.child["playerText"], "PC", pcTitleOffset));
@@ -24,13 +25,15 @@ class BattleSelectionScreen : GUIElement {
       _startButton = new Button(data.child["startButton"], startButtonOffset, &startBattle);
       _playerFactionMenu = new FactionMenu(playerOffset, &selectPlayerFaction);
       _pcFactionMenu     = new FactionMenu(pcOffset, &selectPCFaction);
+      _mapSelector = new StringSelection(getGUIData("selectMap"), mapOffset, ["one", "two", "ho"]);
 
-      addChildren(_startButton, _playerFactionMenu, _pcFactionMenu);
+      addChildren(_startButton, _playerFactionMenu, _pcFactionMenu, _mapSelector);
       _startButton.enabled = false;
   }
 
   private:
   FactionMenu _playerFactionMenu, _pcFactionMenu;
+  StringSelection _mapSelector;
   Button _startButton;
 
   void selectPlayerFaction(Faction faction) {

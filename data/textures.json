@@ -27,6 +27,12 @@
   },
 
   {
+    "sheets" : ["gui/arrows"],
+    "frameSize": 32,
+    "sprites": ["leftArrow", "rightArrow"]
+  },
+
+  {
     "sheets" : ["gui/pip"],
     "frameWidth": 6,
     "frameHeight": 10,

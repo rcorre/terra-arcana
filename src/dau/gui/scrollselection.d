@@ -31,16 +31,14 @@ abstract class ScrollSelection(EntryType) : GUIElement {
       onChange(_currentSelection);
     };
 
-    Vector2i childPos = area.topLeft;
-    int buttonSpacing = data.get("buttonSpacingX", "0").to!int;
+    int buttonSpacingX = data.get("buttonSpacingX", "0").to!int;
+    auto leftPos = Vector2i(-buttonSpacingX, height / 2);
+    auto rightPos = Vector2i(area.width + buttonSpacingX, height / 2);
 
-    GUIElement button = addChild(new Button(data.child["prevButton"], childPos, clickPrev));
-    childPos.x += button.width + buttonSpacing;
+    addChild(new Button(data.child["prevButton"], leftPos, clickPrev, Anchor.center));
+    addChild(new Button(data.child["nextButton"], rightPos, clickNext, Anchor.center));
 
-    _currentElement = addChild(createEntry(_currentSelection, childPos));
-    childPos.x += _currentElement.width + buttonSpacing;
-
-    addChild(new Button(data.child["nextButton"], childPos, clickNext));
+    _currentElement = addChild(createEntry(_currentSelection, Vector2i.zero));
   }
 
   /// the currently selected entry
