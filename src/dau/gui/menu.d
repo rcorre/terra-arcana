@@ -5,7 +5,6 @@ import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.element;
 import dau.gui.data;
-import dau.util.removal_list;
 
 abstract class Menu(EntryType, ButtonType) : GUIElement {
   this(GUIData data, Vector2i pos, ButtonType.Action onClick) {
@@ -17,7 +16,6 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
       setSelection(entry);
     };
   }
-
 
   /// the currently selected entry, or the default value of EntryType if none selected
   @property EntryType selection() {
