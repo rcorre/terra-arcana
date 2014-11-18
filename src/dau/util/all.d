@@ -1,6 +1,6 @@
 module dau.util.all;
 
-public import dau.util.all;
+public import dau.util.func;
 public import dau.util.bicycle;
 public import dau.util.config;
 public import dau.util.jsonizer;
