@@ -11,8 +11,8 @@ class Button : GUIElement {
   alias Action = void delegate();
   this(GUIData data, Vector2i pos, Action onClick, Anchor anchor = Anchor.topLeft) {
     _onShade  = data.get("onShade", "1, 1, 1").parseColor;
-    _offShade = data.get("offShade", "1, 1, 1").parseColor;
-    _disabledShade = data.get("disabledShade", "1, 1, 1").parseColor;
+    _offShade = data.get("offShade", "0.6, 0.6, 0.6").parseColor;
+    _disabledShade = data.get("disabledShade", "0.2, 0.2, 0.2").parseColor;
     _onClick = onClick;
     super(data, pos, anchor);
     auto text = data.get("text", null);
