@@ -10,8 +10,10 @@ import battle.system.all;
 import battle.ai.all;
 import gui.battlepanel;
 
+private enum mapFormat = Paths.mapDir ~ "/%s.json";
+
 class Battle : Scene!Battle {
-  this(Faction playerFaction, Faction pcFaction) {
+  this(string mapName, Faction playerFaction, Faction pcFaction) {
     _players = [
       new Player(playerFaction, 1, true),
           new AIPlayer(pcFaction,  2, "balanced")
@@ -32,36 +34,31 @@ class Battle : Scene!Battle {
     gui.addElement(_panel);
     _turnCycle = cycle(_players);
     cursor.setSprite("inactive");
-  }
 
-  override {
-    void enter() {
-      auto mapPath = "%s/%s.json".format(cast(string) Paths.mapDir, "test");
-      auto mapData = loadTiledMap(mapPath);
-      map = new TileMap(mapData, entities);
-      entities.registerEntity(map);
-      foreach(obj ; mapData.layerTileData("feature")) {
-        int team = obj.objectType.to!int;
-        switch(obj.objectName) {
-          case "spawn":
-            _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), team);
-            break;
-          case "obelisk":
-            auto pos = map.tileAt(obj.row, obj.col).center;
-            auto obelisk = new Obelisk(pos, obj.row, obj.col);
-            entities.registerEntity(obelisk);
-            if (team != 0) {
-              captureObelisk(obelisk, team);
-            }
-            break;
-          default:
-            assert(0, "invalid object named " ~ obj.objectName);
-        }
+    auto mapData = loadTiledMap(mapFormat.format(mapName));
+    map = new TileMap(mapData, entities);
+    entities.registerEntity(map);
+    foreach(obj ; mapData.layerTileData("feature")) {
+      int team = obj.objectType.to!int;
+      switch(obj.objectName) {
+        case "spawn":
+          _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), team);
+          break;
+        case "obelisk":
+          auto pos = map.tileAt(obj.row, obj.col).center;
+          auto obelisk = new Obelisk(pos, obj.row, obj.col);
+          entities.registerEntity(obelisk);
+          if (team != 0) {
+            captureObelisk(obelisk, team);
+          }
+          break;
+        default:
+          assert(0, "invalid object named " ~ obj.objectName);
       }
-      camera.area = Rect2f(0, 0, Settings.screenW, Settings.screenH - _panel.area.height);
-      camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
-      startNewTurn;
     }
+    camera.area = Rect2f(0, 0, Settings.screenW, Settings.screenH - _panel.area.height);
+    camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
+    startNewTurn;
   }
 
 package:

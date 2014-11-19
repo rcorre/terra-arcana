@@ -1,10 +1,12 @@
 module gui.battleselectionscreen;
 
-import std.algorithm, std.range;
+import std.algorithm, std.range, std.file, std.path, std.array;
 import dau.all;
 import model.all;
 import gui.factionmenu;
 import battle.battle;
+
+enum mapFormat = Paths.mapDir ~ "/%s.json";
 
 /// bar that displays progress as discrete elements (pips)
 class BattleSelectionScreen : GUIElement {
@@ -18,6 +20,9 @@ class BattleSelectionScreen : GUIElement {
       auto startButtonOffset  = data["startButtonOffset"].parseVector!int;
       auto mapOffset          = data["mapSelectOffset"].parseVector!int;
 
+      auto mapPaths = Paths.mapDir.dirEntries("*.json", SpanMode.shallow);
+      auto mapNames = mapPaths.map!(x => x.baseName(".json"));
+
       addChild(new TextBox(data.child["playerText"], "Player", playerTitleOffset));
       addChild(new TextBox(data.child["playerText"], "PC", pcTitleOffset));
       addChild(new TextBox(data.child["factionText"], "Faction", factionTitleOffset));
@@ -25,7 +30,7 @@ class BattleSelectionScreen : GUIElement {
       _startButton = new Button(data.child["startButton"], startButtonOffset, &startBattle);
       _playerFactionMenu = new FactionMenu(playerOffset, &selectPlayerFaction);
       _pcFactionMenu     = new FactionMenu(pcOffset, &selectPCFaction);
-      _mapSelector = new StringSelection(getGUIData("selectMap"), mapOffset, ["one", "two", "ho"]);
+      _mapSelector = new StringSelection(getGUIData("selectMap"), mapOffset, mapNames.array);
 
       addChildren(_startButton, _playerFactionMenu, _pcFactionMenu, _mapSelector);
       _startButton.enabled = false;
@@ -53,6 +58,7 @@ class BattleSelectionScreen : GUIElement {
   void startBattle() {
     auto playerFaction = _playerFactionMenu.selection;
     auto pcFaction = _pcFactionMenu.selection;
-    setScene(new Battle(playerFaction, pcFaction));
+    auto mapName = _mapSelector.selection;
+    setScene(new Battle(mapName, playerFaction, pcFaction));
   }
 }

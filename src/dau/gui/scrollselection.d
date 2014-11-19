@@ -20,14 +20,14 @@ abstract class ScrollSelection(EntryType) : GUIElement {
     auto clickPrev = delegate() {
       _currentSelection = _entries.reverse;
       _currentElement.active = false;
-      _currentElement = createEntry(_currentSelection, _currentElement.area.topLeft);
+      _currentElement = addChild(createEntry(_currentSelection, size / 2));
       onChange(_currentSelection);
     };
 
     auto clickNext = delegate() {
       _currentSelection = _entries.advance;
       _currentElement.active = false;
-      _currentElement = createEntry(_currentSelection, _currentElement.area.topLeft);
+      _currentElement = addChild(createEntry(_currentSelection, size / 2));
       onChange(_currentSelection);
     };
 
@@ -38,7 +38,7 @@ abstract class ScrollSelection(EntryType) : GUIElement {
     addChild(new Button(data.child["prevButton"], leftPos, clickPrev, Anchor.center));
     addChild(new Button(data.child["nextButton"], rightPos, clickNext, Anchor.center));
 
-    _currentElement = addChild(createEntry(_currentSelection, Vector2i.zero));
+    _currentElement = addChild(createEntry(_currentSelection, size / 2));
   }
 
   /// the currently selected entry

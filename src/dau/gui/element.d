@@ -139,14 +139,13 @@ class GUIElement {
     }
 
     bool handleMouseClick(Vector2i pos) {
-      if (!area.contains(pos)) { return false; }
       auto localPos = pos - area.topLeft;
       foreach(child ; children) {
         if (child.handleMouseClick(localPos)) {
           return true;
         }
       }
-      return onClick();
+      return (area.contains(pos)) ? onClick() : false;
     }
 
     void onHover(HoverHandler handler) {

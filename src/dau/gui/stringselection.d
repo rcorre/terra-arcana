@@ -15,6 +15,6 @@ class StringSelection : ScrollSelection!string {
   }
 
   override GUIElement createEntry(string text, Vector2i pos) {
-    return new TextBox(data.child["text"], text, pos);
+    return new TextBox(data.child["text"], text, pos, Anchor.center);
   }
 }
