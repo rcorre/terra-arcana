@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800"
+   height="600"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="titleScreen.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.72301668"
+     inkscape:cx="529.4015"
+     inkscape:cy="323.08174"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="true"
+     inkscape:window-width="1918"
+     inkscape:window-height="1059"
+     inkscape:window-x="0"
+     inkscape:window-y="19"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3058"
+       empspacing="8"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="4px"
+       spacingy="4px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="bg"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-452.36218)"
+     style="display:inline">
+    <rect
+       style="opacity:0.9;fill:#008080;fill-opacity:0.72077924;fill-rule:nonzero;stroke:none"
+       id="rect3009"
+       width="800"
+       height="600"
+       x="0"
+       y="452.36218" />
+    <path
+       style="fill:#008080;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 32,24 736,0 -64,128 -608,0 z"
+       id="path3853"
+       inkscape:connector-curvature="0"
+       transform="translate(0,452.36218)"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path3562"
+       d="m 224,604.36218 352,0 -64,64 -224,0 z"
+       style="fill:#008080;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="mock"
+     style="display:none">
+    <text
+       transform="translate(0,-452.36218)"
+       xml:space="preserve"
+       style="font-size:72px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
+       x="167.91602"
+       y="562.89734"
+       id="text3558"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3560"
+         x="167.91602"
+         y="562.89734">Terra Arcana</tspan></text>
+    <rect
+       style="fill:#008080;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       id="rect3735"
+       width="288"
+       height="32"
+       x="256"
+       y="344" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
+       x="278.50781"
+       y="370.01562"
+       id="text3574"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3576"
+         x="278.50781"
+         y="370.01562">network battle</tspan></text>
+    <rect
+       y="280"
+       x="256"
+       height="32"
+       width="288"
+       id="rect3581"
+       style="fill:#008080;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3583"
+       y="306.01562"
+       x="323.79688"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
+       xml:space="preserve"><tspan
+         y="306.01562"
+         x="323.79688"
+         id="tspan3585"
+         sodipodi:role="line">battle AI</tspan></text>
+    <rect
+       y="408"
+       x="256"
+       height="32"
+       width="288"
+       id="rect3587"
+       style="fill:#008080;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3589"
+       y="434.01562"
+       x="278.50781"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
+       xml:space="preserve"><tspan
+         y="434.01562"
+         x="278.50781"
+         id="tspan3591"
+         sodipodi:role="line">network battle</tspan></text>
+    <rect
+       style="fill:#008080;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       id="rect3593"
+       width="288"
+       height="32"
+       x="256"
+       y="472" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
+       x="305.03125"
+       y="495.45312"
+       id="text3595"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3597"
+         x="305.03125"
+         y="495.45312">preferences</tspan></text>
+    <rect
+       y="536"
+       x="256"
+       height="32"
+       width="288"
+       id="rect3599"
+       style="fill:#008080;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3601"
+       y="562.01562"
+       x="366.42188"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
+       xml:space="preserve"><tspan
+         y="562.01562"
+         x="366.42188"
+         id="tspan3603"
+         sodipodi:role="line">exit</tspan></text>
+    <text
+       transform="translate(0,-452.36218)"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
+       x="303.07617"
+       y="645.67859"
+       id="text3566"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3568"
+         x="303.07617"
+         y="645.67859">alpha 0.0</tspan></text>
+  </g>
+</svg>

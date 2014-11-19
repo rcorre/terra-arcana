@@ -1,5 +1,6 @@
 module dau.gui.button;
 
+import std.conv;
 import dau.gui.element;
 import dau.gui.textbox;
 import dau.gui.data;
@@ -9,6 +10,12 @@ import dau.graphics.all;
 /// draws a single sprite with a value next to it
 class Button : GUIElement {
   alias Action = void delegate();
+  this(GUIData data, Action onClick) {
+    auto pos = data["offset"].parseVector!int;
+    auto anchor = data["anchor"].to!Anchor;
+    this(data, pos, onClick, anchor); 
+  }
+
   this(GUIData data, Vector2i pos, Action onClick, Anchor anchor = Anchor.topLeft) {
     _onShade  = data.get("onShade", "1, 1, 1").parseColor;
     _offShade = data.get("offShade", "0.6, 0.6, 0.6").parseColor;

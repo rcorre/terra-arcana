@@ -8,6 +8,13 @@ import dau.graphics.color;
 import dau.graphics.font;
 
 class TextBox : GUIElement {
+  this(GUIData data) {
+    auto text = data.get("text", "");
+    auto pos = data.get("offset", "0,0").parseVector!int;
+    auto anchor = data.get("anchor", "topLeft").to!Anchor;
+    this(data, text, pos, anchor);
+  }
+
   this(T)(GUIData data, T text, Vector2i pos, Anchor anchor = Anchor.topLeft) {
     _text = text.to!string;
     _font = Font(data["fontName"], data["fontSize"].to!int);

@@ -2,7 +2,7 @@ module title.title;
 
 import dau.all;
 import model.all;
-import title.state.selectbattle;
+import title.state.showtitle;
 
 private enum bgColor = color(0, 0.5, 0.5, 0.8);
 
@@ -23,7 +23,7 @@ class Title : Scene!Title {
 
   override {
     void enter() {
-      states.setState(new SelectBattle);
+      states.setState(new ShowTitle);
     }
   }
 }

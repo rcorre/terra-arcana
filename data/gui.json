@@ -39,6 +39,112 @@
     }
   },
 
+  "titleScreen": {
+    "properties": {
+      "texture"           : "gui/titleScreen"
+    },
+    "child": {
+      "titleText": {
+        "properties": {
+          "offset"   : "400, 89",
+          "text"     : "Terra Arcana",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "48"
+        }
+      },
+      "versionText": {
+        "properties": {
+          "offset"   : "400, 185",
+          "text"     : "Alpha 0.0",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "32"
+        }
+      },
+      "startSinglePlayer": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Battle vs AI",
+          "offset" : "400, 297",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "startNetwork": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Network Battle",
+          "offset" : "400, 361",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "preferences": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Preferences",
+          "offset" : "400, 425",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "credits": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Credits",
+          "offset" : "400, 489",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "exit": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Exit",
+          "offset" : "400, 553",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      }
+    }
+  },
+
   "selectMap": {
     "properties": {
       "texture": "gui/mapTextBox",
