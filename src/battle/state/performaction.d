@@ -62,8 +62,9 @@ class PerformAction : State!Battle {
       }
       else {
         onAnimationEnd = delegate() {
+          b.states.popState();
           foreach(unit ; unitsAffected) {
-            b.states.setState(new ApplyBuff(_action, unit));
+            b.states.pushState(new ApplyBuff(_action, unit));
           }
         };
       }
