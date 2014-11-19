@@ -50,6 +50,9 @@ class PCTurn : State!Battle {
           }
           break;
       }
+
+      auto cameraSys = b.getSystem!BattleCameraSystem;
+      cameraSys.autoScrollTo(decision.decisionPoint);
     }
 
     void end(Battle b) {

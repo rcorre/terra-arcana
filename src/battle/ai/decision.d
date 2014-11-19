@@ -1,5 +1,6 @@
 module battle.ai.decision;
 
+import dau.geometry.vector;
 import model.all;
 
 abstract class AIDecision {
@@ -12,6 +13,9 @@ abstract class AIDecision {
   const float score;
   const Type type;
 
+  /// point on map where decision will take place (for camera purposes)
+  @property Vector2i decisionPoint();
+
   this(Type type, float score) {
     this.type = type;
     this.score = score;
@@ -21,6 +25,10 @@ abstract class AIDecision {
 class MoveDecison : AIDecision {
   Unit unit;
   Tile[] path;
+
+  override @property Vector2i decisionPoint() {
+    return unit.center;
+  }
 
   this(Unit unit, Tile[] path, float score) {
     super(Type.move, score);
@@ -35,6 +43,10 @@ class ActDecison : AIDecision {
   Tile[] movePath;
   int actionNum;
 
+  override @property Vector2i decisionPoint() {
+    return actor.center;
+  }
+
   this(Unit actor, Tile[] movePath, Tile target, int actionNum, float score) {
     super(Type.action, score);
     this.actor = actor;
@@ -47,6 +59,10 @@ class ActDecison : AIDecision {
 class DeployDecison : AIDecision {
   string unitKey;
   Tile location;
+
+  override @property Vector2i decisionPoint() {
+    return location.center;
+  }
 
   this(string unitKey, Tile location, float score) {
     super(Type.deploy, score);
