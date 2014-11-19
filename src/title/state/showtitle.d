@@ -10,7 +10,7 @@ class ShowTitle : State!Title {
   override {
     void enter(Title title) {
       title.gui.clear();
-      title.gui.addElement(new TitleScreen);
+      title.gui.addElement(new TitleScreen(title));
     }
   }
 }
