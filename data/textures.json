@@ -54,7 +54,7 @@
     "sprites": [
       "range", "damage", "stun", "heal", "armor", "evade", "piercing", "precise", "blitz",
       "toxin", "slow", "guerilla", "flight", "warp", "", "", "", "",
-      "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", "",
+      "rifle", "frag", "snipe", "mine", "shotgun", "concussor", "aid", "smoke", "",
       "thorns", "regrowth", "claw", "venom", "bite", "screech", "smash", "entangle", ""
     ]
   },

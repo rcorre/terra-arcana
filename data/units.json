@@ -72,7 +72,7 @@
     "baseEvade"  : 0,
 
     "action1": {
-      "name"        : "Sniper",
+      "name"        : "Snipe",
       "description" : "",
       "target"      : "enemy",
       "effect"      : "damage",

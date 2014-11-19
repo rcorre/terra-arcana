@@ -359,12 +359,12 @@
       "toolTipText": "Explosive grenade"
     }
   },
-  "icon_sniper": {
+  "icon_snipe": {
     "properties": {
       "texture": "gui/icons",
-      "sprite": "sniper",
-      "toolTipTitle": "Sniper",
-      "toolTipText": "Long range weapon"
+      "sprite": "snipe",
+      "toolTipTitle": "Snipe",
+      "toolTipText": "Precise long-range shot"
     }
   },
   "icon_mine": {
