@@ -1,5 +1,6 @@
 module dau.state;
 
+import std.stdio, std.path, std.conv, std.string;
 import std.container : SList;
 import dau.input;
 import dau.graphics.spritebatch;
@@ -36,7 +37,7 @@ class StateMachine(T) {
   /// place a new state on the state stack
   void pushState(State!T state) {
     _stateStack.insertFront(state);
-    printStateTrace();
+    debug(StateTrace) { printStateTrace(); }
   }
 
   /// remove the current state
@@ -45,7 +46,7 @@ class StateMachine(T) {
     currentState.end(_obj);
     _stateStack.removeFront;
     _prevState = null;
-    printStateTrace();
+    debug(StateTrace) { printStateTrace(); }
   }
 
   /// pop the current state (if there is a current state) and push a new state
@@ -66,6 +67,13 @@ class StateMachine(T) {
     currentState.draw(_obj, sb);
   }
 
+  void printStateTrace() {
+    foreach(state ; _stateStack) {
+      write(typeid(state).to!string.extension.chompPrefix("."), " | ");
+    }
+    writeln;
+  }
+
   private:
   SList!(State!T) _stateStack;
   State!T _prevState;
@@ -84,16 +92,6 @@ class StateMachine(T) {
         currentState.start(_obj);
       }
       currentState.enter(_obj);
-    }
-  }
-
-  void printStateTrace() {
-    debug(StateTrace) {
-      import std.stdio, std.path, std.conv, std.string;
-      foreach(state ; _stateStack) {
-        write(typeid(state).to!string.extension.chompPrefix("."), " | ");
-      }
-      writeln;
     }
   }
 }

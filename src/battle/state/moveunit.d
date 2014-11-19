@@ -26,6 +26,7 @@ class MoveUnit : State!Battle {
     }
 
     void update(Battle b, float time, InputManager input) {
+      _currentTile = _path.back;
       auto disp = _path.back.center - _unit.center;
       auto dist = moveRate * time;
       if (dist >= disp.len) {
@@ -43,7 +44,10 @@ class MoveUnit : State!Battle {
     }
 
     void exit(Battle b) {
-      _unit.tile = b.map.tileAt(_unit.center);
+      if (_currentTile.entity !is null && _currentTile.entity != _unit) {
+        b.states.printStateTrace();
+      }
+      _unit.tile = _currentTile;
     }
 
     void end(Battle b) {
@@ -54,6 +58,7 @@ class MoveUnit : State!Battle {
   private:
   Unit _unit;
   Tile[] _path;
+  Tile _currentTile;
   Vector2f _pos; // use float for greater precision of tracking movement
 
   void checkForTrap(Battle b) {

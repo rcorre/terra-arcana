@@ -51,7 +51,6 @@ struct UnitAI {
       int act = _unit.firstUseableActionFrom(target, tile, apLeft);
       if (act != 0) {
         auto path = _pathfinder.pathTo(tile);
-        // TODO : score using helpers
         auto tileScore = computeTilePriority(_battle, _profile, tile, _unit);
         auto attackScore = attackScore(_unit, target, act, _profile);
         auto score = average(tileScore, attackScore);

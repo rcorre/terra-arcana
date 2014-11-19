@@ -45,7 +45,8 @@ class Unit : Entity {
 
   @property {
     auto tile() { return _tile; }
-    auto tile(Tile newTile) {
+    void tile(Tile newTile) {
+      if (newTile == _tile) { return; }
       assert(newTile.entity is null, "cannot place %s on tile %d,%d which already has entity"
           .format(name, newTile.row, newTile.col));
       if (tile !is null) {
