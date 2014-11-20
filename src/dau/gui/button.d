@@ -50,6 +50,8 @@ class Button : GUIElement {
       _onClick();
       return true;
     }
+
+    @property bool highlightCursorOnHover() { return _enabled; }
   }
 
   private:

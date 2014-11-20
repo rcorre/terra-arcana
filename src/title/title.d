@@ -19,6 +19,7 @@ class Title : Scene!Title {
     ];
     super(systems, cursorSprites);
     cursor.setSprite("inactive");
+    gui.manageCursor(cursor, "inactive", "active");
   }
 
   override {

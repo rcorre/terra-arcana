@@ -66,6 +66,8 @@ class GUIElement {
     auto children() { return _children[]; }
 
     auto data() { return _data; }
+    /// if true, mouse should be highlighted when hovering over this element
+    bool highlightCursorOnHover() { return false; }
   }
 
   auto childrenOfType(T)() {
@@ -115,11 +117,12 @@ class GUIElement {
       }
     }
 
-    /// return most-nested element under mouse
-    GUIElement handleMouseHover(Vector2i pos, Vector2i prevPos) {
+    /// return most-nested element under mouse.
+    GUIElement handleMouseHover(Vector2i pos, Vector2i prevPos, ref bool highlightCursor) {
       bool mouseInArea = area.contains(pos);
       bool mouseWasInArea = area.contains(prevPos);
       GUIElement hoveredElement = mouseInArea ? this : null;
+      highlightCursor = highlightCursor || (mouseInArea && highlightCursorOnHover);
       if (mouseInArea && !mouseWasInArea) {
         onMouseEnter();
         _hoverHandler(true);
@@ -132,7 +135,7 @@ class GUIElement {
       auto localPos = pos - area.topLeft;
       auto prevLocalPos = prevPos - area.topLeft;
       foreach(child ; children) {
-        auto underMouse = child.handleMouseHover(localPos, prevLocalPos);
+        auto underMouse = child.handleMouseHover(localPos, prevLocalPos, highlightCursor);
         hoveredElement = (underMouse is null) ? hoveredElement : underMouse;
       }
       return hoveredElement;

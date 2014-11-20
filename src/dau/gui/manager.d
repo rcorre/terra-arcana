@@ -6,10 +6,17 @@ import dau.gui.element;
 import dau.gui.tooltip;
 import dau.gui.data;
 import dau.geometry.all;
+import dau.graphics.cursor;
 
 class GUIManager {
   this() {
     clear(); // set up initial guielement
+  }
+
+  void manageCursor(CursorManager cursor, string inactiveCursorSprite, string activeCursorSprite) {
+    _cursor = cursor;
+    _inactiveCursorSprite = inactiveCursorSprite;
+    _activeCursorSprite = activeCursorSprite;
   }
 
   void addElement(GUIElement el) {
@@ -23,8 +30,11 @@ class GUIManager {
   void update(float time, InputManager input) {
     _topElement.update(time);
     _mousePos = input.mousePos;
-    auto underMouse = _topElement.handleMouseHover(input.mousePos, input.prevMousePos);
+    bool highlight; // whether to highlight mouse
+    auto underMouse = _topElement.handleMouseHover(input.mousePos, input.prevMousePos, highlight);
     if (underMouse != _elementUnderMouse) {
+      adjustCursor(highlight);
+      _elementUnderMouse = underMouse;
       if (underMouse is null) {
         _toolTip = null;
       }
@@ -56,4 +66,12 @@ class GUIManager {
   GUIElement _elementUnderMouse;
   ToolTip _toolTip;
   Vector2i _mousePos;
+  CursorManager _cursor;
+  string _inactiveCursorSprite, _activeCursorSprite;
+
+  void adjustCursor(bool active) {
+    if (_cursor !is null) {
+      _cursor.setSprite(active ? _activeCursorSprite : _inactiveCursorSprite);
+    }
+  }
 }
