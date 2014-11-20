@@ -186,7 +186,7 @@
       },
       "musicVolumeBar": {
         "properties": {
-          "pipBarArea": "209, 281, 385, 33",
+          "pipBarArea": "240, 281, 385, 33",
           "numPips": "10"
         },
         "child": {
@@ -199,7 +199,7 @@
       },
       "soundVolumeBar": {
         "properties": {
-          "pipBarArea": "209, 377, 385, 33",
+          "pipBarArea": "240, 377, 385, 33",
           "numPips": "10"
         },
         "child": {
@@ -212,28 +212,28 @@
       },
       "musicVolumeUp": {
         "properties": {
-          "offset": "609, 281",
+          "offset": "590, 276",
           "texture": "gui/arrows",
           "sprite": "rightArrow"
         }
       },
       "musicVolumeDown": {
         "properties": {
-          "offset": "161, 281",
+          "offset": "180, 276",
           "texture": "gui/arrows",
           "sprite": "leftArrow"
         }
       },
       "soundVolumeUp": {
         "properties": {
-          "offset": "609, 377",
+          "offset": "590, 373",
           "texture": "gui/arrows",
           "sprite": "rightArrow"
         }
       },
       "soundVolumeDown": {
         "properties": {
-          "offset": "161, 377",
+          "offset": "180, 373",
           "texture": "gui/arrows",
           "sprite": "leftArrow"
         }
