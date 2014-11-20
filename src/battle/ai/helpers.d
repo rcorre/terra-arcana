@@ -10,8 +10,11 @@ private enum effectFactor = [
   UnitAction.Effect.damage : 1.0,
   UnitAction.Effect.heal   : 1.0,
   UnitAction.Effect.toxin  : 0.7,
-  UnitAction.Effect.slow   : 0.8,
-  UnitAction.Effect.stun   : 0.8
+  UnitAction.Effect.slow   : 0.6,
+  UnitAction.Effect.stun   : 0.6,
+  UnitAction.Effect.evade  : 0.8,
+  UnitAction.Effect.armor  : 0.8,
+  UnitAction.Effect.transform  : 0.4
 ];
 
 private enum wasteEvadeScore = 0.3; /// score for degrading the targets evasion
