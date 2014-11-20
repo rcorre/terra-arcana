@@ -4,8 +4,8 @@ import dau.all;
 import model.all;
 import title.title;
 import title.state.selectbattle;
+import title.state.editpreferences;
 
-/// bar that displays progress as discrete elements (pips)
 class TitleScreen : GUIElement {
   this(Title title) {
     super(getGUIData("titleScreen"), Vector2i.zero);
@@ -31,6 +31,7 @@ class TitleScreen : GUIElement {
   }
 
   void preferencesButton() {
+    _title.states.setState(new EditPreferences);
   }
 
   void creditsButton() {

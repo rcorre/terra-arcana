@@ -12,7 +12,7 @@ class Button : GUIElement {
   alias Action = void delegate();
   this(GUIData data, Action onClick) {
     auto pos = data["offset"].parseVector!int;
-    auto anchor = data["anchor"].to!Anchor;
+    auto anchor = data.get("anchor", "topLeft").to!Anchor;
     this(data, pos, onClick, anchor); 
   }
 

@@ -1,6 +1,6 @@
 module dau.gui.pipbar;
 
-import std.algorithm : min, max;
+import std.conv, std.algorithm : min, max;
 import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.element;
@@ -13,6 +13,12 @@ private enum {
 
 /// bar that displays progress as discrete elements (pips)
 class PipBar : GUIElement {
+  this(GUIData data) {
+    auto area = data["pipBarArea"].parseRect!int;
+    auto numPips = data["numPips"].to!int;
+    this(data, area, numPips);
+  }
+
   this(GUIData data, Rect2i area, int numPips) {
     super(data, area);
     _maxVal = numPips;

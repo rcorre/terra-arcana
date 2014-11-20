@@ -41,7 +41,7 @@
 
   "titleScreen": {
     "properties": {
-      "texture"           : "gui/titleScreen"
+      "texture": "gui/titleScreen"
     },
     "child": {
       "titleText": {
@@ -140,6 +140,86 @@
               "fontSize": "32"
             }
           }
+        }
+      }
+    }
+  },
+
+  "preferences": {
+    "properties": {
+      "texture": "gui/titleScreen"
+    },
+    "child": {
+      "musicText": {
+        "properties": {
+          "offset": "400, 252",
+          "anchor": "center",
+          "text": "Music Volume",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
+      "soundText": {
+        "properties": {
+          "offset": "400, 345",
+          "anchor": "center",
+          "text": "Sound Volume",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
+      "musicVolumeBar": {
+        "properties": {
+          "pipBarArea": "209, 281, 385, 33",
+          "numPips": "10"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/menuPip"
+            }
+          }
+        }
+      },
+      "soundVolumeBar": {
+        "properties": {
+          "pipBarArea": "209, 377, 385, 33",
+          "numPips": "10"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/menuPip"
+            }
+          }
+        }
+      },
+      "musicVolumeUp": {
+        "properties": {
+          "offset": "609, 281",
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
+        }
+      },
+      "musicVolumeDown": {
+        "properties": {
+          "offset": "161, 281",
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
+        }
+      },
+      "soundVolumeUp": {
+        "properties": {
+          "offset": "609, 377",
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
+        }
+      },
+      "soundVolumeDown": {
+        "properties": {
+          "offset": "161, 377",
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
         }
       }
     }
