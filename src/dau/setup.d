@@ -24,6 +24,7 @@ enum Paths : string {
   factionData = "data/factions.json",
   aiData      = "data/ai.json",
   advantageData = "data/advantages.json",
+  preferences = "save/preferences.json",
 }
 
 void onInit(InitFunction fn) {
