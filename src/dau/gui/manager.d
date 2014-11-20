@@ -2,6 +2,7 @@ module dau.gui.manager;
 
 import dau.setup;
 import dau.input;
+import dau.sound;
 import dau.gui.element;
 import dau.gui.tooltip;
 import dau.gui.data;
@@ -10,6 +11,8 @@ import dau.graphics.cursor;
 
 class GUIManager {
   this() {
+    auto data = getGUIData("dauGUIDefaults");
+    _clickSound = ("clickSound" in data) ? new SoundSample(data["clickSound"]) : nullAudio;
     clear(); // set up initial guielement
   }
 
@@ -50,7 +53,8 @@ class GUIManager {
       }
     }
     if (input.select) {
-      _topElement.handleMouseClick(input.mousePos);
+      bool handled = _topElement.handleMouseClick(input.mousePos);
+      if (handled) { _clickSound.play; }
     }
   }
 
@@ -68,6 +72,7 @@ class GUIManager {
   Vector2i _mousePos;
   CursorManager _cursor;
   string _inactiveCursorSprite, _activeCursorSprite;
+  AudioSample _clickSound;
 
   void adjustCursor(bool active) {
     if (_cursor !is null) {

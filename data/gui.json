@@ -1,4 +1,10 @@
 {
+  "dauGUIDefaults": {
+    "properties": {
+      "clickSound": "click"
+    }
+  },
+
   "toolTip": {
     "properties": {
       "texture": "gui/tooltip",

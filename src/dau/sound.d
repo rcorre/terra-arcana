@@ -1,19 +1,20 @@
 module dau.sound;
 
-import std.string, std.conv, std.file, std.path;
+import std.string, std.conv, std.file, std.path, std.typecons;
 import dau.allegro;
 import dau.setup;
+import dau.preferences;
 
 private enum {
   fileFormat = Paths.soundDir ~ "/%s.ogg", // TODO: support other extensions
-  soundVolume = 1f // TODO: set in user preferences
 }
 
-void stopAllSounds() {
-  al_stop_samples();
+abstract class AudioSample {
+  abstract void play();
+  abstract void stop();
 }
 
-class SoundSample {
+class SoundSample : AudioSample {
   enum Loop {
     no    = ALLEGRO_PLAYMODE.ALLEGRO_PLAYMODE_ONCE,
     yes   = ALLEGRO_PLAYMODE.ALLEGRO_PLAYMODE_LOOP,
@@ -28,13 +29,13 @@ class SoundSample {
     _pan    = pan;
   }
 
-  void play() {
-    float gain = _gain * soundVolume;
+  override void play() {
+    float gain = _gain * Preferences.fetch().soundVolume;
     bool ok = al_play_sample(_sample, gain, _pan, _speed, _loop, &_id);
     assert(ok, "a sound sample failed to play");
   }
 
-  void stop() {
+  override void stop() {
     al_stop_sample(&_id);
   }
 
@@ -47,6 +48,10 @@ class SoundSample {
   ALLEGRO_SAMPLE_ID _id;
   float _gain, _speed, _pan;
   Loop _loop;
+}
+
+auto nullAudio() {
+  return new BlackHole!AudioSample();
 }
 
 void preloadSoundSamples() {
