@@ -1,8 +1,6 @@
 module dau.sound;
 
-import std.string;
-import std.conv;
-import std.file;
+import std.string, std.conv, std.file, std.path;
 import dau.allegro;
 import dau.setup;
 
@@ -51,6 +49,12 @@ class SoundSample {
   Loop _loop;
 }
 
+void preloadSoundSamples() {
+  foreach(entry ; Paths.soundDir.dirEntries("*.ogg", SpanMode.shallow)) {
+    loadSample(entry.baseName(".ogg"));
+  }
+}
+
 void unloadSamples() {
   foreach(key, sample ; _samples) {
     al_destroy_sample(sample);
@@ -76,5 +80,6 @@ auto loadSample(string key) {
 }
 
 static this() {
+  onInit({ preloadSoundSamples(); });
   onShutdown({ unloadSamples(); });
 }
