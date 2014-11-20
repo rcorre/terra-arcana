@@ -15,6 +15,7 @@ class TitleScreen : GUIElement {
     addChild(new Button(data.child["startSinglePlayer"], &singlePlayerButton));
     addChild(new Button(data.child["startNetwork"], &networkButton));
     addChild(new Button(data.child["preferences"], &preferencesButton));
+    addChild(new Button(data.child["instructions"], &instructionsButton));
     addChild(new Button(data.child["credits"], &creditsButton));
     addChild(new Button(data.child["exit"], &exitButton));
 
@@ -28,6 +29,9 @@ class TitleScreen : GUIElement {
   }
 
   void networkButton() {
+  }
+
+  void instructionsButton() {
   }
 
   void preferencesButton() {

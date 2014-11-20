@@ -12,3 +12,4 @@ __dummy.html
 *.obj
 resources/icons/
 *.bak
+save/

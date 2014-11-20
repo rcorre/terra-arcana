@@ -27,6 +27,7 @@ class PreferenceScreen : GUIElement {
     addChild(new Button(data.child["musicVolumeDown"], &musicVolumeDown));
     addChild(new Button(data.child["soundVolumeUp"], &soundVolumeUp));
     addChild(new Button(data.child["soundVolumeDown"], &soundVolumeDown));
+    addChild(new Button(data.child["exit"], &exitButton));
 
     _title = title;
   }

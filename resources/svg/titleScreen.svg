@@ -24,11 +24,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.088322"
-     inkscape:cx="310.42133"
-     inkscape:cy="326.92665"
+     inkscape:zoom="0.5220805"
+     inkscape:cx="718.98062"
+     inkscape:cy="31.037987"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer2"
      showgrid="true"
      inkscape:window-width="1918"
      inkscape:window-height="1059"
@@ -148,13 +148,13 @@
        sodipodi:linespacing="125%"
        id="text3589"
        y="434.01562"
-       x="278.50781"
+       x="295.21094"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
        xml:space="preserve"><tspan
          y="434.01562"
-         x="278.50781"
+         x="295.21094"
          id="tspan3591"
-         sodipodi:role="line">network battle</tspan></text>
+         sodipodi:role="line">instructions</tspan></text>
     <rect
        style="fill:#008080;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
        id="rect3593"
@@ -184,13 +184,13 @@
        sodipodi:linespacing="125%"
        id="text3601"
        y="562.01562"
-       x="366.42188"
+       x="340.41406"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
        xml:space="preserve"><tspan
          y="562.01562"
-         x="366.42188"
+         x="340.41406"
          id="tspan3603"
-         sodipodi:role="line">exit</tspan></text>
+         sodipodi:role="line">credits</tspan></text>
     <text
        transform="translate(0,-452.36218)"
        xml:space="preserve"
@@ -203,6 +203,22 @@
          id="tspan3568"
          x="303.07617"
          y="645.67859">alpha 0.0</tspan></text>
+    <path
+       style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -32,536 0,32 192,0 -32,-32 z"
+       id="path3649"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
+       x="30.421875"
+       y="562.01562"
+       id="text3655"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3657"
+         x="30.421875"
+         y="562.01562">exit</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

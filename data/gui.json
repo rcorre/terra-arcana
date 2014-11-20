@@ -110,11 +110,27 @@
           }
         }
       },
+      "instructions": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Instructions",
+          "offset" : "400, 489",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
       "credits": {
         "properties": {
           "texture": "gui/rectButton",
           "text": "Credits",
-          "offset" : "400, 489",
+          "offset" : "400, 553",
           "anchor": "center"
         },
         "child": {
@@ -128,9 +144,9 @@
       },
       "exit": {
         "properties": {
-          "texture": "gui/rectButton",
+          "texture": "gui/edgeButton",
           "text": "Exit",
-          "offset" : "400, 553",
+          "offset" : "50, 552",
           "anchor": "center"
         },
         "child": {
@@ -220,6 +236,22 @@
           "offset": "161, 377",
           "texture": "gui/arrows",
           "sprite": "leftArrow"
+        }
+      },
+      "exit": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Back",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
         }
       }
     }
