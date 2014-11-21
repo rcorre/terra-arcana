@@ -5,6 +5,7 @@ import model.all;
 import title.title;
 import title.state.selectbattle;
 import title.state.editpreferences;
+import title.state.showinstructions;
 
 class TitleScreen : GUIElement {
   this(Title title) {
@@ -32,6 +33,7 @@ class TitleScreen : GUIElement {
   }
 
   void instructionsButton() {
+    _title.states.setState(new ShowInstructions);
   }
 
   void preferencesButton() {

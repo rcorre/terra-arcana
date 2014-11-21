@@ -1,6 +1,6 @@
 module dau.gui.icon;
 
-import std.algorithm : max;
+import std.conv, std.algorithm : max;
 import dau.gui.element;
 import dau.gui.textbox;
 import dau.gui.data;
@@ -9,6 +9,12 @@ import dau.graphics.all;
 
 /// draws a single sprite with a value next to it
 class Icon : GUIElement {
+  this(GUIData data) {
+    auto pos = data.get("offset", "0,0").parseVector!int;
+    auto anchor = data.get("anchor", "topLeft").to!Anchor;
+    super(data, pos, anchor);
+  }
+
   this(GUIData data, Vector2i pos, Anchor anchor = Anchor.topLeft) {
     super(data, pos, anchor);
   }

@@ -117,6 +117,13 @@ class GUIElement {
       }
     }
 
+    /// automatically add children from the given keys
+    void addChildren(T)(string[] keys ...) if(is(typeof(new T(GUIData.init)) : GUIElement)) {
+      foreach(key ; keys) {
+        addChild(new T(data.child[key]));
+      }
+    }
+
     /// return most-nested element under mouse.
     GUIElement handleMouseHover(Vector2i pos, Vector2i prevPos, ref bool highlightCursor) {
       bool mouseInArea = area.contains(pos);

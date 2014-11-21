@@ -45,6 +45,139 @@
     }
   },
 
+  "instructions": {
+    "properties": {
+      "texture": "gui/tutorialPopup"
+    },
+    "child": {
+      "wIcon": {
+        "properties": {
+          "offset" : "193, 153",
+          "texture": "input",
+          "sprite" : "w"
+        }
+      },
+      "aIcon": {
+        "properties": {
+          "offset" : "225, 153",
+          "texture": "input",
+          "sprite" : "a"
+        }
+      },
+      "sIcon": {
+        "properties": {
+          "offset" : "257, 153",
+          "texture": "input",
+          "sprite" : "s"
+        }
+      },
+      "dIcon": {
+        "properties": {
+          "offset" : "289, 153",
+          "texture": "input",
+          "sprite" : "d"
+        }
+      },
+      "qIcon": {
+        "properties": {
+          "offset" : "257, 185",
+          "texture": "input",
+          "sprite" : "q"
+        }
+      },
+      "eIcon": {
+        "properties": {
+          "offset" : "289, 185",
+          "texture": "input",
+          "sprite" : "e"
+        }
+      },
+      "eIcon": {
+        "properties": {
+          "offset" : "289, 185",
+          "texture": "input",
+          "sprite" : "e"
+        }
+      },
+      "spaceIcon": {
+        "properties": {
+          "offset" : "289, 217",
+          "texture": "input",
+          "sprite" : "space"
+        }
+      },
+      "lmbIcon": {
+        "properties": {
+          "offset" : "289, 249",
+          "texture": "input",
+          "sprite" : "lmb"
+        }
+      },
+      "rmbIcon": {
+        "properties": {
+          "offset" : "289, 281",
+          "texture": "input",
+          "sprite" : "rmb"
+        }
+      },
+      "hIcon": {
+        "properties": {
+          "offset" : "289, 313",
+          "texture": "input",
+          "sprite" : "h"
+        }
+      },
+      "moveText": {
+        "properties": {
+          "offset" : "329, 152",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "move camera"
+        }
+      },
+      "chooseText": {
+        "properties": {
+          "offset" : "329, 184",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "choose action"
+        }
+      },
+      "skipText": {
+        "properties": {
+          "offset" : "329, 216",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "skip turn"
+        }
+      },
+      "confirmText": {
+        "properties": {
+          "offset" : "329, 248",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "confirm"
+        }
+      },
+      "cancelText": {
+        "properties": {
+          "offset" : "329, 280",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "cancel"
+        }
+      },
+      "helpText": {
+        "properties": {
+          "offset" : "329, 312",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "show help"
+        }
+      }
+    }
+  },
+
   "titleScreen": {
     "properties": {
       "texture": "gui/titleScreen"

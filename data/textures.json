@@ -60,6 +60,18 @@
   },
 
   {
+    "sheets" : ["input"],
+    "frameWidth": 32,
+    "frameHeight": 32,
+    "sprites": [
+      "f", "q", "e", "h",
+      "enter", "space", "shift", "",
+      "w", "a", "s", "d",
+      "rmb", "lmb", "", ""
+    ]
+  },
+
+  {
     "sheets" : ["terrain"],
     "defaultDepth": 0,
     "frameSize": 32
