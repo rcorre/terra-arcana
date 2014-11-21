@@ -59,7 +59,7 @@ class Battle : Scene!Battle {
     camera.area = Rect2f(0, 0, Settings.screenW, Settings.screenH - _panel.area.height);
     camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
 
-    playMusicTrack(playerFaction.themeSong);
+    playMusicTrack(playerFaction.themeSong, true);
     startNewTurn;
   }
 
