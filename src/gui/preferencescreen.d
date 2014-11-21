@@ -40,11 +40,13 @@ class PreferenceScreen : GUIElement {
   void musicVolumeUp() {
     _preferences.musicVolume = _preferences.musicVolume + volumeIncrement;
     _musicBar.setVal(cast(int) (_preferences.musicVolume / volumeIncrement));
+    setMusicVolume(_preferences.musicVolume);
   }
 
   void musicVolumeDown() {
     _preferences.musicVolume = _preferences.musicVolume - volumeIncrement;
     _musicBar.setVal(cast(int) (_preferences.musicVolume / volumeIncrement));
+    setMusicVolume(_preferences.musicVolume);
   }
 
   void soundVolumeUp() {
