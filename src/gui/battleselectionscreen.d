@@ -5,12 +5,14 @@ import dau.all;
 import model.all;
 import gui.factionmenu;
 import battle.battle;
+import title.title;
+import title.state.showtitle;
 
 enum mapFormat = Paths.mapDir ~ "/%s.json";
 
 /// bar that displays progress as discrete elements (pips)
 class BattleSelectionScreen : GUIElement {
-  this() {
+  this(Title title) {
     super(getGUIData("selectBattle"), Vector2i.zero);
       auto playerOffset       = data["playerOffset"].parseVector!int;
       auto pcOffset           = data["pcOffset"].parseVector!int;
@@ -34,6 +36,8 @@ class BattleSelectionScreen : GUIElement {
 
       addChildren(_startButton, _playerFactionMenu, _pcFactionMenu, _mapSelector);
       _startButton.enabled = false;
+
+      addChild(new Button(data.child["backButton"], () => title.states.setState(new ShowTitle)));
   }
 
   private:
@@ -60,5 +64,8 @@ class BattleSelectionScreen : GUIElement {
     auto pcFaction = _pcFactionMenu.selection;
     auto mapName = _mapSelector.selection;
     setScene(new Battle(mapName, playerFaction, pcFaction));
+  }
+
+  void backToMenu() {
   }
 }

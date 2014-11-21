@@ -13,6 +13,8 @@ class PreferenceScreen : GUIElement {
 
     _preferences = Preferences.fetch();
 
+    addChild(new TextBox(data.child["titleText"]));
+    addChild(new TextBox(data.child["preferencesText"]));
     addChild(new TextBox(data.child["musicText"]));
     addChild(new TextBox(data.child["soundText"]));
 

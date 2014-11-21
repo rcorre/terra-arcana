@@ -10,7 +10,7 @@ class SelectBattle : State!Title {
   override {
     void enter(Title title) {
       title.gui.clear();
-      title.gui.addElement(new BattleSelectionScreen);
+      title.gui.addElement(new BattleSelectionScreen(title));
     }
   }
 }

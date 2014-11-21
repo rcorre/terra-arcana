@@ -172,6 +172,24 @@
       "texture": "gui/titleScreen"
     },
     "child": {
+      "titleText": {
+        "properties": {
+          "offset"   : "400, 89",
+          "text"     : "Terra Arcana",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "48"
+        }
+      },
+      "preferencesText": {
+        "properties": {
+          "offset"   : "400, 185",
+          "text"     : "Preferences",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "32"
+        }
+      },
       "musicText": {
         "properties": {
           "offset": "400, 252",
@@ -327,6 +345,22 @@
             "properties": {
               "fontName": "Mecha",
               "fontSize": "26"
+            }
+          }
+        }
+      },
+      "backButton": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Back",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
             }
           }
         }
