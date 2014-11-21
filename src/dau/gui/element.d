@@ -105,6 +105,12 @@ class GUIElement {
     }
   }
 
+  void clear() {
+    foreach(child ; children) {
+      child.active = false;
+    }
+  }
+
   final {
     auto addChild(GUIElement el) {
       _children.insert(el);
