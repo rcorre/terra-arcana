@@ -9,6 +9,7 @@ class Faction {
   @jsonize {
     string name;
     string description;
+    string themeSong;
     string[] standardUnitKeys;
     string[] advancedUnitKeys;
     string[] eliteUnitKeys;

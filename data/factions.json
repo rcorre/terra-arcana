@@ -3,6 +3,7 @@
     "name": "Gaia",
     "description": "",
     "standardUnitKeys": ["hellblossom", "antlion", "treant", "wyvern"],
+    "themeSong": "terra",
     "advancedUnitKeys": [],
     "eliteUnitKeys": []
   },
@@ -10,8 +11,10 @@
   {
     "name": "Federation",
     "description": "",
+    "themeSong": "federation",
     "standardUnitKeys": ["assault", "medic", "sniper", "guardian"],
     "advancedUnitKeys": [],
     "eliteUnitKeys": []
   }
+
 ]
