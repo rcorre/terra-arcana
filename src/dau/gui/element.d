@@ -79,6 +79,7 @@ class GUIElement {
   void onMouseEnter() {}
   void onMouseLeave() {}
   bool onClick() { return false; } // return false to indicate event not handled
+  void onFocus(bool focused) { }
 
   void update(float time) {
     if (_sprite !is null) {
@@ -158,6 +159,7 @@ class GUIElement {
 
     bool handleMouseClick(Vector2i pos) {
       _hasFocus = area.contains(pos);
+      onFocus(_hasFocus);
       auto localPos = pos - area.topLeft;
       foreach(child ; children) {
         if (child.handleMouseClick(localPos)) {

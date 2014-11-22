@@ -8,8 +8,7 @@ import dau.gui.element;
 import dau.gui.data;
 import dau.gui.textbox;
 import dau.geometry.all;
-import dau.graphics.color;
-import dau.graphics.font;
+import dau.graphics.all;
 
 class TextInput : GUIElement {
   this(GUIData data) {
@@ -22,6 +21,14 @@ class TextInput : GUIElement {
 
     _charLimit = ("charLimit" in data) ? data["charLimit"].to!int : int.max;
 
+    _focusedTint = data.get("focusedTint", "1, 1, 1").parseColor;
+    _unfocusedTint = data.get("unfocusedTint", "0.5, 0.5, 0.5").parseColor;
+    sprite.tint = _unfocusedTint;
+
+    if ("cursorTexture" in data && "cursorAnimation" in data) {
+      _cursor = new Animation(data["cursorTexture"], data["cursorAnimation"], Animation.Repeat.loop);
+    }
+
     registerEventHandler(&handleKeyChar, ALLEGRO_EVENT_KEY_CHAR);
   }
 
@@ -32,12 +39,30 @@ class TextInput : GUIElement {
     }
   }
 
-  override void update(float time) {
+  override {
+    void update(float time) {
+      super.update(time);
+      if (hasFocus && _cursor !is null) { _cursor.update(time); }
+    }
+
+    void draw(Vector2i parentTopLeft) {
+      super.draw(parentTopLeft);
+      if (hasFocus && _cursor !is null) {
+        auto offset = parentTopLeft + area.topLeft + Vector2i(0, _textBox.height / 2);
+        _cursor.draw(offset + _textBox.textArea.topRight);
+      }
+    }
+
+    void onFocus(bool focus) {
+      sprite.tint = focus ? _focusedTint : _unfocusedTint;
+    }
   }
 
   private:
   TextBox _textBox;
   int _charLimit;
+  Color _focusedTint, _unfocusedTint;
+  Animation _cursor;
 
   void handleKeyChar(ALLEGRO_EVENT event) {
     if (!hasFocus) { return; }

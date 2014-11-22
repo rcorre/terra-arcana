@@ -590,6 +590,9 @@
         "properties": {
           "texture": "gui/edgeButton",
           "charLimit": "5",
+          "cursorTexture": "gui/cursor",
+          "cursorAnimation": "textInput",
+          "unfocusedTint": "0.5, 0.5, 0.5",
           "offset": "450, 252",
           "anchor": "center"
         },
@@ -658,6 +661,9 @@
         "properties": {
           "texture": "gui/edgeButton",
           "offset": "450, 200",
+          "unfocusedTint": "0.5, 0.5, 0.5",
+          "cursorTexture": "gui/cursor",
+          "cursorAnimation": "textInput",
           "charLimit": "15",
           "anchor": "center"
         },
@@ -684,6 +690,9 @@
         "properties": {
           "texture": "gui/edgeButton",
           "offset": "450, 252",
+          "unfocusedTint": "0.5, 0.5, 0.5",
+          "cursorTexture": "gui/cursor",
+          "cursorAnimation": "textInput",
           "charLimit": "5",
           "anchor": "center"
         },
