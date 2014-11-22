@@ -1,6 +1,6 @@
 module dau.gui.textinput;
 
-import std.conv, std.string;
+import std.conv, std.string, std.range;
 import dau.input;
 import dau.allegro;
 import dau.engine;
@@ -20,13 +20,15 @@ class TextInput : GUIElement {
     _textBox = new TextBox(data.child["text"]);
     addChild(_textBox);
 
+    _charLimit = ("charLimit" in data) ? data["charLimit"].to!int : int.max;
+
     registerEventHandler(&handleKeyChar, ALLEGRO_EVENT_KEY_CHAR);
   }
 
   @property {
     string text() { return _textBox.text; }
     void text(string val) {
-      _textBox.text = val;
+      _textBox.text = val.take(_charLimit).to!string;
     }
   }
 
@@ -35,13 +37,14 @@ class TextInput : GUIElement {
 
   private:
   TextBox _textBox;
+  int _charLimit;
 
   void handleKeyChar(ALLEGRO_EVENT event) {
     if (event.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
-      _textBox.text = _textBox.text.chop;
+      text = text.chop;
     }
     else {
-      _textBox.text = _textBox.text ~ cast(char) event.keyboard.unichar;
+      text = text ~ cast(char) event.keyboard.unichar;
     }
   }
 }

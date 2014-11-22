@@ -589,6 +589,7 @@
       "portInput": {
         "properties": {
           "texture": "gui/edgeButton",
+          "charLimit": "5",
           "offset": "450, 252",
           "anchor": "center"
         },
@@ -657,6 +658,7 @@
         "properties": {
           "texture": "gui/edgeButton",
           "offset": "450, 200",
+          "charLimit": "15",
           "anchor": "center"
         },
         "child": {
@@ -682,6 +684,7 @@
         "properties": {
           "texture": "gui/edgeButton",
           "offset": "450, 252",
+          "charLimit": "5",
           "anchor": "center"
         },
         "child": {
