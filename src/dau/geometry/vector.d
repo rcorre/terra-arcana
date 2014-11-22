@@ -1,7 +1,6 @@
 module dau.geometry.vector;
 
-import std.math;
-import std.traits;
+import std.math, std.traits, std.conv, std.string, std.algorithm;
 
 public alias Vector2f = Vector2!float;
 public alias Vector2i = Vector2!int;
@@ -176,6 +175,15 @@ T distance(T)(Vector2!T v1, Vector2!T v2) {
   return (v2 - v1).len;
 }
 
+/// parse a Vector2!T from a string of format "x,y"
+auto parseVector(T : real)(string csvSpec) {
+  auto entries = csvSpec.splitter(",").map!(x => x.strip.to!T);
+  T x = entries.front;
+  entries.popFront;
+  T y = entries.front;
+  return Vector2!T(x, y);
+}
+
 // float vector
 unittest {
   // test for rough equality
@@ -309,4 +317,11 @@ unittest {
   assert(v5 == Vector2i(-2,-4));
   v5 /= 2;
   assert(v5 == Vector2i(-1,-2));
+}
+
+// parse vector
+unittest {
+  assert(parseVector!int("1,2") == Vector2i(1,2));
+  assert(parseVector!float("1,2") == Vector2f(1,2));
+  assert(parseVector!real("-1.75, 20.4") == Vector2!real(-1.75, 20.4));
 }

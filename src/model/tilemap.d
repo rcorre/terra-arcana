@@ -1,6 +1,6 @@
 module model.tilemap;
 
-import std.string;
+import std.string, std.math;
 import dau.all;
 import model.tile;
 
@@ -48,6 +48,20 @@ class TileMap : Entity {
     if (row < numRows - 1) { neighbors ~= tileAt(row + 1, col); }
     if (col < numCols - 1) { neighbors ~= tileAt(row, col + 1); }
     return neighbors;
+  }
+
+  auto tilesInRange(Tile center, int minRange, int maxRange) {
+    Tile[] tiles;
+    for (int row = center.row - maxRange ; row <= center.row + maxRange ; ++row) {
+      for (int col = center.col - maxRange ; col <= center.col + maxRange ; ++col) {
+        auto tile = tileAt(row, col);
+        auto dist = abs(row - center.row) + abs(col - center.col);
+        if (tile !is null && dist >= minRange && dist <= maxRange) {
+          tiles ~= tile;
+        }
+      }
+    }
+    return tiles;
   }
 
   private:

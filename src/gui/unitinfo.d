@@ -9,42 +9,40 @@ import dau.gui.all;
 import model.all;
 
 private enum {
-  spriteName       = "gui/unit_status",
-  pipName          = "gui/pip",
-  armorOffset      = Vector2i(18, 52),
-  evadeOffset      = Vector2i(118, 51),
-  hpArea           = Rect2i(37, 37, 63, 13),
-  apArea           = Rect2i(37, 53, 63, 13),
-  effectsOffset    = Vector2i(5, 73),
-  actionBarOffset1 = Vector2i(137, 9),
-  actionBarOffset2 = Vector2i(137, 57),
-  actionBarSize    = Vector2i(200, 24),
-  spriteOffset     = Vector2i(13, 0),
-  nameOffset       = Vector2i(49, 12),
-  iconSheetName    = "gui/icons",
-  effectFlashTime  = 0.5f,
-  effectFlashColor = Color.red
+  iconFmt = "icon_%s",
 }
 
 /// bar that displays progress as discrete elements (pips)
 class UnitInfoGUI : GUIElement {
   this(Unit unit, Vector2i offset) {
     // TODO: choose corner of unit based on screen positioning
-    super(new Sprite(spriteName), offset);
-    _nextEffectOffset = effectsOffset;
+    super(getGUIData("unitInfo"), offset);
+    _nextEffectOffset = data["effectsOffset"].parseVector!int;
     if (unit !is null) {
-      _hpBar = new PipBar(hpArea, unit.maxHp, pipName, "hpPip");
-      _apBar = new PipBar(apArea, unit.maxAp, pipName, "apPip");
-      _armorText = new TextBox(unit.armor, _font, armorOffset, GUIElement.Anchor.center);
-      _evadeText = new TextBox(unit.evade, _font, evadeOffset, GUIElement.Anchor.center);
+      auto hpArea           = data["hpArea"].parseRect!int;
+      auto apArea           = data["apArea"].parseRect!int;
+      auto spriteOffset     = data["spriteOffset"].parseVector!int;
+      auto armorOffset      = data["armorOffset"].parseVector!int;
+      auto evadeOffset      = data["evadeOffset"].parseVector!int;
+      auto actionBarOffset1 = data["actionBarOffset1"].parseVector!int;
+      auto actionBarOffset2 = data["actionBarOffset2"].parseVector!int;
+      auto nameOffset       = data["nameOffset"].parseVector!int;
+      auto actionBarSize    = data["actionBarSize"].parseVector!int;
+      auto textData         = data.child["text"];
+      auto unitIconData     = getGUIData(iconFmt.format(unit.key));
+
+      _hpBar = new PipBar(getGUIData("hpBar"), hpArea, unit.maxHp);
+      _apBar = new PipBar(getGUIData("apBar"), apArea, unit.maxAp);
+      _armorText = new TextBox(textData, unit.armor, armorOffset, GUIElement.Anchor.center);
+      _evadeText = new TextBox(textData, unit.evade, evadeOffset, GUIElement.Anchor.center);
       addChild(_hpBar);
       addChild(_apBar);
       addChild(_armorText);
       addChild(_evadeText);
-      addChild(new ActionInfo(actionBarOffset1, unit.action1));
-      addChild(new ActionInfo(actionBarOffset2, unit.action2));
-      addChild(new Icon(new Animation(unit.key, "idle", Animation.Repeat.loop), spriteOffset));
-      addChild(new TextBox(unit.name, _font, nameOffset));
+      addChild(new ActionInfo(actionBarOffset1, actionBarSize, unit.action1));
+      addChild(new ActionInfo(actionBarOffset2, actionBarSize, unit.action2));
+      addChild(new Icon(unitIconData, spriteOffset));
+      addChild(new TextBox(textData, unit.name, nameOffset));
       foreach(trait ; unit.traits) {
         addEffectIcon(trait.to!string);
       }
@@ -58,6 +56,8 @@ class UnitInfoGUI : GUIElement {
       _apBar.setVal(unit.ap);
     }
     _unit = unit;
+    _effectFlashColor = data["effectFlashColor"].parseColor;
+    _effectFlashTime = data["effectFlashTime"].to!float;
   }
 
   @property auto unit() { return _unit; }
@@ -72,19 +72,20 @@ class UnitInfoGUI : GUIElement {
 
   void animateEffect(string name, int val) {
     auto icon = addEffectIcon(name, val);
-    icon.flash(effectFlashTime, effectFlashColor);
+    icon.flash(_effectFlashTime, _effectFlashColor);
   }
 
   auto addEffectIcon(string iconName) {
-    auto sprite = new Sprite(iconSheetName, iconName);
-    auto icon = addChild(new Icon(sprite, _nextEffectOffset));
+    auto iconData = getGUIData(iconFmt.format(iconName));
+    auto icon = addChild(new Icon(iconData, _nextEffectOffset));
     _nextEffectOffset.x += icon.width;
     return icon;
   }
 
   auto addEffectIcon(string iconName, int val) {
-    auto sprite = new Sprite(iconSheetName, iconName);
-    auto icon = addChild(new Icon(sprite, _nextEffectOffset, val, _font));
+    auto iconData = getGUIData(iconFmt.format(iconName));
+    auto textData = data.child["text"];
+    auto icon = addChild(new Icon(iconData, textData, _nextEffectOffset, val));
     _nextEffectOffset.x += icon.width;
     return icon;
   }
@@ -96,23 +97,18 @@ class UnitInfoGUI : GUIElement {
   ActionInfo _actionInfo1, _actionInfo2;
   Icon _toxinIcon, _slowIcon, _flyingIcon;
   Vector2i _nextEffectOffset;
+  Color _effectFlashColor;
+  float _effectFlashTime;
 }
 
 private:
 class ActionInfo : GUIElement {
-  private enum {
-    actionIconOffset = Vector2i(2, 2),
-    infoOffset = Vector2i(34, 2),
-    apArea = Rect2i(37, 28, 51, 12),
-    iconSeparation = 4
-  }
-
-  this(Vector2i topLeft, const UnitAction action) {
-    super(Rect2i(topLeft, actionBarSize));
-    auto actionName = action.name.toLower;
-    addChild(new Icon(new Sprite(iconSheetName, actionName), actionIconOffset));
-    addChild(new PipBar(apArea, action.apCost, pipName, "apPip"));
-    Vector2i offset = infoOffset;
+  this(Vector2i topLeft, Vector2i size, const UnitAction action) {
+    super(getGUIData("actionInfo"), Rect2i(topLeft, size));
+    addActionIcon(action.name);
+    addApCostBar(action.apCost);
+    Vector2i offset = data["infoOffset"].parseVector!int;
+    _iconSeparation = data["iconSeparation"].to!int;
     addEffectIcon(action, offset);
     addRangeIcon(action, offset);
     foreach(special ; action.specials) {
@@ -120,50 +116,48 @@ class ActionInfo : GUIElement {
     }
   }
 
+  void addApCostBar(int amount) {
+    auto apArea = data["apArea"].parseRect!int;
+    addChild(new PipBar(getGUIData("apBar"), apArea, amount));
+  }
+
+  void addActionIcon(string name) {
+    auto iconData = getGUIData(iconFmt.format(name.toLower));
+    auto offset = data["actionIconOffset"].parseVector!int;
+    addChild(new Icon(iconData, offset));
+  }
+
   void addEffectIcon(const UnitAction action, ref Vector2i offset) {
-    auto sprite = new Sprite(iconSheetName, action.effect.to!string);
+    auto iconData = getGUIData(iconFmt.format(action.effect));
+    auto textData = data.child["text"];
     string text;
-    switch (action.target) with (UnitAction.Target) {
-      case enemy:
-      case ground:
-        text = "%dx%d".format(action.power, action.hits);
-        break;
-      case ally:
-      case self:
-        text = "%d".format(action.power);
-        break;
-      default:
-        text = "";
+    if (action.hits > 1) {
+      text = "%dx%d".format(action.power, action.hits);
     }
-    addInfo(new Icon(sprite, offset, text, _font), offset);
+    else {
+      text = "%d".format(action.power);
+    }
+    addInfo(new Icon(iconData, textData, offset, text), offset);
   }
 
   void addRangeIcon(const UnitAction action, ref Vector2i offset) {
-    switch (action.target) with (UnitAction.Target) {
-      case enemy:
-      case ground:
-      case ally:
-        auto sprite = new Sprite(iconSheetName, "range");
-        auto text = "%d-%d".format(action.minRange, action.maxRange);
-        addInfo(new Icon(sprite, offset, text, _font), offset);
-        break;
-      default:
+    if (action.maxRange > 0) {
+      auto iconData = getGUIData("icon_range");
+      auto textData = data.child["text"];
+      auto text = "%d-%d".format(action.minRange, action.maxRange);
+      addInfo(new Icon(iconData, textData, offset, text), offset);
     }
   }
 
   void addSpecialIcon(UnitAction.Special special, ref Vector2i offset) {
-    auto sprite = new Sprite(iconSheetName, special.to!string);
-    addInfo(new Icon(sprite, offset), offset);
+    auto iconData = getGUIData(iconFmt.format(special.to!string));
+    addInfo(new Icon(iconData, offset), offset);
   }
 
   void addInfo(Icon icon, ref Vector2i offset) {
     addChild(icon);
-    offset.x += icon.area.width + iconSeparation;
+    offset.x += icon.area.width + _iconSeparation;
   }
-}
 
-Font _font;
-
-static this() {
-  onInit({ _font = Font("Mecha", 16); });
+  int _iconSeparation;
 }

@@ -1,31 +1,46 @@
 module battle.ai.player;
 
-import std.algorithm, std.range, std.array;
+import std.algorithm, std.range, std.array, std.random;
+import dau.util.math;
 import model.all;
 import battle.battle;
 import battle.pathfinder;
-import battle.ai.option;
-import battle.ai.profile;
-import battle.ai.actoption;
-import battle.ai.moveoption;
-import battle.ai.deployoption;
+import battle.ai.unitai;
 import battle.ai.helpers;
+import battle.ai.profile;
+import battle.ai.decision;
+
+private enum deployVariance = 0.1f;
 
 class AIPlayer : Player {
-  this(const Faction faction, int teamIdx, AIProfile profile) {
+  this(const Faction faction, int teamIdx, string profileKey) {
     super(faction, teamIdx, false);
-    _profile = profile;
+    _profile = getAIProfile(profileKey);
   }
 
-  AIOption getDecision(Battle battle) {
-    auto options = allOptions(battle);
-    AIOption bestOption = null;
+  AIDecision getDecision(Battle battle) {
+    auto unitAIs = units.map!(x => UnitAI(x, battle, _profile));
+    auto goals = _profile.expandGoals(teamIdx, battle);
+    AIDecision bestOption = null;
     float bestScore = 0;
-    foreach(option ; options) {
-      float score = option.computeScore(battle, _profile);
-      if (score > bestScore) {
-        bestScore = score;
-        bestOption = option;
+    foreach(goal ; goals) {
+      AIDecision[] options;
+      foreach(ai ; unitAIs) {
+        auto option = ai.bestSolutionTo(goal, commandPoints);
+        if (option !is null) {
+          float score = option.score * goal.priority;
+          if (score > bestScore) {
+            bestScore = score;
+            bestOption = option;
+          }
+        }
+      }
+      foreach(option ; deployOptions(battle, goal.target)) {
+        float score = option.score * goal.priority;
+        if (score > bestScore) {
+          bestScore = score;
+          bestOption = option;
+        }
       }
     }
 
@@ -34,52 +49,18 @@ class AIPlayer : Player {
 
   private:
   AIProfile _profile;
-  auto allOptions(Battle battle) {
-    return deployOptions(battle) ~ allUnitOptions(battle);
-  }
 
-  auto deployOptions(Battle battle) {
-    int excessCommand = maxCommandPoints - units.map!(x => x.deployCost).sum;
-    AIOption[] options;
-    foreach(tile ; battle.spawnPointsFor(teamIdx).filter!(x => x.entity is null)) {
+  auto deployOptions(Battle battle, Tile target) {
+    AIDecision[] options;
+    foreach(tile ; battle.spawnPointsFor(teamIdx)) {
       foreach(key ; faction.standardUnitKeys) {
         auto data = getUnitData(key);
-        if (data.deployCost <= commandPoints) {
-          options ~= new DeployOption(key, tile, units, excessCommand);
-        }
-      }
-    }
-    return options;
-  }
-
-  auto allUnitOptions(Battle battle) {
-    AIOption[] options;
-    foreach(unit ; moveableUnits) {
-      options ~= unitOptions(unit, battle);
-    }
-    return options;
-  }
-
-  auto unitOptions(Unit unit, Battle battle) {
-    return moveOptions(unit, battle) ~ actOptions(unit, battle);
-  }
-
-  auto moveOptions(Unit unit, Battle battle) {
-    float current = computeTilePriority(battle, _profile, unit.tile, unit);
-    auto finder = new Pathfinder(battle.map, unit);
-    return finder.tilesInRange
-      .map!(tile => cast(AIOption) new MoveOption(unit, tile, teamIdx, finder, current))
-      .array;
-  }
-
-  auto actOptions(Unit unit, Battle battle) {
-    AIOption[] options;
-    foreach(enemy ; battle.enemiesTo(teamIdx)) {
-      if (unit.canUseAction(1, enemy.tile)) {
-        options ~= new ActOption(unit, enemy, 1);
-      }
-      if (unit.canUseAction(2, enemy.tile)) {
-        options ~= new ActOption(unit, enemy, 2);
+        if (data.deployCost > commandPoints) { continue; }
+        float cmdScore = 1 - units.length / maxCommandPoints;
+        float distScore = proximityScore(tile, target);
+        float variance = uniform(0f, deployVariance);
+        float score = average(cmdScore, distScore) * _profile.deploy + variance;
+        options ~= new DeployDecison(key, tile, score);
       }
     }
     return options;

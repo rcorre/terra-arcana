@@ -1,0 +1,930 @@
+{
+  "dauGUIDefaults": {
+    "properties": {
+      "clickSound": "click"
+    }
+  },
+
+  "toolTip": {
+    "properties": {
+      "texture": "gui/tooltip",
+      "titleCenter": "97, 10",
+      "textOffset":  "5, 22"
+    },
+    "child": {
+      "title": {
+        "properties": {
+          "fontName": "Mecha_Bold",
+          "fontSize": "16"
+        }
+      },
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "16"
+        }
+      }
+    }
+  },
+
+  "battlePanel": {
+    "properties": {
+      "texture"              : "gui/battle_panel",
+      "leftUnitOffset"       : "108, 7",
+      "rightUnitOffset"      : "446, 10",
+      "commandCounterOffset" : "46, 21",
+      "manaCounterOffset"    : "46, 70"
+    },
+    "child": {
+      "counter": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "20"
+        }
+      }
+    }
+  },
+
+  "instructions": {
+    "properties": {
+      "texture": "gui/tutorialPopup"
+    },
+    "child": {
+      "wIcon": {
+        "properties": {
+          "offset" : "193, 153",
+          "texture": "input",
+          "sprite" : "w"
+        }
+      },
+      "aIcon": {
+        "properties": {
+          "offset" : "225, 153",
+          "texture": "input",
+          "sprite" : "a"
+        }
+      },
+      "sIcon": {
+        "properties": {
+          "offset" : "257, 153",
+          "texture": "input",
+          "sprite" : "s"
+        }
+      },
+      "dIcon": {
+        "properties": {
+          "offset" : "289, 153",
+          "texture": "input",
+          "sprite" : "d"
+        }
+      },
+      "qIcon": {
+        "properties": {
+          "offset" : "257, 185",
+          "texture": "input",
+          "sprite" : "q"
+        }
+      },
+      "eIcon": {
+        "properties": {
+          "offset" : "289, 185",
+          "texture": "input",
+          "sprite" : "e"
+        }
+      },
+      "eIcon": {
+        "properties": {
+          "offset" : "289, 185",
+          "texture": "input",
+          "sprite" : "e"
+        }
+      },
+      "spaceIcon": {
+        "properties": {
+          "offset" : "289, 217",
+          "texture": "input",
+          "sprite" : "space"
+        }
+      },
+      "lmbIcon": {
+        "properties": {
+          "offset" : "289, 249",
+          "texture": "input",
+          "sprite" : "lmb"
+        }
+      },
+      "rmbIcon": {
+        "properties": {
+          "offset" : "289, 281",
+          "texture": "input",
+          "sprite" : "rmb"
+        }
+      },
+      "hIcon": {
+        "properties": {
+          "offset" : "289, 313",
+          "texture": "input",
+          "sprite" : "h"
+        }
+      },
+      "moveText": {
+        "properties": {
+          "offset" : "329, 152",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "move camera"
+        }
+      },
+      "chooseText": {
+        "properties": {
+          "offset" : "329, 184",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "choose action"
+        }
+      },
+      "skipText": {
+        "properties": {
+          "offset" : "329, 216",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "skip turn"
+        }
+      },
+      "confirmText": {
+        "properties": {
+          "offset" : "329, 248",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "confirm"
+        }
+      },
+      "cancelText": {
+        "properties": {
+          "offset" : "329, 280",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "cancel"
+        }
+      },
+      "helpText": {
+        "properties": {
+          "offset" : "329, 312",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "show help"
+        }
+      }
+    }
+  },
+
+  "titleScreen": {
+    "properties": {
+      "texture": "gui/titleScreen"
+    },
+    "child": {
+      "titleText": {
+        "properties": {
+          "offset"   : "400, 89",
+          "text"     : "Terra Arcana",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "48"
+        }
+      },
+      "versionText": {
+        "properties": {
+          "offset"   : "400, 185",
+          "text"     : "Alpha 0.0",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "32"
+        }
+      },
+      "startSinglePlayer": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Battle vs AI",
+          "offset" : "400, 297",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "startNetwork": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Network Battle",
+          "offset" : "400, 361",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "preferences": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Preferences",
+          "offset" : "400, 425",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "instructions": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Instructions",
+          "offset" : "400, 489",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "credits": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Credits",
+          "offset" : "400, 553",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "exit": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Exit",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "preferences": {
+    "properties": {
+      "texture": "gui/titleScreen"
+    },
+    "child": {
+      "titleText": {
+        "properties": {
+          "offset"   : "400, 89",
+          "text"     : "Terra Arcana",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "48"
+        }
+      },
+      "preferencesText": {
+        "properties": {
+          "offset"   : "400, 185",
+          "text"     : "Preferences",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "32"
+        }
+      },
+      "musicText": {
+        "properties": {
+          "offset": "400, 252",
+          "anchor": "center",
+          "text": "Music Volume",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
+      "soundText": {
+        "properties": {
+          "offset": "400, 345",
+          "anchor": "center",
+          "text": "Sound Volume",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
+      "musicVolumeBar": {
+        "properties": {
+          "pipBarArea": "240, 281, 385, 33",
+          "numPips": "10"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/menuPip"
+            }
+          }
+        }
+      },
+      "soundVolumeBar": {
+        "properties": {
+          "pipBarArea": "240, 377, 385, 33",
+          "numPips": "10"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/menuPip"
+            }
+          }
+        }
+      },
+      "musicVolumeUp": {
+        "properties": {
+          "offset": "590, 276",
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
+        }
+      },
+      "musicVolumeDown": {
+        "properties": {
+          "offset": "180, 276",
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
+        }
+      },
+      "soundVolumeUp": {
+        "properties": {
+          "offset": "590, 373",
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
+        }
+      },
+      "soundVolumeDown": {
+        "properties": {
+          "offset": "180, 373",
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
+        }
+      },
+      "exit": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Back",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "selectMap": {
+    "properties": {
+      "texture": "gui/mapTextBox",
+      "buttonSpacingX": "32"
+    },
+    "child": {
+      "nextButton": {
+        "properties": {
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
+        }
+      },
+      "prevButton": {
+        "properties": {
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
+        }
+      },
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "26"
+        }
+      }
+    }
+  },
+
+  "selectBattle": {
+    "properties": {
+      "texture": "gui/select_battle",
+      "playerOffset": "33, 73",
+      "pcOffset": "545, 73",
+      "factionTitleOffset": "350, 37",
+      "playerTitleOffset": "33, 20",
+      "pcTitleOffset": "715, 20",
+      "startButtonOffset": "289, 537",
+      "mapSelectOffset": "402, 472"
+    },
+    "child": {
+      "playerText": {
+        "properties": {
+          "fontName": "Mecha_Bold",
+          "fontSize": "48"
+        }
+      },
+      "factionText": {
+        "properties": {
+          "fontName": "Mecha_Bold",
+          "fontSize": "32"
+        }
+      },
+      "startButton": {
+        "properties": {
+          "texture"       : "gui/start_button",
+          "text"          : "Start",
+          "onShade"       : "1, 1, 1, 0.9",
+          "offShade"      : "0.9, 0.9, 0.9, 0.6",
+          "disabledShade" : "0.5, 0.5, 0.5, 0.5"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "26"
+            }
+          }
+        }
+      },
+      "backButton": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Back",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "factionMenu": {
+    "properties": {
+      "firstButtonOffset" : "17, 17",
+      "menuSpacingY": "32",
+      "texture": "gui/faction_menu"
+    },
+    "child": {
+      "factionButton": {
+        "properties": {
+          "texture"       : "gui/faction_button",
+          "spritesOffset" : "32, 32",
+          "nameOffset"    : "60, 5",
+          "brightShade"   : "1, 1, 1, 0.9",
+          "dullShade"     : "0.9, 0.9, 0.9, 0.6",
+          "disabledShade" : "0.5, 0.5, 0.5, 0.5"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "deployMenu": {
+    "properties": {
+      "texture": "gui/deploy_menu",
+      "firstButtonOffset" : "0, 22"
+    },
+    "child": {
+      "deployButton": {
+        "properties": {
+          "texture"           : "gui/deploy_button",
+          "costOffset"        : "172, 10",
+          "spriteOffset"      : "0, 0",
+          "nameOffset"        : "48, 4",
+          "brightShade"       : "1, 1, 1, 0.9",
+          "dullShade"         : "0.9, 0.9, 0.9, 0.6",
+          "disabledShade"     : "0.5, 0.5, 0.5, 0.5"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "20"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "unitInfo": {
+    "properties": {
+      "texture": "gui/unit_status",
+      "armorOffset": "18, 52",
+      "evadeOffset": "118, 51",
+      "hpArea": "37, 37, 63, 13",
+      "apArea": "37, 53, 63, 13",
+      "effectsOffset": "5, 73",
+      "actionBarOffset1": "137, 9",
+      "actionBarOffset2": "137, 57",
+      "actionBarSize": "200, 24",
+      "spriteOffset": "13, 0",
+      "nameOffset": "49, 12",
+      "effectFlashTime": "0.5",
+      "effectFlashColor": "1, 0, 0, 0"
+    },
+    "child": {
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "16"
+        }
+      }
+    }
+  },
+
+  "actionInfo": {
+    "properties": {
+      "actionIconOffset": "2, 2",
+      "infoOffset": "34, 2",
+      "apArea": "37, 28, 51, 12",
+      "iconSeparation": "4"
+    },
+    "child": {
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "16"
+        }
+      }
+    }
+  },
+
+  "apBar": {
+    "child": {
+      "pip": {
+        "properties": {
+          "texture": "gui/pip",
+          "sprite": "apPip"
+        }
+      }
+    }
+  },
+
+  "hpBar": {
+    "child": {
+      "pip": {
+        "properties": {
+          "texture": "gui/pip",
+          "sprite": "hpPip"
+        }
+      }
+    }
+  },
+
+  "icon_range": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "range",
+      "toolTipTitle": "Range",
+      "toolTipText": "min range - max range"
+    }
+  },
+  "icon_damage": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "damage",
+      "toolTipTitle": "Damage",
+      "toolTipText": "Damage"
+    }
+  },
+  "icon_stun": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "stun",
+      "toolTipTitle": "Stun",
+      "toolTipText": "Reduce AP"
+    }
+  },
+  "icon_heal": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "heal",
+      "toolTipTitle": "Heal",
+      "toolTipText": "Restore health"
+    }
+  },
+  "icon_armor": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "armor",
+      "toolTipTitle": "Armor",
+      "toolTipText": "Improve armor"
+    }
+  },
+  "icon_evade": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "evade",
+      "toolTipTitle": "Evade",
+      "toolTipText": "Boost evasion"
+    }
+  },
+  "icon_piercing": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "piercing",
+      "toolTipTitle": "Piercing",
+      "toolTipText": "Ignore armor"
+    }
+  },
+  "icon_precise": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "precise",
+      "toolTipTitle": "Precise",
+      "toolTipText": "Ignore evasion"
+    }
+  },
+  "icon_blitz": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "blitz",
+      "toolTipTitle": "Blitz",
+      "toolTipText": "Cannot be countered"
+    }
+  },
+  "icon_toxin": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "toxin",
+      "toolTipTitle": "Toxin",
+      "toolTipText": "1 damage per turn"
+    }
+  },
+  "icon_slow": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "slow",
+      "toolTipTitle": "Slow",
+      "toolTipText": "Halve move range"
+    }
+  },
+  "icon_guerilla": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "guerilla",
+      "toolTipTitle": "Guerilla",
+      "toolTipText": "Gain evasion on entering cover"
+    }
+  },
+  "icon_flight": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "flight",
+      "toolTipTitle": "Flight",
+      "toolTipText": "Fly over obstacles"
+    }
+  },
+  "icon_warp": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "warp",
+      "toolTipTitle": "Warp",
+      "toolTipText": "Move instantly to destination"
+    }
+  },
+  "icon_rifle": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "rifle",
+      "toolTipTitle": "Rifle",
+      "toolTipText": "Assault rifle"
+    }
+  },
+  "icon_frag": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "frag",
+      "toolTipTitle": "Frag",
+      "toolTipText": "Explosive grenade"
+    }
+  },
+  "icon_snipe": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "snipe",
+      "toolTipTitle": "Snipe",
+      "toolTipText": "Precise long-range shot"
+    }
+  },
+  "icon_mine": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "mine",
+      "toolTipTitle": "Mine",
+      "toolTipText": "Explosive trap"
+    }
+  },
+  "icon_shotgun": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "shotgun",
+      "toolTipTitle": "Shotgun",
+      "toolTipText": "High power CQC weapon"
+    }
+  },
+  "icon_concussor": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "concussor",
+      "toolTipTitle": "Concussor",
+      "toolTipText": "Stunning grenade"
+    }
+  },
+  "icon_aid": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "aid",
+      "toolTipTitle": "Aid",
+      "toolTipText": "Administer first aid"
+    }
+  },
+  "icon_smoke": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "smoke",
+      "toolTipTitle": "Smoke",
+      "toolTipText": "Smoke providing evasion"
+    }
+  },
+  "icon_thorns": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "thorns",
+      "toolTipTitle": "Thorns",
+      "toolTipText": "Barrage of spines"
+    }
+  },
+  "icon_regrowth": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "regrowth",
+      "toolTipTitle": "Regrowth",
+      "toolTipText": "Regenerate nearby allies"
+    }
+  },
+  "icon_claw": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "claw",
+      "toolTipTitle": "Claw",
+      "toolTipText": "Melee attack"
+    }
+  },
+  "icon_venom": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "venom",
+      "toolTipTitle": "Venom",
+      "toolTipText": "Toxic breath"
+    }
+  },
+  "icon_bite": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "bite",
+      "toolTipTitle": "Bite",
+      "toolTipText": "Melee attack"
+    }
+  },
+  "icon_screech": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "screech",
+      "toolTipTitle": "Screech",
+      "toolTipText": "Paralyzing sonic wave"
+    }
+  },
+  "icon_smash": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "smash",
+      "toolTipTitle": "Smash",
+      "toolTipText": "Melee attack"
+    }
+  },
+  "icon_entangle": {
+    "properties": {
+      "texture": "gui/icons",
+      "sprite": "entangle",
+      "toolTipTitle": "Entangle",
+      "toolTipText": "Movement-slowing vines"
+    }
+  },
+
+  "icon_assault": {
+    "properties": {
+      "texture": "assault",
+      "animation": "idle",
+      "toolTipTitle": "Assault",
+      "toolTipText": "Versatile attacker"
+    }
+  },
+  "icon_guardian": {
+    "properties": {
+      "texture": "guardian",
+      "animation": "idle",
+      "toolTipTitle": "Guardian",
+      "toolTipText": "Armored support"
+    }
+  },
+  "icon_sniper": {
+    "properties": {
+      "texture": "sniper",
+      "animation": "idle",
+      "toolTipTitle": "Sniper",
+      "toolTipText": "Long-range marksman"
+    }
+  },
+  "icon_medic": {
+    "properties": {
+      "texture": "medic",
+      "animation": "idle",
+      "toolTipTitle": "Medic",
+      "toolTipText": "Healing and support"
+    }
+  },
+  "icon_antlion": {
+    "properties": {
+      "texture": "antlion",
+      "animation": "idle",
+      "toolTipTitle": "Antlion",
+      "toolTipText": "Fast Scout"
+    }
+  },
+  "icon_wyvern": {
+    "properties": {
+      "texture": "wyvern",
+      "animation": "idle",
+      "toolTipTitle": "Wyvern",
+      "toolTipText": "Flying and venemous"
+    }
+  },
+  "icon_treant": {
+    "properties": {
+      "texture": "treant",
+      "animation": "idle",
+      "toolTipTitle": "Treant",
+      "toolTipText": "Armored melee"
+    }
+  },
+  "icon_hellblossom": {
+    "properties": {
+      "texture": "hellblossom",
+      "animation": "idle",
+      "toolTipTitle": "Hellblossom",
+      "toolTipText": "Ranged attack and healing"
+    }
+  }
+}

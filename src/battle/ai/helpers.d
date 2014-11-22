@@ -10,11 +10,20 @@ private enum effectFactor = [
   UnitAction.Effect.damage : 1.0,
   UnitAction.Effect.heal   : 1.0,
   UnitAction.Effect.toxin  : 0.7,
-  UnitAction.Effect.slow   : 0.8,
-  UnitAction.Effect.stun   : 0.8
+  UnitAction.Effect.slow   : 0.6,
+  UnitAction.Effect.stun   : 0.6,
+  UnitAction.Effect.evade  : 0.8,
+  UnitAction.Effect.armor  : 0.8,
+  UnitAction.Effect.transform  : 0.4
 ];
 
 private enum wasteEvadeScore = 0.3; /// score for degrading the targets evasion
+
+float attackScore(Unit attacker, Tile target, int actionNum, AIProfile profile) {
+  auto defender = cast(Unit) target.entity;
+  auto action = attacker.getAction(actionNum);
+  return attackScore(attacker, defender, action, profile);
+}
 
 float attackScore(Unit attacker, Unit defender, const UnitAction action, AIProfile profile) {
   float score = action.effectScore(defender) ;
@@ -99,4 +108,9 @@ float computeTilePriority(Battle b, AIProfile profile, Tile tile, Unit unit) {
     weights ~= distFactor;
   }
   return scores.weightedAverage(weights) * profile.mobility;
+}
+
+float proximityScore(Tile src, Tile dest) {
+  int dist = src.distance(dest);
+  return 1.0f / (dist + 1.0f);
 }

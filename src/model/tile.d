@@ -20,8 +20,9 @@ class Tile : Entity {
     int moveCost;
   }
 
-  Entity entity; /// a unit or a wall
+  Entity entity;  /// a unit or a wall
   Entity feature; /// an obelisk, mana pool, or spawn point
+  Entity trap;    /// a trap
 
   this(TileData data) {
     auto pos = Vector2i(data.col, data.row) * size + Vector2i(size, size) / 2;

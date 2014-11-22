@@ -37,9 +37,3 @@ ConfigData loadConfigFile(string path) {
   }
   return data;
 }
-
-ALLEGRO_COLOR parseColor(string spec) {
-  auto vals = map!((s) => to!ubyte(strip(s)))(split(spec, ','));
-  assert(vals.length == 3 || vals.length == 4, spec ~ " is not a valid color spec. try r,g,b or r,g,b,a");
-  return (vals.length == 3) ? al_map_rgb(vals[0], vals[1], vals[2]) : al_map_rgba(vals[0], vals[1], vals[2], vals[3]);
-}

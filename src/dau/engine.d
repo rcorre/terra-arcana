@@ -1,23 +1,5 @@
 module dau.engine;
 
-// library setup
-pragma(lib, "dallegro5");
-version(none)
-{
-
-}
-else
-{
-	pragma(lib, "allegro");
-	pragma(lib, "allegro_primitives");
-	pragma(lib, "allegro_image");
-	pragma(lib, "allegro_font");
-	pragma(lib, "allegro_ttf");
-	pragma(lib, "allegro_color");
-	pragma(lib, "allegro_audio");
-	pragma(lib, "allegro_acodec");
-}
-
 import dau.allegro;
 import dau.setup;
 import dau.scene;
@@ -33,6 +15,7 @@ int runGame(FirstSceneType)() {
     // initialize
     al_init();
 
+    al_set_new_display_option(ALLEGRO_DISPLAY_OPTIONS.ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
     mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
     mainEventQueue = al_create_event_queue();
     mainTimer = al_create_timer(1.0 / Settings.fps);
@@ -132,7 +115,5 @@ void mainUpdate() {
 }
 
 void mainDraw() {
-  al_clear_to_color(al_map_rgb(0,0,0));
   currentScene.draw();
-  al_flip_display();
 }

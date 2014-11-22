@@ -5,7 +5,9 @@ import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
+import battle.util;
 import battle.state.applyeffect;
+import battle.state.checkunitdestruction;
 
 class PerformCounter : State!Battle {
   this(Unit actor, Unit target) {
@@ -28,8 +30,13 @@ class PerformCounter : State!Battle {
         else {
           auto onAnimationEnd = delegate() {
             b.states.popState();
-            for(int i = 0; i < action.hits; ++i) {
-              b.states.pushState(new ApplyEffect(action, _target));
+            auto action = _actor.getAction(_actionNum);
+            _tilesAffected = tilesAffected(b.map, _target.tile, _actor, action);
+            foreach(enemy ; unitsAffected(b.map, _target.tile, _actor, action)) {
+              for(int i = 0; i < action.hits; ++i) {
+                b.states.pushState(new CheckUnitDestruction(enemy));
+                b.states.pushState(new ApplyEffect(action, enemy));
+              }
             }
             _actor.consumeAp(action.apCost);
           };
@@ -45,11 +52,14 @@ class PerformCounter : State!Battle {
     }
 
     void draw(Battle b, SpriteBatch sb) {
-      sb.draw(_effectAnim, _target.center);
+      foreach(tile ; _tilesAffected) {
+        sb.draw(_effectAnim, tile.center);
+      }
     }
   }
 
   private:
+  Tile[] _tilesAffected;
   Unit _actor, _target;
   int _actionNum;
   Animation _effectAnim;

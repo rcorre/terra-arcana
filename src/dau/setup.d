@@ -16,13 +16,16 @@ enum Paths : string {
   bitmapDir   = "content/image",
   fontDir     = "content/font",
   soundDir    = "content/sound",
+  musicDir    = "content/music",
   musicData   = "content/music.cfg",
   mapDir      = "data/maps",
   textureData = "data/textures.json",
+  guiData     = "data/gui.json",
   unitData    = "data/units.json",
   factionData = "data/factions.json",
   aiData      = "data/ai.json",
   advantageData = "data/advantages.json",
+  preferences = "save/preferences.json",
 }
 
 void onInit(InitFunction fn) {

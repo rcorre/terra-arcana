@@ -18,6 +18,7 @@ class ApplyEffect : State!Battle {
 
   override { // TODO: show effect on status bar
     void enter(Battle b) {
+      b.displayUnitInfo(_target);
       bool hit = _target.evade == 0 || _action.hasSpecial(UnitAction.Special.precise);
       auto unitInfo = b.unitInfoFor(_target);
       if (hit) {

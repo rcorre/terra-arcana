@@ -21,10 +21,10 @@
     "action2": {
       "name"        : "Frag",
       "description" : "",
-      "target"      : "enemy",
+      "target"      : "burst",
       "effect"      : "damage",
       "apCost"      : 3,
-      "power"       : 3,
+      "power"       : 2,
       "hits"        : 1,
       "minRange"    : 2,
       "maxRange"    : 2
@@ -55,8 +55,9 @@
       "description" : "",
       "target"      : "enemy",
       "effect"      : "stun",
+      "specials"    : ["precise"],
       "apCost"      : 2,
-      "power"       : 0,
+      "power"       : 2,
       "hits"        : 1,
       "minRange"    : 1,
       "maxRange"    : 2
@@ -71,10 +72,11 @@
     "baseEvade"  : 0,
 
     "action1": {
-      "name"        : "Sniper",
+      "name"        : "Snipe",
       "description" : "",
       "target"      : "enemy",
       "effect"      : "damage",
+      "specials"    : ["precise"],
       "apCost"      : 3,
       "power"       : 3,
       "hits"        : 1,
@@ -85,7 +87,7 @@
     "action2": {
       "name"        : "Mine",
       "description" : "",
-      "target"      : "ground",
+      "target"      : "trap",
       "effect"      : "damage",
       "apCost"      : 2,
       "power"       : 3,
@@ -109,18 +111,18 @@
       "effect"      : "heal",
       "apCost"      : 2,
       "power"       : 2,
-      "minRange"    : 1,
+      "minRange"    : 0,
       "maxRange"    : 1
     },
 
     "action2": {
       "name"        : "Smoke",
       "description" : "",
-      "target"      : "ally",
+      "target"      : "burst",
       "effect"      : "evade",
       "apCost"      : 3,
-      "power"       : 2,
-      "minRange"    : 1,
+      "power"       : 1,
+      "minRange"    : 0,
       "maxRange"    : 2
     }
   },
@@ -130,7 +132,7 @@
     "maxHp"      : 4,
     "maxAp"      : 5,
     "baseArmor"  : 0,
-    "baseEvade"  : 1,
+    "baseEvade"  : 0,
     "traits"     : ["guerilla"],
 
     "action1": {
@@ -225,7 +227,7 @@
   },
 
   "hellblossom": {
-    "name"       : "Hell Blossom",
+    "name"       : "Hellblossom",
     "maxHp"      : 4,
     "maxAp"      : 3,
     "baseArmor"  : 0,
@@ -247,12 +249,12 @@
     "action2": {
       "name"        : "Regrowth",
       "description" : "Release healing pollen",
-      "target"      : "ally",
+      "target"      : "burst",
       "effect"      : "heal",
       "apCost"      : 2,
       "power"       : 2,
-      "minRange"    : 1,
-      "maxRange"    : 1
+      "minRange"    : 0,
+      "maxRange"    : 0
     }
   }
 }

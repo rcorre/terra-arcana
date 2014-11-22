@@ -3,6 +3,7 @@ haven
 
 # content (generated from resources by Makefile)
 content/
+resources/icons/
 
 # dub files
 .dub
@@ -10,7 +11,12 @@ docs.json
 __dummy.html
 *.o
 *.obj
-resources/icons/
+
+# windows files
 *.dll
 *.lib
 *.exe
+
+# other files
+*.bak
+save/

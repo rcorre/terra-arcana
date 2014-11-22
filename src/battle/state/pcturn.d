@@ -1,5 +1,6 @@
 module battle.state.pcturn;
 
+import std.array;
 import dau.all;
 import model.all;
 import battle.ai.all;
@@ -18,6 +19,7 @@ class PCTurn : State!Battle {
 
   override {
     void enter(Battle b) {
+      b.cursor.setSprite("wait");
       b.disableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
       if (_pc.commandPoints == 0) {
@@ -28,22 +30,33 @@ class PCTurn : State!Battle {
       auto decision = _pc.getDecision(b);
       if (decision is null) {
         b.startNewTurn;
+        return;
       }
 
-      auto deploy = cast(DeployOption) decision;
-      if (deploy !is null) {
-        b.states.pushState(new DeployUnit(_pc, deploy.target, deploy.unitKey));
+      final switch (decision.type) with (AIDecision.Type) {
+        case deploy:
+          auto dd = cast(DeployDecison) decision;
+          b.states.pushState(new DeployUnit(_pc, dd.location, dd.unitKey));
+          break;
+        case move:
+          auto md = cast(MoveDecison) decision;
+          b.states.pushState(new MoveUnit(md.unit, md.path));
+          break;
+        case action:
+          auto ad = cast(ActDecison) decision;
+          b.states.pushState(new PerformAction(ad.actor, ad.actionNum, ad.target));
+          if (ad.movePath !is null && !ad.movePath.empty) {
+            b.states.pushState(new MoveUnit(ad.actor, ad.movePath));
+          }
+          break;
       }
 
-      auto move = cast(MoveOption) decision;
-      if (move !is null) {
-        b.states.pushState(new MoveUnit(move.unit, move.path));
-      }
+      auto cameraSys = b.getSystem!BattleCameraSystem;
+      cameraSys.autoScrollTo(decision.decisionPoint);
+    }
 
-      auto action = cast(ActOption) decision;
-      if (action !is null) {
-        b.states.pushState(new PerformAction(action.unit, action.actionNum, action.target));
-      }
+    void end(Battle b) {
+      b.cursor.setSprite("inactive");
     }
   }
 

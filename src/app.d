@@ -1,7 +1,7 @@
 import dau.engine;
 import dau.setup;
-import battle.battle;
+import title.title;
 
 int main(char[][] args) {
-  return runGame!Battle();
+  return runGame!Title();
 }

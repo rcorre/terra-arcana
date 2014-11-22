@@ -45,7 +45,8 @@ class Unit : Entity {
 
   @property {
     auto tile() { return _tile; }
-    auto tile(Tile newTile) {
+    void tile(Tile newTile) {
+      if (newTile == _tile) { return; }
       assert(newTile.entity is null, "cannot place %s on tile %d,%d which already has entity"
           .format(name, newTile.row, newTile.col));
       if (tile !is null) {
@@ -80,7 +81,7 @@ class Unit : Entity {
   }
 
   void startTurn() {
-    _ap = maxAp;
+    _ap = min(_ap + maxAp, maxAp);
     _evade = baseEvade;
     _armor = baseArmor;
     if (_toxin > 0) {
@@ -115,7 +116,7 @@ class Unit : Entity {
   }
 
   void damageAp(int amount) {
-    _ap -= amount; // TODO: negative ap handling
+    _ap = max(_ap - amount, -maxAp);
     _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
   }
 
@@ -167,6 +168,12 @@ class Unit : Entity {
     else                              { return 0; }
   }
 
+  int firstUseableActionFrom(Tile target, Tile position, int apLeft) {
+    if      (canUseActionFrom(1, target, position, apLeft)) { return 1; }
+    else if (canUseActionFrom(2, target, position, apLeft)) { return 2; }
+    else                                                    { return 0; }
+  }
+
   int firstUseableAction(Unit unit) {
     return firstUseableAction(unit.tile);
   }
@@ -176,20 +183,28 @@ class Unit : Entity {
   }
 
   bool canUseAction(int num, Tile target) {
+    return canUseActionFrom(num, target, tile, ap);
+  }
+
+  /// return true if can use action num from position on target
+  bool canUseActionFrom(int num, Tile target, Tile position, int apLeft) {
     auto action = getAction(num);
-    if (action.apCost > ap) { return false; }
-    int dist = tile.distance(target);
+    if (action.apCost > apLeft) { return false; }
+    int dist = position.distance(target);
     bool inRange = dist <= action.maxRange && dist >= action.minRange;
     auto other = cast(Unit) target.entity;
     final switch (action.target) with (UnitAction.Target) {
       case enemy:
         return other !is null && other.team != team && inRange;
-      case ground:
+      case burst:
+      case line:
         return inRange;
       case ally:
         return other !is null && other.team == team && inRange;
       case self:
         return other !is null && other == this;
+      case trap:
+        return inRange && target.trap is null;
     }
   }
 

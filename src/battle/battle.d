@@ -10,55 +10,57 @@ import battle.system.all;
 import battle.ai.all;
 import gui.battlepanel;
 
+private enum mapFormat = Paths.mapDir ~ "/%s.json";
+
 class Battle : Scene!Battle {
-  //this(Player[] players) { // TODO: load players from previous state
-  this() {
+  this(string mapName, Faction playerFaction, Faction pcFaction) {
     _players = [
-      new Player(getFaction("Federation"), 1, true),
-          new AIPlayer(getFaction("Gaia"),  2, getAIProfile("balanced"))
+      new Player(playerFaction, 1, true),
+          new AIPlayer(pcFaction,  2, "balanced")
     ];
     System!Battle[] systems = [
       new TileHoverSystem(this),
           new BattleCameraSystem(this),
     ];
-    super(systems);
+    Sprite[string] cursorSprites = [
+      "inactive" : new Animation("gui/cursor", "inactive", Animation.Repeat.loop),
+      "active"   : new Animation("gui/cursor", "active", Animation.Repeat.loop),
+      "ally"     : new Animation("gui/cursor", "ally", Animation.Repeat.loop),
+      "enemy"    : new Animation("gui/cursor", "enemy", Animation.Repeat.loop),
+      "wait"    : new Animation("gui/cursor", "wait", Animation.Repeat.loop),
+    ];
+    super(systems, cursorSprites);
     _panel = new BattlePanel;
     gui.addElement(_panel);
     _turnCycle = cycle(_players);
-  }
+    cursor.setSprite("inactive");
 
-  override {
-    void enter() {
-      auto mapPath = "%s/%s.json".format(cast(string) Paths.mapDir, "test");
-      auto mapData = loadTiledMap(mapPath);
-      map = new TileMap(mapData, entities);
-      entities.registerEntity(map);
-      foreach(obj ; mapData.layerTileData("feature")) {
-        int team = obj.objectType.to!int;
-        switch(obj.objectName) {
-          case "spawn":
-            _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), team);
-            break;
-          case "obelisk":
-            auto pos = map.tileAt(obj.row, obj.col).center;
-            auto obelisk = new Obelisk(pos, obj.row, obj.col);
-            entities.registerEntity(obelisk);
-            if (team != 0) {
-              captureObelisk(obelisk, team);
-            }
-            break;
-          default:
-            assert(0, "invalid object named " ~ obj.objectName);
-        }
+    auto mapData = loadTiledMap(mapFormat.format(mapName));
+    map = new TileMap(mapData, entities);
+    entities.registerEntity(map);
+    foreach(obj ; mapData.layerTileData("feature")) {
+      int team = obj.objectType.to!int;
+      switch(obj.objectName) {
+        case "spawn":
+          _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), team);
+          break;
+        case "obelisk":
+          auto pos = map.tileAt(obj.row, obj.col).center;
+          auto obelisk = new Obelisk(pos, obj.row, obj.col);
+          entities.registerEntity(obelisk);
+          if (team != 0) {
+            captureObelisk(obelisk, team);
+          }
+          break;
+        default:
+          assert(0, "invalid object named " ~ obj.objectName);
       }
-      camera.area = Rect2f(0, 0, Settings.screenW, Settings.screenH - _panel.area.height);
-      camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
-      startNewTurn;
     }
+    camera.area = Rect2f(0, 0, Settings.screenW, Settings.screenH - _panel.area.height);
+    camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
 
-    void update(float time) {
-      super.update(time);
-    }
+    playMusicTrack(playerFaction.themeSong, true);
+    startNewTurn;
   }
 
 package:
@@ -87,7 +89,9 @@ package:
   }
 
   auto spawnPointsFor(int teamIdx) {
-    return _spawnPoints.filter!(x => x.team == teamIdx).map!(x => x.tile);
+    return _spawnPoints.filter!(x => x.team == teamIdx)
+      .filter!(x => x.tile.entity is null)
+      .map!(x => x.tile);
   }
 
   auto spawnUnit(string key, Player player, Tile tile) {

@@ -13,11 +13,12 @@ class SpriteBatch {
     _sprites = new SpriteStore;
   }
 
-  void draw(Sprite sprite, Vector2i pos) {
+  void draw(Sprite sprite, Vector2i pos, float angle = 0) {
     if (sprite !is null) {
       Entry entry;
       entry.sprite = sprite;
       entry.pos = pos;
+      entry.angle = angle;
       _sprites.insert(entry);
     }
   }
@@ -32,7 +33,7 @@ class SpriteBatch {
     al_set_clipping_rectangle(0 ,0, camera.clipWidth, camera.clipHeight);
 
     foreach(entry ; _sprites) {
-      entry.sprite.draw(entry.pos);
+      entry.sprite.draw(entry.pos, entry.angle);
     }
 
     al_use_transform(&prevTrans); // restore old transform
@@ -44,6 +45,7 @@ class SpriteBatch {
   struct Entry {
     Sprite sprite;
     Vector2i pos;
+    float angle;
   }
 
   // true indicates: allow duplicates

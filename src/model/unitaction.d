@@ -11,7 +11,9 @@ class UnitAction {
     enemy,
     ally,
     self,
-    ground
+    burst,
+    trap,
+    line
   }
 
   enum Effect {
@@ -29,6 +31,10 @@ class UnitAction {
     pierce,  /// ignore armor
     precise, /// ignore evasion
     blitz,   /// cannot be countered
+  }
+
+  @property bool isAttack() const { 
+    return effect != Effect.heal && effect != effect.armor && effect != effect.evade; 
   }
 
   bool hasSpecial(Special special) const {

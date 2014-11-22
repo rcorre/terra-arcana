@@ -364,7 +364,7 @@
         {
          "firstgid":1,
          "image":"..\/..\/content\/image\/terrain.png",
-         "imageheight":256,
+         "imageheight":192,
          "imagewidth":256,
          "margin":0,
          "name":"terrain",
@@ -411,12 +411,20 @@
              "12":
                 {
                  "moveCost":"99",
-                 "name":"Ground"
+                 "name":"Chasm"
                 },
              "13":
                 {
                  "moveCost":"1",
                  "name":"Ground"
+                },
+             "14":
+                {
+                 "name":"ground"
+                },
+             "15":
+                {
+                 "name":"ground"
                 },
              "16":
                 {
@@ -471,6 +479,16 @@
                  "moveCost":"1",
                  "name":"Ground"
                 },
+             "30":
+                {
+                 "moveCost":"99",
+                 "name":"Cliff"
+                },
+             "31":
+                {
+                 "moveCost":"99",
+                 "name":"Cliff"
+                },
              "35":
                 {
                  "moveCost":"99",
@@ -481,6 +499,16 @@
                  "name":"Ground"
                 },
              "37":
+                {
+                 "moveCost":"99",
+                 "name":"Cliff"
+                },
+             "38":
+                {
+                 "moveCost":"99",
+                 "name":"Cliff"
+                },
+             "39":
                 {
                  "moveCost":"99",
                  "name":"Cliff"
@@ -510,6 +538,14 @@
                  "moveCost":"1",
                  "name":"Ground"
                 },
+             "6":
+                {
+                 "name":"ground"
+                },
+             "7":
+                {
+                 "name":"ground"
+                },
              "8":
                 {
                  "name":"Obelisk"
@@ -536,6 +572,14 @@
              "13":
                 {
                  "terrain":[1, 0, 1, 0]
+                },
+             "14":
+                {
+                 "terrain":[1, 0, 1, 1]
+                },
+             "15":
+                {
+                 "terrain":[0, 1, 1, 1]
                 },
              "19":
                 {
@@ -565,6 +609,14 @@
                 {
                  "terrain":[0, 0, 0, 1]
                 },
+             "30":
+                {
+                 "terrain":[2, 2, 2, 0]
+                },
+             "31":
+                {
+                 "terrain":[2, 2, 0, 2]
+                },
              "35":
                 {
                  "terrain":[0, 2, 0, 2]
@@ -576,6 +628,14 @@
              "37":
                 {
                  "terrain":[2, 0, 2, 0]
+                },
+             "38":
+                {
+                 "terrain":[2, 0, 2, 2]
+                },
+             "39":
+                {
+                 "terrain":[0, 2, 2, 2]
                 },
              "4":
                 {
@@ -596,6 +656,14 @@
              "5":
                 {
                  "terrain":[0, 0, 1, 0]
+                },
+             "6":
+                {
+                 "terrain":[1, 1, 1, 0]
+                },
+             "7":
+                {
+                 "terrain":[1, 1, 0, 1]
                 }
             },
          "tilewidth":32

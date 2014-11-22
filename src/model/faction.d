@@ -9,6 +9,7 @@ class Faction {
   @jsonize {
     string name;
     string description;
+    string themeSong;
     string[] standardUnitKeys;
     string[] advancedUnitKeys;
     string[] eliteUnitKeys;
@@ -19,6 +20,10 @@ auto getFaction(string name) {
   auto faction = _factions.find!(x => x.name == name);
   assert(!faction.empty, "no faction named " ~ name);
   return faction.front;
+}
+
+auto allFactions() {
+  return _factions;
 }
 
 private:

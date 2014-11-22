@@ -6,8 +6,30 @@
     ],
     "frameSize": 32,
     "frameTimeMs": 50,
-    "defaultDepth": 2,
+    "defaultDepth": 3,
     "rows": ["idle", "action1", "action2", "effect1", "effect2"]
+  },
+
+  {
+    "sheets" : ["sniper_trap"],
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "defaultDepth": 2,
+    "rows": ["idle", "trigger"]
+  },
+
+  {
+    "sheets" : ["gui/cursor"],
+    "frameSize": 32,
+    "frameTimeMs": 50,
+    "defaultDepth": 10,
+    "rows": ["inactive", "active", "enemy", "ally", "wait"]
+  },
+
+  {
+    "sheets" : ["gui/arrows"],
+    "frameSize": 32,
+    "sprites": ["leftArrow", "rightArrow"]
   },
 
   {
@@ -18,11 +40,11 @@
   },
 
   {
-    "sheets" : ["gui/tilecursor"],
+    "sheets" : ["gui/overlay"],
     "frameSize": 32,
-    "frameTimeMs": 20,
+    "frameTimeMs": 30,
     "defaultDepth": 5,
-    "rows": ["move", "path", "ally", "enemy"]
+    "rows": ["move",  "enemy", "ally", "enemy-target", "ally-target", "path"]
   },
 
   {
@@ -32,8 +54,20 @@
     "sprites": [
       "range", "damage", "stun", "heal", "armor", "evade", "piercing", "precise", "blitz",
       "toxin", "slow", "guerilla", "flight", "warp", "", "", "", "",
-      "rifle", "frag", "sniper", "mine", "shotgun", "concussor", "aid", "smoke", "",
+      "rifle", "frag", "snipe", "mine", "shotgun", "concussor", "aid", "smoke", "",
       "thorns", "regrowth", "claw", "venom", "bite", "screech", "smash", "entangle", ""
+    ]
+  },
+
+  {
+    "sheets" : ["input"],
+    "frameWidth": 32,
+    "frameHeight": 32,
+    "sprites": [
+      "f", "q", "e", "h",
+      "enter", "space", "shift", "",
+      "w", "a", "s", "d",
+      "rmb", "lmb", "", ""
     ]
   },
 
