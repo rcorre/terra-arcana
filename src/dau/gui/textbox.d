@@ -39,7 +39,7 @@ class TextBox : GUIElement {
   }
 
   override void draw(Vector2i parentTopLeft) {
-    _font.draw(_text, area.topLeft + parentTopLeft);
+    _font.draw(_text, area.topLeft + parentTopLeft, _color);
     super.draw(parentTopLeft);
   }
 

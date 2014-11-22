@@ -72,6 +72,13 @@
   },
 
   {
+    "sheets" : ["gui/tutorialUnitIcons"],
+    "frameWidth": 64,
+    "frameHeight": 32,
+    "sprites": [ "hpBar", "apBar", "armor", "evade" ]
+  },
+
+  {
     "sheets" : ["terrain"],
     "defaultDepth": 0,
     "frameSize": 32

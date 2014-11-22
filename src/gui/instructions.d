@@ -12,7 +12,7 @@ class InstructionScreen : GUIElement {
   this(Title title) {
     super(getGUIData("instructions"), Vector2i.zero);
 
-    setPage(1);
+    setPage(2);
 
     _title = title;
   }
@@ -27,13 +27,12 @@ class InstructionScreen : GUIElement {
     string name = pageFormat.format(pageNum);
     auto page = data.child[name];
 
-    foreach(iconData ; page.child["icons"].child) {
-      addChild(new Icon(iconData));
-    }
-
     foreach(textData ; page.child["textBoxes"].child) {
       addChild(new TextBox(textData));
     }
-  }
 
+    foreach(iconData ; page.child["icons"].child) {
+      addChild(new Icon(iconData));
+    }
+  }
 }
