@@ -6,6 +6,7 @@ import title.title;
 import title.state.selectbattle;
 import title.state.editpreferences;
 import title.state.showinstructions;
+import title.state.networksetup;
 
 class TitleScreen : GUIElement {
   this(Title title) {
@@ -30,6 +31,7 @@ class TitleScreen : GUIElement {
   }
 
   void networkButton() {
+    _title.states.setState(new NetworkSetup);
   }
 
   void instructionsButton() {

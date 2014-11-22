@@ -9,6 +9,12 @@ ALLEGRO_DISPLAY* mainDisplay;
 ALLEGRO_EVENT_QUEUE* mainEventQueue;
 ALLEGRO_TIMER* mainTimer;
 
+alias AllegroEventHandler = void delegate(ALLEGRO_EVENT);
+
+void registerEventHandler(AllegroEventHandler handler, ALLEGRO_EVENT_TYPE type) {
+  _eventHandlers[type] ~= handler;
+}
+
 /// pass FirstSceneType to instantiate first scene after allegro setup
 int runGame(FirstSceneType)() {
   return al_run_allegro({
@@ -103,6 +109,9 @@ bool processEvents() {
       }
     default:
   }
+  foreach(handler ; _eventHandlers.get(event.type, null)) {
+    handler(event);
+  }
   return false;
 }
 
@@ -117,3 +126,6 @@ void mainUpdate() {
 void mainDraw() {
   currentScene.draw();
 }
+
+private:
+AllegroEventHandler[][ALLEGRO_EVENT_TYPE] _eventHandlers;

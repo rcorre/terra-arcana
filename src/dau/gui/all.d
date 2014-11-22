@@ -9,6 +9,6 @@ public import dau.gui.manager;
 public import dau.gui.element;
 public import dau.gui.textbox;
 public import dau.gui.tooltip;
-public import dau.gui.tooltip;
+public import dau.gui.textinput;
 public import dau.gui.scrollselection;
 public import dau.gui.stringselection;

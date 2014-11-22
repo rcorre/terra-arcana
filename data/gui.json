@@ -538,6 +538,127 @@
     }
   },
 
+  "networkSetup": {
+    "properties": {
+      "texture": "gui/titleScreen"
+    },
+    "child": {
+      "titleText": {
+        "properties": {
+          "offset"   : "400, 89",
+          "text"     : "Terra Arcana",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "48"
+        }
+      },
+      "networkText": {
+        "properties": {
+          "offset"   : "400, 185",
+          "text"     : "Network Game",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "32"
+        }
+      },
+      "ipInput": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "offset": "400, 252",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "text": "192.168.0.100",
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "soundText": {
+        "properties": {
+          "offset": "400, 345",
+          "anchor": "center",
+          "text": "Sound Volume",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
+      "musicVolumeBar": {
+        "properties": {
+          "pipBarArea": "240, 281, 385, 33",
+          "numPips": "10"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/menuPip"
+            }
+          }
+        }
+      },
+      "soundVolumeBar": {
+        "properties": {
+          "pipBarArea": "240, 377, 385, 33",
+          "numPips": "10"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/menuPip"
+            }
+          }
+        }
+      },
+      "musicVolumeUp": {
+        "properties": {
+          "offset": "590, 276",
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
+        }
+      },
+      "musicVolumeDown": {
+        "properties": {
+          "offset": "180, 276",
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
+        }
+      },
+      "soundVolumeUp": {
+        "properties": {
+          "offset": "590, 373",
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
+        }
+      },
+      "soundVolumeDown": {
+        "properties": {
+          "offset": "180, 373",
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
+        }
+      },
+      "exit": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Back",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      }
+    }
+  },
+
   "selectMap": {
     "properties": {
       "texture": "gui/mapTextBox",
