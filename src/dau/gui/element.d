@@ -63,6 +63,8 @@ class GUIElement {
     bool active() { return _active; }
     void active(bool val) { _active = val; }
 
+    bool hasFocus() { return _hasFocus; }
+
     auto children() { return _children[]; }
 
     auto data() { return _data; }
@@ -155,13 +157,14 @@ class GUIElement {
     }
 
     bool handleMouseClick(Vector2i pos) {
+      _hasFocus = area.contains(pos);
       auto localPos = pos - area.topLeft;
       foreach(child ; children) {
         if (child.handleMouseClick(localPos)) {
           return true;
         }
       }
-      return (area.contains(pos)) ? onClick() : false;
+      return _hasFocus ? onClick() : false;
     }
 
     void onHover(HoverHandler handler) {
@@ -177,4 +180,5 @@ class GUIElement {
   bool _active = true;
   HoverHandler _hoverHandler;
   GUIData _data;
+  bool _hasFocus;
 }

@@ -40,6 +40,7 @@ class TextInput : GUIElement {
   int _charLimit;
 
   void handleKeyChar(ALLEGRO_EVENT event) {
+    if (!hasFocus) { return; }
     if (event.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
       text = text.chop;
     }
