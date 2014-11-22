@@ -309,7 +309,7 @@
     "child": {
       "titleText": {
         "properties": {
-          "offset"   : "400, 89",
+          "offset"   : "400, 55",
           "text"     : "Terra Arcana",
           "anchor"   : "center",
           "fontName" : "Mecha",
@@ -318,7 +318,7 @@
       },
       "versionText": {
         "properties": {
-          "offset"   : "400, 185",
+          "offset"   : "400, 106",
           "text"     : "Alpha 0.0",
           "anchor"   : "center",
           "fontName" : "Mecha",
@@ -329,7 +329,7 @@
         "properties": {
           "texture": "gui/rectButton",
           "text": "Battle vs AI",
-          "offset" : "400, 297",
+          "offset" : "400, 201",
           "anchor": "center"
         },
         "child": {
@@ -345,7 +345,7 @@
         "properties": {
           "texture": "gui/rectButton",
           "text": "Network Battle",
-          "offset" : "400, 361",
+          "offset" : "400, 265",
           "anchor": "center"
         },
         "child": {
@@ -361,7 +361,7 @@
         "properties": {
           "texture": "gui/rectButton",
           "text": "Preferences",
-          "offset" : "400, 425",
+          "offset" : "400, 329",
           "anchor": "center"
         },
         "child": {
@@ -377,7 +377,7 @@
         "properties": {
           "texture": "gui/rectButton",
           "text": "Instructions",
-          "offset" : "400, 489",
+          "offset" : "400, 393",
           "anchor": "center"
         },
         "child": {
@@ -393,7 +393,7 @@
         "properties": {
           "texture": "gui/rectButton",
           "text": "Credits",
-          "offset" : "400, 553",
+          "offset" : "400, 457",
           "anchor": "center"
         },
         "child": {
@@ -431,7 +431,7 @@
     "child": {
       "titleText": {
         "properties": {
-          "offset"   : "400, 89",
+          "offset"   : "400, 25",
           "text"     : "Terra Arcana",
           "anchor"   : "center",
           "fontName" : "Mecha",

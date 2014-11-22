@@ -16,5 +16,7 @@ class NetworkScreen : GUIElement {
     super(getGUIData("networkSetup"), Vector2i.zero);
     auto _ipInput = new TextInput(data.child["ipInput"]);
     addChild(_ipInput);
+    addChild(new TextBox(data.child["titleText"]));
+    addChild(new TextBox(data.child["networkText"]));
   }
 }
