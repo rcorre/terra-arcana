@@ -577,10 +577,19 @@
           "fontSize" : "32"
         }
       },
+      "portLabel": {
+        "properties": {
+          "offset": "300, 252",
+          "anchor": "center",
+          "text": "Port",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
       "portInput": {
         "properties": {
           "texture": "gui/edgeButton",
-          "offset": "400, 252",
+          "offset": "450, 252",
           "anchor": "center"
         },
         "child": {
@@ -635,10 +644,19 @@
           "fontSize" : "32"
         }
       },
+      "ipLabel": {
+        "properties": {
+          "offset": "320, 200",
+          "anchor": "center",
+          "text": "IP",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
       "ipInput": {
         "properties": {
           "texture": "gui/edgeButton",
-          "offset": "400, 252",
+          "offset": "450, 200",
           "anchor": "center"
         },
         "child": {
@@ -651,10 +669,19 @@
           }
         }
       },
+      "portLabel": {
+        "properties": {
+          "offset": "300, 252",
+          "anchor": "center",
+          "text": "Port",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
       "portInput": {
         "properties": {
           "texture": "gui/edgeButton",
-          "offset": "460, 252",
+          "offset": "450, 252",
           "anchor": "center"
         },
         "child": {

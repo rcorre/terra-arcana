@@ -12,8 +12,7 @@ class JoinScreen : GUIElement {
     super(getGUIData("joinScreen"), Vector2i.zero);
     _title = title;
 
-    addChild(new TextBox(data.child["title"]));
-    addChild(new TextBox(data.child["subtitle"]));
+    addChildren!TextBox("title", "subtitle", "portLabel", "ipLabel");
     addChild(new Button(data.child["back"], &backButton));
 
     _ipInput = new TextInput(data.child["ipInput"]);
