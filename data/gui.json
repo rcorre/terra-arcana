@@ -577,6 +577,15 @@
           "fontSize" : "32"
         }
       },
+      "status": {
+        "properties": {
+          "offset"   : "400, 420",
+          "text"     : "Waiting for input",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "24"
+        }
+      },
       "portLabel": {
         "properties": {
           "offset": "300, 252",
@@ -603,6 +612,22 @@
           "text": {
             "properties": {
               "text": "9999",
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "hostGame": {
+        "properties": {
+          "texture": "gui/start_button",
+          "text": "Host Game",
+          "offset" : "400, 340",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
               "fontName": "Mecha",
               "fontSize": "32"
             }
@@ -649,6 +674,15 @@
           "anchor"   : "center",
           "fontName" : "Mecha",
           "fontSize" : "32"
+        }
+      },
+      "status": {
+        "properties": {
+          "offset"   : "400, 420",
+          "text"     : "Waiting for input",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "24"
         }
       },
       "ipLabel": {
@@ -709,6 +743,22 @@
           "text": {
             "properties": {
               "text": "9999",
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "joinButton": {
+        "properties": {
+          "texture": "gui/start_button",
+          "text": "Join Game",
+          "offset" : "400, 340",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
               "fontName": "Mecha",
               "fontSize": "32"
             }

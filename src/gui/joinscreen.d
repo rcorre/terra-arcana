@@ -18,6 +18,12 @@ class JoinScreen : GUIElement {
     _ipInput = new TextInput(data.child["ipInput"]);
     addChild(_ipInput);
 
+    _joinButton = new Button(data.child["joinButton"], &joinGame);
+    addChild(_joinButton);
+
+    _statusText = new TextBox(data.child["status"]);
+    addChild(_statusText);
+
     _portInput = new TextInput(data.child["portInput"]);
     addChild(_portInput);
   }
@@ -25,7 +31,20 @@ class JoinScreen : GUIElement {
   private:
   Title _title;
   TextInput _ipInput, _portInput;
+  TextBox _statusText;
+  Button _joinButton;
+
   void backButton() {
     _title.states.setState(new ShowTitle);
+  }
+
+  void joinGame() {
+    _joinButton.text = "Cancel";
+    _joinButton.action = &cancelJoin;
+  }
+
+  void cancelJoin() {
+    _joinButton.text = "Join Game";
+    _joinButton.action = &joinGame;
   }
 }

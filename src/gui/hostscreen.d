@@ -13,8 +13,13 @@ class HostScreen : GUIElement {
     _title = title;
 
     addChildren!TextBox("title", "subtitle", "portLabel");
-
     addChild(new Button(data.child["back"], &backButton));
+
+    _hostButton = new Button(data.child["hostGame"], &hostGame);
+    addChild(_hostButton);
+
+    _statusText = new TextBox(data.child["status"]);
+    addChild(_statusText);
 
     _portInput = new TextInput(data.child["portInput"]);
     addChild(_portInput);
@@ -23,8 +28,20 @@ class HostScreen : GUIElement {
   private:
   Title _title;
   TextInput _portInput;
+  TextBox _statusText;
+  Button _hostButton;
 
   void backButton() {
     _title.states.setState(new ShowTitle);
+  }
+
+  void hostGame() {
+    _hostButton.text = "Cancel";
+    _hostButton.action = &cancelHost;
+  }
+
+  void cancelHost() {
+    _hostButton.text = "Host Game";
+    _hostButton.action = &hostGame;
   }
 }
