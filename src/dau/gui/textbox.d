@@ -19,27 +19,32 @@ class TextBox : GUIElement {
     _text = text.to!string;
     _font = Font(data["fontName"], data["fontSize"].to!int);
     _color = parseColor(data.get("textColor", "0,0,0"));
-    Rect2i textArea;
+    Rect2i area;
     int width = _font.widthOf(_text);
     int height = _font.heightOf(_text);
     final switch (anchor) with (Anchor) {
       case topLeft:
-        textArea = Rect2i(pos, width, height);
+        area = Rect2i(pos, width, height);
         break;
       case center:
-        textArea = Rect2i.centeredAt(pos, width, height);
+        area = Rect2i.centeredAt(pos, width, height);
         break;
     }
-    super(data, textArea);
+    super(data, area);
   }
 
   @property {
     auto text() { return _text; }
     void text(string text) { _text = text; }
+
+    /// return the actual area covered by the text
+    auto textArea() {
+      return Rect2i(area.topLeft, _font.widthOf(_text), _font.heightOf(_text));
+    }
   }
 
   override void draw(Vector2i parentTopLeft) {
-    _font.draw(_text, area.topLeft + parentTopLeft);
+    _font.draw(_text, area.topLeft + parentTopLeft, _color);
     super.draw(parentTopLeft);
   }
 

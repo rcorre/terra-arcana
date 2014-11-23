@@ -24,7 +24,8 @@ class Button : GUIElement {
     super(data, pos, anchor);
     auto text = data.get("text", null);
     if (text !is null) {
-      addChild(new TextBox(data.child["text"], text, size / 2, Anchor.center));
+      _textBox = new TextBox(data.child["text"], text, size / 2, Anchor.center);
+      addChild(_textBox);
     }
   }
 
@@ -35,6 +36,12 @@ class Button : GUIElement {
     }
 
     bool enabled() { return _enabled; }
+
+    string text() { return _textBox.text; }
+    void text(string val) { _textBox.text = val; }
+
+    Action action() { return _onClick; }
+    void action(Action action) { _onClick = action; }
   }
 
   override {
@@ -58,4 +65,5 @@ class Button : GUIElement {
   Color _onShade, _offShade, _disabledShade;
   bool _enabled = true;
   Action _onClick;
+  TextBox _textBox;
 }

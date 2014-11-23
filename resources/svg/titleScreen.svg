@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5220805"
-     inkscape:cx="718.98062"
-     inkscape:cy="31.037987"
+     inkscape:zoom="1.4766667"
+     inkscape:cx="243.5666"
+     inkscape:cy="300"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -71,18 +71,17 @@
        x="0"
        y="452.36218" />
     <path
-       style="fill:#008080;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 32,24 736,0 -64,128 -608,0 z"
-       id="path3853"
-       inkscape:connector-curvature="0"
-       transform="translate(0,452.36218)"
-       sodipodi:nodetypes="ccccc" />
-    <path
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="path3562"
-       d="m 224,604.36218 352,0 -64,64 -224,0 z"
+       d="m 224,539.36218 352,0 -64,41 -224,0 z"
        style="fill:#008080;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       style="fill:#008080;stroke:#000000;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 32,476.36218 736,0 -64,64 -608,0 z"
+       id="path3853"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -90,17 +89,16 @@
      inkscape:label="mock"
      style="display:none">
     <text
-       transform="translate(0,-452.36218)"
        xml:space="preserve"
        style="font-size:72px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
        x="167.91602"
-       y="562.89734"
+       y="78.535156"
        id="text3558"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3560"
          x="167.91602"
-         y="562.89734">Terra Arcana</tspan></text>
+         y="78.535156">Terra Arcana</tspan></text>
     <rect
        style="fill:#008080;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
        id="rect3735"
@@ -192,17 +190,16 @@
          id="tspan3603"
          sodipodi:role="line">credits</tspan></text>
     <text
-       transform="translate(0,-452.36218)"
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
        x="303.07617"
-       y="645.67859"
+       y="119.31641"
        id="text3566"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3568"
          x="303.07617"
-         y="645.67859">alpha 0.0</tspan></text>
+         y="119.31641">alpha 0.0</tspan></text>
     <path
        style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m -32,536 0,32 192,0 -32,-32 z"

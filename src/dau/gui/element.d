@@ -63,6 +63,8 @@ class GUIElement {
     bool active() { return _active; }
     void active(bool val) { _active = val; }
 
+    bool hasFocus() { return _hasFocus; }
+
     auto children() { return _children[]; }
 
     auto data() { return _data; }
@@ -77,6 +79,7 @@ class GUIElement {
   void onMouseEnter() {}
   void onMouseLeave() {}
   bool onClick() { return false; } // return false to indicate event not handled
+  void onFocus(bool focused) { }
 
   void update(float time) {
     if (_sprite !is null) {
@@ -102,6 +105,12 @@ class GUIElement {
     }
     foreach(child ; children) {
       child.flash(time, color);
+    }
+  }
+
+  void clear() {
+    foreach(child ; children) {
+      child.active = false;
     }
   }
 
@@ -149,13 +158,15 @@ class GUIElement {
     }
 
     bool handleMouseClick(Vector2i pos) {
+      _hasFocus = area.contains(pos);
+      onFocus(_hasFocus);
       auto localPos = pos - area.topLeft;
       foreach(child ; children) {
         if (child.handleMouseClick(localPos)) {
           return true;
         }
       }
-      return (area.contains(pos)) ? onClick() : false;
+      return _hasFocus ? onClick() : false;
     }
 
     void onHover(HoverHandler handler) {
@@ -171,4 +182,5 @@ class GUIElement {
   bool _active = true;
   HoverHandler _hoverHandler;
   GUIData _data;
+  bool _hasFocus;
 }

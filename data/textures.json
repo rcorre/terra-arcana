@@ -23,7 +23,7 @@
     "frameSize": 32,
     "frameTimeMs": 50,
     "defaultDepth": 10,
-    "rows": ["inactive", "active", "enemy", "ally", "wait"]
+    "rows": ["inactive", "active", "enemy", "ally", "wait", "textInput"]
   },
 
   {
@@ -69,6 +69,13 @@
       "w", "a", "s", "d",
       "rmb", "lmb", "", ""
     ]
+  },
+
+  {
+    "sheets" : ["gui/tutorialUnitIcons"],
+    "frameWidth": 64,
+    "frameHeight": 32,
+    "sprites": [ "hpBar", "apBar", "armor", "evade" ]
   },
 
   {

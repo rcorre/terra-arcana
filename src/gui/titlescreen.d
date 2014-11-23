@@ -6,6 +6,8 @@ import title.title;
 import title.state.selectbattle;
 import title.state.editpreferences;
 import title.state.showinstructions;
+import title.state.hostgame;
+import title.state.joingame;
 
 class TitleScreen : GUIElement {
   this(Title title) {
@@ -13,8 +15,9 @@ class TitleScreen : GUIElement {
     addChild(new TextBox(data.child["titleText"]));
     addChild(new TextBox(data.child["versionText"]));
 
-    addChild(new Button(data.child["startSinglePlayer"], &singlePlayerButton));
-    addChild(new Button(data.child["startNetwork"], &networkButton));
+    addChild(new Button(data.child["singlePlayer"], &singlePlayerButton));
+    addChild(new Button(data.child["hostGame"], &hostGame));
+    addChild(new Button(data.child["joinGame"], &joinGame));
     addChild(new Button(data.child["preferences"], &preferencesButton));
     addChild(new Button(data.child["instructions"], &instructionsButton));
     addChild(new Button(data.child["credits"], &creditsButton));
@@ -29,7 +32,12 @@ class TitleScreen : GUIElement {
     _title.states.setState(new SelectBattle);
   }
 
-  void networkButton() {
+  void hostGame() {
+    _title.states.setState(new HostGame);
+  }
+
+  void joinGame() {
+    _title.states.setState(new JoinGame);
   }
 
   void instructionsButton() {
