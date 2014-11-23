@@ -57,7 +57,12 @@ class TextInput : GUIElement {
     }
 
     void onFocus(bool focus) {
-      sprite.tint = focus ? _focusedTint : _unfocusedTint;
+      if (focus) {
+        sprite.tint = text.matchFirst(_validate).empty ? _invalidTint : _focusedTint;
+      }
+      else {
+        sprite.tint = _unfocusedTint;
+      }
     }
   }
 

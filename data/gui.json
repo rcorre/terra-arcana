@@ -588,12 +588,14 @@
       },
       "portInput": {
         "properties": {
-          "texture": "gui/edgeButton",
+          "texture": "gui/inputField",
           "charLimit": "5",
           "validate": "^[0-9]+$",
           "cursorTexture": "gui/cursor",
           "cursorAnimation": "textInput",
-          "unfocusedTint": "0.5, 0.5, 0.5",
+          "unfocusedTint": "0.0, 0.5, 0.5",
+          "focusedTint": "0.0, 0.7, 0.7",
+          "invalidTint": "1.0, 0.0, 0.0",
           "offset": "450, 252",
           "anchor": "center"
         },
@@ -660,9 +662,11 @@
       },
       "ipInput": {
         "properties": {
-          "texture": "gui/edgeButton",
+          "texture": "gui/inputField",
           "offset": "450, 200",
-          "unfocusedTint": "0.5, 0.5, 0.5",
+          "unfocusedTint": "0.0, 0.5, 0.5",
+          "focusedTint": "0.0, 0.7, 0.7",
+          "invalidTint": "1.0, 0.0, 0.0",
           "cursorTexture": "gui/cursor",
           "cursorAnimation": "textInput",
           "charLimit": "15",
@@ -689,9 +693,11 @@
       },
       "portInput": {
         "properties": {
-          "texture": "gui/edgeButton",
+          "texture": "gui/inputField",
           "offset": "450, 252",
-          "unfocusedTint": "0.5, 0.5, 0.5",
+          "unfocusedTint": "0.0, 0.5, 0.5",
+          "focusedTint": "0.0, 0.7, 0.7",
+          "invalidTint": "1.0, 0.0, 0.0",
           "cursorTexture": "gui/cursor",
           "cursorAnimation": "textInput",
           "charLimit": "5",
