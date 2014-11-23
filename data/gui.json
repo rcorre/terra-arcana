@@ -590,6 +590,7 @@
         "properties": {
           "texture": "gui/edgeButton",
           "charLimit": "5",
+          "validate": "^[0-9]+$",
           "cursorTexture": "gui/cursor",
           "cursorAnimation": "textInput",
           "unfocusedTint": "0.5, 0.5, 0.5",

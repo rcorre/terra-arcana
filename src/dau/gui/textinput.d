@@ -1,6 +1,6 @@
 module dau.gui.textinput;
 
-import std.conv, std.string, std.range;
+import std.conv, std.string, std.range, std.regex;
 import dau.input;
 import dau.allegro;
 import dau.engine;
@@ -20,9 +20,11 @@ class TextInput : GUIElement {
     addChild(_textBox);
 
     _charLimit = ("charLimit" in data) ? data["charLimit"].to!int : int.max;
+    _validate = data.get("validate", ".*").regex;
 
     _focusedTint = data.get("focusedTint", "1, 1, 1").parseColor;
     _unfocusedTint = data.get("unfocusedTint", "0.5, 0.5, 0.5").parseColor;
+    _invalidTint = data.get("invalidTint", "1.0, 0.0, 0.0").parseColor;
     sprite.tint = _unfocusedTint;
 
     if ("cursorTexture" in data && "cursorAnimation" in data) {
@@ -36,6 +38,7 @@ class TextInput : GUIElement {
     string text() { return _textBox.text; }
     void text(string val) {
       _textBox.text = val.take(_charLimit).to!string;
+      sprite.tint = text.matchFirst(_validate).empty ? _invalidTint : _focusedTint;
     }
   }
 
@@ -61,8 +64,9 @@ class TextInput : GUIElement {
   private:
   TextBox _textBox;
   int _charLimit;
-  Color _focusedTint, _unfocusedTint;
+  Color _focusedTint, _unfocusedTint, _invalidTint;
   Animation _cursor;
+  Regex!char _validate;
 
   void handleKeyChar(ALLEGRO_EVENT event) {
     if (!hasFocus) { return; }
