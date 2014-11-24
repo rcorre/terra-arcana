@@ -11,24 +11,30 @@ class MessageBox : GUIElement {
     _font = Font(data["fontName"], data["fontSize"].to!int);
     auto pos = data.get("offset", "0,0").parseVector!int;
     auto anchor = data.get("anchor", "topLeft").to!Anchor;
+    _textBuffer = data.get("textBuffer", "0,0").parseVector!int;
     super(data, pos, anchor);
   }
 
   override void draw(Vector2i parentTopLeft) {
     super.draw(parentTopLeft);
-    auto drawPos = area.bottomLeft + parentTopLeft;
-    foreach(message ; _messages) {
-      drawPos.y -= _font.heightOf(message);
-      auto color = Color.black;
-      _font.draw(message, drawPos, color);
+    auto drawPos = area.bottomLeft + parentTopLeft + _textBuffer;
+    foreach(post ; _messages) {
+      drawPos.y -= _font.heightOf(post.message);
+      _font.draw(post.message, drawPos, post.color);
     }
   }
 
-  void postMessage(string message) {
-    _messages.insertFront(message);
+  void postMessage(string message, Color color = Color.black) {
+    _messages.insertFront(Post(message, color));
   }
 
   private:
   Font _font;
-  DList!string _messages;
+  DList!Post _messages;
+  Vector2i _textBuffer;
+
+  struct Post {
+    string message;
+    Color color;
+  }
 }

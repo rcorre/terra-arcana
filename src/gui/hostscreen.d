@@ -1,10 +1,25 @@
 module gui.hostscreen;
 
+import std.string;
 import dau.all;
 import model.all;
 import battle.battle;
 import title.title;
 import title.state.showtitle;
+
+private enum PostColor : Color {
+  self  = Color.blue,
+  other = Color.green,
+  note  = Color.black,
+  error = Color.red
+}
+
+private enum PostFormat : string {
+  self  = "you: %s",
+  other = "other: %s",
+  note  = "note: %s",
+  error = "error: %s",
+}
 
 /// screen to host a network game
 class HostScreen : GUIElement {
@@ -44,7 +59,7 @@ class HostScreen : GUIElement {
   }
 
   void postMessage(string message) {
-    _messageBox.postMessage(message);
+    _messageBox.postMessage(PostFormat.self.format(message), PostColor.self);
     _messageInput.text = "";
   }
 }

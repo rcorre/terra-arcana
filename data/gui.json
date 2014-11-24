@@ -583,7 +583,8 @@
           "offset"   : "520, 320",
           "anchor"   : "center",
           "fontName" : "Mecha",
-          "fontSize" : "16"
+          "fontSize" : "16",
+          "textBuffer": "4,-4"
         }
       },
       "messageInput": {
