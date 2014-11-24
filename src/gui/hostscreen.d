@@ -1,7 +1,8 @@
 module gui.hostscreen;
 
-import std.string;
+import std.string, std.conv;
 import dau.all;
+import net.all;
 import model.all;
 import battle.battle;
 import title.title;
@@ -43,14 +44,29 @@ class HostScreen : GUIElement {
   TextInput _portInput, _messageInput;
   MessageBox _messageBox;
   Button _hostButton;
+  NetworkServer _server;
+  NetworkClient _client;
 
   void backButton() {
     _title.states.setState(new ShowTitle);
   }
 
   void hostGame() {
-    _hostButton.text = "Cancel";
-    _hostButton.action = &cancelHost;
+    if (_portInput.isValid) {
+      _hostButton.text = "Cancel";
+      _hostButton.action = &cancelHost;
+      auto post = "Hosting on port %s".format(_portInput.text);
+      _messageBox.postMessage(post, PostColor.note);
+      _server = new NetworkServer(_portInput.text.to!ushort);
+      /*
+         _client = _server.waitForClientConnection();
+         _messageBox.postMessage("client connected!", PostColor.note);
+       */
+    }
+    else {
+      auto post = "%s is not a valid port".format(_portInput.text);
+      _messageBox.postMessage(post, PostColor.error);
+    }
   }
 
   void cancelHost() {

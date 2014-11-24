@@ -1,10 +1,26 @@
 module gui.joinscreen;
 
+import std.conv;
+import net.all;
 import dau.all;
 import model.all;
 import battle.battle;
 import title.title;
 import title.state.showtitle;
+
+private enum PostColor : Color {
+  self  = Color.blue,
+  other = Color.green,
+  note  = Color.black,
+  error = Color.red
+}
+
+private enum PostFormat : string {
+  self  = "you: %s",
+  other = "other: %s",
+  note  = "note: %s",
+  error = "error: %s",
+}
 
 /// screen to join a network game
 class JoinScreen : GUIElement {
@@ -15,24 +31,22 @@ class JoinScreen : GUIElement {
     addChildren!TextBox("title", "subtitle", "portLabel", "ipLabel");
     addChild(new Button(data.child["back"], &backButton));
 
-    _ipInput = new TextInput(data.child["ipInput"]);
-    addChild(_ipInput);
-
     _joinButton = new Button(data.child["joinButton"], &joinGame);
-    addChild(_joinButton);
-
-    _statusText = new TextBox(data.child["status"]);
-    addChild(_statusText);
-
+    _ipInput = new TextInput(data.child["ipInput"]);
     _portInput = new TextInput(data.child["portInput"]);
-    addChild(_portInput);
+
+    _messageBox = new MessageBox(data.child["messageBox"]);
+    _messageInput = new TextInput(data.child["messageInput"], &postMessage);
+
+    addChildren(_joinButton, _ipInput, _portInput, _messageBox, _messageInput);
   }
 
   private:
   Title _title;
-  TextInput _ipInput, _portInput;
-  TextBox _statusText;
+  TextInput _ipInput, _portInput, _messageInput;
   Button _joinButton;
+  NetworkClient _client;
+  MessageBox _messageBox;
 
   void backButton() {
     _title.states.setState(new ShowTitle);
@@ -41,10 +55,16 @@ class JoinScreen : GUIElement {
   void joinGame() {
     _joinButton.text = "Cancel";
     _joinButton.action = &cancelJoin;
+    _client = new NetworkClient(_ipInput.text, _portInput.text.to!ushort);
   }
 
   void cancelJoin() {
     _joinButton.text = "Join Game";
     _joinButton.action = &joinGame;
+  }
+
+  void postMessage(string message) {
+    _messageBox.postMessage(PostFormat.self.format(message), PostColor.self);
+    _messageInput.text = "";
   }
 }
