@@ -39,6 +39,15 @@ class HostScreen : GUIElement {
     addChildren(_hostButton, _messageBox, _messageInput, _portInput);
   }
 
+  override void update(float time) {
+    if (_server !is null) {
+      _client = _server.waitForClientConnection();
+      if (_client !is null) {
+        _messageBox.postMessage("client connected!", PostColor.note);
+      }
+    }
+  }
+
   private:
   Title _title;
   TextInput _portInput, _messageInput;
@@ -58,10 +67,6 @@ class HostScreen : GUIElement {
       auto post = "Hosting on port %s".format(_portInput.text);
       _messageBox.postMessage(post, PostColor.note);
       _server = new NetworkServer(_portInput.text.to!ushort);
-      /*
-         _client = _server.waitForClientConnection();
-         _messageBox.postMessage("client connected!", PostColor.note);
-       */
     }
     else {
       auto post = "%s is not a valid port".format(_portInput.text);

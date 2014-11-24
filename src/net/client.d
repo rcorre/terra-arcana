@@ -11,6 +11,7 @@ class NetworkClient {
 
   this(Socket socket) {
     _socket = socket;
+    _socket.blocking = false;
   }
 
   void send(T)(T data) if (is(T == struct)) {
@@ -18,11 +19,13 @@ class NetworkClient {
     assert(ret != Socket.ERROR && ret == data.sizeof,  "failed to send data");
   }
 
-  T receive(T)() if (is(T == struct)) {
-    T buf;
+  bool receive(T)(out T buf) if (is(T == struct)) {
     auto ret = _socket.receive((&buf)[0 .. 1]);
-    assert(ret != Socket.ERROR && ret == data.sizeof, "failed to recieve data");
-    return buf;
+    if (ret > 0) {
+      assert(ret != Socket.ERROR && ret == data.sizeof,  "failed to receive data");
+      return true;
+    }
+    return false;
   }
 
   void close() {
