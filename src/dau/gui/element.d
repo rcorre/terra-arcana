@@ -29,6 +29,7 @@ class GUIElement {
         _sprite = new Sprite(textureName, spriteName);
       }
     }
+    _sprite.scale = data.get("scale", "1,1").parseVector!float;
     Rect2i area;
     final switch (anchor) with (Anchor) {
       case topLeft:
