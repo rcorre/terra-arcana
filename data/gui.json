@@ -584,6 +584,7 @@
           "anchor"   : "center",
           "fontName" : "Mecha",
           "fontSize" : "16",
+          "maxLines" : "17",
           "textBuffer": "4,-4"
         }
       },

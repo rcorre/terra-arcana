@@ -12,6 +12,7 @@ class MessageBox : GUIElement {
     auto pos = data.get("offset", "0,0").parseVector!int;
     auto anchor = data.get("anchor", "topLeft").to!Anchor;
     _textBuffer = data.get("textBuffer", "0,0").parseVector!int;
+    _maxLines = ("maxLines" in data) ? data["maxLines"].to!int : int.max;
     super(data, pos, anchor);
   }
 
@@ -26,12 +27,15 @@ class MessageBox : GUIElement {
 
   void postMessage(string message, Color color = Color.black) {
     _messages.insertFront(Post(message, color));
+    if (_numLines >= _maxLines) { _messages.removeBack; }
+    else { ++_numLines; }
   }
 
   private:
   Font _font;
   DList!Post _messages;
   Vector2i _textBuffer;
+  int _maxLines, _numLines;
 
   struct Post {
     string message;
