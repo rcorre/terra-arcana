@@ -42,8 +42,10 @@ class TextInput : GUIElement {
     string text() { return _textBox.text; }
     void text(string val) {
       _textBox.text = val.take(_charLimit).to!string;
-      sprite.tint = text.matchFirst(_validate).empty ? _invalidTint : _focusedTint;
+      sprite.tint = isValid ? _focusedTint : _invalidTint ;
     }
+
+    bool isValid() { return !text.matchFirst(_validate).empty; }
   }
 
   override {
@@ -62,7 +64,7 @@ class TextInput : GUIElement {
 
     void onFocus(bool focus) {
       if (focus) {
-        sprite.tint = text.matchFirst(_validate).empty ? _invalidTint : _focusedTint;
+        sprite.tint = isValid ? _focusedTint : _invalidTint ;
       }
       else {
         sprite.tint = _unfocusedTint;
