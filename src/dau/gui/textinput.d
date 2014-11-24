@@ -29,6 +29,7 @@ class TextInput : GUIElement {
 
     if ("cursorTexture" in data && "cursorAnimation" in data) {
       _cursor = new Animation(data["cursorTexture"], data["cursorAnimation"], Animation.Repeat.loop);
+      _cursor.scale = data.get("scale", "1,1").parseVector!float;
     }
 
     registerEventHandler(&handleKeyChar, ALLEGRO_EVENT_KEY_CHAR);

@@ -577,10 +577,10 @@
           "fontSize" : "32"
         }
       },
-      "status": {
+      "messageBox": {
         "properties": {
-          "offset"   : "400, 420",
-          "text"     : "Waiting for input",
+          "texture"  : "gui/messagePanel",
+          "offset"   : "520, 320",
           "anchor"   : "center",
           "fontName" : "Mecha",
           "fontSize" : "24"
@@ -588,11 +588,33 @@
       },
       "portLabel": {
         "properties": {
-          "offset": "300, 252",
+          "offset": "100, 252",
           "anchor": "center",
           "text": "Port",
           "fontName": "Mecha",
           "fontSize": "32"
+        }
+      },
+      "messageInput": {
+        "properties": {
+          "texture": "gui/inputField",
+          "charLimit": "20",
+          "cursorTexture": "gui/cursor",
+          "cursorAnimation": "textInput",
+          "unfocusedTint": "0.0, 0.5, 0.5",
+          "focusedTint": "0.0, 0.7, 0.7",
+          "offset": "377, 466",
+          "anchor": "topLeft",
+          "scale": "1.2, 0.6"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "text": "",
+              "fontName": "Mecha",
+              "fontSize": "16"
+            }
+          }
         }
       },
       "portInput": {
@@ -605,7 +627,7 @@
           "unfocusedTint": "0.0, 0.5, 0.5",
           "focusedTint": "0.0, 0.7, 0.7",
           "invalidTint": "1.0, 0.0, 0.0",
-          "offset": "450, 252",
+          "offset": "230, 252",
           "anchor": "center"
         },
         "child": {
@@ -622,7 +644,7 @@
         "properties": {
           "texture": "gui/start_button",
           "text": "Host Game",
-          "offset" : "400, 340",
+          "offset" : "210, 340",
           "anchor": "center"
         },
         "child": {

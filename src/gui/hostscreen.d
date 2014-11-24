@@ -18,8 +18,9 @@ class HostScreen : GUIElement {
     _hostButton = new Button(data.child["hostGame"], &hostGame);
     addChild(_hostButton);
 
-    _statusText = new TextBox(data.child["status"]);
-    addChild(_statusText);
+    _messageBox = new MessageBox(data.child["messageBox"]);
+    addChild(_messageBox);
+    addChild(new TextInput(data.child["messageInput"]));
 
     _portInput = new TextInput(data.child["portInput"]);
     addChild(_portInput);
@@ -28,7 +29,7 @@ class HostScreen : GUIElement {
   private:
   Title _title;
   TextInput _portInput;
-  TextBox _statusText;
+  MessageBox _messageBox;
   Button _hostButton;
 
   void backButton() {
