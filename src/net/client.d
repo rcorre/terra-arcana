@@ -2,6 +2,7 @@ module net.client;
 
 import std.socket;
 
+/// TODO: use multiple calls to send/receive if necessary (check returned byte count)
 class NetworkClient {
   this(string ipAddress, ushort portNumber) {
     // TODO: try all addresses?
@@ -12,14 +13,16 @@ class NetworkClient {
     _socket = socket;
   }
 
-  bool send(void[] data) {
-    auto ret = _socket.send(data);
-    return ret == Socket.ERROR;
+  void send(T)(T data) if (is(T == struct)) {
+    auto ret = _socket.send((&data)[0 .. 1]);
+    assert(ret != Socket.ERROR && ret == data.sizeof,  "failed to send data");
   }
 
-  bool receive(out void[] buffer) {
-    auto ret = _socket.receive(buffer);
-    return ret == Socket.ERROR;
+  T receive(T)() if (is(T == struct)) {
+    T buf;
+    auto ret = _socket.receive((&buf)[0 .. 1]);
+    assert(ret != Socket.ERROR && ret == data.sizeof, "failed to recieve data");
+    return buf;
   }
 
   void close() {
