@@ -16,19 +16,16 @@ class HostScreen : GUIElement {
     addChild(new Button(data.child["back"], &backButton));
 
     _hostButton = new Button(data.child["hostGame"], &hostGame);
-    addChild(_hostButton);
-
     _messageBox = new MessageBox(data.child["messageBox"]);
-    addChild(_messageBox);
-    addChild(new TextInput(data.child["messageInput"]));
+    _messageInput = new TextInput(data.child["messageInput"], &postMessage);
 
     _portInput = new TextInput(data.child["portInput"]);
-    addChild(_portInput);
+    addChildren(_hostButton, _messageBox, _messageInput, _portInput);
   }
 
   private:
   Title _title;
-  TextInput _portInput;
+  TextInput _portInput, _messageInput;
   MessageBox _messageBox;
   Button _hostButton;
 
@@ -44,5 +41,10 @@ class HostScreen : GUIElement {
   void cancelHost() {
     _hostButton.text = "Host Game";
     _hostButton.action = &hostGame;
+  }
+
+  void postMessage(string message) {
+    _messageBox.postMessage(message);
+    _messageInput.text = "";
   }
 }

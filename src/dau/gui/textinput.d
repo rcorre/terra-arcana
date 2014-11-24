@@ -4,6 +4,7 @@ import std.conv, std.string, std.range, std.regex;
 import dau.input;
 import dau.allegro;
 import dau.engine;
+import dau.util.func;
 import dau.gui.element;
 import dau.gui.data;
 import dau.gui.textbox;
@@ -11,7 +12,8 @@ import dau.geometry.all;
 import dau.graphics.all;
 
 class TextInput : GUIElement {
-  this(GUIData data) {
+  alias Action = void delegate(string);
+  this(GUIData data, Action action = doNothing!Action) {
     auto pos = data.get("offset", "0,0").parseVector!int;
     auto anchor = data.get("anchor", "topLeft").to!Anchor;
     super(data, pos, anchor);
@@ -33,6 +35,7 @@ class TextInput : GUIElement {
     }
 
     registerEventHandler(&handleKeyChar, ALLEGRO_EVENT_KEY_CHAR);
+    _action = action;
   }
 
   @property {
@@ -73,10 +76,14 @@ class TextInput : GUIElement {
   Color _focusedTint, _unfocusedTint, _invalidTint;
   Animation _cursor;
   Regex!char _validate;
+  Action _action;
 
   void handleKeyChar(ALLEGRO_EVENT event) {
     if (!hasFocus) { return; }
-    if (event.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
+    if (event.keyboard.keycode == ALLEGRO_KEY_ENTER) {
+      _action(text);
+    }
+    else if (event.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
       text = text.chop;
     }
     else {
