@@ -583,16 +583,7 @@
           "offset"   : "520, 320",
           "anchor"   : "center",
           "fontName" : "Mecha",
-          "fontSize" : "24"
-        }
-      },
-      "portLabel": {
-        "properties": {
-          "offset": "100, 252",
-          "anchor": "center",
-          "text": "Port",
-          "fontName": "Mecha",
-          "fontSize": "32"
+          "fontSize" : "16"
         }
       },
       "messageInput": {
@@ -615,6 +606,15 @@
               "fontSize": "16"
             }
           }
+        }
+      },
+      "portLabel": {
+        "properties": {
+          "offset": "100, 252",
+          "anchor": "center",
+          "text": "Port",
+          "fontName": "Mecha",
+          "fontSize": "32"
         }
       },
       "portInput": {

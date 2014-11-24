@@ -25,7 +25,7 @@ class MessageBox : GUIElement {
   }
 
   void postMessage(string message) {
-    _messages ~= message;
+    _messages.insertFront(message);
   }
 
   private:
