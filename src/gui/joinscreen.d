@@ -71,7 +71,13 @@ class JoinScreen : GUIElement {
   void joinGame() {
     _joinButton.text = "Cancel";
     _joinButton.action = &cancelJoin;
-    _client = new NetworkClient(_ipInput.text, _portInput.text.to!ushort);
+    try {
+      _client = new NetworkClient(_ipInput.text, _portInput.text.to!ushort);
+    }
+    catch(Exception ex) {
+      cancelJoin();
+      _messageBox.postMessage(ex.msg, PostColor.error);
+    }
   }
 
   void cancelJoin() {

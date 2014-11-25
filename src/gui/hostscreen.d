@@ -76,7 +76,13 @@ class HostScreen : GUIElement {
       _hostButton.action = &cancelHost;
       auto post = "Hosting on port %s".format(_portInput.text);
       _messageBox.postMessage(post, PostColor.note);
-      _server = new NetworkServer(_portInput.text.to!ushort);
+      try {
+        _server = new NetworkServer(_portInput.text.to!ushort);
+      }
+      catch(Exception ex) {
+        cancelHost();
+        _messageBox.postMessage(ex.msg, PostColor.error);
+      }
     }
     else {
       auto post = "%s is not a valid port".format(_portInput.text);
