@@ -9,17 +9,8 @@ import title.title;
 import title.state.showtitle;
 
 private enum PostColor : Color {
-  self  = Color.blue,
-  other = Color.green,
   note  = Color.black,
   error = Color.red
-}
-
-private enum PostFormat : string {
-  self  = "you: %s",
-  other = "other: %s",
-  note  = "note: %s",
-  error = "error: %s",
 }
 
 /// screen to host a network game
@@ -33,10 +24,9 @@ class HostScreen : GUIElement {
 
     _hostButton = new Button(data.child["hostGame"], &hostGame);
     _messageBox = new MessageBox(data.child["messageBox"]);
-    _messageInput = new TextInput(data.child["messageInput"], &postMessage);
 
     _portInput = new TextInput(data.child["portInput"]);
-    addChildren(_hostButton, _messageBox, _messageInput, _portInput);
+    addChildren(_hostButton, _messageBox, _portInput);
   }
 
   override void update(float time) {
@@ -59,7 +49,7 @@ class HostScreen : GUIElement {
 
   private:
   Title _title;
-  TextInput _portInput, _messageInput;
+  TextInput _portInput;
   MessageBox _messageBox;
   Button _hostButton;
   NetworkServer _server;
@@ -70,9 +60,6 @@ class HostScreen : GUIElement {
       case closeConnection:
         _messageBox.postMessage("Client left", PostColor.error);
         cancelHost();
-        break;
-      case chat:
-        _messageBox.postMessage(msg.chat.text.dup, PostColor.other);
         break;
       default:
     }
@@ -110,13 +97,5 @@ class HostScreen : GUIElement {
       _server = null;
     }
     _messageBox.postMessage("Connection closed", PostColor.error);
-  }
-
-  void postMessage(string message) {
-    _messageBox.postMessage(PostFormat.self.format(message), PostColor.self);
-    if (_client !is null) {
-      _client.send(NetworkMessage.makeChat(message));
-    }
-    _messageInput.text = "";
   }
 }
