@@ -7,6 +7,7 @@ import model.all;
 import battle.battle;
 import title.title;
 import title.state.showtitle;
+import title.state.selectbattle;
 
 private enum PostColor : Color {
   note  = Color.black,
@@ -34,7 +35,9 @@ class HostScreen : GUIElement {
       if (_client is null) {
         _client = _server.waitForClientConnection();
         if (_client !is null) {
-          _messageBox.postMessage("client connected!", PostColor.note);
+          _server.close();
+          _server = null;
+          _title.states.setState(new SelectBattle(_client));
         }
       }
       else {

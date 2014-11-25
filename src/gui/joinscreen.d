@@ -7,6 +7,7 @@ import model.all;
 import battle.battle;
 import title.title;
 import title.state.showtitle;
+import title.state.selectbattle;
 
 private enum PostColor : Color {
   note  = Color.black,
@@ -36,57 +37,23 @@ class JoinScreen : GUIElement {
     addChildren(_joinButton, _ipInput, _portInput, _messageBox);
   }
 
-  override void update(float time) {
-    if (_client !is null) {
-      NetworkMessage msg;
-      bool gotSomething = _client.receive(msg);
-      if (gotSomething) {
-        processMessage(msg);
-      }
-    }
-  }
-
   private:
   Title _title;
   TextInput _ipInput, _portInput;
   Button _joinButton;
-  NetworkClient _client;
   MessageBox _messageBox;
 
-  void processMessage(NetworkMessage msg) {
-    switch (msg.type) with (NetworkMessage.Type) {
-      case closeConnection:
-        _messageBox.postMessage("Host closed Connection", PostColor.error);
-        cancelJoin();
-        break;
-      default:
-    }
-  }
-
   void backButton() {
-    cancelJoin();
     _title.states.setState(new ShowTitle);
   }
 
   void joinGame() {
-    _joinButton.text = "Cancel";
-    _joinButton.action = &cancelJoin;
     try {
-      _client = new NetworkClient(_ipInput.text, _portInput.text.to!ushort);
+      auto client = new NetworkClient(_ipInput.text, _portInput.text.to!ushort);
+      _title.states.setState(new SelectBattle(client));
     }
     catch(Exception ex) {
-      cancelJoin();
       _messageBox.postMessage(ex.msg, PostColor.error);
-    }
-  }
-
-  void cancelJoin() {
-    _joinButton.text = "Join Game";
-    _joinButton.action = &joinGame;
-    if (_client !is null) {
-      _client.send(NetworkMessage.makeCloseConnection);
-      _client.close();
-      _client = null;
     }
   }
 }
