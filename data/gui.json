@@ -758,7 +758,7 @@
         "child": {
           "text": {
             "properties": {
-              "text": "192.168.1.100",
+              "text": "127.0.0.1",
               "fontName": "Mecha",
               "fontSize": "32"
             }

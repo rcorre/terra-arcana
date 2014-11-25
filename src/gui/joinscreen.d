@@ -65,7 +65,7 @@ class JoinScreen : GUIElement {
         cancelJoin();
         break;
       case chat:
-        _messageBox.postMessage(cast(string) msg.chat.text, PostColor.other);
+        _messageBox.postMessage(msg.chat.text.dup, PostColor.other);
         break;
       default:
     }
@@ -85,15 +85,18 @@ class JoinScreen : GUIElement {
   void cancelJoin() {
     _joinButton.text = "Join Game";
     _joinButton.action = &joinGame;
-    if (_client !is null) { 
+    if (_client !is null) {
       _client.send(NetworkMessage.makeCloseConnection);
-      _client.close(); 
+      _client.close();
       _client = null;
     }
   }
 
   void postMessage(string message) {
     _messageBox.postMessage(PostFormat.self.format(message), PostColor.self);
+    if (_client !is null) {
+      _client.send(NetworkMessage.makeChat(message));
+    }
     _messageInput.text = "";
   }
 }

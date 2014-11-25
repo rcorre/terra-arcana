@@ -72,7 +72,7 @@ class HostScreen : GUIElement {
         cancelHost();
         break;
       case chat:
-        _messageBox.postMessage(cast(string) msg.chat.text, PostColor.other);
+        _messageBox.postMessage(msg.chat.text.dup, PostColor.other);
         break;
       default:
     }

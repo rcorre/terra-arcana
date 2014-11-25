@@ -104,11 +104,17 @@ struct TileCoord {
 }
 
 struct Chat {
-  char[chatMessageSize] text;
+  @property auto text() { return _text; }
+  @property void text(string val) { _text[0 .. val.length] = val; }
+
+  private char[chatMessageSize] _text;
 }
 
 struct ChooseFaction {
-  char[factionNameSize] name;
+  @property auto name() { return _name; }
+  @property void name(string val) { _name[0 .. val.length] = val; }
+
+  private char[factionNameSize] _name;
 }
 
 struct CycleMap {
@@ -122,8 +128,12 @@ struct MoveUnit {
 }
 
 struct DeployUnit {
-  char[unitKeySize] unitKey;
+  @property auto unitKey() { return _unitKey; }
+  @property void unitKey(string val) { _unitKey[0 .. val.length] = val; }
+
   TileCoord location;
+
+  private char[unitKeySize] _unitKey;
 }
 
 struct PerformAction {
