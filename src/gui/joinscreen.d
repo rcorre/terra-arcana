@@ -9,15 +9,11 @@ import title.title;
 import title.state.showtitle;
 
 private enum PostColor : Color {
-  self  = Color.blue,
-  other = Color.green,
   note  = Color.black,
   error = Color.red
 }
 
 private enum PostFormat : string {
-  self  = "you: %s",
-  other = "other: %s",
   note  = "note: %s",
   error = "error: %s",
 }
@@ -36,9 +32,8 @@ class JoinScreen : GUIElement {
     _portInput = new TextInput(data.child["portInput"]);
 
     _messageBox = new MessageBox(data.child["messageBox"]);
-    _messageInput = new TextInput(data.child["messageInput"], &postMessage);
 
-    addChildren(_joinButton, _ipInput, _portInput, _messageBox, _messageInput);
+    addChildren(_joinButton, _ipInput, _portInput, _messageBox);
   }
 
   override void update(float time) {
@@ -53,7 +48,7 @@ class JoinScreen : GUIElement {
 
   private:
   Title _title;
-  TextInput _ipInput, _portInput, _messageInput;
+  TextInput _ipInput, _portInput;
   Button _joinButton;
   NetworkClient _client;
   MessageBox _messageBox;
@@ -63,9 +58,6 @@ class JoinScreen : GUIElement {
       case closeConnection:
         _messageBox.postMessage("Host closed Connection", PostColor.error);
         cancelJoin();
-        break;
-      case chat:
-        _messageBox.postMessage(msg.chat.text.dup, PostColor.other);
         break;
       default:
     }
@@ -90,13 +82,5 @@ class JoinScreen : GUIElement {
       _client.close();
       _client = null;
     }
-  }
-
-  void postMessage(string message) {
-    _messageBox.postMessage(PostFormat.self.format(message), PostColor.self);
-    if (_client !is null) {
-      _client.send(NetworkMessage.makeChat(message));
-    }
-    _messageInput.text = "";
   }
 }

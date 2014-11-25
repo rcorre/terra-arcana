@@ -591,7 +591,7 @@
       },
       "portLabel": {
         "properties": {
-          "offset": "257, 257",
+          "offset": "264, 250",
           "anchor": "topLeft",
           "text": "Port",
           "fontName": "Mecha",
@@ -682,72 +682,19 @@
       "messageBox": {
         "properties": {
           "texture"  : "gui/messagePanel",
-          "offset"   : "520, 320",
-          "anchor"   : "center",
+          "offset"   : "257, 377",
+          "anchor"   : "topLeft",
           "fontName" : "Mecha",
           "fontSize" : "16",
           "maxLines" : "17",
-          "textBuffer": "4,-4"
-        }
-      },
-      "messageInput": {
-        "properties": {
-          "texture": "gui/inputField",
-          "charLimit": "20",
-          "cursorTexture": "gui/cursor",
-          "cursorAnimation": "textInput",
-          "unfocusedTint": "0.0, 0.5, 0.5",
-          "focusedTint": "0.0, 0.7, 0.7",
-          "offset": "377, 466",
-          "anchor": "topLeft",
-          "scale": "1.2, 0.6"
-        },
-        "child": {
-          "text": {
-            "properties": {
-              "text": "",
-              "fontName": "Mecha",
-              "fontSize": "16"
-            }
-          }
-        }
-      },
-      "ipLabel": {
-        "properties": {
-          "offset": "320, 200",
-          "anchor": "center",
-          "text": "IP",
-          "fontName": "Mecha",
-          "fontSize": "32"
-        }
-      },
-      "ipInput": {
-        "properties": {
-          "texture": "gui/inputField",
-          "offset": "450, 200",
-          "unfocusedTint": "0.0, 0.5, 0.5",
-          "focusedTint": "0.0, 0.7, 0.7",
-          "invalidTint": "1.0, 0.0, 0.0",
-          "validate": "^([0-9]{1,3}[.]){3}[0-9]{1,3}$",
-          "cursorTexture": "gui/cursor",
-          "cursorAnimation": "textInput",
-          "charLimit": "15",
-          "anchor": "center"
-        },
-        "child": {
-          "text": {
-            "properties": {
-              "text": "127.0.0.1",
-              "fontName": "Mecha",
-              "fontSize": "32"
-            }
-          }
+          "textBuffer": "4,-4",
+          "scale": "1, 0.5"
         }
       },
       "portLabel": {
         "properties": {
-          "offset": "300, 252",
-          "anchor": "center",
+          "offset": "264, 250",
+          "anchor": "topLeft",
           "text": "Port",
           "fontName": "Mecha",
           "fontSize": "32"
@@ -756,15 +703,15 @@
       "portInput": {
         "properties": {
           "texture": "gui/inputField",
-          "offset": "450, 252",
-          "unfocusedTint": "0.0, 0.5, 0.5",
-          "focusedTint": "0.0, 0.7, 0.7",
-          "invalidTint": "1.0, 0.0, 0.0",
+          "charLimit": "5",
           "validate": "^[0-9]+$",
           "cursorTexture": "gui/cursor",
           "cursorAnimation": "textInput",
-          "charLimit": "5",
-          "anchor": "center"
+          "unfocusedTint": "0.0, 0.5, 0.5",
+          "focusedTint": "0.0, 0.7, 0.7",
+          "invalidTint": "1.0, 0.0, 0.0",
+          "offset": "321, 249",
+          "anchor": "topLeft"
         },
         "child": {
           "text": {
@@ -776,12 +723,44 @@
           }
         }
       },
+      "ipLabel": {
+        "properties": {
+          "offset": "264, 185",
+          "anchor": "topLeft",
+          "text": "IP",
+          "fontName": "Mecha",
+          "fontSize": "32"
+        }
+      },
+      "ipInput": {
+        "properties": {
+          "texture": "gui/inputField",
+          "offset": "321, 185",
+          "unfocusedTint": "0.0, 0.5, 0.5",
+          "focusedTint": "0.0, 0.7, 0.7",
+          "invalidTint": "1.0, 0.0, 0.0",
+          "validate": "^([0-9]{1,3}[.]){3}[0-9]{1,3}$",
+          "cursorTexture": "gui/cursor",
+          "cursorAnimation": "textInput",
+          "charLimit": "15",
+          "anchor": "topLeft"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "text": "127.0.0.1",
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
       "joinButton": {
         "properties": {
           "texture": "gui/start_button",
           "text": "Join Game",
-          "offset" : "400, 340",
-          "anchor": "center"
+          "offset" : "289, 313",
+          "anchor": "topLeft"
         },
         "child": {
           "text": {
