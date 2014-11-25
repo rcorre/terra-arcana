@@ -861,31 +861,48 @@
 
   "selectBattle": {
     "properties": {
-      "texture": "gui/select_battle",
-      "playerOffset": "33, 73",
-      "pcOffset": "545, 73",
-      "factionTitleOffset": "350, 37",
-      "playerTitleOffset": "33, 20",
-      "pcTitleOffset": "715, 20",
-      "startButtonOffset": "289, 537",
-      "mapSelectOffset": "402, 472"
+      "texture": "gui/titleScreen",
+      "selfFactionOffset": "33, 185",
+      "otherFactionOffset": "577, 185",
+      "mapSelectOffset": "401, 489"
     },
     "child": {
-      "playerText": {
+      "titleText": {
         "properties": {
+          "offset"   : "400, 55",
+          "text"     : "Terra Arcana",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "48"
+        }
+      },
+      "subtitle": {
+        "properties": {
+          "offset"   : "400, 106",
+          "text"     : "Battle Setup",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "32"
+        }
+      },
+      "playerLabel": {
+        "properties": {
+          "offset": "33, 20",
           "fontName": "Mecha_Bold",
           "fontSize": "48"
         }
       },
-      "factionText": {
+      "otherPlayerLabel": {
         "properties": {
+          "offset": "715, 20",
           "fontName": "Mecha_Bold",
-          "fontSize": "32"
+          "fontSize": "48"
         }
       },
       "startButton": {
         "properties": {
           "texture"       : "gui/start_button",
+          "offset"        : "289, 537",
           "text"          : "Start",
           "onShade"       : "1, 1, 1, 0.9",
           "offShade"      : "0.9, 0.9, 0.9, 0.6",
@@ -896,6 +913,39 @@
             "properties": {
               "fontName": "Mecha",
               "fontSize": "26"
+            }
+          }
+        }
+      },
+      "messageBox": {
+        "properties": {
+          "texture"  : "gui/messagePanel",
+          "offset"   : "257, 160",
+          "anchor"   : "topLeft",
+          "fontName" : "Mecha",
+          "fontSize" : "16",
+          "maxLines" : "12",
+          "textBuffer": "4,-4"
+        }
+      },
+      "messageInput": {
+        "properties": {
+          "texture": "gui/inputField",
+          "charLimit": "20",
+          "cursorTexture": "gui/cursor",
+          "cursorAnimation": "textInput",
+          "unfocusedTint": "0.0, 0.5, 0.5",
+          "focusedTint": "0.0, 0.7, 0.7",
+          "offset": "257, 418",
+          "anchor": "topLeft",
+          "scale": "1.2, 0.6"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "text": "",
+              "fontName": "Mecha",
+              "fontSize": "16"
             }
           }
         }
@@ -921,8 +971,8 @@
 
   "factionMenu": {
     "properties": {
-      "firstButtonOffset" : "17, 17",
-      "menuSpacingY": "32",
+      "firstButtonOffset" : "4, 8",
+      "menuSpacingY": "8",
       "texture": "gui/faction_menu"
     },
     "child": {
