@@ -92,15 +92,18 @@ class BattleSelectionScreen : GUIElement {
         _messageBox.postMessage(PostFormat.other.format(msg.chat.text), PostColor.other);
         break;
       case chooseMap:
-        string name = msg.chooseMap.name.dup;
+        string name = msg.chooseMap.name;
         auto note = PostFormat.otherChoseMap.format(name);
         _messageBox.postMessage(note, PostColor.note);
         _mapSelector.selection = name;
         break;
       case chooseFaction:
-        string name = msg.chooseFaction.name.dup;
+        string name = msg.chooseFaction.name;
         auto note = PostFormat.otherChoseFaction.format(name);
         _messageBox.postMessage(note, PostColor.note);
+        auto faction = getFaction(name);
+        _otherFactionMenu.setSelection(faction);
+        selectOtherFaction(faction);
         break;
       default:
     }

@@ -44,8 +44,6 @@ struct NetworkMessage {
       return NetworkMessage(Type.closeConnection);
     }
     auto makeChat(string text) {
-      assert(text.length <= chatMessageSize,
-          "cannot send chat larger than %d".format(chatMessageSize));
       auto msg = NetworkMessage(Type.chat);
       msg.chat.text = text;
       return msg;
@@ -77,8 +75,6 @@ struct NetworkMessage {
     }
 
     auto makeDeployUnit(string unitKey, Tile location) {
-      assert(unitKey.length <= unitKeySize,
-          "cannot send unit key larger than %d".format(unitKeySize));
       auto msg = NetworkMessage(Type.deployUnit);
       msg.deployUnit.location = TileCoord(location);
       msg.deployUnit.unitKey = unitKey;
@@ -96,6 +92,22 @@ struct NetworkMessage {
 }
 
 private:
+/// send a string across a socket
+struct NetString(size_t MaxLen) { 
+  alias str this;
+
+  void opAssign(string s) {
+    assert(s.length <= MaxLen, "length %d exceeds NetString capacity %d".format(s.length, MaxLen));
+    _str[0 .. s.length] = s;
+    _strLen = s.length;
+  }
+
+  @property string str() { return _str[0 .. _strLen].dup; }
+
+  private char[MaxLen] _str;
+  private size_t _strLen;
+}
+
 struct TileCoord {
   this(Tile tile) {
     row = tile.row;
@@ -105,24 +117,15 @@ struct TileCoord {
 }
 
 struct Chat {
-  @property auto text() { return _text; }
-  @property void text(string val) { _text[0 .. val.length] = val; }
-
-  private char[chatMessageSize] _text;
+  NetString!chatMessageSize text;
 }
 
 struct ChooseFaction {
-  @property auto name() { return _name; }
-  @property void name(string val) { _name[0 .. val.length] = val; }
-
-  private char[factionNameSize] _name;
+  NetString!factionNameSize name;
 }
 
 struct ChooseMap {
-  @property auto name() { return _name; }
-  @property void name(string val) { _name[0 .. val.length] = val; }
-
-  private char[mapNameSize] _name;
+  NetString!mapNameSize name;
 }
 
 struct MoveUnit {
@@ -132,12 +135,8 @@ struct MoveUnit {
 }
 
 struct DeployUnit {
-  @property auto unitKey() { return _unitKey; }
-  @property void unitKey(string val) { _unitKey[0 .. val.length] = val; }
-
   TileCoord location;
-
-  private char[unitKeySize] _unitKey;
+  NetString!unitKeySize unitKey;
 }
 
 struct PerformAction {
