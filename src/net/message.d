@@ -6,9 +6,10 @@ import model.all;
 private enum {
   chatMessageSize = 40,
   factionNameSize = 20,
-  unitKeySize = 20,
-  tileCoordSize = 3,
-  maxPathLength = 10
+  mapNameSize     = 20,
+  unitKeySize     = 20,
+  tileCoordSize   = 3,
+  maxPathLength   = 10
 }
 
 struct NetworkMessage {
@@ -16,7 +17,7 @@ struct NetworkMessage {
     closeConnection,
     chat,
     chooseFaction,
-    cycleMap,
+    chooseMap,
     startBattle,
     moveUnit,
     deployUnit,
@@ -27,7 +28,7 @@ struct NetworkMessage {
   union {
     Chat chat;
     ChooseFaction chooseFaction;
-    CycleMap cycleMap;
+    ChooseMap chooseMap;
 
     MoveUnit moveUnit;
     DeployUnit deployUnit;
@@ -59,9 +60,9 @@ struct NetworkMessage {
       return msg;
     }
 
-    auto makeCycleMap(bool next) {
-      auto msg = NetworkMessage(Type.cycleMap);
-      msg.cycleMap.next = next;
+    auto makeChooseMap(string name) {
+      auto msg = NetworkMessage(Type.chooseMap);
+      msg.chooseMap.name = name;
       return msg;
     }
 
@@ -117,8 +118,11 @@ struct ChooseFaction {
   private char[factionNameSize] _name;
 }
 
-struct CycleMap {
-  bool next;
+struct ChooseMap {
+  @property auto name() { return _name; }
+  @property void name(string val) { _name[0 .. val.length] = val; }
+
+  private char[mapNameSize] _name;
 }
 
 struct MoveUnit {

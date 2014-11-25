@@ -19,15 +19,13 @@ abstract class ScrollSelection(EntryType) : GUIElement {
 
     auto clickPrev = delegate() {
       _currentSelection = _entries.reverse;
-      _currentElement.active = false;
-      _currentElement = addChild(createEntry(_currentSelection, size / 2));
+      updateEntry();
       onChange(_currentSelection);
     };
 
     auto clickNext = delegate() {
       _currentSelection = _entries.advance;
-      _currentElement.active = false;
-      _currentElement = addChild(createEntry(_currentSelection, size / 2));
+      updateEntry();
       onChange(_currentSelection);
     };
 
@@ -43,6 +41,15 @@ abstract class ScrollSelection(EntryType) : GUIElement {
 
   /// the currently selected entry
   @property EntryType selection() { return _currentSelection; }
+  @property void selection(EntryType entry) {
+    if (entry == _currentSelection) { return; }
+    EntryType next;
+    do {
+      next = _entries.advance;
+    } while (next != entry && next != _currentSelection);
+    _currentSelection = next;
+    updateEntry();
+  }
 
   GUIElement createEntry(EntryType entry, Vector2i pos);
 
@@ -50,4 +57,9 @@ abstract class ScrollSelection(EntryType) : GUIElement {
   Bicycle!(EntryType[]) _entries;
   EntryType _currentSelection;
   GUIElement _currentElement;
+
+  void updateEntry() {
+      _currentElement.active = false;
+      _currentElement = addChild(createEntry(_currentSelection, size / 2));
+  }
 }

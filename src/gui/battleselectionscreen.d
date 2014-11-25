@@ -20,9 +20,13 @@ private enum PostColor : Color {
 
 private enum PostFormat : string {
   self  = "you: %s",
-  other = "other: %s",
+  other = "opponent: %s",
   error = "error: %s",
   note  = "system: %s",
+  youChoseMap = "you chose map %s",
+  otherChoseMap = "opponent chose map %s",
+  youChoseFaction = "you chose faction %s",
+  otherChoseFaction = "opponent chose faction %s",
 }
 
 /// bar that displays progress as discrete elements (pips)
@@ -42,9 +46,9 @@ class BattleSelectionScreen : GUIElement {
     auto otherFactionOffset = data["otherFactionOffset"].parseVector!int;
 
     _playerFactionMenu = new FactionMenu(selfFactionOffset, &selectPlayerFaction);
-    _pcFactionMenu     = new FactionMenu(otherFactionOffset, &selectPCFaction);
-    _mapSelector       = new StringSelection(getGUIData("selectMap"), mapOffset, mapNames);
-    addChildren(_startButton, _playerFactionMenu, _pcFactionMenu, _mapSelector);
+    _otherFactionMenu  = new FactionMenu(otherFactionOffset, &selectOtherFaction);
+    _mapSelector = new StringSelection(getGUIData("selectMap"), mapOffset, mapNames, &selectMap);
+    addChildren(_startButton, _playerFactionMenu, _otherFactionMenu, _mapSelector);
 
     _messageBox = new MessageBox(data.child["messageBox"]);
     _messageInput = new TextInput(data.child["messageInput"], &postMessage);
@@ -59,6 +63,7 @@ class BattleSelectionScreen : GUIElement {
   }
 
   override void update(float time) {
+    super.update(time);
     if (_client !is null) {
       NetworkMessage msg;
       bool gotSomething = _client.receive(msg);
@@ -69,7 +74,7 @@ class BattleSelectionScreen : GUIElement {
   }
 
   private:
-  FactionMenu _playerFactionMenu, _pcFactionMenu;
+  FactionMenu _playerFactionMenu, _otherFactionMenu;
   StringSelection _mapSelector;
   Button _startButton;
   MessageBox _messageBox;
@@ -86,18 +91,32 @@ class BattleSelectionScreen : GUIElement {
       case chat:
         _messageBox.postMessage(PostFormat.other.format(msg.chat.text), PostColor.other);
         break;
+      case chooseMap:
+        string name = msg.chooseMap.name.dup;
+        auto note = PostFormat.otherChoseMap.format(name);
+        _messageBox.postMessage(note, PostColor.note);
+        _mapSelector.selection = name;
+        break;
+      case chooseFaction:
+        string name = msg.chooseFaction.name.dup;
+        auto note = PostFormat.otherChoseFaction.format(name);
+        _messageBox.postMessage(note, PostColor.note);
+        break;
       default:
     }
   }
 
   void selectPlayerFaction(Faction faction) {
-    if (_pcFactionMenu.selection == faction) {
-      _pcFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
+    if (_otherFactionMenu.selection == faction) {
+      _otherFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
     }
-    _startButton.enabled = _pcFactionMenu.selection !is null;
+    if (_client !is null) {
+      _client.send(NetworkMessage.makeChooseFaction(faction));
+    }
+    _startButton.enabled = _otherFactionMenu.selection !is null;
   }
 
-  void selectPCFaction(Faction faction) {
+  void selectOtherFaction(Faction faction) {
     if (_playerFactionMenu.selection == faction) {
       _playerFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
     }
@@ -106,7 +125,7 @@ class BattleSelectionScreen : GUIElement {
 
   void startBattle() {
     auto playerFaction = _playerFactionMenu.selection;
-    auto pcFaction = _pcFactionMenu.selection;
+    auto pcFaction = _otherFactionMenu.selection;
     auto mapName = _mapSelector.selection;
     setScene(new Battle(mapName, playerFaction, pcFaction));
   }
@@ -123,6 +142,12 @@ class BattleSelectionScreen : GUIElement {
     _messageInput.text = "";
     if (_client !is null) {
       _client.send(NetworkMessage.makeChat(text));
+    }
+  }
+
+  void selectMap(string mapName) {
+    if (_client !is null) {
+      _client.send(NetworkMessage.makeChooseMap(mapName));
     }
   }
 }
