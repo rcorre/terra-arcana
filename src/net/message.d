@@ -13,6 +13,7 @@ private enum {
 
 struct NetworkMessage {
   enum Type {
+    closeConnection,
     chat,
     chooseFaction,
     cycleMap,
@@ -38,6 +39,9 @@ struct NetworkMessage {
   }
 
   static {
+    auto makeCloseConnection() {
+      return NetworkMessage(Type.closeConnection);
+    }
     auto makeChat(string text) {
       assert(text.length <= chatMessageSize,
           "cannot send chat larger than %d".format(chatMessageSize));

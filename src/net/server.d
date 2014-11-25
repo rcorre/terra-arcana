@@ -22,6 +22,11 @@ class NetworkServer {
     }
   }
 
+  void close() {
+    _server.shutdown(SocketShutdown.BOTH);
+    _server.close();
+  }
+
   private:
   TcpSocket _server;
 }

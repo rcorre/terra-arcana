@@ -14,6 +14,8 @@ class NetworkClient {
     _socket.blocking = false;
   }
 
+  @property bool isAlive() { return _socket.isAlive; }
+
   void send(T)(T data) if (is(T == struct)) {
     auto ret = _socket.send((&data)[0 .. 1]);
     assert(ret != Socket.ERROR && ret == data.sizeof,  "failed to send data");
@@ -22,7 +24,7 @@ class NetworkClient {
   bool receive(T)(out T buf) if (is(T == struct)) {
     auto ret = _socket.receive((&buf)[0 .. 1]);
     if (ret > 0) {
-      assert(ret != Socket.ERROR && ret == data.sizeof,  "failed to receive data");
+      assert(ret != Socket.ERROR && ret == buf.sizeof,  "failed to receive data");
       return true;
     }
     return false;
