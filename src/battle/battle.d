@@ -26,7 +26,7 @@ class Battle : Scene!Battle {
       _players = [new Player(playerFaction, 1, true), new Player(pcFaction, 2, false)];
     }
     else {
-      _players = [new Player(pcFaction, 2, false), new Player(playerFaction, 1, true)];
+      _players = [new Player(pcFaction, 1, false), new Player(playerFaction, 2, true)];
     }
     System!Battle[] systems = [
       new TileHoverSystem(this),

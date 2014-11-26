@@ -12,8 +12,6 @@ import battle.state.chooseunittodeploy;
 class PlayerTurn : State!Battle {
   this(Player player) {
     _player = player;
-    // TODO: for each action state (move/deploy/act), 
-    // check if network system is active and send message if so
   }
 
   override {
@@ -26,6 +24,7 @@ class PlayerTurn : State!Battle {
       _unitJumpList = bicycle(_player.moveableUnits.array);
       if (_player.commandPoints == 0) {
         b.startNewTurn();
+        b.getSystem!BattleNetworkSystem.broadcastEndTurn(); // notify network
       }
       checkMouse(b);
     }
@@ -48,8 +47,7 @@ class PlayerTurn : State!Battle {
       }
       else if (input.skip) {
         b.startNewTurn;
-        // notify network
-        b.getSystem!BattleNetworkSystem.broadcastEndTurn();
+        b.getSystem!BattleNetworkSystem.broadcastEndTurn(); // notify network
       }
     }
 
