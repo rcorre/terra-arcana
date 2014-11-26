@@ -130,7 +130,7 @@ class BattleSelectionScreen : GUIElement {
     auto playerFaction = _playerFactionMenu.selection;
     auto pcFaction = _otherFactionMenu.selection;
     auto mapName = _mapSelector.selection;
-    setScene(new Battle(mapName, playerFaction, pcFaction));
+    setScene(new Battle(mapName, playerFaction, pcFaction, _client));
   }
 
   void backToMenu() {

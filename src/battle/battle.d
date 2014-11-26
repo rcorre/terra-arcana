@@ -2,6 +2,7 @@ module battle.battle;
 
 import std.range, std.algorithm, std.conv;
 import dau.all;
+import net.all;
 import model.all;
 import battle.state.playerturn;
 import battle.state.pcturn;
@@ -13,7 +14,7 @@ import gui.battlepanel;
 private enum mapFormat = Paths.mapDir ~ "/%s.json";
 
 class Battle : Scene!Battle {
-  this(string mapName, Faction playerFaction, Faction pcFaction) {
+  this(string mapName, Faction playerFaction, Faction pcFaction, NetworkClient client = null) {
     _players = [
       new Player(playerFaction, 1, true),
           new AIPlayer(pcFaction,  2, "balanced")
@@ -21,6 +22,7 @@ class Battle : Scene!Battle {
     System!Battle[] systems = [
       new TileHoverSystem(this),
           new BattleCameraSystem(this),
+          new BattleNetworkSystem(this, client)
     ];
     Sprite[string] cursorSprites = [
       "inactive" : new Animation("gui/cursor", "inactive", Animation.Repeat.loop),
@@ -179,6 +181,7 @@ package:
   Player[] _players;
   bool _lockLeftUnitInfo;
   SpawnPoint[] _spawnPoints;
+  NetworkClient _client;
 
   class SpawnPoint {
     this(Tile tile, int team) {

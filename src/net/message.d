@@ -21,7 +21,8 @@ struct NetworkMessage {
     startBattle,
     moveUnit,
     deployUnit,
-    performAction
+    performAction,
+    endTurn
   }
 
   Type type;
@@ -30,9 +31,9 @@ struct NetworkMessage {
     ChooseFaction chooseFaction;
     ChooseMap chooseMap;
 
-    MoveUnit moveUnit;
-    DeployUnit deployUnit;
-    PerformAction performAction;
+    NetworkMove moveUnit;
+    NetworkDeploy deployUnit;
+    NetworkAction performAction;
   }
 
   this(Type type) {
@@ -64,7 +65,7 @@ struct NetworkMessage {
       return msg;
     }
 
-    auto makeMoveUnit(Tile start, Tile[] path) {
+    auto makeNetworkMove(Tile start, Tile[] path) {
       assert(path.length <= maxPathLength,
           "path exceeds size limit (%d/%d)".format(maxPathLength, path.length));
       auto msg = NetworkMessage(Type.moveUnit);
@@ -74,14 +75,14 @@ struct NetworkMessage {
       return msg;
     }
 
-    auto makeDeployUnit(string unitKey, Tile location) {
+    auto makeNetworkDeploy(string unitKey, Tile location) {
       auto msg = NetworkMessage(Type.deployUnit);
       msg.deployUnit.location = TileCoord(location);
       msg.deployUnit.unitKey = unitKey;
       return msg;
     }
 
-    auto makePerformAction(Tile start, Tile target, int actionNum) {
+    auto makeNetworkAction(Tile start, Tile target, int actionNum) {
       auto msg = NetworkMessage(Type.performAction);
       msg.performAction.start = TileCoord(start);
       msg.performAction.target = TileCoord(target);
@@ -93,7 +94,7 @@ struct NetworkMessage {
 
 private:
 /// send a string across a socket
-struct NetString(size_t MaxLen) { 
+struct NetString(size_t MaxLen) {
   alias str this;
 
   void opAssign(string s) {
@@ -114,6 +115,10 @@ struct TileCoord {
     col = tile.col;
   }
   int row, col;
+
+  auto getTile(TileMap map) {
+    return map.tileAt(row, col);
+  }
 }
 
 struct Chat {
@@ -128,18 +133,18 @@ struct ChooseMap {
   NetString!mapNameSize name;
 }
 
-struct MoveUnit {
+struct NetworkMove {
   TileCoord start;
   ubyte pathLength;
   TileCoord[maxPathLength] path;
 }
 
-struct DeployUnit {
+struct NetworkDeploy {
   TileCoord location;
   NetString!unitKeySize unitKey;
 }
 
-struct PerformAction {
+struct NetworkAction {
   TileCoord start;
   TileCoord target;
   ubyte actionNum;
