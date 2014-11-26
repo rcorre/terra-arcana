@@ -48,6 +48,9 @@ class ConsiderMove : State!Battle {
       }
       if (input.select && _path !is null && !_path.empty) {
         b.states.pushState(new MoveUnit(_unit, _path));
+        // send notification over network
+        auto net = b.getSystem!BattleNetworkSystem;
+        net.broadcastMove(_unit, _path);
       }
       else if (input.altSelect || input.skip) {
         b.states.popState();

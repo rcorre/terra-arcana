@@ -31,13 +31,19 @@ private enum PostFormat : string {
 
 /// bar that displays progress as discrete elements (pips)
 class BattleSelectionScreen : GUIElement {
-  this(Title title, NetworkClient client = null) {
+  const bool isHost;
+
+  this(Title title, NetworkClient client = null, bool isHost = false) {
     super(getGUIData("selectBattle"), Vector2i.zero);
+
+    _client = client;
+    _title = title;
+    this.isHost = isHost;
 
     auto mapPaths = Paths.mapDir.dirEntries("*.json", SpanMode.shallow);
     auto mapNames = mapPaths.map!(x => x.baseName(".json")).array;
 
-    _startButton = new Button(data.child["startButton"], &startBattle);
+    _startButton = new Button(data.child["startButton"], &beginBattle);
     _startButton.enabled = false;
 
     // map an faction selections
@@ -57,9 +63,6 @@ class BattleSelectionScreen : GUIElement {
     addChild(new Button(data.child["backButton"], &backToMenu));
 
     addChildren!TextBox("titleText", "subtitle");
-
-    _client = client;
-    _title = title;
   }
 
   override void update(float time) {
@@ -105,6 +108,9 @@ class BattleSelectionScreen : GUIElement {
         _otherFactionMenu.setSelection(faction);
         selectOtherFaction(faction);
         break;
+      case startBattle:
+        beginBattle();
+        break;
       default:
     }
   }
@@ -116,21 +122,22 @@ class BattleSelectionScreen : GUIElement {
     if (_client !is null) {
       _client.send(NetworkMessage.makeChooseFaction(faction));
     }
-    _startButton.enabled = _otherFactionMenu.selection !is null;
+    _startButton.enabled = isHost && _otherFactionMenu.selection !is null;
   }
 
   void selectOtherFaction(Faction faction) {
     if (_playerFactionMenu.selection == faction) {
       _playerFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
     }
-    _startButton.enabled = _playerFactionMenu.selection !is null;
+    _startButton.enabled = isHost && _playerFactionMenu.selection !is null;
   }
 
-  void startBattle() {
+  void beginBattle() {
     auto playerFaction = _playerFactionMenu.selection;
-    auto pcFaction = _otherFactionMenu.selection;
+    auto otherFaction = _otherFactionMenu.selection;
     auto mapName = _mapSelector.selection;
-    setScene(new Battle(mapName, playerFaction, pcFaction, _client));
+    if (isHost) { _client.send(NetworkMessage(NetworkMessage.Type.startBattle)); }
+    setScene(new Battle(mapName, playerFaction, otherFaction, _client, isHost));
   }
 
   void backToMenu() {

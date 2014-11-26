@@ -46,8 +46,9 @@ class NetworkTurn : State!Battle {
         auto move = msg.moveUnit;
         auto unit = cast(Unit) move.start.getTile(b.map).entity;
         assert(unit !is null, "move unit message: no unit at start");
-        Tile[] path = move.path[0 .. cast(size_t) move.pathLength].map!(x => x.getTile(b.map)).array;
-        b.states.pushState(new MoveUnit(unit, path));
+        auto path = move.path[0 .. cast(size_t) move.pathLength];
+        auto tiles = path.map!(x => x.getTile(b.map)).array;
+        b.states.pushState(new MoveUnit(unit, tiles));
         break;
       case performAction:
         auto act = msg.performAction;

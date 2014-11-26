@@ -7,14 +7,14 @@ import model.unit;
 
 class Player {
   const Faction faction;
-  const bool isHuman;
+  const bool isLocal;
   const int teamIdx;
   int mana;
 
-  this(const Faction faction, int teamIdx, bool isHuman) {
+  this(const Faction faction, int teamIdx, bool isLocal) {
     this.faction = faction;
     this.teamIdx = teamIdx;
-    this.isHuman = isHuman;
+    this.isLocal = isLocal;
   }
 
   @property {

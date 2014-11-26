@@ -4,8 +4,9 @@ import std.range, std.algorithm, std.conv;
 import dau.all;
 import net.all;
 import model.all;
-import battle.state.playerturn;
 import battle.state.pcturn;
+import battle.state.playerturn;
+import battle.state.networkturn;
 import battle.state.checkunitdestruction;
 import battle.system.all;
 import battle.ai.all;
@@ -14,11 +15,19 @@ import gui.battlepanel;
 private enum mapFormat = Paths.mapDir ~ "/%s.json";
 
 class Battle : Scene!Battle {
-  this(string mapName, Faction playerFaction, Faction pcFaction, NetworkClient client = null) {
-    _players = [
-      new Player(playerFaction, 1, true),
-          new AIPlayer(pcFaction,  2, "balanced")
-    ];
+  this(string mapName, Faction playerFaction, Faction pcFaction, NetworkClient client = null,
+      bool isHost = false)
+  {
+    _client = client;
+    if (client is null) {
+      _players = [new Player(playerFaction, 1, true), new AIPlayer(pcFaction, 2, "balanced")];
+    }
+    else if (isHost) {
+      _players = [new Player(playerFaction, 1, true), new Player(pcFaction, 2, false)];
+    }
+    else {
+      _players = [new Player(pcFaction, 2, false), new Player(playerFaction, 1, true)];
+    }
     System!Battle[] systems = [
       new TileHoverSystem(this),
           new BattleCameraSystem(this),
@@ -120,7 +129,15 @@ package:
     auto player = _turnCycle.front;
     _turnCycle.popFront;
     assert(states.empty, "extra states on stack when starting new turn");
-    states.pushState(player.isHuman ? new PlayerTurn(player) : new PCTurn(player));
+    if (player.isLocal) {
+      states.pushState(new PlayerTurn(player));
+    }
+    else if (_client is null) {
+      states.pushState(new PCTurn(player));
+    }
+    else {
+      states.pushState(new NetworkTurn(player));
+    }
     _activePlayer = player;
 
     foreach(obelisk ; obelisks) {

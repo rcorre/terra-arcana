@@ -22,6 +22,8 @@ class ChooseUnitToDeploy : State!Battle {
       _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       auto deploy = delegate(string key) {
         b.states.setState(new DeployUnit(_player, _tile, key));
+        // notify network
+        b.getSystem!BattleNetworkSystem.broadcastDeploy(key, _tile);
       };
       _menu = new DeployMenu(_player.faction, Vector2i.zero, deploy, _player.commandPoints);
       b.gui.addElement(_menu);

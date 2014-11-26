@@ -37,7 +37,7 @@ class HostScreen : GUIElement {
         if (_client !is null) {
           _server.close();
           _server = null;
-          _title.states.setState(new SelectBattle(_client));
+          _title.states.setState(new SelectBattle(_client, true));
         }
       }
       else {

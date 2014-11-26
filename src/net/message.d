@@ -65,7 +65,7 @@ struct NetworkMessage {
       return msg;
     }
 
-    auto makeNetworkMove(Tile start, Tile[] path) {
+    auto makeMove(Tile start, Tile[] path) {
       assert(path.length <= maxPathLength,
           "path exceeds size limit (%d/%d)".format(maxPathLength, path.length));
       auto msg = NetworkMessage(Type.moveUnit);
@@ -75,14 +75,14 @@ struct NetworkMessage {
       return msg;
     }
 
-    auto makeNetworkDeploy(string unitKey, Tile location) {
+    auto makeDeploy(string unitKey, Tile location) {
       auto msg = NetworkMessage(Type.deployUnit);
       msg.deployUnit.location = TileCoord(location);
       msg.deployUnit.unitKey = unitKey;
       return msg;
     }
 
-    auto makeNetworkAction(Tile start, Tile target, int actionNum) {
+    auto makeAct(Tile start, Tile target, int actionNum) {
       auto msg = NetworkMessage(Type.performAction);
       msg.performAction.start = TileCoord(start);
       msg.performAction.target = TileCoord(target);
