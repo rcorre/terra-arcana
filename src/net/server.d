@@ -15,7 +15,7 @@ class NetworkServer {
   auto waitForClientConnection() {
     try {
       auto sock = _server.accept();
-      return new NetworkClient(sock);
+      return (sock is null) ? null : new NetworkClient(sock);
     }
     catch(SocketException ex) {
       return null;
