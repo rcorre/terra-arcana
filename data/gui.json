@@ -584,6 +584,7 @@
           "anchor"   : "topLeft",
           "fontName" : "Mecha",
           "fontSize" : "16",
+          "charLimit" : "80",
           "maxLines" : "17",
           "textBuffer": "4,-4",
           "scale": "1, 0.5"
@@ -685,6 +686,7 @@
           "offset"   : "257, 377",
           "anchor"   : "topLeft",
           "fontName" : "Mecha",
+          "charLimit" : "80",
           "fontSize" : "16",
           "maxLines" : "17",
           "textBuffer": "4,-4",
@@ -882,6 +884,7 @@
           "anchor"   : "topLeft",
           "fontName" : "Mecha",
           "fontSize" : "16",
+          "charLimit" : "80",
           "maxLines" : "12",
           "textBuffer": "4,-4"
         }

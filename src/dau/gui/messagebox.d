@@ -1,6 +1,6 @@
 module dau.gui.messagebox;
 
-import std.conv, std.container : DList;
+import std.string, std.conv, std.container : DList;
 import dau.gui.element;
 import dau.gui.data;
 import dau.geometry.all;
@@ -13,6 +13,7 @@ class MessageBox : GUIElement {
     auto anchor = data.get("anchor", "topLeft").to!Anchor;
     _textBuffer = data.get("textBuffer", "0,0").parseVector!int;
     _maxLines = ("maxLines" in data) ? data["maxLines"].to!int : int.max;
+    _charLimit = ("charLimit" in data) ? data["charLimit"].to!int : int.max;
     super(data, pos, anchor);
   }
 
@@ -20,7 +21,7 @@ class MessageBox : GUIElement {
     super.draw(parentTopLeft);
     auto drawPos = area.bottomLeft + parentTopLeft + _textBuffer;
     foreach(post ; _messages) {
-      drawPos.y -= _font.heightOf(post.message);
+      drawPos.y -= _font.heightOf(post.message.wrap(_charLimit));
       _font.draw(post.message, drawPos, post.color);
     }
   }
@@ -35,7 +36,7 @@ class MessageBox : GUIElement {
   Font _font;
   DList!Post _messages;
   Vector2i _textBuffer;
-  int _maxLines, _numLines;
+  int _maxLines, _numLines, _charLimit;
 
   struct Post {
     string message;
