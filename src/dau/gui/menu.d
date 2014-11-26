@@ -12,8 +12,8 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
     _nextButtonOffset = data.get("firstButtonOffset", "0,0").parseVector!int;
     _menuSpacingY = data.get("menuSpacingY", "0").to!int;
     _onClick = delegate(EntryType entry) {
-      onClick(entry);
       setSelection(entry);
+      onClick(entry);
     };
   }
 
@@ -28,7 +28,7 @@ abstract class Menu(EntryType, ButtonType) : GUIElement {
 
   void setSelection(EntryType entry) {
     foreach(button ; childrenOfType!ButtonType) {
-        button.setSelected(button.entry == entry);
+      button.setSelected(button.entry == entry);
     }
   }
 
@@ -70,11 +70,8 @@ abstract class MenuButton(EntryType) : GUIElement {
   }
 
   override bool onClick() {
-    if (_enabled) {
-      _onClick(_entry);
-      return true;
-    }
-    return false;
+    if (_enabled) { _onClick(_entry); }
+    return _enabled;
   }
 
   override void onMouseEnter() {

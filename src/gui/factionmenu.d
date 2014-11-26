@@ -8,12 +8,11 @@ private enum iconFmt = "icon_%s";
 
 /// bar that displays progress as discrete elements (pips)
 class FactionMenu : Menu!(Faction, FactionButton) {
-  this(Vector2i offset, FactionButton.Action onClick) {
+  this(Vector2i offset, FactionButton.Action onClick, bool enabled = true) {
     auto menuData = getGUIData("factionMenu");
     super(menuData, offset, onClick);
     auto buttonData = data.child["factionButton"];
     foreach(faction ; allFactions()) {
-      bool enabled = true;
       addEntry(buttonData, faction, enabled);
     }
   }

@@ -38,7 +38,7 @@ class BattleSelectionScreen : GUIElement {
 
     _client = client;
     _title = title;
-    this.isHost = isHost;
+    this.isHost = isHost || client is null; // if singleplayer, default to host
 
     auto mapPaths = Paths.mapDir.dirEntries("*.json", SpanMode.shallow);
     auto mapNames = mapPaths.map!(x => x.baseName(".json")).array;
@@ -47,13 +47,15 @@ class BattleSelectionScreen : GUIElement {
     _startButton.enabled = false;
 
     // map an faction selections
-    auto mapOffset          = data["mapSelectOffset"].parseVector!int;
+    auto mapPos             = data["mapSelectOffset"].parseVector!int;
     auto selfFactionOffset  = data["selfFactionOffset"].parseVector!int;
     auto otherFactionOffset = data["otherFactionOffset"].parseVector!int;
 
     _playerFactionMenu = new FactionMenu(selfFactionOffset, &selectPlayerFaction);
-    _otherFactionMenu  = new FactionMenu(otherFactionOffset, &selectOtherFaction);
-    _mapSelector = new StringSelection(getGUIData("selectMap"), mapOffset, mapNames, &selectMap);
+    bool canPickOtherFaction = client is null;
+    _otherFactionMenu  = new FactionMenu(otherFactionOffset, &selectOtherFaction,
+        canPickOtherFaction);
+    _mapSelector = new StringSelection(getGUIData("selectMap"), mapPos, mapNames, &selectMap);
     addChildren(_startButton, _playerFactionMenu, _otherFactionMenu, _mapSelector);
 
     _messageBox = new MessageBox(data.child["messageBox"]);
@@ -84,6 +86,12 @@ class BattleSelectionScreen : GUIElement {
   TextInput _messageInput;
   NetworkClient _client;
   Title _title;
+
+  @property bool canStartGame() {
+    return isHost && 
+      _playerFactionMenu.selection !is null && 
+      _otherFactionMenu.selection !is null;
+  }
 
   void processMessage(NetworkMessage msg) {
     switch (msg.type) with (NetworkMessage.Type) {
@@ -122,21 +130,23 @@ class BattleSelectionScreen : GUIElement {
     if (_client !is null) {
       _client.send(NetworkMessage.makeChooseFaction(faction));
     }
-    _startButton.enabled = isHost && _otherFactionMenu.selection !is null;
+    _startButton.enabled = canStartGame;
   }
 
   void selectOtherFaction(Faction faction) {
     if (_playerFactionMenu.selection == faction) {
       _playerFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
     }
-    _startButton.enabled = isHost && _playerFactionMenu.selection !is null;
+    _startButton.enabled = canStartGame;
   }
 
   void beginBattle() {
     auto playerFaction = _playerFactionMenu.selection;
     auto otherFaction = _otherFactionMenu.selection;
     auto mapName = _mapSelector.selection;
-    if (isHost) { _client.send(NetworkMessage(NetworkMessage.Type.startBattle)); }
+    if (isHost && _client !is null) { 
+      _client.send(NetworkMessage(NetworkMessage.Type.startBattle)); 
+    }
     setScene(new Battle(mapName, playerFaction, otherFaction, _client, isHost));
   }
 
