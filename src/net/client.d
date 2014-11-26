@@ -1,6 +1,6 @@
 module net.client;
 
-import std.socket;
+import std.socket, std.string : format;
 
 /// TODO: use multiple calls to send/receive if necessary (check returned byte count)
 class NetworkClient {
@@ -24,7 +24,8 @@ class NetworkClient {
   bool receive(T)(out T buf) if (is(T == struct)) {
     auto ret = _socket.receive((&buf)[0 .. 1]);
     if (ret > 0) {
-      assert(ret != Socket.ERROR && ret == buf.sizeof,  "failed to receive data");
+      assert(ret != Socket.ERROR, "socket error during receive");
+      assert(ret == buf.sizeof, "expected %d bytes, got %d".format(buf.sizeof, ret));
       return true;
     }
     return false;

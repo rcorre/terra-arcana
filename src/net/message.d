@@ -52,8 +52,6 @@ struct NetworkMessage {
 
     auto makeChooseFaction(Faction faction) {
       auto text = faction.name;
-      assert(text.length <= factionNameSize,
-          "faction name exceeds byte limit (%d/%d)".format(text.length, factionNameSize));
       auto msg = NetworkMessage(Type.chooseFaction);
       msg.chooseFaction.name = text;
       return msg;
@@ -100,13 +98,13 @@ struct NetString(size_t MaxLen) {
   void opAssign(string s) {
     assert(s.length <= MaxLen, "length %d exceeds NetString capacity %d".format(s.length, MaxLen));
     _str[0 .. s.length] = s;
-    _strLen = s.length;
+    _strLen = cast(int) s.length;
   }
 
   @property string str() { return _str[0 .. _strLen].dup; }
 
   private char[MaxLen] _str;
-  private size_t _strLen;
+  private int _strLen;
 }
 
 struct TileCoord {
