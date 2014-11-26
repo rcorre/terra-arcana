@@ -2,70 +2,162 @@ module gui.battleselectionscreen;
 
 import std.algorithm, std.range, std.file, std.path, std.array;
 import dau.all;
+import net.all;
 import model.all;
 import gui.factionmenu;
 import battle.battle;
 import title.title;
 import title.state.showtitle;
 
-enum mapFormat = Paths.mapDir ~ "/%s.json";
+private enum mapFormat = Paths.mapDir ~ "/%s.json";
+
+private enum PostColor : Color {
+  self = Color.blue,
+  other = Color.green,
+  error = Color.red,
+  note = Color.black
+}
+
+private enum PostFormat : string {
+  self  = "you: %s",
+  other = "opponent: %s",
+  error = "error: %s",
+  note  = "system: %s",
+  youChoseMap = "you chose map %s",
+  otherChoseMap = "opponent chose map %s",
+  youChoseFaction = "you chose faction %s",
+  otherChoseFaction = "opponent chose faction %s",
+}
 
 /// bar that displays progress as discrete elements (pips)
 class BattleSelectionScreen : GUIElement {
-  this(Title title) {
+  const bool isHost;
+
+  this(Title title, NetworkClient client = null, bool isHost = false) {
     super(getGUIData("selectBattle"), Vector2i.zero);
-      auto playerOffset       = data["playerOffset"].parseVector!int;
-      auto pcOffset           = data["pcOffset"].parseVector!int;
-      auto factionTitleOffset = data["factionTitleOffset"].parseVector!int;
-      auto playerTitleOffset  = data["playerTitleOffset"].parseVector!int;
-      auto pcTitleOffset      = data["pcTitleOffset"].parseVector!int;
-      auto startButtonOffset  = data["startButtonOffset"].parseVector!int;
-      auto mapOffset          = data["mapSelectOffset"].parseVector!int;
 
-      auto mapPaths = Paths.mapDir.dirEntries("*.json", SpanMode.shallow);
-      auto mapNames = mapPaths.map!(x => x.baseName(".json"));
+    _client = client;
+    _title = title;
+    this.isHost = isHost;
 
-      addChild(new TextBox(data.child["playerText"], "Player", playerTitleOffset));
-      addChild(new TextBox(data.child["playerText"], "PC", pcTitleOffset));
-      addChild(new TextBox(data.child["factionText"], "Faction", factionTitleOffset));
+    auto mapPaths = Paths.mapDir.dirEntries("*.json", SpanMode.shallow);
+    auto mapNames = mapPaths.map!(x => x.baseName(".json")).array;
 
-      _startButton = new Button(data.child["startButton"], startButtonOffset, &startBattle);
-      _playerFactionMenu = new FactionMenu(playerOffset, &selectPlayerFaction);
-      _pcFactionMenu     = new FactionMenu(pcOffset, &selectPCFaction);
-      _mapSelector = new StringSelection(getGUIData("selectMap"), mapOffset, mapNames.array);
+    _startButton = new Button(data.child["startButton"], &beginBattle);
+    _startButton.enabled = false;
 
-      addChildren(_startButton, _playerFactionMenu, _pcFactionMenu, _mapSelector);
-      _startButton.enabled = false;
+    // map an faction selections
+    auto mapOffset          = data["mapSelectOffset"].parseVector!int;
+    auto selfFactionOffset  = data["selfFactionOffset"].parseVector!int;
+    auto otherFactionOffset = data["otherFactionOffset"].parseVector!int;
 
-      addChild(new Button(data.child["backButton"], () => title.states.setState(new ShowTitle)));
+    _playerFactionMenu = new FactionMenu(selfFactionOffset, &selectPlayerFaction);
+    _otherFactionMenu  = new FactionMenu(otherFactionOffset, &selectOtherFaction);
+    _mapSelector = new StringSelection(getGUIData("selectMap"), mapOffset, mapNames, &selectMap);
+    addChildren(_startButton, _playerFactionMenu, _otherFactionMenu, _mapSelector);
+
+    _messageBox = new MessageBox(data.child["messageBox"]);
+    _messageInput = new TextInput(data.child["messageInput"], &postMessage);
+    addChildren(_messageBox, _messageInput);
+
+    addChild(new Button(data.child["backButton"], &backToMenu));
+
+    addChildren!TextBox("titleText", "subtitle");
+  }
+
+  override void update(float time) {
+    super.update(time);
+    if (_client !is null) {
+      NetworkMessage msg;
+      bool gotSomething = _client.receive(msg);
+      if (gotSomething) {
+        processMessage(msg);
+      }
+    }
   }
 
   private:
-  FactionMenu _playerFactionMenu, _pcFactionMenu;
+  FactionMenu _playerFactionMenu, _otherFactionMenu;
   StringSelection _mapSelector;
   Button _startButton;
+  MessageBox _messageBox;
+  TextInput _messageInput;
+  NetworkClient _client;
+  Title _title;
 
-  void selectPlayerFaction(Faction faction) {
-    if (_pcFactionMenu.selection == faction) {
-      _pcFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
+  void processMessage(NetworkMessage msg) {
+    switch (msg.type) with (NetworkMessage.Type) {
+      case closeConnection:
+        _messageBox.postMessage("Client left", PostColor.error);
+        backToMenu();
+        break;
+      case chat:
+        _messageBox.postMessage(PostFormat.other.format(msg.chat.text), PostColor.other);
+        break;
+      case chooseMap:
+        string name = msg.chooseMap.name;
+        auto note = PostFormat.otherChoseMap.format(name);
+        _messageBox.postMessage(note, PostColor.note);
+        _mapSelector.selection = name;
+        break;
+      case chooseFaction:
+        string name = msg.chooseFaction.name;
+        auto note = PostFormat.otherChoseFaction.format(name);
+        _messageBox.postMessage(note, PostColor.note);
+        auto faction = getFaction(name);
+        _otherFactionMenu.setSelection(faction);
+        selectOtherFaction(faction);
+        break;
+      case startBattle:
+        beginBattle();
+        break;
+      default:
     }
-    _startButton.enabled = _pcFactionMenu.selection !is null;
   }
 
-  void selectPCFaction(Faction faction) {
+  void selectPlayerFaction(Faction faction) {
+    if (_otherFactionMenu.selection == faction) {
+      _otherFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
+    }
+    if (_client !is null) {
+      _client.send(NetworkMessage.makeChooseFaction(faction));
+    }
+    _startButton.enabled = isHost && _otherFactionMenu.selection !is null;
+  }
+
+  void selectOtherFaction(Faction faction) {
     if (_playerFactionMenu.selection == faction) {
       _playerFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
     }
-    _startButton.enabled = _playerFactionMenu.selection !is null;
+    _startButton.enabled = isHost && _playerFactionMenu.selection !is null;
   }
 
-  void startBattle() {
+  void beginBattle() {
     auto playerFaction = _playerFactionMenu.selection;
-    auto pcFaction = _pcFactionMenu.selection;
+    auto otherFaction = _otherFactionMenu.selection;
     auto mapName = _mapSelector.selection;
-    setScene(new Battle(mapName, playerFaction, pcFaction));
+    if (isHost) { _client.send(NetworkMessage(NetworkMessage.Type.startBattle)); }
+    setScene(new Battle(mapName, playerFaction, otherFaction, _client, isHost));
   }
 
   void backToMenu() {
+    if (_client !is null) {
+      _client.send(NetworkMessage.makeCloseConnection());
+    }
+    _title.states.setState(new ShowTitle);
+  }
+
+  void postMessage(string text) {
+    _messageBox.postMessage(PostFormat.self.format(text), PostColor.self);
+    _messageInput.text = "";
+    if (_client !is null) {
+      _client.send(NetworkMessage.makeChat(text));
+    }
+  }
+
+  void selectMap(string mapName) {
+    if (_client !is null) {
+      _client.send(NetworkMessage.makeChooseMap(mapName));
+    }
   }
 }

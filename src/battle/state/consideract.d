@@ -43,6 +43,8 @@ class ConsiderAct : State!Battle {
       }
       if (input.select && _unit.canUseAction(_actionNum, tile)) {
         b.states.setState(new PerformAction(_unit, _actionNum, tile));
+        // notify network
+        b.getSystem!BattleNetworkSystem.broadcastAction(_unit, tile, _actionNum);
       }
       else if (input.action1) {
         if (_actionNum == 1) {

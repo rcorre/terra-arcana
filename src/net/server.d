@@ -8,12 +8,23 @@ class NetworkServer {
     _server = new TcpSocket();
     _server.setOption(SocketOptionLevel.SOCKET, SocketOption.REUSEADDR, true);
     _server.bind(new InternetAddress(portNumber));
+    _server.blocking = false;
+    _server.listen(1); // 1 is backlog
   }
 
-  auto waitForClientConnection(int backlog = 1) {
-    _server.listen(backlog);
-    auto sock = _server.accept();
-    return new NetworkClient(sock);
+  auto waitForClientConnection() {
+    try {
+      auto sock = _server.accept();
+      return new NetworkClient(sock);
+    }
+    catch(SocketAcceptException ex) {
+      return null;
+    }
+  }
+
+  void close() {
+    _server.shutdown(SocketShutdown.BOTH);
+    _server.close();
   }
 
   private:

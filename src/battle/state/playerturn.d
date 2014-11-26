@@ -24,6 +24,7 @@ class PlayerTurn : State!Battle {
       _unitJumpList = bicycle(_player.moveableUnits.array);
       if (_player.commandPoints == 0) {
         b.startNewTurn();
+        b.getSystem!BattleNetworkSystem.broadcastEndTurn(); // notify network
       }
       checkMouse(b);
     }
@@ -46,8 +47,8 @@ class PlayerTurn : State!Battle {
       }
       else if (input.skip) {
         b.startNewTurn;
+        b.getSystem!BattleNetworkSystem.broadcastEndTurn(); // notify network
       }
-
     }
 
     void draw(Battle b, SpriteBatch sb) {

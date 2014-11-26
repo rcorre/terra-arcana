@@ -4,6 +4,7 @@ import std.conv, std.string, std.range, std.regex;
 import dau.input;
 import dau.allegro;
 import dau.engine;
+import dau.util.func;
 import dau.gui.element;
 import dau.gui.data;
 import dau.gui.textbox;
@@ -11,7 +12,8 @@ import dau.geometry.all;
 import dau.graphics.all;
 
 class TextInput : GUIElement {
-  this(GUIData data) {
+  alias Action = void delegate(string);
+  this(GUIData data, Action action = doNothing!Action) {
     auto pos = data.get("offset", "0,0").parseVector!int;
     auto anchor = data.get("anchor", "topLeft").to!Anchor;
     super(data, pos, anchor);
@@ -29,17 +31,21 @@ class TextInput : GUIElement {
 
     if ("cursorTexture" in data && "cursorAnimation" in data) {
       _cursor = new Animation(data["cursorTexture"], data["cursorAnimation"], Animation.Repeat.loop);
+      _cursor.scale = data.get("scale", "1,1").parseVector!float;
     }
 
     registerEventHandler(&handleKeyChar, ALLEGRO_EVENT_KEY_CHAR);
+    _action = action;
   }
 
   @property {
     string text() { return _textBox.text; }
     void text(string val) {
       _textBox.text = val.take(_charLimit).to!string;
-      sprite.tint = text.matchFirst(_validate).empty ? _invalidTint : _focusedTint;
+      sprite.tint = isValid ? _focusedTint : _invalidTint ;
     }
+
+    bool isValid() { return !text.matchFirst(_validate).empty; }
   }
 
   override {
@@ -58,7 +64,7 @@ class TextInput : GUIElement {
 
     void onFocus(bool focus) {
       if (focus) {
-        sprite.tint = text.matchFirst(_validate).empty ? _invalidTint : _focusedTint;
+        sprite.tint = isValid ? _focusedTint : _invalidTint ;
       }
       else {
         sprite.tint = _unfocusedTint;
@@ -72,10 +78,14 @@ class TextInput : GUIElement {
   Color _focusedTint, _unfocusedTint, _invalidTint;
   Animation _cursor;
   Regex!char _validate;
+  Action _action;
 
   void handleKeyChar(ALLEGRO_EVENT event) {
     if (!hasFocus) { return; }
-    if (event.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
+    if (event.keyboard.keycode == ALLEGRO_KEY_ENTER) {
+      _action(text);
+    }
+    else if (event.keyboard.keycode == ALLEGRO_KEY_BACKSPACE) {
       text = text.chop;
     }
     else {

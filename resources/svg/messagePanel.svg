@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210.09375"
-   height="289.875"
+   width="288.9375"
+   height="256.9375"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="faction_menu.svg">
+   sodipodi:docname="messagePanel.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,14 +24,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.088322"
-     inkscape:cx="-45.224857"
-     inkscape:cy="176.0134"
+     inkscape:zoom="1.166459"
+     inkscape:cx="-37.031439"
+     inkscape:cy="234.08719"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1918"
-     inkscape:window-height="1059"
+     inkscape:window-height="409"
      inkscape:window-x="0"
      inkscape:window-y="19"
      inkscape:window-maximized="0"
@@ -48,8 +48,8 @@
        snapvisiblegridlinesonly="true"
        spacingx="4px"
        spacingy="4px"
-       originx="-31.0625px"
-       originy="-239.06251px" />
+       originx="-95.53125px"
+       originy="-255.51843px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -64,17 +64,16 @@
     </rdf:RDF>
   </metadata>
   <g
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer5"
-     inkscape:label="factionmenu"
-     transform="translate(-31.0625,-71.0625)">
+     id="layer1"
+     transform="translate(-95.53125,-539.90625)">
     <rect
-       style="fill:none;stroke:#000000;stroke-width:1.87946808;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect5978"
-       width="208.22569"
-       height="288"
-       x="32"
-       y="72"
-       ry="24" />
+       style="opacity:0.8;fill:#008080;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.88191712"
+       id="rect3902"
+       width="288"
+       height="224"
+       x="96"
+       y="572.36218" />
   </g>
 </svg>
