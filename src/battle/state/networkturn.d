@@ -53,7 +53,7 @@ class NetworkTurn : State!Battle {
       case performAction:
         auto act = msg.performAction;
         auto actor = cast(Unit) act.start.getTile(b.map).entity;
-        auto target = act.start.getTile(b.map);
+        auto target = act.target.getTile(b.map);
         auto actionNum = cast(int) act.actionNum;
         b.states.pushState(new PerformAction(actor, actionNum, target));
         break;

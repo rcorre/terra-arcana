@@ -71,7 +71,7 @@ struct NetworkMessage {
       auto msg = NetworkMessage(Type.moveUnit);
       msg.moveUnit.start = TileCoord(start);
       msg.moveUnit.pathLength = cast(ubyte) path.length;
-      msg.moveUnit.path = path.map!(x => TileCoord(x)).array;
+      msg.moveUnit.path[0 .. path.length] = path.map!(x => TileCoord(x)).array;
       return msg;
     }
 

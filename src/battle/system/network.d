@@ -43,8 +43,7 @@ class BattleNetworkSystem : System!Battle {
   override {
     void update(float time, InputManager input) {
       NetworkMessage msg;
-      if (_client.receive(msg)) {
-      }
+      if (_client.receive(msg)) { processMessage(msg); }
     }
 
     void start() {
