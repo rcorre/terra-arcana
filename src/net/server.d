@@ -17,7 +17,7 @@ class NetworkServer {
       auto sock = _server.accept();
       return new NetworkClient(sock);
     }
-    catch(SocketAcceptException ex) {
+    catch(SocketException ex) {
       return null;
     }
   }
