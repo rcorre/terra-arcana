@@ -19,30 +19,20 @@ class UnitInfoGUI : GUIElement {
     super(getGUIData("unitInfo"), offset);
     _nextEffectOffset = data["effectsOffset"].parseVector!int;
     if (unit !is null) {
-      auto hpArea           = data["hpArea"].parseRect!int;
-      auto apArea           = data["apArea"].parseRect!int;
       auto spriteOffset     = data["spriteOffset"].parseVector!int;
-      auto armorOffset      = data["armorOffset"].parseVector!int;
-      auto evadeOffset      = data["evadeOffset"].parseVector!int;
-      auto actionBarOffset1 = data["actionBarOffset1"].parseVector!int;
-      auto actionBarOffset2 = data["actionBarOffset2"].parseVector!int;
-      auto nameOffset       = data["nameOffset"].parseVector!int;
-      auto actionBarSize    = data["actionBarSize"].parseVector!int;
-      auto textData         = data.child["text"];
       auto unitIconData     = getGUIData(iconFmt.format(unit.key));
-
-      _hpBar = new PipBar(getGUIData("hpBar"), hpArea, unit.maxHp);
-      _apBar = new PipBar(getGUIData("apBar"), apArea, unit.maxAp);
-      _armorText = new TextBox(textData, unit.armor, armorOffset, GUIElement.Anchor.center);
-      _evadeText = new TextBox(textData, unit.evade, evadeOffset, GUIElement.Anchor.center);
-      addChild(_hpBar);
-      addChild(_apBar);
-      addChild(_armorText);
-      addChild(_evadeText);
-      addChild(new ActionInfo(actionBarOffset1, actionBarSize, unit.action1));
-      addChild(new ActionInfo(actionBarOffset2, actionBarSize, unit.action2));
       addChild(new Icon(unitIconData, spriteOffset));
-      addChild(new TextBox(textData, unit.name, nameOffset));
+      addChild(new TextBox(data.child["nameText"]));
+
+      // pip bars for hp, ap, armor, evade
+      _hpBar = new PipBar(getGUIData("hpBar"), unit.maxHp);
+      _apBar = new PipBar(getGUIData("apBar"), unit.maxAp);
+      _armorBar = new PipBar(getGUIData("armorBar"), unit.armor);
+      _evadeBar = new PipBar(getGUIData("evadeBar"), unit.evade);
+      addChildren(_hpBar, _hpBar, _armorBar, _evadeBar);
+
+      //trait icons
+      /*
       foreach(trait ; unit.traits) {
         addEffectIcon(trait.to!string);
       }
@@ -52,6 +42,7 @@ class UnitInfoGUI : GUIElement {
       if (unit.isSlowed) {
         addEffectIcon("slow", unit.slow);
       }
+      */
       _hpBar.setVal(unit.hp);
       _apBar.setVal(unit.ap);
     }
@@ -92,9 +83,8 @@ class UnitInfoGUI : GUIElement {
 
   private:
   Unit _unit;
-  PipBar _hpBar, _apBar;
-  TextBox _armorText, _evadeText;
-  ActionInfo _actionInfo1, _actionInfo2;
+  PipBar _hpBar, _apBar, _evadeBar, _armorBar;
+  ActionInfo _actionInfo;
   Icon _toxinIcon, _slowIcon, _flyingIcon;
   Vector2i _nextEffectOffset;
   Color _effectFlashColor;

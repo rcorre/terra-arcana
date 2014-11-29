@@ -33,13 +33,6 @@
   },
 
   {
-    "sheets" : ["gui/pip"],
-    "frameWidth": 6,
-    "frameHeight": 10,
-    "sprites": ["hpPip", "apPip"]
-  },
-
-  {
     "sheets" : ["gui/overlay"],
     "frameSize": 32,
     "frameTimeMs": 30,

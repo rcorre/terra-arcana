@@ -10,6 +10,10 @@ import dau.graphics.font;
 class TextBox : GUIElement {
   this(GUIData data) {
     auto text = data.get("text", "");
+    this(data, text);
+  }
+
+  this(T)(GUIData data, T text) {
     auto pos = data.get("offset", "0,0").parseVector!int;
     auto anchor = data.get("anchor", "topLeft").to!Anchor;
     this(data, text, pos, anchor);

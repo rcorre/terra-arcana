@@ -6,6 +6,7 @@ import dau.graphics.all;
 import dau.gui.element;
 import dau.gui.data;
 
+// TODO: Load shades from json
 private enum {
   dimShade = color(0.25, 0.25, 0.25), /// shade to tint 'dimmed' pips with
   negativeShade = color(1.00, 0, 0), /// shade to tint 'negative' pips with
@@ -14,8 +15,12 @@ private enum {
 /// bar that displays progress as discrete elements (pips)
 class PipBar : GUIElement {
   this(GUIData data) {
-    auto area = data["pipBarArea"].parseRect!int;
     auto numPips = data["numPips"].to!int;
+    this(data, numPips);
+  }
+
+  this(GUIData data, int numPips) {
+    auto area = data["area"].parseRect!int;
     this(data, area, numPips);
   }
 

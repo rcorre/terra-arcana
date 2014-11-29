@@ -483,7 +483,7 @@
       },
       "musicVolumeBar": {
         "properties": {
-          "pipBarArea": "240, 281, 385, 33",
+          "area": "240, 281, 385, 33",
           "numPips": "10"
         },
         "child": {
@@ -496,7 +496,7 @@
       },
       "soundVolumeBar": {
         "properties": {
-          "pipBarArea": "240, 377, 385, 33",
+          "area": "240, 377, 385, 33",
           "numPips": "10"
         },
         "child": {
@@ -989,22 +989,15 @@
   "unitInfo": {
     "properties": {
       "texture": "gui/unit_status",
-      "armorOffset": "18, 52",
-      "evadeOffset": "118, 51",
-      "hpArea": "37, 37, 63, 13",
-      "apArea": "37, 53, 63, 13",
       "effectsOffset": "5, 73",
-      "actionBarOffset1": "137, 9",
-      "actionBarOffset2": "137, 57",
-      "actionBarSize": "200, 24",
       "spriteOffset": "13, 0",
-      "nameOffset": "49, 12",
       "effectFlashTime": "0.5",
       "effectFlashColor": "1, 0, 0, 0"
     },
     "child": {
-      "text": {
+      "nameText": {
         "properties": {
+          "offset": "49, 12",
           "fontName": "Mecha",
           "fontSize": "16"
         }
@@ -1029,23 +1022,53 @@
     }
   },
 
-  "apBar": {
+  "hpBar": {
+    "properties": {
+      "area": "27, 36, 80, 20"
+    },
     "child": {
       "pip": {
         "properties": {
-          "texture": "gui/pip",
-          "sprite": "apPip"
+          "texture": "gui/pip"
         }
       }
     }
   },
 
-  "hpBar": {
+  "apBar": {
+    "properties": {
+      "area": "27, 62, 80, 20"
+    },
     "child": {
       "pip": {
         "properties": {
-          "texture": "gui/pip",
-          "sprite": "hpPip"
+          "texture": "gui/pip"
+        }
+      }
+    }
+  },
+
+  "armorBar": {
+    "properties": {
+      "area": "143, 38, 80, 20"
+    },
+    "child": {
+      "pip": {
+        "properties": {
+          "texture": "gui/pip"
+        }
+      }
+    }
+  },
+
+  "evadeBar": {
+    "properties": {
+      "area": "143, 62, 80, 20"
+    },
+    "child": {
+      "pip": {
+        "properties": {
+          "texture": "gui/pip"
         }
       }
     }
