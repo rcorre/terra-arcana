@@ -25,11 +25,11 @@ class UnitInfoGUI : GUIElement {
       addChild(new TextBox(data.child["nameText"]));
 
       // pip bars for hp, ap, armor, evade
-      _hpBar = new PipBar(getGUIData("hpBar"), unit.maxHp);
-      _apBar = new PipBar(getGUIData("apBar"), unit.maxAp);
-      _armorBar = new PipBar(getGUIData("armorBar"), unit.armor);
-      _evadeBar = new PipBar(getGUIData("evadeBar"), unit.evade);
-      addChildren(_hpBar, _hpBar, _armorBar, _evadeBar);
+      _hpBar = new PipBar(data.child["hpBar"], unit.maxHp);
+      _apBar = new PipBar(data.child["apBar"], unit.maxAp);
+      _armorBar = new PipBar(data.child["armorBar"]);
+      _evadeBar = new PipBar(data.child["evadeBar"]);
+      addChildren(_hpBar, _apBar, _armorBar, _evadeBar);
 
       //trait icons
       /*
@@ -45,6 +45,8 @@ class UnitInfoGUI : GUIElement {
       */
       _hpBar.setVal(unit.hp);
       _apBar.setVal(unit.ap);
+      _armorBar.setVal(unit.armor);
+      _evadeBar.setVal(unit.evade);
     }
     _unit = unit;
     _effectFlashColor = data["effectFlashColor"].parseColor;

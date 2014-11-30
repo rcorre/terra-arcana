@@ -6,12 +6,6 @@ import dau.graphics.all;
 import dau.gui.element;
 import dau.gui.data;
 
-// TODO: Load shades from json
-private enum {
-  dimShade = color(0.25, 0.25, 0.25), /// shade to tint 'dimmed' pips with
-  negativeShade = color(1.00, 0, 0), /// shade to tint 'negative' pips with
-}
-
 /// bar that displays progress as discrete elements (pips)
 class PipBar : GUIElement {
   this(GUIData data) {
@@ -36,16 +30,19 @@ class PipBar : GUIElement {
       _pips ~= addChild(pip);
       pos.x += pip.width;
     }
+    _brightShade   = data.get("brightShade", "1,1,1").parseColor;
+    _dimShade      = data.get("dimShade", "1,1,1,0.3").parseColor;
+    _negativeShade = data.get("negativeShade", "1,0,0").parseColor;
   }
 
   void setVal(int val) {
     int idx = 0;
     foreach(pip ; _pips) {
       if (val < 0) {
-        pip.sprite.tint = (idx++ < -val) ? negativeShade : dimShade;
+        pip.sprite.tint = (idx++ < -val) ? _negativeShade : _dimShade;
       }
       else {
-        pip.sprite.tint = (idx++ < val) ? Color.white : dimShade;
+        pip.sprite.tint = (idx++ < val) ? _brightShade : _dimShade;
       }
     }
   }
@@ -56,14 +53,14 @@ class PipBar : GUIElement {
     int idx = 0;
     foreach(pip ; _pips) {
       if (idx < bottom) {
-        pip.sprite.tint =  Color.white;
+        pip.sprite.tint =  _brightShade;
       }
       else if (idx >= top) {
-        pip.sprite.tint =  dimShade;
+        pip.sprite.tint =  _dimShade;
       }
       else {
-        pip.sprite.tint = (from > to) ? Color.white : dimShade;
-        pip.sprite.fade(time, (from > to) ? dimShade : Color.white);
+        pip.sprite.tint = (from > to) ? _brightShade : _dimShade;
+        pip.sprite.fade(time, (from > to) ? _dimShade : _brightShade);
       }
       ++idx;
     }
@@ -72,6 +69,7 @@ class PipBar : GUIElement {
   private:
   int _maxVal;
   GUIElement[] _pips;
+  Color _brightShade, _dimShade, _negativeShade;
 }
 
 private class Pip : GUIElement {

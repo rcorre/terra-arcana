@@ -995,6 +995,66 @@
       "effectFlashColor": "1, 0, 0, 0"
     },
     "child": {
+      "hpBar": {
+        "properties": {
+          "area"          : "27, 36, 80, 20",
+          "brightShade"   : "0,1,1",
+          "dimShade"      : "0,0.4,0.4",
+          "negativeShade" : "0.8,0,0"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip"
+            }
+          }
+        }
+      },
+      "apBar": {
+        "properties": {
+          "area": "27, 60, 80, 20",
+          "brightShade"   : "1,0.5,0, 0.8",
+          "dimShade"      : "1,0.5,0, 0.2",
+          "negativeShade" : "0.8,0,0"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip"
+            }
+          }
+        }
+      },
+      "armorBar": {
+        "properties": {
+          "area"        : "143, 36, 80, 20",
+          "brightShade" : "1,1,1",
+          "dimShade"    : "0,0,0,0",
+          "numPips"     : "6"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip"
+            }
+          }
+        }
+      },
+      "evadeBar": {
+        "properties": {
+          "area"        : "143, 60, 80, 20",
+          "brightShade" : "0.8, 0.6, 0.4",
+          "dimShade"    : "0,0,0,0",
+          "numPips"     : "6"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip"
+            }
+          }
+        }
+      },
       "nameText": {
         "properties": {
           "offset": "49, 12",
@@ -1017,58 +1077,6 @@
         "properties": {
           "fontName": "Mecha",
           "fontSize": "16"
-        }
-      }
-    }
-  },
-
-  "hpBar": {
-    "properties": {
-      "area": "27, 36, 80, 20"
-    },
-    "child": {
-      "pip": {
-        "properties": {
-          "texture": "gui/pip"
-        }
-      }
-    }
-  },
-
-  "apBar": {
-    "properties": {
-      "area": "27, 62, 80, 20"
-    },
-    "child": {
-      "pip": {
-        "properties": {
-          "texture": "gui/pip"
-        }
-      }
-    }
-  },
-
-  "armorBar": {
-    "properties": {
-      "area": "143, 38, 80, 20"
-    },
-    "child": {
-      "pip": {
-        "properties": {
-          "texture": "gui/pip"
-        }
-      }
-    }
-  },
-
-  "evadeBar": {
-    "properties": {
-      "area": "143, 62, 80, 20"
-    },
-    "child": {
-      "pip": {
-        "properties": {
-          "texture": "gui/pip"
         }
       }
     }
