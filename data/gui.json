@@ -998,6 +998,7 @@
       "hpBar": {
         "properties": {
           "area"          : "27, 36, 80, 20",
+          "pipSpacingX"   : "-4",
           "brightShade"   : "0,1,1",
           "dimShade"      : "0,0.4,0.4",
           "negativeShade" : "0.8,0,0"
@@ -1012,7 +1013,8 @@
       },
       "apBar": {
         "properties": {
-          "area": "27, 60, 80, 20",
+          "area"          : "27, 60, 80, 20",
+          "pipSpacingX"   : "-4",
           "brightShade"   : "1,0.5,0, 0.8",
           "dimShade"      : "1,0.5,0, 0.2",
           "negativeShade" : "0.8,0,0"
@@ -1028,6 +1030,7 @@
       "armorBar": {
         "properties": {
           "area"        : "143, 36, 80, 20",
+          "pipSpacingX" : "-4",
           "brightShade" : "1,1,1",
           "dimShade"    : "0,0,0,0",
           "numPips"     : "6"
@@ -1043,6 +1046,7 @@
       "evadeBar": {
         "properties": {
           "area"        : "143, 60, 80, 20",
+          "pipSpacingX" : "-4",
           "brightShade" : "0.8, 0.6, 0.4",
           "dimShade"    : "0,0,0,0",
           "numPips"     : "6"

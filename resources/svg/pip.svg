@@ -10,8 +10,8 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="14"
-   height="22"
+   width="12.125"
+   height="21.125"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
@@ -50,9 +50,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="16.181818"
-     inkscape:cx="2.2038492"
-     inkscape:cy="11.915368"
+     inkscape:zoom="40.272727"
+     inkscape:cx="1.2521163"
+     inkscape:cy="10.0625"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -62,7 +62,7 @@
      inkscape:window-y="19"
      inkscape:window-maximized="0"
      fit-margin-left="0"
-     fit-margin-top="2"
+     fit-margin-top="3"
      fit-margin-right="0"
      fit-margin-bottom="2">
     <inkscape:grid
@@ -74,8 +74,8 @@
        snapvisiblegridlinesonly="true"
        spacingx="1px"
        spacingy="1px"
-       originx="0px"
-       originy="2px" />
+       originx="0.0625px"
+       originy="1.0625px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -93,7 +93,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-344,-649.86219)">
+     transform="translate(-343.9375,-649.79969)">
     <g
        id="layer1-6"
        inkscape:label="bg"
@@ -112,7 +112,7 @@
        id="text4354"
        y="855.56384"
        x="250.2234"
-       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:#000000;font-family:Press Start;-inkscape-font-specification:Press Start;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:none;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;font-family:Press Start;-inkscape-font-specification:Press Start"
        xml:space="preserve"><tspan
          y="855.56384"
          x="250.2234"
@@ -122,7 +122,7 @@
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="path4414"
-       d="m 344,668.86219 7,0 7,-16 -8,0 z"
-       style="opacity:1;fill:#ffffff;stroke:#000000;stroke-width:0.10000000000000001;stroke-miterlimit:4;stroke-dasharray:none" />
+       d="m 344,668.86219 6,0 6,-16 -6,0 z"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none" />
   </g>
 </svg>
