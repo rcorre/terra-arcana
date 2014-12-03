@@ -33,9 +33,6 @@ class PerformAction : State!Battle {
     void start(Battle b) {
       b.disableSystem!TileHoverSystem;
       // place actor in left unit info slot, target in right
-      b.lockLeftUnitInfo = false;
-      b.displayUnitInfo(_actor);
-      b.lockLeftUnitInfo = true;
       _tilesAffected = tilesAffected(b.map, _target, _actor, _action);
       auto unitsAffected = unitsAffected(b.map, _target, _actor, _action);
 
@@ -74,12 +71,10 @@ class PerformAction : State!Battle {
       _actor.getActionSound(_actionNum).play();
 
       // drain ap and animate ap change
-      auto ui = b.unitInfoFor(_actor);
       int prevAp = _actor.ap;
       _actor.consumeAp(_action.apCost);
       b.activePlayer.consumeCommandPoints(1);
       b.updateBattlePanel();
-      ui.animateApChange(prevAp, _actor.ap, apBarFadeDuration);
     }
 
     void update(Battle b, float time, InputManager input) {

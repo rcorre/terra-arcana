@@ -28,18 +28,49 @@
   },
 
   "battlePanel": {
-    "properties": {
-      "texture"              : "gui/battle_panel",
-      "leftUnitOffset"       : "108, 7",
-      "rightUnitOffset"      : "446, 10",
-      "commandCounterOffset" : "46, 21",
-      "manaCounterOffset"    : "46, 70"
-    },
     "child": {
-      "counter": {
+      "leftMana": {
         "properties": {
-          "fontName": "Mecha",
-          "fontSize": "20"
+          "offset": "-107, 505",
+          "texture": "gui/edgeButton"
+        },
+        "child": {
+          "icon": {
+            "properties": {
+              "offset": "110, 0",
+              "texture": "gui/icons",
+              "sprite": "mana"
+            }
+          },
+          "text": {
+            "properties": {
+              "offset": "145,6",
+              "fontName": "Mecha",
+              "fontSize": "20"
+            }
+          }
+        }
+      },
+      "leftCommand": {
+        "properties": {
+          "offset": "-67, 545",
+          "texture": "gui/edgeButton"
+        },
+        "child": {
+          "icon": {
+            "properties": {
+              "offset": "70, 0",
+              "texture": "gui/icons",
+              "sprite": "command"
+            }
+          },
+          "text": {
+            "properties": {
+              "offset": "105,6",
+              "fontName": "Mecha",
+              "fontSize": "20"
+            }
+          }
         }
       }
     }
@@ -989,8 +1020,8 @@
   "unitInfo": {
     "properties": {
       "texture": "gui/unit_status",
-      "effectsOffset": "5, 73",
-      "spriteOffset": "13, 0",
+      "effectsOffset": "5, 89",
+      "spriteOffset": "14, 0",
       "effectFlashTime": "0.5",
       "effectFlashColor": "1, 0, 0, 0"
     },

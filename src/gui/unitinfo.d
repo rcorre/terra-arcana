@@ -32,7 +32,6 @@ class UnitInfoGUI : GUIElement {
       addChildren(_hpBar, _apBar, _armorBar, _evadeBar);
 
       //trait icons
-      /*
       foreach(trait ; unit.traits) {
         addEffectIcon(trait.to!string);
       }
@@ -42,7 +41,6 @@ class UnitInfoGUI : GUIElement {
       if (unit.isSlowed) {
         addEffectIcon("slow", unit.slow);
       }
-      */
       _hpBar.setVal(unit.hp);
       _apBar.setVal(unit.ap);
       _armorBar.setVal(unit.armor);

@@ -67,8 +67,6 @@ class Battle : Scene!Battle {
           assert(0, "invalid object named " ~ obj.objectName);
       }
     }
-    camera.area = Rect2f(0, 0, Settings.screenW, Settings.screenH - _panel.area.height);
-    camera.bounds = Rect2f(Vector2f.zero, cast(Vector2f) map.totalSize);
 
     playMusicTrack(playerFaction.themeSong, true);
     startNewTurn;
@@ -87,18 +85,6 @@ package:
     }
   }
 
-  auto unitInfoFor(Unit unit) {
-    if (_panel.leftUnitInfo.unit == unit) {
-      return _panel.leftUnitInfo;
-    }
-    else if (_panel.rightUnitInfo.unit == unit) {
-      return _panel.rightUnitInfo;
-    }
-    else {
-      assert(0, "no unit info gui found for unit " ~ unit.name);
-    }
-  }
-
   auto spawnPointsFor(int teamIdx) {
     return _spawnPoints.filter!(x => x.team == teamIdx)
       .filter!(x => x.tile.entity is null)
@@ -113,12 +99,7 @@ package:
   }
 
   void displayUnitInfo(Unit unit) {
-    if (_lockLeftUnitInfo) {
-      _panel.setRightUnitInfo(unit);
-    }
-    else {
-      _panel.setLeftUnitInfo(unit);
-    }
+    //TODO
   }
 
   void startNewTurn() {

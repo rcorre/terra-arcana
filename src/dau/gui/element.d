@@ -1,6 +1,6 @@
 module dau.gui.element;
 
-import std.algorithm;
+import std.algorithm, std.conv;
 import dau.gui.data;
 import dau.geometry.all;
 import dau.graphics.all;
@@ -29,6 +29,7 @@ class GUIElement {
         _sprite = new Sprite(textureName, spriteName);
       }
     }
+    assert(_sprite !is null, "no sprite defined in gui data");
     _sprite.scale = data.get("scale", "1,1").parseVector!float;
     Rect2i area;
     final switch (anchor) with (Anchor) {
@@ -50,6 +51,19 @@ class GUIElement {
     toolTipText = data.get("toolTipText", null);
     toolTipTitle = data.get("toolTipTitle", null);
     _data = data;
+  }
+
+  this(GUIData data) {
+    if ("offset" in data) {
+      this(data, data["offset"].parseVector!int, data.get("anchor", "topLeft").to!Anchor);
+    }
+    else if ("area" in data) {
+      this(data, data["area"].parseRect!int);
+    }
+    else {
+      this(data, Vector2i.zero);
+      assert(0, "gui data must specify an area or offset");
+    }
   }
 
   @property {
@@ -116,7 +130,7 @@ class GUIElement {
   }
 
   final {
-    auto addChild(GUIElement el) {
+    T addChild(T : GUIElement)(T el) {
       _children.insert(el);
       return el;
     }
