@@ -15,6 +15,12 @@ private enum {
 }
 
 class Texture {
+  enum Flip {
+    none = 0,
+    horizontal = ALLEGRO_FLIP_HORIZONTAL,
+    vertical = ALLEGRO_FLIP_VERTICAL,
+    both = horizontal | vertical
+  }
   const int frameWidth, frameHeight;
   const int defaultDepth;
   const float frameTime;
@@ -45,29 +51,29 @@ class Texture {
   }
 
   void drawTopLeft(Vector2i pos, Vector2f scale = Vector2f(1, 1), Color tint = Color.white,
-      float angle = 0)
+      float angle = 0, Flip flip = Flip.none)
   {
     al_draw_tinted_scaled_rotated_bitmap(_bmp, // bitmap
         tint,                                  // color
         0, 0,                                  // frame center position
         pos.x, pos.y,                          // position to place center of frame at
         scale.x, scale.y,                      // x and y scale
-        angle, 0);                             // rotation and flats
+        angle, flip);                             // rotation and flats
   }
 
   void draw(Vector2i pos, Vector2f scale = Vector2f(1, 1), Color tint = Color.white,
-      float angle = 0)
+      float angle = 0, Flip flip = Flip.none)
   {
     al_draw_tinted_scaled_rotated_bitmap(_bmp, // bitmap
         tint,                                  // color
         frameCenter.x, frameCenter.y,          // frame center position
         pos.x, pos.y,                          // position to place center of frame at
         scale.x, scale.y,                      // x and y scale
-        angle, 0);                             // rotation and flats
+        angle, flip);                          // rotation and flats
   }
 
   void draw(Vector2i pos, int row = 0, int col = 0, Vector2f scale = Vector2f(1, 1),
-      Color tint = Color.white, float angle = 0)
+      Color tint = Color.white, float angle = 0, Flip flip = Flip.none)
   {
     assert(col >= 0 && col < numCols && row >= 0 && row < numRows,
         "frame at %d,%d is out of texture bounds (%dx%d) for texture %s"
@@ -79,7 +85,7 @@ class Texture {
         frameCenter.x, frameCenter.y,                 // frame center position
         pos.x, pos.y,                                 // position to place center of frame at
         scale.x, scale.y,                             // x and y scale
-        angle, 0);                                    // rotation and flats
+        angle, flip);                                 // rotation and flats
   }
 
   void draw(Vector2i pos, int idx = 0, Vector2f scale = Vector2f(1, 1), Color tint = Color.white,

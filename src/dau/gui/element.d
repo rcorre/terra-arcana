@@ -31,6 +31,7 @@ class GUIElement {
     }
     assert(_sprite !is null, "no sprite defined in gui data");
     _sprite.scale = data.get("scale", "1,1").parseVector!float;
+    _sprite.flip = data.get("flip", "none").to!(Texture.Flip);
     Rect2i area;
     final switch (anchor) with (Anchor) {
       case topLeft:

@@ -12,6 +12,7 @@ import dau.util.math;
 
 /// displays a single frame of a texture
 class Sprite {
+  Texture.Flip flip;
   /// create a sprite from a subsection of the bitmap
   this(string textureName, string spriteName = null) {
     _texture = getTexture(textureName);
@@ -71,7 +72,7 @@ class Sprite {
   /// rotation in radians
   void draw(Vector2i pos, float rotation = 0) {
     auto adjustedPos = pos + _jiggleEffect.offset;
-    _texture.draw(adjustedPos, _row, _col, scale, _tint, rotation);
+    _texture.draw(adjustedPos, _row, _col, scale, _tint, rotation, flip);
   }
 
   @property {
