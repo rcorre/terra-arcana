@@ -72,6 +72,53 @@
             }
           }
         }
+      },
+      "rightMana": {
+        "properties": {
+          "offset": "720, 505",
+          "texture": "gui/edgeButton",
+          "flip": "horizontal"
+        },
+        "child": {
+          "icon": {
+            "properties": {
+              "offset": "42, 0",
+              "texture": "gui/icons",
+              "sprite": "mana"
+            }
+          },
+          "text": {
+            "properties": {
+              "offset": "16,6",
+              "fontName": "Mecha",
+              "fontSize": "20"
+            }
+          }
+        }
+      },
+      "rightCommand": {
+        "properties": {
+          "offset": "688, 545",
+          "texture": "gui/edgeButton",
+          "flip": "horizontal"
+        },
+        "child": {
+          "icon": {
+            "properties": {
+              "offset": "68, 0",
+              "texture": "gui/icons",
+              "sprite": "command",
+              "flip": "horizontal"
+            }
+          },
+          "text": {
+            "properties": {
+              "offset": "24, 4",
+              "fontName": "Mecha",
+              "fontSize": "20"
+            }
+          }
+        }
       }
     }
   },

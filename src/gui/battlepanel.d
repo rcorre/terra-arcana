@@ -21,6 +21,8 @@ class BattlePanel : GUIElement {
 
     _leftCommand = addChild(new BattlePanelCounter(data.child["leftCommand"]));
     _leftMana    = addChild(new BattlePanelCounter(data.child["leftMana"]));
+    _rightCommand = addChild(new BattlePanelCounter(data.child["rightCommand"]));
+    _rightMana    = addChild(new BattlePanelCounter(data.child["rightMana"]));
   }
 
   void setCommandCounter(int val, int max) {
