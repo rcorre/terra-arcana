@@ -28,7 +28,6 @@ auto weightedAverage(T, U)(T[] vals, U[] weights) if (is(typeof(((T.init * U.ini
   return vals.zip(weights).map!(x => x[0] * x[1]).sum / weights.sum;
 }
 
-
 int roundUp(real val) {
   return cast(int) ceil(val);
 }
@@ -44,6 +43,11 @@ T lerp(T, U : real)(T start, T end, U factor) {
 }
 
 unittest {
+  assert(5.approach(9, 3) == 8);
+  assert(5.approach(9, 12) == 9);
+  assert(9.approach(5, -2) == 7);
+  assert(9.approach(5, -8) == 5);
+
   assert(5.clamp(0, 3) == 3);
   assert((-2).clamp(0, 3) == 0);
   assert(0.clamp(-5, 5) == 0);
