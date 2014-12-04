@@ -32,6 +32,8 @@
       "leftMana": {
         "properties": {
           "offset": "-107, 505",
+          "slideOffset": "-100,0",
+          "slideSpeed": "400",
           "texture": "gui/edgeButton"
         },
         "child": {
@@ -54,6 +56,8 @@
       "leftCommand": {
         "properties": {
           "offset": "-67, 545",
+          "slideOffset": "-150,0",
+          "slideSpeed": "600",
           "texture": "gui/edgeButton"
         },
         "child": {
@@ -77,6 +81,8 @@
         "properties": {
           "offset": "720, 505",
           "texture": "gui/edgeButton",
+          "slideOffset": "100,0",
+          "slideSpeed": "400",
           "flip": "horizontal"
         },
         "child": {
@@ -100,6 +106,8 @@
         "properties": {
           "offset": "688, 545",
           "texture": "gui/edgeButton",
+          "slideOffset": "150,0",
+          "slideSpeed": "600",
           "flip": "horizontal"
         },
         "child": {

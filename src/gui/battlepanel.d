@@ -6,6 +6,7 @@ import dau.geometry.all;
 import dau.graphics.all;
 import dau.gui.all;
 import gui.unitinfo;
+import gui.slideawaypanel;
 import model.all;
 
 private enum {
@@ -19,31 +20,28 @@ class BattlePanel : GUIElement {
     auto data = getGUIData("battlePanel");
     super(data, Rect2i(0, 0, Settings.screenW, Settings.screenH));
 
-    _leftCommand = addChild(new BattlePanelCounter(data.child["leftCommand"]));
-    _leftMana    = addChild(new BattlePanelCounter(data.child["leftMana"]));
-    _rightCommand = addChild(new BattlePanelCounter(data.child["rightCommand"]));
-    _rightMana    = addChild(new BattlePanelCounter(data.child["rightMana"]));
+    _leftCommand  = addPanel("leftCommand");
+    _leftMana     = addPanel("leftMana");
+    _rightCommand = addPanel("rightCommand");
+    _rightMana    = addPanel("rightMana");
   }
 
   void setCommandCounter(int val, int max) {
-    _leftCommand.text.text = cmdFormat.format(val, max);
+    //_leftCommand.text.text = cmdFormat.format(val, max);
   }
 
   void setManaCounter(int val) {
-    _leftMana.text.text = manaFormat.format(val);
+    //_leftMana.text.text = manaFormat.format(val);
   }
 
   private:
-  BattlePanelCounter _leftCommand, _leftMana;
-  BattlePanelCounter _rightCommand, _rightMana;
-}
+  SlideAwayPanel _leftCommand, _leftMana;
+  SlideAwayPanel _rightCommand, _rightMana;
 
-private class BattlePanelCounter : GUIElement {
-  TextBox text;
-
-  this(GUIData data) {
-    super(data);
-    addChild(new Icon(data.child["icon"]));
-    text = addChild(new TextBox(data.child["text"]));
+  auto addPanel(string name) {
+    auto panelData = data.child[name];
+    auto icon = new Icon(panelData.child["icon"]);
+    auto textBox = new TextBox(panelData.child["text"]);
+    return addChild(new SlideAwayPanel(panelData, icon, textBox));
   }
 }
