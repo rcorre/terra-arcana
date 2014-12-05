@@ -23,13 +23,11 @@ class TileHoverSystem : System!Battle {
         _newTileUnderMouse = true;
         _tileUnderMouse = tile;
         _unitUnderMouse = cast(Unit) tile.entity;
-        if (_unitUnderMouse is null) {
-          if (_unitInfo !is null) {
-            _unitInfo.active = false;
-            _unitInfo = null;
-          }
+        if (_newTileUnderMouse && _unitInfo !is null) {
+          _unitInfo.active = false;
+          _unitInfo = null;
         }
-        else {
+        if (_unitUnderMouse !is null) {
           _unitInfo = new UnitInfoGUI(_unitUnderMouse, input.mousePos);
           scene.gui.addElement(_unitInfo);
         }
