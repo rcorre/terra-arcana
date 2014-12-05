@@ -19,9 +19,6 @@ class ConsiderMove : State!Battle {
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
-      b.lockLeftUnitInfo = false;
-      b.displayUnitInfo(_unit);
-      b.lockLeftUnitInfo = true;
       if (!_unit.canAct || b.activePlayer.commandPoints <= 0) {
         b.states.popState();
       }

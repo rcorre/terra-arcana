@@ -25,9 +25,6 @@ class TriggerTrap : State!Battle {
         }
       };
       _animation = trap.getTriggerAnimation(onEnd);
-      b.lockLeftUnitInfo = false;
-      b.displayUnitInfo(unit);
-      b.lockLeftUnitInfo = true;
       _tile.trap = null;
       b.entities.removeEntity(trap);
       trap.getTriggerSound().play();

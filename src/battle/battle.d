@@ -79,10 +79,6 @@ package:
     auto players() { return _players[]; }
     auto activePlayer() { return _activePlayer; }
     auto obelisks() { return entities.findEntities("obelisk").map!(x => cast(Obelisk) x); }
-    void lockLeftUnitInfo(bool val) {
-      _lockLeftUnitInfo = val;
-      displayUnitInfo(null);
-    }
   }
 
   auto spawnPointsFor(int teamIdx) {
@@ -96,10 +92,6 @@ package:
     entities.registerEntity(unit);
     player.registerUnit(unit);
     return unit;
-  }
-
-  void displayUnitInfo(Unit unit) {
-    //TODO
   }
 
   void startNewTurn() {
@@ -177,7 +169,6 @@ package:
   Cycle!(Player[]) _turnCycle;
   Player _activePlayer;
   Player[] _players;
-  bool _lockLeftUnitInfo;
   SpawnPoint[] _spawnPoints;
   NetworkClient _client;
 

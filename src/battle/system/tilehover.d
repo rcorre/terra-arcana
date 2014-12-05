@@ -22,12 +22,6 @@ class TileHoverSystem : System!Battle {
         _newTileUnderMouse = true;
         _tileUnderMouse = tile;
         _unitUnderMouse = cast(Unit) tile.entity;
-        if (_unitUnderMouse is null) {
-          clearUnitInfo();
-        }
-        else {
-          setUnitInfo();
-        }
       }
     }
 
@@ -42,12 +36,4 @@ class TileHoverSystem : System!Battle {
   Tile _tileUnderMouse;
   Unit _unitUnderMouse;
   bool _newTileUnderMouse;
-
-  void clearUnitInfo() {
-    scene.displayUnitInfo(null);
-  }
-
-  void setUnitInfo() {
-    scene.displayUnitInfo(_unitUnderMouse);
-  }
 }

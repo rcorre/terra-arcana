@@ -18,7 +18,6 @@ class PlayerTurn : State!Battle {
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
-      b.lockLeftUnitInfo = false;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       _unitJumpList = bicycle(_player.moveableUnits.array);
