@@ -74,7 +74,7 @@ class PerformAction : State!Battle {
       int prevAp = _actor.ap;
       _actor.consumeAp(_action.apCost);
       b.activePlayer.consumeCommandPoints(1);
-      b.updateBattlePanel();
+      b.refreshBattlePanel();
     }
 
     void update(Battle b, float time, InputManager input) {

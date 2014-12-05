@@ -15,7 +15,7 @@ class DeployUnit : State!Battle {
     void start(Battle b) {
       auto unit = b.spawnUnit(_key, _player, _tile);
       _player.consumeCommandPoints(unit.deployCost);
-      b.updateBattlePanel();
+      b.refreshBattlePanel();
       b.states.popState;
     }
   }

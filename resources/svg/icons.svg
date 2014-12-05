@@ -133,9 +133,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="4.3292842"
-     inkscape:cy="81.871023"
+     inkscape:zoom="7.9999999"
+     inkscape:cx="67.846772"
+     inkscape:cy="-3.9539472"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -503,20 +503,16 @@
          id="path7429"
          inkscape:connector-curvature="0" />
     </g>
-    <g
-       transform="translate(31.477984,281.43979)"
-       id="g7472">
-      <path
-         id="path7696"
-         d="m 16.369062,572.85234 c 3.715641,0 7.245563,-2.61231 7.245563,-6.22037 0,-7.2708 -5.32461,-10.14463 -7.245563,-20.92783 -1.858929,10.80364 -7.3907493,12.97992 -7.3907493,20.55429 0,3.80032 3.7567553,6.59391 7.3907493,6.59391 z"
-         inkscape:connector-curvature="0"
-         style="fill:#00ffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.16803634" />
-      <path
-         style="fill:#ffffff;stroke:none"
-         id="path7698"
-         d="m 12.726308,559.27357 c -5.229883,6.61494 -0.874976,14.71516 6.383318,11.60351 -1.011286,0.0896 -2.043713,0.004 -2.992859,-0.39316 -3.709567,-1.55046 -5.137959,-6.48961 -3.390343,-11.21035 z"
-         inkscape:connector-curvature="0" />
-    </g>
+    <path
+       style="fill:#008080;fill-rule:evenodd;stroke:#00ffff;stroke-width:1.16803634000000001"
+       inkscape:connector-curvature="0"
+       d="m 47.847046,854.29213 c 3.715641,0 7.245563,-2.61231 7.245563,-6.22037 0,-7.2708 -5.32461,-10.14463 -7.245563,-20.92783 -1.858929,10.80364 -7.390749,12.97992 -7.390749,20.55429 0,3.80032 3.756755,6.59391 7.390749,6.59391 z"
+       id="path7696" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 44.204292,840.71336 c -5.229883,6.61494 -0.874976,14.71516 6.383318,11.60351 -1.011286,0.0896 -2.043713,0.004 -2.992859,-0.39316 -3.709567,-1.55046 -5.137959,-6.48961 -3.390343,-11.21035 z"
+       id="path7698"
+       style="fill:#00ffff;stroke:none" />
     <g
        id="layer3"
        inkscape:label="mock"

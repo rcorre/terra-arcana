@@ -104,6 +104,17 @@ struct Rect2(T) {
     if (right  > bounds.right)  { right = bounds.right; }
     if (bottom > bounds.bottom) { bottom = bounds.bottom; }
   }
+
+  static Rect2!T aggregate(Rect2!T[] rects ...) {
+    T top, bottom, left, right;
+    foreach(rect ; rects) {
+      left   = min(left   , rect.x);
+      right  = max(right  , rect.right);
+      top    = min(top    , rect.y);
+      bottom = max(bottom , rect.bottom);
+    }
+    return Rect2!T(left, top, right - left, bottom - top);
+  }
 }
 
 void keepInside(T)(ref Vector2!T point, Rect2!T area) {
@@ -117,7 +128,6 @@ auto parseRect(T : real)(string csvSpec) {
   assert(vals.length == 4, "failed to parse rectangle from %s (need 4 values)".format(csvSpec));
   return Rect2!T(vals[0], vals[1], vals[2], vals[3]);
 }
-
 
 // int rects
 unittest {
@@ -133,6 +143,9 @@ unittest {
   auto r2 = Rect2i(0, 0, 20, 20);
 
   assert(!r1.contains(r2) && r2.contains(r1));
+
+  auto cont = Rect2i.aggregate(Rect2(0, 0, 10, 20), Rect2(-10, 12, 16, 12));
+  assert(cont = Rect2i(-10, 0, 20, 24));
 }
 
 // float rects
