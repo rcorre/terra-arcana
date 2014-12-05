@@ -68,7 +68,7 @@ class GUIElement {
   }
 
   @property {
-    auto area() { return _area; }
+    auto ref area() { return _area; }
     auto width() { return _area.width; }
     auto height() { return _area.height; }
     auto size() { return Vector2i(width, height); }
