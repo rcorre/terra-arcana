@@ -35,7 +35,7 @@ class TileHoverSystem : System!Battle {
         }
       }
       if (_unitInfo !is null) {
-        _unitInfo.area.topLeft = input.mousePos;
+        positionUnitInfo(input.mousePos);
       }
     }
 
@@ -51,4 +51,24 @@ class TileHoverSystem : System!Battle {
   Unit _unitUnderMouse;
   bool _newTileUnderMouse;
   UnitInfoGUI _unitInfo;
+
+  void positionUnitInfo(Vector2i mousePos) {
+    auto center = Vector2i(Settings.screenW, Settings.screenH) / 2;
+    if (mousePos.x < center.x) {
+      if (mousePos.y < center.y) {
+        _unitInfo.area.topLeft = mousePos;
+      }
+      else {
+        _unitInfo.area.bottomLeft = mousePos;
+      }
+    }
+    else {
+      if (mousePos.y < center.y) {
+        _unitInfo.area.topRight = mousePos;
+      }
+      else {
+        _unitInfo.area.bottomRight = mousePos;
+      }
+    }
+  }
 }
