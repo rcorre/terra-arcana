@@ -21,7 +21,7 @@ class MoveUnit : State!Battle {
   override {
     void start(Battle b) {
       b.activePlayer.consumeCommandPoints(1);
-      b.updateBattlePanel();
+      b.refreshBattlePanel();
       _unit.sprite.depth += 1;  // make sure it passes over other units
     }
 

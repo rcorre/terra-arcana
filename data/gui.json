@@ -28,102 +28,43 @@
   },
 
   "battlePanel": {
+    "properties": {
+      "offset": "0, 529",
+      "slideOffset": "-150,0",
+      "slideSpeed": "600",
+      "texture": "gui/battlePanel"
+    },
     "child": {
-      "leftMana": {
+      "commandBar": {
         "properties": {
-          "offset": "-107, 505",
-          "slideOffset": "-100,0",
-          "slideSpeed": "400",
-          "texture": "gui/edgeButton"
+          "area"          : "24, 0, 95, 21",
+          "pipSpacingX"   : "-4",
+          "brightShade"   : "1,0.5,0, 0.8",
+          "dimShade"      : "1,0.5,0, 0.0",
+          "negativeShade" : "0.8,0,0",
+          "numPips" : "12"
         },
         "child": {
-          "icon": {
+          "pip": {
             "properties": {
-              "offset": "110, 0",
-              "texture": "gui/icons",
-              "sprite": "mana"
-            }
-          },
-          "text": {
-            "properties": {
-              "offset": "145,6",
-              "fontName": "Mecha",
-              "fontSize": "20"
+              "texture": "gui/pip"
             }
           }
         }
       },
-      "leftCommand": {
+      "manaBar": {
         "properties": {
-          "offset": "-67, 545",
-          "slideOffset": "-150,0",
-          "slideSpeed": "600",
-          "texture": "gui/edgeButton"
+          "area"          : "24, 24, 95, 21",
+          "pipSpacingX"   : "-4",
+          "brightShade"   : "0,1,1",
+          "dimShade"      : "0,0.0,0.0,0.0",
+          "negativeShade" : "0.8,0,0",
+          "numPips" : "12"
         },
         "child": {
-          "icon": {
+          "pip": {
             "properties": {
-              "offset": "70, 0",
-              "texture": "gui/icons",
-              "sprite": "command"
-            }
-          },
-          "text": {
-            "properties": {
-              "offset": "105,6",
-              "fontName": "Mecha",
-              "fontSize": "20"
-            }
-          }
-        }
-      },
-      "rightMana": {
-        "properties": {
-          "offset": "720, 505",
-          "texture": "gui/edgeButton",
-          "slideOffset": "100,0",
-          "slideSpeed": "400",
-          "flip": "horizontal"
-        },
-        "child": {
-          "icon": {
-            "properties": {
-              "offset": "42, 0",
-              "texture": "gui/icons",
-              "sprite": "mana"
-            }
-          },
-          "text": {
-            "properties": {
-              "offset": "16,6",
-              "fontName": "Mecha",
-              "fontSize": "20"
-            }
-          }
-        }
-      },
-      "rightCommand": {
-        "properties": {
-          "offset": "688, 545",
-          "texture": "gui/edgeButton",
-          "slideOffset": "150,0",
-          "slideSpeed": "600",
-          "flip": "horizontal"
-        },
-        "child": {
-          "icon": {
-            "properties": {
-              "offset": "68, 0",
-              "texture": "gui/icons",
-              "sprite": "command",
-              "flip": "horizontal"
-            }
-          },
-          "text": {
-            "properties": {
-              "offset": "24, 4",
-              "fontName": "Mecha",
-              "fontSize": "20"
+              "texture": "gui/pip"
             }
           }
         }

@@ -8,12 +8,13 @@ import dau.util.math;
 
 class SlideAwayPanel : GUIElement {
   this(GUIData data, GUIElement[] children ...) {
-    auto pos = data.get("offset", "0,0").parseVector!int;
-    auto anchor = data.get("anchor", "topLeft").to!Anchor;
-    super(data, pos, anchor);
+    super(data);
     _endOffset = data["slideOffset"].parseVector!int;
     auto speed = data["slideSpeed"].to!float;
     _endTime = _endOffset.len / speed;
+    foreach(child ; children) {
+      addChild(child);
+    }
   }
 
   override {

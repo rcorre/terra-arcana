@@ -125,12 +125,11 @@ package:
     foreach(unit ; player.units) { // check if any units were killed by poison
       states.pushState(new CheckUnitDestruction(unit));
     }
-    updateBattlePanel();
+    refreshBattlePanel();
   }
 
-  void updateBattlePanel() {
-    _panel.setCommandCounter(_activePlayer.commandPoints, _activePlayer.maxCommandPoints);
-    _panel.setManaCounter(_activePlayer.mana);
+  void refreshBattlePanel() {
+    _panel.refresh(_activePlayer);
   }
 
   void captureObelisk(Obelisk obelisk, int team) {
