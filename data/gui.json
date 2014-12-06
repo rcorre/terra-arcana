@@ -1017,7 +1017,7 @@
     "properties": {
       "texture": "gui/unit_status",
       "effectsOffset": "5, 89",
-      "spriteOffset": "14, 0",
+      "spriteOffset": "10, 1",
       "effectFlashTime": "0.5",
       "effectFlashColor": "1, 0, 0, 0"
     },
@@ -1098,14 +1098,27 @@
 
   "actionInfo": {
     "properties": {
-      "actionIconOffset": "2, 2",
-      "infoOffset": "34, 2",
-      "apArea": "37, 28, 51, 12",
-      "iconSeparation": "4"
+      "texture": "gui/actionInfo",
+      "apArea": "37, 28, 51, 12"
     },
     "child": {
-      "text": {
+      "name": {
         "properties": {
+          "offset": "13, 17",
+          "fontName": "Mecha",
+          "fontSize": "16"
+        }
+      },
+      "effect": {
+        "properties": {
+          "offset": "9, 36",
+          "fontName": "Mecha",
+          "fontSize": "16"
+        }
+      },
+      "special": {
+        "properties": {
+          "offset": "81, 13",
           "fontName": "Mecha",
           "fontSize": "16"
         }

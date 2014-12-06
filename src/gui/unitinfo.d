@@ -10,6 +10,7 @@ import model.all;
 
 private enum {
   iconFmt = "icon_%s",
+  effectFmt = "%s: %dx%d   Range: %d-%d",  // e.g. Damage: 3x2 Range: 1-2
 }
 
 /// bar that displays progress as discrete elements (pips)
@@ -81,6 +82,17 @@ class UnitInfoGUI : GUIElement {
     return icon;
   }
 
+  void showActionInfo(int actionNum) {
+    if (_actionInfo !is null) {
+      _actionInfo.active = false;
+      _actionInfo = null;
+    }
+    if (actionNum == 1 || actionNum == 2) {
+      auto offset = Vector2i(0, area.height);
+      _actionInfo = addChild(new ActionInfo(offset, _unit.getAction(actionNum)));
+    }
+  }
+
   private:
   Unit _unit;
   PipBar _hpBar, _apBar, _evadeBar, _armorBar;
@@ -93,17 +105,14 @@ class UnitInfoGUI : GUIElement {
 
 private:
 class ActionInfo : GUIElement {
-  this(Vector2i topLeft, Vector2i size, const UnitAction action) {
-    super(getGUIData("actionInfo"), Rect2i(topLeft, size));
-    addActionIcon(action.name);
-    addApCostBar(action.apCost);
-    Vector2i offset = data["infoOffset"].parseVector!int;
-    _iconSeparation = data["iconSeparation"].to!int;
-    addEffectIcon(action, offset);
-    addRangeIcon(action, offset);
-    foreach(special ; action.specials) {
-      addSpecialIcon(special, offset);
+  this(Vector2i topLeft, const UnitAction action) {
+    super(getGUIData("actionInfo"), topLeft);
+    addNameText(action.name);
+    addEffectText(action);
+    if (action.specials.length > 0) {
+      addSpecialText(action.specials[0]);
     }
+    //addApCostBar(action.apCost);
   }
 
   void addApCostBar(int amount) {
@@ -111,43 +120,31 @@ class ActionInfo : GUIElement {
     addChild(new PipBar(getGUIData("apBar"), apArea, amount));
   }
 
-  void addActionIcon(string name) {
-    auto iconData = getGUIData(iconFmt.format(name.toLower));
-    auto offset = data["actionIconOffset"].parseVector!int;
-    addChild(new Icon(iconData, offset));
+  void addNameText(string name) {
+    addChild(new TextBox(data.child["name"], name));
   }
 
-  void addEffectIcon(const UnitAction action, ref Vector2i offset) {
-    auto iconData = getGUIData(iconFmt.format(action.effect));
-    auto textData = data.child["text"];
+  void addEffectText(const UnitAction action) {
+    auto title = action.effect.to!string.capitalize;
+    auto text = effectFmt.format(title, action.power, action.hits, action.minRange,
+        action.maxRange);
+    addChild(new TextBox(data.child["effect"], text));
+  }
+
+  void addSpecialText(const UnitAction.Special special) {
     string text;
-    if (action.hits > 1) {
-      text = "%dx%d".format(action.power, action.hits);
+    final switch(special) with (UnitAction.Special) {
+      case pierce:
+        text = "Ignore Armor";
+        break;
+      case precise:
+        text = "Ignore Evade";
+        break;
+      case blitz:
+        text = "Ignore Counter";
+        break;
     }
-    else {
-      text = "%d".format(action.power);
-    }
-    addInfo(new Icon(iconData, textData, offset, text), offset);
-  }
 
-  void addRangeIcon(const UnitAction action, ref Vector2i offset) {
-    if (action.maxRange > 0) {
-      auto iconData = getGUIData("icon_range");
-      auto textData = data.child["text"];
-      auto text = "%d-%d".format(action.minRange, action.maxRange);
-      addInfo(new Icon(iconData, textData, offset, text), offset);
-    }
+    addChild(new TextBox(data.child["special"], text));
   }
-
-  void addSpecialIcon(UnitAction.Special special, ref Vector2i offset) {
-    auto iconData = getGUIData(iconFmt.format(special.to!string));
-    addInfo(new Icon(iconData, offset), offset);
-  }
-
-  void addInfo(Icon icon, ref Vector2i offset) {
-    addChild(icon);
-    offset.x += icon.area.width + _iconSeparation;
-  }
-
-  int _iconSeparation;
 }
