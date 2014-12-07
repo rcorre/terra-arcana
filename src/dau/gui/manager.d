@@ -22,8 +22,8 @@ class GUIManager {
     _activeCursorSprite = activeCursorSprite;
   }
 
-  void addElement(GUIElement el) {
-    _topElement.addChild(el);
+  T addElement(T : GUIElement)(T el) {
+    return _topElement.addChild(el);
   }
 
   void clear() {

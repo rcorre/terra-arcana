@@ -27,6 +27,14 @@
     }
   },
 
+  "endTurn": {
+    "properties": {
+      "offset": "400, 300",
+      "anchor": "center",
+      "texture": "gui/endTurn"
+    }
+  },
+
   "battlePanel": {
     "properties": {
       "offset": "0, 529",

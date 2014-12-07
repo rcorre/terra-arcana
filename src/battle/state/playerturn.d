@@ -5,6 +5,7 @@ import dau.all;
 import model.all;
 import battle.battle;
 import battle.system.all;
+import battle.state.endTurn;
 import battle.state.considermove;
 import battle.state.chooseunittodeploy;
 
@@ -45,8 +46,7 @@ class PlayerTurn : State!Battle {
         }
       }
       else if (input.skip) {
-        b.startNewTurn;
-        b.getSystem!BattleNetworkSystem.broadcastEndTurn(); // notify network
+        b.states.pushState(new EndTurn);
       }
     }
 
