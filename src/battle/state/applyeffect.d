@@ -6,6 +6,7 @@ import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
 import battle.state.delay;
+import gui.battlepopup;
 
 private enum delayDuration = 0.2f;
 
@@ -16,14 +17,16 @@ class ApplyEffect : State!Battle {
     _action = action;
   }
 
-  override { // TODO: show effect on status bar
+  override {
     void enter(Battle b) {
       bool hit = _target.evade == 0 || _action.hasSpecial(UnitAction.Special.precise);
+      int effectAmount = _action.power;
       if (hit) {
         switch (_action.effect) with (UnitAction.Effect) {
           case damage:
             int prevHp = _target.hp;
-            _target.dealDamage(_action.power);
+            bool ignoreArmor = _action.hasSpecial(UnitAction.Special.pierce);
+            effectAmount = _target.dealDamage(_action.power, ignoreArmor);
             break;
           case stun:
             _target.damageAp(_action.power);
@@ -47,6 +50,16 @@ class ApplyEffect : State!Battle {
       else {
         _target.dodgeAttack();
       }
+
+      // show popup
+      auto popupPos = _target.center;
+      if (!hit) {
+        b.gui.addElement(BattlePopup.evadeMessage(popupPos));
+      }
+      else {
+        b.gui.addElement(new BattlePopup(popupPos, _action.effect, effectAmount));
+      }
+
       b.states.setState(new Delay(delayDuration)); // pause briefly after applying effect
     }
   }

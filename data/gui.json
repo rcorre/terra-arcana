@@ -27,6 +27,13 @@
     }
   },
 
+  "battlePopup": {
+    "properties": {
+      "fontName": "Mecha_Bold",
+      "fontSize": "20"
+    }
+  },
+
   "endTurn": {
     "properties": {
       "offset": "400, 300",

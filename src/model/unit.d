@@ -103,8 +103,9 @@ class Unit : Entity {
     _ap -= amount;
   }
 
-  void dealDamage(int amount) {
-    amount -= armor;
+  /// deal damage, returns amount of damage dealt
+  int dealDamage(int amount, bool ignoreArmor) {
+    amount -= ignoreArmor ? 0 : armor;
     if (amount > 0) {
       _hp = max(0, hp - amount);
       _sprite.flash(flashTime, damageFlashColor);
@@ -113,6 +114,7 @@ class Unit : Entity {
     else { // no damage
       _noDamageSound.play();
     }
+    return amount;
   }
 
   void damageAp(int amount) {
