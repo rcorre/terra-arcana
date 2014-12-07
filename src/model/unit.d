@@ -243,10 +243,6 @@ class Unit : Entity {
     _destroySound.play();
   }
 
-  override void update(float time) {
-    super.update(time);
-  }
-
   private:
   Tile _tile;
   int _hp, _ap;
