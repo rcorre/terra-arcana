@@ -57,7 +57,7 @@ class TileHoverSystem : System!Battle {
         _unitInfo.area.topLeft = mousePos;
       }
       else {
-        _unitInfo.area.bottomLeft = mousePos;
+        _unitInfo.area.topLeft = mousePos - Vector2i(0, _unitInfo.totalSize.y);
       }
     }
     else {
@@ -65,7 +65,7 @@ class TileHoverSystem : System!Battle {
         _unitInfo.area.topRight = mousePos;
       }
       else {
-        _unitInfo.area.bottomRight = mousePos;
+        _unitInfo.area.topRight = mousePos - Vector2i(0, _unitInfo.totalSize.y);
       }
     }
   }
