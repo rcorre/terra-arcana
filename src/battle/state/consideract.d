@@ -59,7 +59,7 @@ class ConsiderAct : State!Battle {
           b.states.setState(new ConsiderAct(_unit, 2));
         }
       }
-      else if (input.altSelect || input.skip) {
+      else if (input.skip) {
         b.states.popState();
       }
     }

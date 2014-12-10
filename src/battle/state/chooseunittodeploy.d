@@ -33,7 +33,7 @@ class ChooseUnitToDeploy : State!Battle {
 
     void update(Battle b, float time, InputManager input) {
       _cursor.update(time);
-      if (input.skip || input.altSelect) {
+      if (input.skip) {
         b.states.popState();
       }
     }

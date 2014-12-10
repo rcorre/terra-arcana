@@ -58,7 +58,7 @@ class InputManager {
     bool action2() { return keyPressed(Keymap.action2); }
 
     bool select() { return mouseClicked(MouseButton.lmb); }
-    bool altSelect() { return mouseClicked(MouseButton.rmb); }
+    bool inspect() { return mouseHeld(MouseButton.rmb); }
   }
 
   Vector2i mousePos() {
@@ -85,6 +85,11 @@ class InputManager {
   bool mouseClicked(MouseButton button) {
     int b = cast(int) button;
     return !al_mouse_button_down(&_prevMouseState, b) && al_mouse_button_down(&_curMouseState, b);
+  }
+
+  bool mouseHeld(MouseButton button) {
+    int b = cast(int) button;
+    return al_mouse_button_down(&_curMouseState, b);
   }
 
   ALLEGRO_KEYBOARD_STATE _curKeyboardState, _prevKeyboardState;

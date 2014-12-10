@@ -23,16 +23,18 @@ class TileHoverSystem : System!Battle {
         _newTileUnderMouse = true;
         _tileUnderMouse = tile;
         _unitUnderMouse = cast(Unit) tile.entity;
-        if (_newTileUnderMouse && _unitInfo !is null) {
-          _unitInfo.active = false;
-          _unitInfo = null;
-        }
-        if (_unitUnderMouse !is null) {
-          _unitInfo = new UnitInfoGUI(_unitUnderMouse, input.mousePos);
+      }
+
+      // handle displaying unit info
+      if (_unitUnderMouse is null || !input.inspect) {
+        destroyUnitInfo();
+      }
+      if (input.inspect && _unitUnderMouse !is null) {
+        if (_unitInfo is null || _unitUnderMouse != _unitInfo.unit) {
+          destroyUnitInfo();
+          _unitInfo = new UnitInfoGUI(_unitUnderMouse, _unitUnderMouse.center);
           scene.gui.addElement(_unitInfo);
         }
-      }
-      if (_unitInfo !is null) {
         positionUnitInfo(input.mousePos);
       }
     }
@@ -49,6 +51,13 @@ class TileHoverSystem : System!Battle {
   Unit _unitUnderMouse;
   bool _newTileUnderMouse;
   UnitInfoGUI _unitInfo;
+
+  void destroyUnitInfo() {
+    if (_unitInfo !is null) {
+      _unitInfo.active = false;
+      _unitInfo = null;
+    }
+  }
 
   void positionUnitInfo(Vector2i mousePos) {
     auto center = Vector2i(Settings.screenW, Settings.screenH) / 2;

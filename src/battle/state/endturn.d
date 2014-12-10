@@ -14,7 +14,7 @@ class EndTurn : State!Battle {
     }
 
     void update(Battle b, float time, InputManager input) {
-      if (input.select || input.altSelect) {
+      if (input.select) {
         b.states.popState();
       }
       else if (input.skip) {

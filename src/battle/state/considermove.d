@@ -46,7 +46,7 @@ class ConsiderMove : State!Battle {
         auto net = b.getSystem!BattleNetworkSystem;
         net.broadcastMove(_unit, _path);
       }
-      else if (input.altSelect || input.skip) {
+      else if (input.skip) {
         b.states.popState();
       }
       else if (input.action1) {
