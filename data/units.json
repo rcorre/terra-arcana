@@ -111,6 +111,7 @@
       "effect"      : "heal",
       "apCost"      : 2,
       "power"       : 2,
+      "hits"        : 1,
       "minRange"    : 0,
       "maxRange"    : 1
     },
@@ -122,6 +123,7 @@
       "effect"      : "evade",
       "apCost"      : 3,
       "power"       : 1,
+      "hits"        : 1,
       "minRange"    : 0,
       "maxRange"    : 2
     }
@@ -253,6 +255,7 @@
       "effect"      : "heal",
       "apCost"      : 2,
       "power"       : 2,
+      "hits"        : 1,
       "minRange"    : 0,
       "maxRange"    : 0
     }

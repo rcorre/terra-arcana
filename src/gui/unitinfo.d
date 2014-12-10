@@ -1,7 +1,6 @@
 module gui.unitinfo;
 
-import std.string;
-import std.conv;
+import std.string, std.conv;
 import dau.setup;
 import dau.geometry.all;
 import dau.graphics.all;
@@ -10,7 +9,8 @@ import model.all;
 
 private enum {
   iconFmt = "icon_%s",
-  effectFmt = "%s: %dx%d   Range: %d-%d",  // e.g. Damage: 3x2 Range: 1-2
+  effectFmt = "%s:%s  Range:%s [%s]",  // e.g. Damage:3x2 Range:1-2 [burst]
+  apFormat = "%d AP"
 }
 
 /// bar that displays progress as discrete elements (pips)
@@ -47,12 +47,20 @@ class UnitInfoGUI : GUIElement {
       _armorBar.setVal(unit.armor);
       _evadeBar.setVal(unit.evade);
     }
+
     _unit = unit;
     _effectFlashColor = data["effectFlashColor"].parseColor;
     _effectFlashTime = data["effectFlashTime"].to!float;
+
+    auto actionOffset = Vector2i(0, area.height);
+    _actionInfo1 = addChild(new ActionInfo(actionOffset, _unit.getAction(1)));
+    actionOffset += Vector2i(0, _actionInfo1.height);
+    _actionInfo2 = addChild(new ActionInfo(actionOffset, _unit.getAction(2)));
   }
 
   @property auto unit() { return _unit; }
+
+  @property totalSize() { return size + _actionInfo1.size + _actionInfo2.size; }
 
   void animateHpChange(int from, int to, float duration) {
     _hpBar.transitionVal(from, to, duration);
@@ -82,52 +90,40 @@ class UnitInfoGUI : GUIElement {
     return icon;
   }
 
-  void showActionInfo(int actionNum) {
-    if (_actionInfo !is null) {
-      _actionInfo.active = false;
-      _actionInfo = null;
-    }
-    if (actionNum == 1 || actionNum == 2) {
-      auto offset = Vector2i(0, area.height);
-      _actionInfo = addChild(new ActionInfo(offset, _unit.getAction(actionNum)));
-    }
-  }
-
   private:
   Unit _unit;
   PipBar _hpBar, _apBar, _evadeBar, _armorBar;
-  ActionInfo _actionInfo;
-  Icon _toxinIcon, _slowIcon, _flyingIcon;
   Vector2i _nextEffectOffset;
   Color _effectFlashColor;
   float _effectFlashTime;
+  ActionInfo _actionInfo1, _actionInfo2;
 }
 
 private:
 class ActionInfo : GUIElement {
   this(Vector2i topLeft, const UnitAction action) {
     super(getGUIData("actionInfo"), topLeft);
-    addNameText(action.name);
+    addChild(new TextBox(data.child["name"], action.name));
+    addChild(new TextBox(data.child["apCost"], apFormat.format(action.apCost)));
     addEffectText(action);
     if (action.specials.length > 0) {
       addSpecialText(action.specials[0]);
     }
-    //addApCostBar(action.apCost);
-  }
-
-  void addApCostBar(int amount) {
-    auto apArea = data["apArea"].parseRect!int;
-    addChild(new PipBar(getGUIData("apBar"), apArea, amount));
-  }
-
-  void addNameText(string name) {
-    addChild(new TextBox(data.child["name"], name));
   }
 
   void addEffectText(const UnitAction action) {
     auto title = action.effect.to!string.capitalize;
-    auto text = effectFmt.format(title, action.power, action.hits, action.minRange,
-        action.maxRange);
+
+    string effect = (action.hits > 1) ? 
+      "%d".format(action.power) : 
+      "%dx%d".format(action.power, action.hits);
+
+    string range = (action.minRange == action.maxRange) ? 
+      "%d".format(action.minRange) : 
+      "%d-%d".format(action.minRange, action.maxRange);
+
+    auto text = effectFmt.format(title, effect, range, action.target);
+
     addChild(new TextBox(data.child["effect"], text));
   }
 

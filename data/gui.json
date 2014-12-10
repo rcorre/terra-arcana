@@ -887,29 +887,35 @@
 
   "actionInfo": {
     "properties": {
-      "texture": "gui/actionInfo",
-      "apArea": "37, 28, 51, 12"
+      "texture": "gui/actionInfo"
     },
     "child": {
       "name": {
         "properties": {
-          "offset": "13, 17",
+          "offset": "13, 7",
           "fontName": "Mecha",
           "fontSize": "16"
         }
       },
-      "effect": {
+      "apCost": {
         "properties": {
-          "offset": "9, 36",
+          "offset": "81, 7",
           "fontName": "Mecha",
           "fontSize": "16"
         }
       },
       "special": {
         "properties": {
-          "offset": "81, 13",
+          "offset": "113, 7",
           "fontName": "Mecha",
           "fontSize": "16"
+        }
+      },
+      "effect": {
+        "properties": {
+          "offset": "13, 27",
+          "fontName": "Mecha",
+          "fontSize": "15"
         }
       }
     }
