@@ -89,256 +89,30 @@
 
   "instructions": {
     "properties": {
-      "texture": "gui/tutorialPopup"
+      "numPages": "5"
     },
     "child": {
-      "page1": {
-        "child": {
-          "icons": {
-            "child": {
-              "wIcon": {
-                "properties": {
-                  "offset" : "193, 153",
-                  "texture": "input",
-                  "sprite" : "w"
-                }
-              },
-              "aIcon": {
-                "properties": {
-                  "offset" : "225, 153",
-                  "texture": "input",
-                  "sprite" : "a"
-                }
-              },
-              "sIcon": {
-                "properties": {
-                  "offset" : "257, 153",
-                  "texture": "input",
-                  "sprite" : "s"
-                }
-              },
-              "dIcon": {
-                "properties": {
-                  "offset" : "289, 153",
-                  "texture": "input",
-                  "sprite" : "d"
-                }
-              },
-              "qIcon": {
-                "properties": {
-                  "offset" : "257, 185",
-                  "texture": "input",
-                  "sprite" : "q"
-                }
-              },
-              "eIcon": {
-                "properties": {
-                  "offset" : "289, 185",
-                  "texture": "input",
-                  "sprite" : "e"
-                }
-              },
-              "eIcon": {
-                "properties": {
-                  "offset" : "289, 185",
-                  "texture": "input",
-                  "sprite" : "e"
-                }
-              },
-              "spaceIcon": {
-                "properties": {
-                  "offset" : "289, 217",
-                  "texture": "input",
-                  "sprite" : "space"
-                }
-              },
-              "lmbIcon": {
-                "properties": {
-                  "offset" : "289, 249",
-                  "texture": "input",
-                  "sprite" : "lmb"
-                }
-              },
-              "rmbIcon": {
-                "properties": {
-                  "offset" : "289, 281",
-                  "texture": "input",
-                  "sprite" : "rmb"
-                }
-              },
-              "hIcon": {
-                "properties": {
-                  "offset" : "289, 313",
-                  "texture": "input",
-                  "sprite" : "h"
-                }
-              }
-            }
-          },
-          "textBoxes": {
-            "child": {
-              "moveText": {
-                "properties": {
-                  "offset" : "329, 152",
-                  "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "move camera"
-                }
-              },
-              "chooseText": {
-                "properties": {
-                  "offset" : "329, 184",
-                  "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "choose action"
-                }
-              },
-              "skipText": {
-                "properties": {
-                  "offset" : "329, 216",
-                  "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "skip turn"
-                }
-              },
-              "confirmText": {
-                "properties": {
-                  "offset" : "329, 248",
-                  "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "confirm"
-                }
-              },
-              "cancelText": {
-                "properties": {
-                  "offset" : "329, 280",
-                  "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "cancel"
-                }
-              },
-              "helpText": {
-                "properties": {
-                  "offset" : "329, 312",
-                  "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "show help"
-                }
-              }
-            }
-          }
+      "pageNumber": {
+        "properties": {
+          "texture": "rectButton",
+          "offset": "393, 489",
+          "anchor" : "center",
+          "fontName": "Mecha",
+          "fontSize": "20"
         }
       },
-      "page2": {
-        "child": {
-          "icons": {
-            "child": {
-              "unitInfo": {
-                "properties": {
-                  "offset" : "225, 153",
-                  "texture": "gui/unit_status"
-                }
-              },
-              "hpBar": {
-                "properties": {
-                  "offset" : "129, 281",
-                  "texture": "gui/tutorialUnitIcons",
-                  "sprite": "hpBar"
-                }
-              },
-              "apBar": {
-                "properties": {
-                  "offset" : "129, 313",
-                  "texture": "gui/tutorialUnitIcons",
-                  "sprite": "apBar"
-                }
-              },
-              "armorBar": {
-                "properties": {
-                  "offset" : "129, 345",
-                  "texture": "gui/tutorialUnitIcons",
-                  "sprite": "armor"
-                }
-              },
-              "evadeBar": {
-                "properties": {
-                  "offset" : "129, 377",
-                  "texture": "gui/tutorialUnitIcons",
-                  "sprite": "evade"
-                }
-              }
-            }
-          },
-          "textBoxes": {
-            "child": {
-              "name": {
-                "properties": {
-                  "offset" : "273, 160",
-                  "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "name"
-                }
-              },
-              "effects": {
-                "properties": {
-                  "offset" : "229, 224",
-                  "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "effects"
-                }
-              },
-              "hp": {
-                "properties": {
-                  "offset" : "265, 185",
-                  "fontName": "Mecha",
-                  "fontSize": "16",
-                  "textColor": "0, 1, 1",
-                  "text": "hp"
-                }
-              },
-              "ap": {
-                "properties": {
-                  "offset" : "265, 200",
-                  "fontName": "Mecha",
-                  "fontSize": "16",
-                  "textColor": "1, 0.5, 0.1",
-                  "text": "ap"
-                }
-              },
-              "hpInfo": {
-                "properties": {
-                  "offset" : "205, 293",
-                  "fontName": "Mecha",
-                  "fontSize": "12",
-                  "text": "When HP hits 0, the unit is destroyed"
-                }
-              },
-              "apInfo": {
-                "properties": {
-                  "offset" : "205, 325",
-                  "fontName": "Mecha",
-                  "fontSize": "12",
-                  "text": "AP is used to move and perform actions"
-                }
-              },
-              "armorInfo": {
-                "properties": {
-                  "offset" : "205, 357",
-                  "fontName": "Mecha",
-                  "fontSize": "12",
-                  "text": "each point of armor reduces incoming damage by 1"
-                }
-              },
-              "evadeInfo": {
-                "properties": {
-                  "offset" : "205, 389",
-                  "fontName": "Mecha",
-                  "fontSize": "12",
-                  "text": "Each point of evasion allows the unit to avoid 1 attack"
-                }
-              }
-            }
-          }
+      "prevPage": {
+        "properties": {
+          "offset": "193, 473",
+          "texture": "gui/arrows",
+          "sprite": "leftArrow"
+        }
+      },
+      "nextPage": {
+        "properties": {
+          "offset": "577, 473",
+          "texture": "gui/arrows",
+          "sprite": "rightArrow"
         }
       }
     }

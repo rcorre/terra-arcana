@@ -526,8 +526,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="485.03439"
-     inkscape:cy="292.48731"
+     inkscape:cx="254.03439"
+     inkscape:cy="136.48731"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="true"
@@ -555,7 +555,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -577,46 +577,6 @@
        inkscape:connector-curvature="0"
        transform="translate(0,452.36218)"
        sodipodi:nodetypes="cccc" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer4"
-     inkscape:label="page"
-     style="display:none">
-    <g
-       style="display:inline"
-       transform="translate(-320,-164.02486)"
-       id="layer1-7"
-       inkscape:label="Layer 1">
-      <rect
-         style="fill:#008080;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
-         id="rect3581"
-         width="288"
-         height="32"
-         x="576"
-         y="636.36218" />
-    </g>
-    <path
-       inkscape:connector-curvature="0"
-       id="path3739"
-       d="m 224,472 0,32 -32,-16 z"
-       style="fill:#00ffff;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path3739-6"
-       d="m 576,472 0,32 32,-16 z"
-       style="fill:#00ffff;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
-    <text
-       xml:space="preserve"
-       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Anonymous Pro;-inkscape-font-specification:Anonymous Pro"
-       x="331.80469"
-       y="496.89301"
-       id="text4457"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4459"
-         x="331.80469"
-         y="496.89301">Page 1/10</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -1402,36 +1362,36 @@
     <text
        sodipodi:linespacing="125%"
        id="text5730"
-       y="216"
+       y="184"
        x="128"
        style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Mecha;-inkscape-font-specification:Mecha"
        xml:space="preserve"><tspan
-         y="216"
+         y="184"
          x="128"
          sodipodi:role="line"
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
          id="tspan5745">Each turn, a player has a limited number of command points (CP) to spend</tspan><tspan
-         y="243.5"
+         y="211.5"
          x="128"
          sodipodi:role="line"
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
          id="tspan5843">Moving a unit costs 1 CP, regardless of how far it moves</tspan><tspan
-         y="271"
+         y="239"
          x="128"
          sodipodi:role="line"
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
          id="tspan5845">Using an action costs 1 CP, regardless of how much AP it costs</tspan><tspan
-         y="298.5"
+         y="266.5"
          x="128"
          sodipodi:role="line"
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
          id="tspan5847">Deploying new units costs CP depending on the rank of the unit</tspan><tspan
-         y="326"
+         y="294"
          x="128"
          sodipodi:role="line"
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
-         id="tspan6013">If you deploy too many units, you may not have enough CP to move</tspan><tspan
-         y="353.5"
+         id="tspan6013">Deploy too many units, and you may not have enough CP to move</tspan><tspan
+         y="321.5"
          x="128"
          sodipodi:role="line"
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
@@ -1439,11 +1399,11 @@
     <text
        sodipodi:linespacing="125%"
        id="text5759"
-       y="184"
+       y="152"
        x="128"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Mecha;-inkscape-font-specification:Mecha"
        xml:space="preserve"><tspan
-         y="184"
+         y="152"
          x="128"
          id="tspan5761"
          sodipodi:role="line">Command Points</tspan></text>
@@ -1486,7 +1446,7 @@
          clip-path="url(#clipPath4588-3)" />
     </g>
     <g
-       transform="translate(347.27357,-351.27356)"
+       transform="translate(347.27357,-383.27356)"
        id="g7462-6">
       <path
          id="path5485-0"
@@ -1539,102 +1499,48 @@
        xml:space="preserve"
        style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Mecha;-inkscape-font-specification:Mecha"
        x="128"
-       y="446"
+       y="401"
        id="text5849"
        sodipodi:linespacing="125%"><tspan
          id="tspan5857"
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
          sodipodi:role="line"
          x="128"
-         y="446">The more obelisks you hold, the more CP you have available</tspan><tspan
+         y="401">The more obelisks you hold, the more CP you have available</tspan><tspan
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
          sodipodi:role="line"
          x="128"
-         y="473.5"
+         y="428.5"
          id="tspan5872">To capture an obelisk, a unit must end their turn on it</tspan><tspan
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
          sodipodi:role="line"
          x="128"
-         y="501"
+         y="456"
          id="tspan5876">If the opponent holds no obelisks, you win.</tspan><tspan
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Mecha;-inkscape-font-specification:Mecha"
          sodipodi:role="line"
          x="128"
-         y="528.5"
+         y="483.5"
          id="tspan5874" /></text>
     <text
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Mecha;-inkscape-font-specification:Mecha"
        x="128"
-       y="414"
+       y="369"
        id="text5859"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5861"
          x="128"
-         y="414">Obelisks</tspan></text>
+         y="369">Obelisks</tspan></text>
     <image
        y="536"
        x="704"
        id="image6000"
-       xlink:href="data:image/png;base64,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
-"
+       xlink:href="data:image/png;base64,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 "
        height="96"
        width="384"
        clip-path="url(#clipPath6005)"
-       transform="translate(-448,-149)" />
+       transform="translate(-448,-194)" />
   </g>
 </svg>
