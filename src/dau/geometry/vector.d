@@ -1,6 +1,6 @@
 module dau.geometry.vector;
 
-import std.math, std.traits, std.conv, std.string, std.algorithm;
+import std.math, std.traits, std.range, std.conv, std.string, std.algorithm;
 
 public alias Vector2f = Vector2!float;
 public alias Vector2i = Vector2!int;
@@ -178,6 +178,7 @@ T distance(T)(Vector2!T v1, Vector2!T v2) {
 /// parse a Vector2!T from a string of format "x,y"
 auto parseVector(T : real)(string csvSpec) {
   auto entries = csvSpec.splitter(",").map!(x => x.strip.to!T);
+  assert(entries.walkLength == 2, "parseVector expects 'x,y', got " ~ csvSpec);
   T x = entries.front;
   entries.popFront;
   T y = entries.front;

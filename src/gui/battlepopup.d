@@ -1,6 +1,6 @@
 module gui.battlepopup;
 
-import std.string;
+import std.string, std.conv;
 import dau.all;
 import model.unitaction;
 
@@ -24,14 +24,13 @@ private enum string[UnitAction.Effect.max + 1] colors = [
   UnitAction.Effect.stun       : "1,0,0",
 ];
 
-private enum velocity = Vector2i(0, -120);
-
 class BattlePopup : TextBox {
-
   this(Vector2i pos, UnitAction.Effect effect, int value) {
     auto data = getGUIData("battlePopup");
     data["textColor"] = colors[effect];
     string text = formats[effect].format(value);
+    _duration = data["duration"].to!float;
+    _velocity = data["velocity"].parseVector!float;
     super(data, text, pos);
   }
 
@@ -43,11 +42,20 @@ class BattlePopup : TextBox {
     auto data = getGUIData("battlePopup");
     data["textColor"] = "1,1,1";
     string text = "miss (evasion - 1)";
+    _duration = data["duration"].to!float;
+    _velocity = data["velocity"].parseVector!float;
     super(data, text, pos);
   }
 
   override void update(float time) {
     super.update(time);
-    area.center = area.center + cast(Vector2i) (velocity * time);
+    area.center = area.center + cast(Vector2i) (_velocity * time);
+    _duration -= time;
+    if (_duration <= 0) {
+      active = false;
+    }
   }
+
+  private float _duration;
+  private Vector2f _velocity;
 }

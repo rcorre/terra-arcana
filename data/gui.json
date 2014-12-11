@@ -29,8 +29,10 @@
 
   "battlePopup": {
     "properties": {
-      "fontName": "Mecha_Bold",
-      "fontSize": "20"
+      "fontName": "Mecha",
+      "fontSize": "16",
+      "velocity": "0, -120",
+      "duration": "1.0"
     }
   },
 
