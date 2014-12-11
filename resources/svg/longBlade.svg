@@ -10,7 +10,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="737"
-   height="65"
+   height="55"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4766667"
-     inkscape:cx="336.26249"
-     inkscape:cy="-59.585063"
+     inkscape:cx="177.79748"
+     inkscape:cy="-69.585063"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -49,7 +49,7 @@
        spacingx="4px"
        spacingy="4px"
        originx="0.5px"
-       originy="-383.5px" />
+       originy="-393.5px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -70,8 +70,8 @@
      transform="translate(0.5,-151.5)"
      style="display:inline">
     <path
-       style="fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.8"
-       d="m 0,152 672,0 64,64 -736,0"
+       style="opacity:0.8;fill:#008080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 0,152 672,0 64,54 -736,0"
        id="path3800"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />

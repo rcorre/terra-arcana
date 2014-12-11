@@ -46,6 +46,7 @@ class CreditsScreen : GUIElement {
 
     auto buttonData = page.child["button"];
     auto nextPage = buttonData["nextPage"].to!int;
+    buttonData["text"] = "page %d".format(num);
     _entries ~= addChild(new Button(page.child["button"], { setPage(nextPage); }));
   }
 }

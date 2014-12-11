@@ -477,7 +477,7 @@
     "properties": {
       "texture": "gui/titleScreen",
       "firstEntryOffset": "0, 153",
-      "entrySpacing": "0, 32"
+      "entrySpacing": "0, 16"
     },
     "child": {
       "entryBackground": {
@@ -487,9 +487,9 @@
       },
       "entryText": {
         "properties": {
-          "offset": "32, 2",
+          "offset": "32, 4",
           "fontName": "Mecha",
-          "fontSize": "28"
+          "fontSize": "20"
         }
       },
       "title": {
@@ -540,7 +540,7 @@
               "text": {
                 "properties": {
                   "fontName": "Mecha",
-                  "fontSize": "24"
+                  "fontSize": "16"
                 }
               }
             }
@@ -548,7 +548,7 @@
           "0": {
             "properties": {
               "text1": "Programming, Art, Music, Sound by rcorre",
-              "text2": "source available: "
+              "text2": "source available: https://github.com/rcorre/terra-arcana"
             }
           },
           "1": {
@@ -579,20 +579,20 @@
               "text": "Page 1",
               "offset" : "489, 533",
               "anchor": "topLeft",
-              "nextPage": "1"
+              "nextPage": "3"
             },
             "child": {
               "text": {
                 "properties": {
                   "fontName": "Mecha",
-                  "fontSize": "24"
+                  "fontSize": "16"
                 }
               }
             }
           },
           "0": {
             "properties": {
-              "text1": "Tiled: tilemap editor",
+              "text1": "Tiled: Tilemap Editor",
               "text2": "www.mapeditor.org"
             }
           },
@@ -605,15 +605,69 @@
           },
           "2": {
             "properties": {
-              "text1": "Aseprite: pixel art",
+              "text1": "Aseprite: Pixel Art",
               "text2": "http://www.aseprite.org/"
 
             }
           },
           "3": {
             "properties": {
-              "text1": "Audacity: Sound editing",
+              "text1": "Audacity: Sound Editing",
               "text2": "http://audacity.sourceforge.net/"
+            }
+          },
+          "4": {
+            "properties": {
+              "text1": "Inkscape: Vector Graphics",
+              "text2": "http://audacity.sourceforge.net/"
+            }
+          }
+        }
+      },
+      "page3": {
+        "child": {
+          "button": {
+            "properties": {
+              "texture": "gui/rectButton",
+              "text": "Page 1",
+              "offset" : "489, 533",
+              "anchor": "topLeft",
+              "nextPage": "1"
+            },
+            "child": {
+              "text": {
+                "properties": {
+                  "fontName": "Mecha",
+                  "fontSize": "16"
+                }
+              }
+            }
+          },
+          "0": {
+            "properties": {
+              "text1": "Sounds from FreeSound:",
+              "text2": "https://www.freesound.org/"
+            }
+          },
+          "1": {
+            "properties": {
+              "text1": "'Explosion.wav' by cejordi84",
+              "text2": "'semtex grenade.wav' by superfreq"
+
+            }
+          },
+          "2": {
+            "properties": {
+              "text1": "Grenade Launcher by LeMudCrab",
+              "text2": "gun_shoot.wav by Michel Hollicardo"
+
+            }
+          },
+          "3": {
+            "properties": {
+              "text1": "AK47 shot by pepv",
+              "text2": "M16 gun 3 round burst by lensflare8642"
+
             }
           }
         }
