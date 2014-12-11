@@ -2,6 +2,7 @@ module battle.state.applybuff;
 
 import dau.all;
 import model.all;
+import gui.battlepopup;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
@@ -31,6 +32,10 @@ class ApplyBuff : State!Battle {
         default:
           assert(0, "no code to handle effect type");
       }
+
+      // show popup
+      auto popupPos = _target.center;
+      b.gui.addElement(new BattlePopup(popupPos, _action.effect, _action.power));
 
       b.states.setState(new Delay); // pause briefly after applying buff
     }
