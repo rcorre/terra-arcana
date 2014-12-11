@@ -68,6 +68,12 @@ class Battle : Scene!Battle {
       }
     }
 
+    debug {
+      import std.stdio;
+      writeln(__FUNCTION__, ": ", "map.totalSize = ", map.totalSize);
+    }
+    camera.bounds = Rect2i(Vector2i.zero, map.totalSize);
+
     playMusicTrack(playerFaction.themeSong, true);
     startNewTurn;
   }

@@ -24,9 +24,9 @@ class Camera {
     }
 
     auto bounds() { return _bounds; }
-    void bounds(T)(Rect2!T bounds) {
-      _bounds = cast(Rect2f) bounds;
-      _area.keepInside(bounds);
+    void bounds(T)(Rect2!T newBounds) {
+      _bounds = cast(Rect2f) newBounds;
+      _area.keepInside(_bounds);
     }
 
     int clipWidth()  { return cast(int) _area.width; }
