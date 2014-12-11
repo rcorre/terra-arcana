@@ -38,7 +38,7 @@ class Battle : Scene!Battle {
       "active"   : new Animation("gui/cursor", "active", Animation.Repeat.loop),
       "ally"     : new Animation("gui/cursor", "ally", Animation.Repeat.loop),
       "enemy"    : new Animation("gui/cursor", "enemy", Animation.Repeat.loop),
-      "wait"    : new Animation("gui/cursor", "wait", Animation.Repeat.loop),
+      "wait"     : new Animation("gui/cursor", "wait", Animation.Repeat.loop),
     ];
     super(systems, cursorSprites);
     _panel = new BattlePanel;
@@ -68,10 +68,6 @@ class Battle : Scene!Battle {
       }
     }
 
-    debug {
-      import std.stdio;
-      writeln(__FUNCTION__, ": ", "map.totalSize = ", map.totalSize);
-    }
     camera.bounds = Rect2i(Vector2i.zero, map.totalSize);
 
     playMusicTrack(playerFaction.themeSong, true);
