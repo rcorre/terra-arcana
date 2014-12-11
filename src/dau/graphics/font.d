@@ -38,7 +38,7 @@ struct Font {
   void draw(string text, Vector2i topLeft, Color color = Color.black) {
     auto lines = text.splitter('\n');
     foreach(line ; lines) {
-      al_draw_text(_font, color, topLeft.x, topLeft.y, 0, text.toStringz);
+      al_draw_text(_font, color, topLeft.x, topLeft.y, 0, line.toStringz);
       topLeft.y += al_get_font_line_height(_font);
     }
   }

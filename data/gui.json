@@ -94,7 +94,7 @@
     "child": {
       "pageNumber": {
         "properties": {
-          "texture": "rectButton",
+          "texture": "gui/rectButton",
           "offset": "393, 489",
           "anchor" : "center",
           "fontName": "Mecha",
@@ -466,6 +466,154 @@
             "properties": {
               "fontName": "Mecha",
               "fontSize": "32"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "credits": {
+    "properties": {
+      "texture": "gui/titleScreen",
+      "firstEntryOffset": "0, 153",
+      "entrySpacing": "0, 32"
+    },
+    "child": {
+      "entryBackground": {
+        "properties": {
+          "texture": "gui/longBlade"
+        }
+      },
+      "entryText": {
+        "properties": {
+          "offset": "32, 2",
+          "fontName": "Mecha",
+          "fontSize": "28"
+        }
+      },
+      "title": {
+        "properties": {
+          "offset"   : "400, 55",
+          "text"     : "Terra Arcana",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "48"
+        }
+      },
+      "subtitle": {
+        "properties": {
+          "offset"   : "400, 106",
+          "text"     : "Credits",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "32"
+        }
+      },
+      "back": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Back",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "page1": {
+        "child": {
+          "button": {
+            "properties": {
+              "texture": "gui/rectButton",
+              "text": "Page 1",
+              "offset" : "489, 533",
+              "anchor": "topLeft",
+              "nextPage": "2"
+            },
+            "child": {
+              "text": {
+                "properties": {
+                  "fontName": "Mecha",
+                  "fontSize": "24"
+                }
+              }
+            }
+          },
+          "0": {
+            "properties": {
+              "text1": "Programming, Art, Music, Sound by rcorre",
+              "text2": "source available: "
+            }
+          },
+          "1": {
+            "properties": {
+              "text1": "Made with Allegro5",
+              "text2": "alleg.sourceforge.net"
+            }
+          },
+          "2": {
+            "properties": {
+              "text1": "Programmed in D (dlang.org)",
+              "text2": "D bindings for Allegro: github.com/SiegeLord/DAllegro5"
+            }
+          },
+          "3": {
+            "properties": {
+              "text1": "Font: Mecha by Captain Falcon",
+              "text2": "www.fontspace.com/captain-falcon/mecha"
+            }
+          }
+        }
+      },
+      "page2": {
+        "child": {
+          "button": {
+            "properties": {
+              "texture": "gui/rectButton",
+              "text": "Page 1",
+              "offset" : "489, 533",
+              "anchor": "topLeft",
+              "nextPage": "1"
+            },
+            "child": {
+              "text": {
+                "properties": {
+                  "fontName": "Mecha",
+                  "fontSize": "24"
+                }
+              }
+            }
+          },
+          "0": {
+            "properties": {
+              "text1": "Tiled: tilemap editor",
+              "text2": "www.mapeditor.org"
+            }
+          },
+          "1": {
+            "properties": {
+              "text1": "LMMS: Linux MultiMedia Studio",
+              "text2": "https://lmms.io/"
+
+            }
+          },
+          "2": {
+            "properties": {
+              "text1": "Aseprite: pixel art",
+              "text2": "http://www.aseprite.org/"
+
+            }
+          },
+          "3": {
+            "properties": {
+              "text1": "Audacity: Sound editing",
+              "text2": "http://audacity.sourceforge.net/"
             }
           }
         }

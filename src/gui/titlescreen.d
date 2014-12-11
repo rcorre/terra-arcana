@@ -8,6 +8,7 @@ import title.state.editpreferences;
 import title.state.showinstructions;
 import title.state.hostgame;
 import title.state.joingame;
+import title.state.showcredits;
 
 class TitleScreen : GUIElement {
   this(Title title) {
@@ -49,6 +50,7 @@ class TitleScreen : GUIElement {
   }
 
   void creditsButton() {
+    _title.states.setState(new ShowCredits);
   }
 
   void exitButton() {
