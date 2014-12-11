@@ -78,6 +78,11 @@ struct Rect2(T) {
     }
   }
 
+  /// cast to another rect type
+  auto opCast(U : inout(Rect2!V), V)() const {
+    return U(cast(V) x, cast(V) y, cast(V) width, cast(V) height);
+  }
+
   bool contains(T px, T py) {
     return px >= x && px <= right && py >= y && py <= bottom;
   }
