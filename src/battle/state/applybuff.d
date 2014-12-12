@@ -34,7 +34,7 @@ class ApplyBuff : State!Battle {
       }
 
       // show popup
-      auto popupPos = _target.center;
+      auto popupPos = cast(Vector2i) (_target.center - b.camera.area.topLeft);
       b.gui.addElement(new BattlePopup(popupPos, _action.effect, _action.power));
 
       b.states.setState(new Delay); // pause briefly after applying buff

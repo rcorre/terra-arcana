@@ -52,7 +52,7 @@ class ApplyEffect : State!Battle {
       }
 
       // show popup
-      auto popupPos = _target.center;
+      auto popupPos = cast(Vector2i) (_target.center - b.camera.area.topLeft);
       if (!hit) {
         b.gui.addElement(BattlePopup.evadeMessage(popupPos));
       }
