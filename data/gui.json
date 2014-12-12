@@ -1085,6 +1085,12 @@
           "fontName": "Mecha",
           "fontSize": "16"
         }
+      },
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "16"
+        }
       }
     }
   },
