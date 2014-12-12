@@ -19,12 +19,11 @@ class ConsiderMove : State!Battle {
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
-      if (!_unit.canAct || b.activePlayer.commandPoints <= 0) {
-        b.states.popState();
-      }
       _tileHover = b.getSystem!TileHoverSystem;
       _pathFinder = new Pathfinder(b.map, _unit);
-      b.cursor.setSprite((_pathFinder.tilesInRange.empty) ? "inactive" : "active");
+      if (_pathFinder.tilesInRange.empty || b.activePlayer.commandPoints <= 0) {
+        b.states.popState();
+      }
       _allyCursor  = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       _enemyCursor = new Animation("gui/overlay", "enemy", Animation.Repeat.loop);
       _moveCursor  = new Animation("gui/overlay", "move", Animation.Repeat.loop);
@@ -39,6 +38,7 @@ class ConsiderMove : State!Battle {
       if (_tileHover.tileUnderMouseChanged) {
         auto tile = _tileHover.tileUnderMouse;
         _path = _pathFinder.pathTo(tile);
+        b.cursor.setSprite((_path is null) ? "inactive" : "active");
       }
       if (input.select) {
         if (_path is null || _path.empty) {

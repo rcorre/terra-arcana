@@ -54,8 +54,8 @@ class InputManager {
     bool selectRight() { return keyPressed(Keymap.right); }
 
     bool skip() { return keyPressed(Keymap.skip); }
-    bool action1() { return keyPressed(Keymap.action1); }
-    bool action2() { return keyPressed(Keymap.action2); }
+    bool action1() { return keyHeld(Keymap.action1); }
+    bool action2() { return keyHeld(Keymap.action2); }
 
     bool select() { return mouseClicked(MouseButton.lmb); }
     bool inspect() { return mouseHeld(MouseButton.rmb); }
