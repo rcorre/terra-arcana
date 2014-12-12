@@ -68,6 +68,8 @@ class Battle : Scene!Battle {
       }
     }
 
+    preloadTextures("content/image/gui", "*.png");
+
     camera.bounds = Rect2i(Vector2i.zero, map.totalSize);
 
     playMusicTrack(playerFaction.themeSong, true);

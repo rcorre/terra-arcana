@@ -1,9 +1,6 @@
 module dau.graphics.texture;
 
-import std.string;
-import std.conv;
-import std.algorithm;
-import std.file : exists;
+import std.string, std.conv, std.algorithm, std.file, std.path;
 import dau.allegro;
 import dau.setup;
 import dau.util.jsonizer;
@@ -131,8 +128,17 @@ Texture getTexture(string name) {
   return _textureStore[name];
 }
 
-private:
+void preloadTextures(string dir, string glob = "*", SpanMode spanMode = SpanMode.shallow) {
+  foreach(path ; dirEntries(dir, glob, spanMode)) {
+    auto name = path.chompPrefix(Paths.bitmapDir ~ "/").stripExtension;
+    if (name !in _textureStore) {
+      auto bmp = loadBitmap(name);
+      _textureStore[name] = new Texture(bmp, name);
+    }
+  }
+}
 
+private:
 static this() { // automatically load a texture for each entry in the texture sheet config file
   onInit(&loadTextures);
   onShutdown(&unloadTextures);
