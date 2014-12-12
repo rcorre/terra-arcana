@@ -40,11 +40,16 @@ class ConsiderMove : State!Battle {
         auto tile = _tileHover.tileUnderMouse;
         _path = _pathFinder.pathTo(tile);
       }
-      if (input.select && _path !is null && !_path.empty) {
-        b.states.pushState(new MoveUnit(_unit, _path));
-        // send notification over network
-        auto net = b.getSystem!BattleNetworkSystem;
-        net.broadcastMove(_unit, _path);
+      if (input.select) {
+        if (_path is null || _path.empty) {
+          b.states.popState();
+        }
+        else {
+          b.states.pushState(new MoveUnit(_unit, _path));
+          // send notification over network
+          auto net = b.getSystem!BattleNetworkSystem;
+          net.broadcastMove(_unit, _path);
+        }
       }
       else if (input.skip) {
         b.states.popState();
