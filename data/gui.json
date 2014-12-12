@@ -31,7 +31,7 @@
     "properties": {
       "fontName": "Mecha",
       "fontSize": "16",
-      "velocity": "0, -120",
+      "velocity": "0, -60",
       "duration": "1.0"
     }
   },
