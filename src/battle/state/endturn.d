@@ -2,6 +2,7 @@ module battle.state.endTurn;
 
 import dau.all;
 import model.all;
+import gui.endturn;
 import battle.battle;
 import battle.system.all;
 
@@ -10,7 +11,7 @@ class EndTurn : State!Battle {
   override {
     void enter(Battle b) {
       b.disableSystem!TileHoverSystem;
-      _popup = b.gui.addElement(new Icon(getGUIData("endTurn")));
+      _popup = b.gui.addElement(new EndTurnPopup());
     }
 
     void update(Battle b, float time, InputManager input) {

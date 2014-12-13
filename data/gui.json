@@ -41,6 +41,46 @@
       "offset": "400, 300",
       "anchor": "center",
       "texture": "gui/endTurn"
+    },
+    "child": {
+      "mainText": {
+        "properties": {
+          "offset": "41, 9",
+          "fontName": "Mecha",
+          "fontSize": "40",
+          "text": "End Turn?"
+        }
+      },
+      "confirmText": {
+        "properties": {
+          "offset": "89, 53",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "to confirm"
+        }
+      },
+      "cancelText": {
+        "properties": {
+          "offset": "89, 89",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "to cancel"
+        }
+      },
+      "confirmIcon": {
+        "properties": {
+          "offset": "45, 53",
+          "texture": "input",
+          "sprite": "space"
+        }
+      },
+      "cancelIcon": {
+        "properties": {
+          "offset": "45, 89",
+          "texture": "input",
+          "sprite": "lmb"
+        }
+      }
     }
   },
 
