@@ -72,7 +72,7 @@ class PerformAction : State!Battle {
 
       // drain ap and animate ap change
       int prevAp = _actor.ap;
-      _actor.consumeAp(_action.apCost);
+      _actor.consumeAp(_action.apCost * (_actor.isStunned ? 2 : 1));
       b.activePlayer.consumeCommandPoints(1);
       b.refreshBattlePanel();
     }

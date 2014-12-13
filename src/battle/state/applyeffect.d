@@ -29,7 +29,7 @@ class ApplyEffect : State!Battle {
             effectAmount = _target.dealDamage(_action.power, ignoreArmor);
             break;
           case stun:
-            _target.damageAp(_action.power);
+            _target.applyStun(_action.power);
             break;
           case evade:
             _target.adjustEvade(_action.power);

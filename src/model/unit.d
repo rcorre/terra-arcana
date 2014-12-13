@@ -66,15 +66,18 @@ class Unit : Entity {
     int armor() { return _armor; }
     int toxin() { return _toxin; }
     int slow()  { return _slow; }
+    int stun()  { return _stun; }
 
     bool canAct()   { return _ap > 0 && isAlive; }
     bool isAlive()  { return _hp > 0; }
     bool isSlowed() { return _slow > 0; }
+    bool isStunned() { return _stun > 0; }
     bool isToxic()  { return _toxin > 0; }
   }
 
   void endTurn() {
     _slow = max(0, _slow - 1);
+    _stun = max(0, _stun - 1);
     if (!hasTrait(UnitData.Trait.flight)) { // no cover bonus for flying units
       _coverBonus = min(_coverBonus + 1, tile.cover);
     }
@@ -117,11 +120,6 @@ class Unit : Entity {
     return amount;
   }
 
-  void damageAp(int amount) {
-    _ap = max(_ap - amount, -maxAp);
-    _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
-  }
-
   void applyToxin(int amount) {
     _toxin += amount;
     _sprite.flash(flashTime, toxinFlashColor);
@@ -129,6 +127,11 @@ class Unit : Entity {
 
   void applySlow(int amount) {
     _slow += amount;
+    _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
+  }
+
+  void applyStun(int amount) {
+    _stun += amount;
     _sprite.shake(shakeOffset, shakeSpeed, shakeRepetitions);
   }
 
@@ -191,7 +194,7 @@ class Unit : Entity {
   /// return true if can use action num from position on target
   bool canUseActionFrom(int num, Tile target, Tile position, int apLeft) {
     auto action = getAction(num);
-    if (action.apCost > apLeft) { return false; }
+    if (action.apCost * (isStunned ? 2 : 1) > apLeft) { return false; }
     int dist = position.distance(target);
     bool inRange = dist <= action.maxRange && dist >= action.minRange;
     auto other = cast(Unit) target.entity;
@@ -250,7 +253,7 @@ class Unit : Entity {
   int _hp, _ap;
   int _evade, _armor; // current evade and armor stats
   int _coverBonus;    // evasion granted by cover
-  int _toxin, _slow;
+  int _toxin, _slow, _stun;
   SoundSample _damageSound, _noDamageSound, _healSound, _evadeSound, _destroySound;
 
   @property auto animation() { return cast(Animation) _sprite; }
