@@ -4,6 +4,7 @@ import dau.all;
 import battle.battle;
 import model.all;
 import gui.unitinfo;
+import gui.unitpreview;
 
 class TileHoverSystem : System!Battle {
   this(Battle b) {
@@ -37,6 +38,14 @@ class TileHoverSystem : System!Battle {
         }
         positionUnitInfo(input.mousePos);
       }
+
+      // display unit preview
+      if (_newTileUnderMouse) {
+        destroyUnitPreview();
+        if (_unitUnderMouse !is null) {
+          _unitPreview = scene.gui.addElement(new UnitPreview(_unitUnderMouse));
+        }
+      }
     }
 
     void start() {
@@ -51,11 +60,19 @@ class TileHoverSystem : System!Battle {
   Unit _unitUnderMouse;
   bool _newTileUnderMouse;
   UnitInfoGUI _unitInfo;
+  UnitPreview _unitPreview;
 
   void destroyUnitInfo() {
     if (_unitInfo !is null) {
       _unitInfo.active = false;
       _unitInfo = null;
+    }
+  }
+
+  void destroyUnitPreview() {
+    if (_unitPreview !is null) {
+      _unitPreview.active = false;
+      _unitPreview = null;
     }
   }
 

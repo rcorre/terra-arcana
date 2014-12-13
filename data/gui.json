@@ -142,6 +142,53 @@
     }
   },
 
+  "unitPreview": {
+    "properties": {
+      "offset": "0, 497",
+      "slideOffset": "-150,0",
+      "slideSpeed": "600",
+      "texture": "gui/unitPreview"
+    },
+    "child": {
+      "name": {
+        "properties": {
+        }
+      },
+      "hpBar": {
+        "properties": {
+          "area"          : "24, 24, 95, 21",
+          "pipSpacingX"   : "-4",
+          "brightShade"   : "0,1,1",
+          "dimShade"      : "0,0.4,0.4",
+          "negativeShade" : "0.8,0,0"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip"
+            }
+          }
+        }
+      },
+      "apBar": {
+        "properties": {
+          "area"          : "24, 48, 95, 21",
+          "pipSpacingX"   : "-4",
+          "brightShade"   : "1,0.5,0, 0.8",
+          "dimShade"      : "1,0.5,0, 0.2",
+          "negativeShade" : "0.8,0,0"
+        },
+        "child": {
+          "pip": {
+            "properties": {
+              "texture": "gui/pip"
+            }
+          }
+        }
+      }
+    }
+  },
+
   "battlePanel": {
     "properties": {
       "offset": "667, 497",
