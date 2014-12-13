@@ -29,10 +29,68 @@
 
   "battlePopup": {
     "properties": {
-      "fontName": "Mecha",
-      "fontSize": "16",
-      "velocity": "0, -60",
-      "duration": "1.0"
+      "texture": "gui/battlePopup",
+      "velocity": "0, -120",
+      "duration": "1.0",
+      "anchor": "center"
+    },
+    "child": {
+      "damage": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "18",
+          "textColor": "1,0,0"
+        }
+      },
+      "heal": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "18",
+          "textColor": "0,1,0"
+        }
+      },
+      "evade": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "18",
+          "textColor": "0,0,1"
+        }
+      },
+      "armor": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "18",
+          "textColor": "0,0,1"
+        }
+      },
+      "toxin": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "18",
+          "textColor": "0,1,0"
+        }
+      },
+      "slow": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "18",
+          "textColor": "1,0,0"
+        }
+      },
+      "stun": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "18",
+          "textColor": "1,0,0"
+        }
+      },
+      "miss": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "18",
+          "textColor": "0,0,0"
+        }
+      }
     }
   },
 

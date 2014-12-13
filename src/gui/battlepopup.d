@@ -14,24 +14,13 @@ private enum string[UnitAction.Effect.max + 1] formats = [
   UnitAction.Effect.stun       : "stun (%d)",
 ];
 
-private enum string[UnitAction.Effect.max + 1] colors = [
-  UnitAction.Effect.damage     : "1,0,0",
-  UnitAction.Effect.heal       : "0,1,0",
-  UnitAction.Effect.evade      : "0,0,1",
-  UnitAction.Effect.armor      : "0,0,1",
-  UnitAction.Effect.toxin      : "0,1,0",
-  UnitAction.Effect.slow       : "1,0,0",
-  UnitAction.Effect.stun       : "1,0,0",
-];
-
-class BattlePopup : TextBox {
+class BattlePopup : GUIElement {
   this(Vector2i pos, UnitAction.Effect effect, int value) {
-    auto data = getGUIData("battlePopup");
-    data["textColor"] = colors[effect];
-    string text = formats[effect].format(value);
+    super(getGUIData("battlePopup"), pos);
     _duration = data["duration"].to!float;
     _velocity = data["velocity"].parseVector!float;
-    super(data, text, pos);
+    string text = formats[effect].format(value);
+    addChild(new TextBox(data.child[effect.to!string], text));
   }
 
   static BattlePopup evadeMessage(Vector2i pos) {
@@ -39,12 +28,11 @@ class BattlePopup : TextBox {
   }
 
   private this(Vector2i pos) {
-    auto data = getGUIData("battlePopup");
-    data["textColor"] = "1,1,1";
-    string text = "miss (evasion - 1)";
+    super(getGUIData("battlePopup"), pos);
     _duration = data["duration"].to!float;
     _velocity = data["velocity"].parseVector!float;
-    super(data, text, pos);
+    string text = "miss!";
+    addChild(new TextBox(data.child["miss"], text));
   }
 
   override void update(float time) {
