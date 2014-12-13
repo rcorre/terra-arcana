@@ -5,7 +5,7 @@ import dau.graphics.all;
 import dau.gui.all;
 import model.all;
 
-/// bar that displays progress as discrete elements (pips)
+/// show unit AP and HP on the side of the screen
 class UnitPreview : DynamicGUIElement {
   this(Unit unit) {
     super(getGUIData("unitPreview"));
@@ -24,10 +24,6 @@ class UnitPreview : DynamicGUIElement {
     transitionActive = true;
   }
 
-  void hide() {
-    transitionActive = false;
-  }
-
   override void update(float time) {
     super.update(time);
     if (!transitionActive && transitionAtStart) {
@@ -38,5 +34,4 @@ class UnitPreview : DynamicGUIElement {
   private:
   TextBox _name;
   PipBar _hpBar, _apBar;
-  bool _hiding;
 }

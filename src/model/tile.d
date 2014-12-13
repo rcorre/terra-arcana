@@ -10,7 +10,7 @@ import dau.tool.tiled;
 class Tile : Entity {
   enum {
     size = 32,
-    unreachable = 9999
+    unreachable = 99
   }
 
   const {

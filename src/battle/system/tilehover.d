@@ -5,6 +5,7 @@ import battle.battle;
 import model.all;
 import gui.unitinfo;
 import gui.unitpreview;
+import gui.terrainpreview;
 
 class TileHoverSystem : System!Battle {
   this(Battle b) {
@@ -41,9 +42,28 @@ class TileHoverSystem : System!Battle {
 
       // display unit preview
       if (_newTileUnderMouse) {
-        destroyUnitPreview();
         if (_unitUnderMouse !is null) {
-          _unitPreview = scene.gui.addElement(new UnitPreview(_unitUnderMouse));
+          auto unitPreview = cast(UnitPreview) _currentPreview;
+          if (unitPreview is null) {
+            destroyCurrentPreview();
+            _currentPreview = scene.gui.addElement(new UnitPreview(_unitUnderMouse));
+          }
+          else {
+            unitPreview.refresh(_unitUnderMouse);
+          }
+        }
+        else if (_tileUnderMouse !is null) {
+          auto terrainPreview = cast(TerrainPreview) _currentPreview;
+          if (terrainPreview is null) {
+            destroyCurrentPreview();
+            _currentPreview = scene.gui.addElement(new TerrainPreview(_tileUnderMouse));
+          }
+          else {
+            terrainPreview.refresh(_tileUnderMouse);
+          }
+        }
+        else {
+          destroyCurrentPreview();
         }
       }
     }
@@ -60,7 +80,7 @@ class TileHoverSystem : System!Battle {
   Unit _unitUnderMouse;
   bool _newTileUnderMouse;
   UnitInfoGUI _unitInfo;
-  UnitPreview _unitPreview;
+  DynamicGUIElement _currentPreview;
 
   void destroyUnitInfo() {
     if (_unitInfo !is null) {
@@ -69,10 +89,10 @@ class TileHoverSystem : System!Battle {
     }
   }
 
-  void destroyUnitPreview() {
-    if (_unitPreview !is null) {
-      _unitPreview.hide();
-      _unitPreview = null;
+  void destroyCurrentPreview() {
+    if (_currentPreview !is null) {
+      _currentPreview.transitionActive = false;
+      _currentPreview = null;
     }
   }
 

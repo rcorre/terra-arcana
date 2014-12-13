@@ -10,12 +10,12 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="135.5"
-   height="69.166656"
+   width="111.18808"
+   height="69"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="unitPreview.svg">
+   sodipodi:docname="terrainPreview.svg">
   <defs
      id="defs4">
     <clipPath
@@ -181,11 +181,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="98.059059"
-     inkscape:cy="30.891075"
+     inkscape:zoom="4.165509"
+     inkscape:cx="23.436321"
+     inkscape:cy="-12.179277"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer6"
      showgrid="true"
      inkscape:snap-global="true"
      inkscape:window-width="1918"
@@ -203,15 +203,15 @@
      gridtolerance="10">
     <sodipodi:guide
        orientation="0,1"
-       position="-73.867274,175.43166"
+       position="-73.867274,175.265"
        id="guide3304" />
     <sodipodi:guide
        orientation="0,1"
-       position="-31.000004,206.75416"
+       position="-31.000004,206.5875"
        id="guide3076" />
     <sodipodi:guide
        orientation="1,0"
-       position="-95.000004,178.75416"
+       position="-95.000004,178.5875"
        id="guide3078" />
     <inkscape:grid
        type="xygrid"
@@ -221,7 +221,7 @@
        enabled="true"
        snapvisiblegridlinesonly="true"
        originx="0.50000001px"
-       originy="0.66665589px" />
+       originy="0.4999994px" />
     <inkscape:grid
        type="xygrid"
        id="grid6675"
@@ -232,7 +232,7 @@
        spacingx="1px"
        spacingy="1px"
        originx="0.50000001px"
-       originy="0.66665589px" />
+       originy="0.4999994px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -242,7 +242,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -446,22 +446,16 @@
     </g>
     <path
        style="fill:#4d4d4d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.69282001;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;display:inline"
-       d="m 11.486924,622.67441 106.666666,0.33334 -8,20 -106.666666,-0.33334 z"
+       d="m 11.486924,622.67441 81.791666,0.0131 -8,20 -81.791666,-0.0131 z"
        id="path3546"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        inkscape:connector-curvature="0"
        id="path3544"
-       d="m -16.499996,642.6875 35,0 8,-20 -43,0"
+       d="m -16.499996,642.6875 76,0 8,-20 -84,0"
        style="fill:#808080;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        sodipodi:nodetypes="cccc" />
-    <path
-       style="fill:#ff6600;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
-       d="m -8.846406,625.00776 6,0 -3,6 4,0 -4,9 -5.8,0 2.8,-6 -4,0 z"
-       id="path3548"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccc" />
     <image
        style="display:none"
        width="832"
@@ -485,7 +479,7 @@
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="path4412"
-       d="m 11.486924,598.67441 106.666666,0.33334 -8,20 -106.666666,-0.33334 z"
+       d="m 11.486924,598.67441 81.791666,0.0131 -8,20 -81.791666,-0.0131 z"
        style="fill:#4d4d4d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.69282001;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;display:inline" />
     <path
        sodipodi:nodetypes="ccccccccc"
@@ -496,14 +490,9 @@
     <path
        inkscape:connector-curvature="0"
        id="path3538"
-       d="m -16.499996,618.6875 35,0 8,-20 -43,0"
+       d="m -16.499996,618.6875 76,0 8,-20 -84,0"
        style="fill:#808080;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        sodipodi:nodetypes="cccc" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path4418"
-       d="m -10.173206,600.68095 5.33334,0 0,5.33333 5.33333,0 0,5.33334 -5.33333,0 0,5.33333 -5.33334,0 0,-5.33333 -5.33333,0 0,-5.33334 5.33333,0 z"
-       style="opacity:0.76000001;fill:#00ffff;stroke:#000000;stroke-width:0.66666698px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1" />
     <g
        style="display:none"
        transform="translate(-345.05354,550.26001)"
@@ -645,25 +634,25 @@
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Mecha;-inkscape-font-specification:Mecha"
-       x="2.533829"
+       x="-16.466171"
        y="639.5625"
        id="text3574"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3576"
-         x="2.533829"
-         y="639.5625">AP</tspan></text>
+         x="-16.466171"
+         y="639.5625">Cover</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3578"
        y="615.5625"
-       x="2.533829"
+       x="-16.466171"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Mecha;-inkscape-font-specification:Mecha"
        xml:space="preserve"><tspan
          y="615.5625"
-         x="2.533829"
+         x="-16.466171"
          id="tspan3580"
-         sodipodi:role="line">HP</tspan></text>
+         sodipodi:role="line">Move Cost</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

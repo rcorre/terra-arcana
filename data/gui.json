@@ -163,7 +163,7 @@
       },
       "hpBar": {
         "properties": {
-          "area"          : "24, 24, 95, 21",
+          "area"          : "39, 24, 95, 21",
           "pipSpacingX"   : "-4",
           "brightShade"   : "0,1,1",
           "dimShade"      : "0,0.4,0.4",
@@ -179,7 +179,7 @@
       },
       "apBar": {
         "properties": {
-          "area"          : "24, 48, 95, 21",
+          "area"          : "39, 48, 95, 21",
           "pipSpacingX"   : "-4",
           "brightShade"   : "1,0.5,0, 0.8",
           "dimShade"      : "1,0.5,0, 0.2",
@@ -191,6 +191,42 @@
               "texture": "gui/pip"
             }
           }
+        }
+      }
+    }
+  },
+
+  "terrainPreview": {
+    "properties": {
+      "offset": "-150, 510",
+      "texture": "gui/terrainPreview"
+    },
+    "child": {
+      "transition": {
+        "properties": {
+          "duration": "0.2",
+          "offset": "150, 0"
+        }
+      },
+      "name": {
+        "properties": {
+          "offset": "2, 0",
+          "fontName": "Mecha",
+          "fontSize": "20"
+        }
+      },
+      "moveCost": {
+        "properties": {
+          "offset": "88, 25",
+          "fontName": "Mecha",
+          "fontSize": "20"
+        }
+      },
+      "cover": {
+        "properties": {
+          "offset": "88, 49",
+          "fontName": "Mecha",
+          "fontSize": "20"
         }
       }
     }
