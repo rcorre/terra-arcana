@@ -53,11 +53,10 @@
     "action2": {
       "name"        : "Concussor",
       "description" : "",
-      "target"      : "enemy",
+      "target"      : "burst",
       "effect"      : "stun",
-      "specials"    : ["precise"],
       "apCost"      : 2,
-      "power"       : 2,
+      "power"       : 1,
       "hits"        : 1,
       "minRange"    : 1,
       "maxRange"    : 2
@@ -218,7 +217,7 @@
     "action2": {
       "name"        : "Entangle",
       "description" : "",
-      "target"      : "enemy",
+      "target"      : "burst",
       "effect"      : "slow",
       "apCost"      : 2,
       "power"       : 1,
