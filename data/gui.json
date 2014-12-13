@@ -144,12 +144,16 @@
 
   "unitPreview": {
     "properties": {
-      "offset": "0, 497",
-      "slideOffset": "-150,0",
-      "slideSpeed": "600",
+      "offset": "-150, 510",
       "texture": "gui/unitPreview"
     },
     "child": {
+      "transition": {
+        "properties": {
+          "duration": "0.2",
+          "offset": "150, 0"
+        }
+      },
       "name": {
         "properties": {
           "offset": "2, 0",
@@ -194,7 +198,7 @@
 
   "battlePanel": {
     "properties": {
-      "offset": "667, 497",
+      "offset": "667, 510",
       "slideOffset": "150,0",
       "slideSpeed": "600",
       "texture": "gui/battlePanel"

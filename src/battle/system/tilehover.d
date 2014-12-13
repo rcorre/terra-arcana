@@ -71,7 +71,7 @@ class TileHoverSystem : System!Battle {
 
   void destroyUnitPreview() {
     if (_unitPreview !is null) {
-      _unitPreview.active = false;
+      _unitPreview.hide();
       _unitPreview = null;
     }
   }

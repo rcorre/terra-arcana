@@ -13,3 +13,4 @@ public import dau.gui.textinput;
 public import dau.gui.messagebox;
 public import dau.gui.scrollselection;
 public import dau.gui.stringselection;
+public import dau.gui.dynamicelement;
