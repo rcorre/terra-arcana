@@ -144,42 +144,46 @@
 
   "battlePanel": {
     "properties": {
-      "offset": "0, 529",
-      "slideOffset": "-150,0",
+      "offset": "667, 497",
+      "slideOffset": "150,0",
       "slideSpeed": "600",
       "texture": "gui/battlePanel"
     },
     "child": {
       "commandBar": {
         "properties": {
-          "area"          : "24, 0, 95, 21",
+          "area"          : "0, 30, 100, 21",
           "pipSpacingX"   : "-4",
           "brightShade"   : "1,0.5,0, 0.8",
           "dimShade"      : "1,0.5,0, 0.0",
           "negativeShade" : "0.8,0,0",
-          "numPips" : "12"
+          "reverse"       : "true",
+          "numPips"       : "12"
         },
         "child": {
           "pip": {
             "properties": {
-              "texture": "gui/pip"
+              "texture": "gui/pip",
+              "flip": "horizontal"
             }
           }
         }
       },
       "manaBar": {
         "properties": {
-          "area"          : "24, 24, 95, 21",
+          "area"          : "24, 56, 95, 21",
           "pipSpacingX"   : "-4",
           "brightShade"   : "0,1,1",
           "dimShade"      : "0,0.0,0.0,0.0",
           "negativeShade" : "0.8,0,0",
-          "numPips" : "12"
+          "reverse"       : "true",
+          "numPips"       : "12"
         },
         "child": {
           "pip": {
             "properties": {
-              "texture": "gui/pip"
+              "texture": "gui/pip",
+              "flip": "horizontal"
             }
           }
         }

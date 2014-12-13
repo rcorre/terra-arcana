@@ -23,13 +23,14 @@ class PipBar : GUIElement {
     _maxVal = numPips;
     // insert pips, moving horizontally from left to right
     auto pipData = data.child["pip"];
+    bool reverse = data.get("reverse", "false").to!bool;
     int pipSpacingX = data.get("pipSpacingX", "0").to!int;
     auto pip = new Pip(pipData, Vector2i.zero);
-    auto pos = pip.size / 2; // relative to top left
+    auto pos = pip.size / 2 + (reverse ? Vector2i(area.width, 0) : Vector2i.zero);
     for(int i = 0; i < numPips; ++i) {
       pip = new Pip(pipData, pos);
       _pips ~= addChild(pip);
-      pos.x += pip.width + pipSpacingX;
+      pos.x += (pip.width + pipSpacingX) * (reverse ? -1 : 1);
     }
     _brightShade   = data.get("brightShade", "1,1,1").parseColor;
     _dimShade      = data.get("dimShade", "1,1,1,0.3").parseColor;
