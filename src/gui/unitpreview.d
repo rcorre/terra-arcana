@@ -10,6 +10,7 @@ class UnitPreview : GUIElement {
   this(Unit unit) {
     super(getGUIData("unitPreview"));
 
+    _name = addChild(new TextBox(data.child["name"], unit.name));
     _hpBar = addChild(new PipBar(data.child["hpBar"], unit.maxHp));
     _apBar = addChild(new PipBar(data.child["apBar"], unit.maxAp));
 
@@ -17,10 +18,12 @@ class UnitPreview : GUIElement {
   }
 
   void refresh(Unit unit) {
+    _name.text = unit.name;
     _hpBar.setVal(unit.hp);
     _apBar.setVal(unit.ap);
   }
 
   private:
+  TextBox _name;
   PipBar _hpBar, _apBar;
 }

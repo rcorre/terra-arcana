@@ -152,6 +152,9 @@
     "child": {
       "name": {
         "properties": {
+          "offset": "2, 0",
+          "fontName": "Mecha",
+          "fontSize": "20"
         }
       },
       "hpBar": {
