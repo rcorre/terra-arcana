@@ -12,9 +12,7 @@ class ShowBattleMenu : State!Battle {
     void enter(Battle b) {
       b.disableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
-      auto returnButton = { b.states.popState(); };
-      auto exitButton = delegate() { setScene(new Title); };
-      _menu = b.gui.addElement(new BattleMenu(returnButton, exitButton));
+      _menu = b.gui.addElement(new BattleMenu(b));
     }
 
     void update(Battle b, float time, InputManager input) {

@@ -2,26 +2,25 @@ module gui.battlemenu;
 
 import dau.all;
 import model.all;
+import title.title;
 import battle.battle;
+import battle.state.showinstructions;
+import battle.state.showpreferences;
 
 class BattleMenu : GUIElement {
   alias Action = void delegate();
-  this(Action returnButton, Action surrenderButton) {
+  this(Battle battle) {
     super(getGUIData("battleMenu"));
 
     addChild(new TextBox(data.child["title"]));
 
-    addChild(new Button(data.child["return"], returnButton));
-    addChild(new Button(data.child["surrender"], surrenderButton));
+    addChild(new Button(data.child["return"], { battle.states.popState(); }));
+    addChild(new Button(data.child["surrender"], { setScene(new Title); }));
 
-    addChild(new Button(data.child["instructions"], &showInstructions));
-    addChild(new Button(data.child["preferences"], &showPreferences));
-  }
+    auto showPreferences  = { battle.states.pushState(new ShowPreferences); };
+    auto showInstructions = { battle.states.pushState(new ShowInstructions); };
 
-  private:
-  void showInstructions() {
-  }
-
-  void showPreferences() {
+    addChild(new Button(data.child["instructions"], showInstructions));
+    addChild(new Button(data.child["preferences"], showPreferences));
   }
 }
