@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.6496221"
-     inkscape:cx="183.81204"
-     inkscape:cy="221.60265"
+     inkscape:zoom="2.3329179"
+     inkscape:cx="128.75999"
+     inkscape:cy="268.55431"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -59,7 +59,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -80,17 +80,6 @@
        id="path2985"
        inkscape:connector-curvature="0"
        transform="translate(0,452.36218)" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Mecha;-inkscape-font-specification:Mecha"
-       x="315"
-       y="554.11218"
-       id="text2987"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2989"
-         x="315"
-         y="554.11218">Battle Menu</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -213,5 +202,17 @@
          id="tspan3121"
          x="355"
          y="368.25">Surrender</tspan></text>
+    <text
+       transform="translate(0,-452.36218)"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Mecha;-inkscape-font-specification:Mecha"
+       x="315"
+       y="554.11218"
+       id="text2987"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2989"
+         x="315"
+         y="554.11218">Battle Menu</tspan></text>
   </g>
 </svg>

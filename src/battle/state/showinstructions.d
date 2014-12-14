@@ -9,7 +9,6 @@ import gui.instructions;
 class ShowInstructions : State!Battle {
   override {
     void enter(Battle battle) {
-      battle.gui.clear();
       auto backToBattle = { battle.states.popState(); };
       _menu = battle.gui.addElement(new InstructionScreen(backToBattle));
     }
