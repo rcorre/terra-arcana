@@ -42,6 +42,9 @@ class UnitInfoGUI : GUIElement {
       if (unit.isSlowed) {
         addEffectIcon("slow", unit.slow);
       }
+      if (unit.isStunned) {
+        addEffectIcon("stun", unit.stun);
+      }
       _hpBar.setVal(unit.hp);
       _apBar.setVal(unit.ap);
       _armorBar.setVal(unit.armor);
