@@ -94,19 +94,6 @@ bool processEvents() {
         shutdownGame();
         break;
       }
-    case ALLEGRO_EVENT_KEY_DOWN:
-      {
-        switch(event.keyboard.keycode)
-        {
-          case ALLEGRO_KEY_ESCAPE:
-            {
-              shutdownGame();
-              break;
-            }
-          default:
-        }
-        break;
-      }
     default:
   }
   foreach(handler ; _eventHandlers.get(event.type, null)) {
