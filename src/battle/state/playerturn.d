@@ -7,6 +7,7 @@ import battle.battle;
 import battle.system.all;
 import battle.state.endturn;
 import battle.state.considermove;
+import battle.state.showbattlemenu;
 import battle.state.chooseunittodeploy;
 
 /// player may click on a unit to issue orders
@@ -47,6 +48,9 @@ class PlayerTurn : State!Battle {
       }
       else if (input.skip) {
         b.states.pushState(new EndTurn);
+      }
+      else if (input.exit) {
+        b.states.pushState(new ShowBattleMenu);
       }
     }
 

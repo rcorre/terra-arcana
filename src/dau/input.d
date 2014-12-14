@@ -20,6 +20,7 @@ private enum Keymap {
   action2  = [ALLEGRO_KEY_E],
 
   skip  = [ALLEGRO_KEY_SPACE],
+  exit  = [ALLEGRO_KEY_ESCAPE],
 }
 
 class InputManager {
@@ -54,6 +55,7 @@ class InputManager {
     bool selectRight() { return keyPressed(Keymap.right); }
 
     bool skip() { return keyPressed(Keymap.skip); }
+    bool exit() { return keyPressed(Keymap.exit); }
     bool action1() { return keyHeld(Keymap.action1); }
     bool action2() { return keyHeld(Keymap.action2); }
 

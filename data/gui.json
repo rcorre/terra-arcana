@@ -507,6 +507,84 @@
     }
   },
 
+  "battleMenu": {
+    "properties": {
+      "texture": "gui/battleMenu",
+      "anchor": "center",
+      "offset": "400, 300"
+    },
+    "child": {
+      "title": {
+        "properties": {
+          "offset"   : "125, 17",
+          "text"     : "Battle Menu",
+          "fontName" : "Mecha",
+          "fontSize" : "40"
+        }
+      },
+      "return": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Return To Battle",
+          "offset" : "65, 97"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
+        }
+      },
+      "instructions": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Instructions",
+          "offset" : "65, 161"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
+        }
+      },
+      "preferences": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Preferences",
+          "offset" : "65, 225"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
+        }
+      },
+      "surrender": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Surrender",
+          "offset" : "65, 289"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
+        }
+      }
+    }
+  },
+
   "preferences": {
     "properties": {
       "texture": "gui/titleScreen"
