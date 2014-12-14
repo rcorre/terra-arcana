@@ -1,10 +1,11 @@
 module battle.battle;
 
-import std.range, std.algorithm, std.conv;
+import std.range, std.algorithm, std.conv, std.typecons;
 import dau.all;
 import net.all;
 import model.all;
 import battle.state.pcturn;
+import battle.state.battleover;
 import battle.state.playerturn;
 import battle.state.networkturn;
 import battle.state.checkunitdestruction;
@@ -122,6 +123,13 @@ package:
       auto unit = cast(Unit) tile.entity;
       if (unit !is null && unit.team != obelisk.team) { // switch obelisk team
         captureObelisk(obelisk, unit.team);
+      }
+    }
+
+    foreach(pl ; players) {
+      if (pl.maxCommandPoints == 0) {
+        states.setState(new BattleOver(pl.isLocal ? No.Victory : Yes.Victory));
+        return;
       }
     }
 

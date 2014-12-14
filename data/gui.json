@@ -98,7 +98,7 @@
     "properties": {
       "offset": "400, 300",
       "anchor": "center",
-      "texture": "gui/endTurn"
+      "texture": "gui/battleMessage"
     },
     "child": {
       "mainText": {
@@ -137,6 +137,47 @@
           "offset": "45, 89",
           "texture": "input",
           "sprite": "lmb"
+        }
+      }
+    }
+  },
+
+  "battleOver": {
+    "properties": {
+      "offset": "400, 300",
+      "anchor": "center",
+      "texture": "gui/battleMessage"
+    },
+    "child": {
+      "victory": {
+        "properties": {
+          "offset": "41, 9",
+          "fontName": "Mecha",
+          "fontSize": "40",
+          "text": "Victory!"
+        }
+      },
+      "defeat": {
+        "properties": {
+          "offset": "41, 9",
+          "fontName": "Mecha",
+          "fontSize": "40",
+          "text": "Defeat!"
+        }
+      },
+      "confirmText": {
+        "properties": {
+          "offset": "89, 53",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "to confirm"
+        }
+      },
+      "confirmIcon": {
+        "properties": {
+          "offset": "45, 53",
+          "texture": "input",
+          "sprite": "space"
         }
       }
     }

@@ -5,7 +5,7 @@ import dau.all;
 import model.all;
 import battle.battle;
 import battle.system.all;
-import battle.state.endTurn;
+import battle.state.endturn;
 import battle.state.considermove;
 import battle.state.chooseunittodeploy;
 

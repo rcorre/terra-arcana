@@ -1,4 +1,4 @@
-module battle.state.endTurn;
+module battle.state.endturn;
 
 import dau.all;
 import model.all;
@@ -26,7 +26,6 @@ class EndTurn : State!Battle {
     }
 
     void exit(Battle b) {
-      _popup.active = false;
       _popup.active = false;
     }
   }
