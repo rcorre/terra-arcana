@@ -1,5 +1,6 @@
 module battle.battle;
 
+import core.memory;
 import std.range, std.algorithm, std.conv, std.typecons;
 import dau.all;
 import net.all;
@@ -74,6 +75,9 @@ class Battle : Scene!Battle {
     camera.bounds = Rect2i(Vector2i.zero, map.totalSize);
 
     playMusicTrack(playerFaction.themeSong, true);
+
+    GC.collect(); // reduce risk of in-battle collection
+
     startNewTurn;
   }
 
