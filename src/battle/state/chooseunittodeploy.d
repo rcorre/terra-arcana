@@ -36,6 +36,9 @@ class ChooseUnitToDeploy : State!Battle {
       if (input.skip) {
         b.states.popState();
       }
+      if (input.select && !_menu.area.contains(input.mousePos)) {
+        b.states.popState();
+      }
     }
 
     void draw(Battle b, SpriteBatch sb) {
