@@ -72,6 +72,11 @@ class TileHoverSystem : System!Battle {
     }
 
     void stop() {
+      _tileUnderMouse = null;
+      _unitUnderMouse = null;
+      _newTileUnderMouse = false;
+      destroyUnitInfo();
+      destroyCurrentPreview();
     }
   }
 
