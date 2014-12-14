@@ -30,27 +30,27 @@ class TitleScreen : GUIElement {
   private:
   Title _title;
   void singlePlayerButton() {
-    _title.states.setState(new SelectBattle);
+    _title.states.pushState(new SelectBattle);
   }
 
   void hostGame() {
-    _title.states.setState(new HostGame);
+    _title.states.pushState(new HostGame);
   }
 
   void joinGame() {
-    _title.states.setState(new JoinGame);
+    _title.states.pushState(new JoinGame);
   }
 
   void instructionsButton() {
-    _title.states.setState(new ShowInstructions);
+    _title.states.pushState(new ShowInstructions);
   }
 
   void preferencesButton() {
-    _title.states.setState(new EditPreferences);
+    _title.states.pushState(new EditPreferences);
   }
 
   void creditsButton() {
-    _title.states.setState(new ShowCredits);
+    _title.states.pushState(new ShowCredits);
   }
 
   void exitButton() {

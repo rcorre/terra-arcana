@@ -327,6 +327,22 @@
       "numPages": "5"
     },
     "child": {
+      "backButton": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Back",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
       "pageNumber": {
         "properties": {
           "texture": "gui/rectButton",

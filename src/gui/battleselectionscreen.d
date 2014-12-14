@@ -154,7 +154,7 @@ class BattleSelectionScreen : GUIElement {
     if (_client !is null) {
       _client.send(NetworkMessage.makeCloseConnection());
     }
-    _title.states.setState(new ShowTitle);
+    _title.states.popState();
   }
 
   void postMessage(string text) {

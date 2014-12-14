@@ -10,7 +10,8 @@ class EditPreferences : State!Title {
   override {
     void enter(Title title) {
       title.gui.clear();
-      title.gui.addElement(new PreferenceScreen(title));
+      auto backToTitle = { title.states.popState(); };
+      title.gui.addElement(new PreferenceScreen(backToTitle));
     }
   }
 }

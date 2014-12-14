@@ -8,7 +8,7 @@ import title.state.showtitle;
 private enum volumeIncrement = 0.1;
 
 class PreferenceScreen : GUIElement {
-  this(Title title) {
+  this(void delegate() goBack) {
     super(getGUIData("preferences"), Vector2i.zero);
 
     _preferences = Preferences.fetch();
@@ -29,13 +29,10 @@ class PreferenceScreen : GUIElement {
     addChild(new Button(data.child["musicVolumeDown"], &musicVolumeDown));
     addChild(new Button(data.child["soundVolumeUp"], &soundVolumeUp));
     addChild(new Button(data.child["soundVolumeDown"], &soundVolumeDown));
-    addChild(new Button(data.child["exit"], &exitButton));
-
-    _title = title;
+    addChild(new Button(data.child["exit"], { _preferences.save(); goBack(); }));
   }
 
   private:
-  Title _title;
   Preferences _preferences;
   PipBar _musicBar, _soundBar;
 
@@ -59,10 +56,5 @@ class PreferenceScreen : GUIElement {
   void soundVolumeDown() {
     _preferences.soundVolume = _preferences.soundVolume - volumeIncrement;
     _soundBar.setVal(cast(int) (_preferences.soundVolume / volumeIncrement));
-  }
-
-  void exitButton() {
-    _title.states.setState(new ShowTitle);
-    _preferences.save();
   }
 }

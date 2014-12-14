@@ -10,16 +10,16 @@ private enum textureFormat = "gui/instructions%d";
 private enum pageDisplayFormat = "Page %d / %d";
 
 class InstructionScreen : GUIElement {
-  this(Title title) {
+  this(void delegate() goBack) {
     super(getGUIData("instructions"), Rect2i(0, 0, Settings.screenW, Settings.screenH));
 
+    addChild(new Button(data.child["backButton"], goBack));
+
     _numPages = data["numPages"].to!int;
-    _title = title;
     setPage(1);
   }
 
   private:
-  Title _title;
   GUIElement _currentPage;
   int _pageNum;
   int _numPages;

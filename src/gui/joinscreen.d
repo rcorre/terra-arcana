@@ -44,7 +44,7 @@ class JoinScreen : GUIElement {
   MessageBox _messageBox;
 
   void backButton() {
-    _title.states.setState(new ShowTitle);
+    _title.states.popState();
   }
 
   void joinGame() {

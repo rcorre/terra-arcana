@@ -10,7 +10,8 @@ class ShowInstructions : State!Title {
   override {
     void enter(Title title) {
       title.gui.clear();
-      title.gui.addElement(new InstructionScreen(title));
+      auto backToTitle = { title.states.popState(); };
+      title.gui.addElement(new InstructionScreen(backToTitle));
     }
   }
 }

@@ -70,7 +70,7 @@ class HostScreen : GUIElement {
 
   void backButton() {
     cancelHost();
-    _title.states.setState(new ShowTitle);
+    _title.states.popState();
   }
 
   void hostGame() {
