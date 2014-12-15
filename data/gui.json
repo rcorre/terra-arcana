@@ -306,7 +306,7 @@
     "child": {
       "commandBar": {
         "properties": {
-          "area"          : "0, 30, 100, 21",
+          "area"          : "0, 20, 100, 21",
           "pipSpacingX"   : "-4",
           "brightShade"   : "1,0.5,0, 0.8",
           "dimShade"      : "1,0.5,0, 0.0",
@@ -325,7 +325,7 @@
       },
       "manaBar": {
         "properties": {
-          "area"          : "24, 56, 95, 21",
+          "area"          : "24, 64, 95, 21",
           "pipSpacingX"   : "-4",
           "brightShade"   : "0,1,1",
           "dimShade"      : "0,0.0,0.0,0.0",
