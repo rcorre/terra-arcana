@@ -32,6 +32,9 @@ struct UnitAI {
   }
 
   auto bestCaptureOption(Tile tile) {
+    if (tile == _unit.tile) { 
+      return null; // already on tile
+    }
     auto path = _pathfinder.pathTo(tile);
     if (path is null) {
       path = _pathfinder.pathToward(tile);
