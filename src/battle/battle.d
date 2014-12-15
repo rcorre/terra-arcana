@@ -32,8 +32,9 @@ class Battle : Scene!Battle {
     }
     System!Battle[] systems = [
       new TileHoverSystem(this),
-          new BattleCameraSystem(this),
-          new BattleNetworkSystem(this, client)
+      new InputHintSystem(this),
+      new BattleCameraSystem(this),
+      new BattleNetworkSystem(this, client)
     ];
     Sprite[string] cursorSprites = [
       "inactive" : new Animation("gui/cursor", "inactive", Animation.Repeat.loop),

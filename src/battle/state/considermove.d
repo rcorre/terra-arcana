@@ -6,8 +6,9 @@ import model.all;
 import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
-import battle.state.consideract;
 import battle.state.moveunit;
+import battle.state.consideract;
+import battle.state.showbattlemenu;
 
 /// player may click to move a unit
 class ConsiderMove : State!Battle {
@@ -28,6 +29,13 @@ class ConsiderMove : State!Battle {
       _enemyCursor = new Animation("gui/overlay", "enemy", Animation.Repeat.loop);
       _moveCursor  = new Animation("gui/overlay", "move", Animation.Repeat.loop);
       _pathCursor  = new Animation("gui/overlay", "path", Animation.Repeat.loop);
+
+
+      auto hintSys = b.getSystem!InputHintSystem;
+      hintSys.hideHints();
+      hintSys.showHint("lmb", "move");
+      hintSys.showHint("q", "action1");
+      hintSys.showHint("e", "action2");
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -59,6 +67,9 @@ class ConsiderMove : State!Battle {
       }
       else if (input.action2) {
         b.states.pushState(new ConsiderAct(_unit, 2));
+      }
+      else if (input.exit) {
+        b.states.pushState(new ShowBattleMenu);
       }
     }
 

@@ -28,6 +28,12 @@ class PlayerTurn : State!Battle {
         b.getSystem!BattleNetworkSystem.broadcastEndTurn(); // notify network
       }
       checkMouse(b);
+
+      auto hintSys = b.getSystem!InputHintSystem;
+      hintSys.hideHints();
+      hintSys.showHint("lmb", "select");
+      hintSys.showHint("rmb", "inspect");
+      hintSys.showHint("space", "end turn");
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -61,6 +67,10 @@ class PlayerTurn : State!Battle {
       foreach(spawnPoint ; b.spawnPointsFor(_player.teamIdx)) {
         sb.draw(_cursor, spawnPoint.center);
       }
+    }
+
+    void end(Battle b) {
+      b.getSystem!InputHintSystem.hideHints();
     }
   }
 

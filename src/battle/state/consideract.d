@@ -29,6 +29,12 @@ class ConsiderAct : State!Battle {
       _rangeOverlay = new Animation("gui/overlay", overlayName, Animation.Repeat.loop);
       _targetOverlay = new Animation("gui/overlay", targetName, Animation.Repeat.loop);
       _tilesInRange = b.map.tilesInRange(_unit.tile, _action.minRange, _action.maxRange);
+
+      auto hintSys = b.getSystem!InputHintSystem;
+      hintSys.hideHints();
+      hintSys.showHint("lmb", "use");
+      hintSys.showHint("rmb", "inspect");
+      hintSys.showHint("space", "cancel");
     }
 
     void update(Battle b, float time, InputManager input) {

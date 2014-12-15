@@ -16,6 +16,12 @@ class DynamicGUIElement : GUIElement {
     _transition = new Transition(data.child["transition"]);
   }
 
+  this(GUIData data, Vector2i pos, Anchor anchor) {
+    super(data, pos, anchor);
+    _startPos = area.center;
+    _transition = new Transition(data.child["transition"]);
+  }
+
   @property {
     bool transitionComplete() { return _timer >= _transition.duration; }
     bool transitionAtStart() { return _timer <= 0; }

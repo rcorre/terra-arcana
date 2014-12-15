@@ -27,6 +27,29 @@
     }
   },
 
+  "inputHint": {
+    "properties": {
+      "texture": "gui/inputHint",
+      "startPos": "257, 616",
+      "spacing": "160, 0",
+      "iconOffset": "0,0"
+    },
+    "child": {
+      "transition": {
+        "properties": {
+          "duration": "0.1",
+          "offset": "0, -32"
+        }
+      },
+      "text": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "20"
+        }
+      }
+    }
+  },
+
   "battlePopup": {
     "properties": {
       "texture": "gui/battlePopup",
