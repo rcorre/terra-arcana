@@ -11,7 +11,9 @@ class InputHintSystem : System!Battle {
   }
 
   void showHint(string key, string command) {
-    _hints ~= scene.gui.addElement(new InputHint(key, command, cast(int) _hints.length));
+    if (Preferences.fetch.showInputHints) {
+      _hints ~= scene.gui.addElement(new InputHint(key, command, cast(int) _hints.length));
+    }
   }
 
   void hideHints() {
@@ -29,4 +31,5 @@ class InputHintSystem : System!Battle {
 
   private:
   InputHint[] _hints;
+  bool _showHints;
 }

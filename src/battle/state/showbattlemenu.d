@@ -23,6 +23,9 @@ class ShowBattleMenu : State!Battle {
 
     void exit(Battle b) {
       _menu.active = false;
+      if (!Preferences.fetch.showInputHints) {
+        b.getSystem!InputHintSystem.hideHints();
+      }
     }
   }
 

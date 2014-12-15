@@ -30,11 +30,15 @@ class PreferenceScreen : GUIElement {
     addChild(new Button(data.child["soundVolumeUp"], &soundVolumeUp));
     addChild(new Button(data.child["soundVolumeDown"], &soundVolumeDown));
     addChild(new Button(data.child["exit"], { _preferences.save(); goBack(); }));
+
+    _inputHintsButton = addChild(new Button(data.child["toggleInputHints"], &toggleInputHints));
+    _inputHintsButton.text = "Show Input Hints: " ~ (_preferences.showInputHints ? "on" : "off");
   }
 
   private:
   Preferences _preferences;
   PipBar _musicBar, _soundBar;
+  Button _inputHintsButton;
 
   void musicVolumeUp() {
     _preferences.musicVolume = _preferences.musicVolume + volumeIncrement;
@@ -56,5 +60,10 @@ class PreferenceScreen : GUIElement {
   void soundVolumeDown() {
     _preferences.soundVolume = _preferences.soundVolume - volumeIncrement;
     _soundBar.setVal(cast(int) (_preferences.soundVolume / volumeIncrement));
+  }
+
+  void toggleInputHints() {
+    _preferences.showInputHints = !_preferences.showInputHints;
+    _inputHintsButton.text = "Show Input Hints: " ~ (_preferences.showInputHints ? "on" : "off");
   }
 }

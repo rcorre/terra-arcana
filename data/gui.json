@@ -633,7 +633,7 @@
       },
       "musicText": {
         "properties": {
-          "offset": "400, 252",
+          "offset": "400, 220",
           "anchor": "center",
           "text": "Music Volume",
           "fontName": "Mecha",
@@ -642,7 +642,7 @@
       },
       "soundText": {
         "properties": {
-          "offset": "400, 345",
+          "offset": "400, 313",
           "anchor": "center",
           "text": "Sound Volume",
           "fontName": "Mecha",
@@ -651,7 +651,7 @@
       },
       "musicVolumeBar": {
         "properties": {
-          "area": "240, 281, 385, 33",
+          "area": "240, 249, 385, 33",
           "numPips": "10"
         },
         "child": {
@@ -664,7 +664,7 @@
       },
       "soundVolumeBar": {
         "properties": {
-          "area": "240, 377, 385, 33",
+          "area": "240, 345, 385, 33",
           "numPips": "10"
         },
         "child": {
@@ -677,30 +677,46 @@
       },
       "musicVolumeUp": {
         "properties": {
-          "offset": "590, 276",
+          "offset": "590, 244",
           "texture": "gui/arrows",
           "sprite": "rightArrow"
         }
       },
       "musicVolumeDown": {
         "properties": {
-          "offset": "180, 276",
+          "offset": "180, 244",
           "texture": "gui/arrows",
           "sprite": "leftArrow"
         }
       },
       "soundVolumeUp": {
         "properties": {
-          "offset": "590, 373",
+          "offset": "590, 341",
           "texture": "gui/arrows",
           "sprite": "rightArrow"
         }
       },
       "soundVolumeDown": {
         "properties": {
-          "offset": "180, 373",
+          "offset": "180, 341",
           "texture": "gui/arrows",
           "sprite": "leftArrow"
+        }
+      },
+      "toggleInputHints": {
+        "properties": {
+          "offset": "400, 450",
+          "anchor": "center",
+          "text": "Show Input Hints",
+          "texture": "gui/rectButton"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
         }
       },
       "exit": {
