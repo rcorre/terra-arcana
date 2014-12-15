@@ -5,6 +5,7 @@
     "deploy": 0.15,
     "mobility": 0.5,
     "agression": 1.0,
+    "support": 0.5,
     "avoidCounter": 0.2
   }
 }

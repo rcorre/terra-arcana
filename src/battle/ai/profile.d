@@ -17,6 +17,7 @@ class AIProfile {
     float deploy;         /// desire to deploy more units
     float mobility;       /// desire to move units
     float agression;      /// desire to attack
+    float support;      /// desire to attack
     float avoidCounter;   /// desire to avoid counter attacks
   }
 
@@ -24,13 +25,18 @@ class AIProfile {
     auto player = battle.playerByTeam(team);
     return chain(
         battle.enemiesTo(team).map!(x => makeAttackGoal(x)),
-        battle.obelisks.filter!(x => x.team != team).map!(x => makeObeliskGoal(x, battle))
+        battle.obelisks.filter!(x => x.team != team).map!(x => makeObeliskGoal(x, battle)),
+        player.units.map!(x => makeAidGoal(x))
     );
   }
 
   private:
   auto makeAttackGoal(Unit unit) {
     return AIGoal(AIGoal.Type.attack, unit.tile, agression);
+  }
+
+  auto makeAidGoal(Unit unit) {
+    return AIGoal(AIGoal.Type.aid, unit.tile, support);
   }
 
   auto makeObeliskGoal(Obelisk obelisk, Battle battle) {
