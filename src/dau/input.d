@@ -24,6 +24,11 @@ private enum Keymap {
 }
 
 class InputManager {
+  this() {
+    al_get_keyboard_state(&_curKeyboardState);
+    al_get_mouse_state(&_curMouseState);
+  }
+
   void update(float time) {
     _prevKeyboardState = _curKeyboardState;
     _prevMouseState = _curMouseState;
