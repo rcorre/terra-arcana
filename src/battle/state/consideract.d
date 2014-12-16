@@ -64,7 +64,7 @@ class ConsiderAct : State!Battle {
       }
       auto tile = _tileHover.tileUnderMouse;
       if (_tilesInRange.canFind(tile) &&
-          _action.target == UnitAction.target.burst || _action.target == UnitAction.target.line) {
+          (_action.target == UnitAction.target.burst || _action.target == UnitAction.target.line)) {
         foreach(other ; tilesAffected(b.map, tile, _unit, _action)) {
           sb.draw(_targetOverlay, other.center);
         }
