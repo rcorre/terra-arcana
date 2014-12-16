@@ -3,6 +3,7 @@ module battle.state.consideract;
 import std.range;
 import dau.all;
 import model.all;
+import battle.util;
 import battle.battle;
 import battle.system.all;
 import battle.state.performaction;
@@ -62,10 +63,10 @@ class ConsiderAct : State!Battle {
         sb.draw(_rangeOverlay, tile.center);
       }
       auto tile = _tileHover.tileUnderMouse;
-      if (_tilesInRange.canFind(tile) && _action.target == UnitAction.target.burst) {
-        sb.draw(_targetOverlay, tile.center);
-        foreach(neighbor ; b.map.neighbors(tile)) {
-          sb.draw(_targetOverlay, neighbor.center);
+      if (_tilesInRange.canFind(tile) &&
+          _action.target == UnitAction.target.burst || _action.target == UnitAction.target.line) {
+        foreach(other ; tilesAffected(b.map, tile, _unit, _action)) {
+          sb.draw(_targetOverlay, other.center);
         }
       }
     }

@@ -8,7 +8,18 @@ auto tilesAffected(TileMap map, Tile target, Unit actor, const UnitAction action
     case burst:
       return target ~ map.neighbors(target);
     case line:
-      assert(0);
+      auto start = actor.tile;
+      int rowDiff = target.row - start.row;
+      int colDiff = target.col - start.col;
+      if (rowDiff != 0) {
+        return [target, map.tileAt(target.row + rowDiff, target.col)];
+      }
+      else if (colDiff != 0) {
+        return [target, map.tileAt(target.row, target.col + colDiff)];
+      }
+      else {
+        return [target];
+      }
     default:
       return [target];
   }
