@@ -2,7 +2,8 @@
   {
     "sheets" : [
       "assault", "medic", "sniper", "guardian",
-      "antlion", "wyvern", "treant", "hellblossom"
+      "antlion", "wyvern", "treant", "hellblossom",
+      "scout", "hunter", "raider", "defender"
     ],
     "frameSize": 32,
     "frameTimeMs": 50,
@@ -81,7 +82,7 @@
     "defaultDepth": 1,
     "frameSize": 32,
     "frameTimeMs": 50,
-    "rows": ["neutral", "Gaia", "Federation"]
+    "rows": ["neutral", "Gaia", "Federation",  "Frontier"]
   }
 
 ]

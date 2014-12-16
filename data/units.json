@@ -128,6 +128,139 @@
     }
   },
 
+  "defender": {
+    "name"       : "Torcher",
+    "maxHp"      : 4,
+    "maxAp"      : 3,
+    "baseArmor"  : 1,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Flamethrower",
+      "description" : "",
+      "target"      : "line",
+      "effect"      : "damage",
+      "specials"    : ["pierce"],
+      "apCost"      : 2,
+      "power"       : 1,
+      "hits"        : 3,
+      "minRange"    : 1,
+      "maxRange"    : 1
+    },
+
+    "action2": {
+      "name"        : "Fog",
+      "description" : "",
+      "target"      : "burst",
+      "effect"      : "evade",
+      "apCost"      : 2,
+      "power"       : 1,
+      "hits"        : 1,
+      "minRange"    : 0,
+      "maxRange"    : 0
+    }
+  },
+
+  "scout": {
+    "name"       : "Scout",
+    "maxHp"      : 4,
+    "maxAp"      : 5,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+    "traits"     : ["guerilla"],
+
+    "action1": {
+      "name"        : "Carbine",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 2,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 2
+    },
+
+    "action2": {
+      "name"        : "First Aid",
+      "description" : "",
+      "target"      : "self",
+      "effect"      : "heal",
+      "apCost"      : 3,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 0,
+      "maxRange"    : 0
+    }
+  },
+
+  "hunter": {
+    "name"       : "Hunter",
+    "maxHp"      : 4,
+    "maxAp"      : 4,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+    "traits"     : ["guerilla"],
+
+    "action1": {
+      "name"        : "Magbow",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "specials"    : ["pierce"],
+      "apCost"      : 4,
+      "power"       : 3,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 3
+    },
+
+    "action2": {
+      "name"        : "First Aid",
+      "description" : "",
+      "target"      : "self",
+      "effect"      : "heal",
+      "apCost"      : 3,
+      "power"       : 2,
+      "hits"        : 1,
+      "minRange"    : 0,
+      "maxRange"    : 0
+    }
+  },
+
+  "raider": {
+    "name"       : "Raider",
+    "maxHp"      : 4,
+    "maxAp"      : 4,
+    "baseArmor"  : 0,
+    "baseEvade"  : 0,
+
+    "action1": {
+      "name"        : "Blade",
+      "description" : "",
+      "target"      : "enemy",
+      "effect"      : "damage",
+      "apCost"      : 2,
+      "power"       : 3,
+      "hits"        : 1,
+      "minRange"    : 1,
+      "maxRange"    : 1
+    },
+
+    "action2": {
+      "name"        : "Firebomb",
+      "description" : "",
+      "target"      : "burst",
+      "effect"      : "damage",
+      "specials"    : ["pierce"],
+      "apCost"      : 3,
+      "power"       : 1,
+      "hits"        : 2,
+      "minRange"    : 1,
+      "maxRange"    : 2
+    }
+  },
+
   "antlion": {
     "name"       : "Antlion",
     "maxHp"      : 4,

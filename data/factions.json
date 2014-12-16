@@ -3,7 +3,7 @@
     "name": "Gaia",
     "description": "",
     "standardUnitKeys": ["hellblossom", "antlion", "treant", "wyvern"],
-    "themeSong": "terra",
+    "themeSong": "gaia",
     "advancedUnitKeys": [],
     "eliteUnitKeys": []
   },
@@ -13,6 +13,15 @@
     "description": "",
     "themeSong": "federation",
     "standardUnitKeys": ["assault", "medic", "sniper", "guardian"],
+    "advancedUnitKeys": [],
+    "eliteUnitKeys": []
+  },
+
+  {
+    "name": "Frontier",
+    "description": "",
+    "themeSong": "frontier",
+    "standardUnitKeys": ["defender", "hunter", "scout", "raider"],
     "advancedUnitKeys": [],
     "eliteUnitKeys": []
   }

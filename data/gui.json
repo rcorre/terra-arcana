@@ -1770,6 +1770,38 @@
       "toolTipText": "Healing and support"
     }
   },
+  "icon_defender": {
+    "properties": {
+      "texture": "defender",
+      "animation": "idle",
+      "toolTipTitle": "Torcher",
+      "toolTipText": "Anti-armor AOE"
+    }
+  },
+  "icon_raider": {
+    "properties": {
+      "texture": "raider",
+      "animation": "idle",
+      "toolTipTitle": "Raider",
+      "toolTipText": "Melee attacker"
+    }
+  },
+  "icon_hunter": {
+    "properties": {
+      "texture": "hunter",
+      "animation": "idle",
+      "toolTipTitle": "Raider",
+      "toolTipText": "ranged anti-armor"
+    }
+  },
+  "icon_scout": {
+    "properties": {
+      "texture": "scout",
+      "animation": "idle",
+      "toolTipTitle": "Scout",
+      "toolTipText": "fast survivor"
+    }
+  },
   "icon_antlion": {
     "properties": {
       "texture": "antlion",
