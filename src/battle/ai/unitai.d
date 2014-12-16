@@ -25,7 +25,7 @@ struct UnitAI {
       case attack:
         return bestAttackOption(goal.target, canMoveAndAttack);
       case aid:
-        return null;
+        return bestAidOption(goal.target, canMoveAndAttack);
       case capture:
         return bestCaptureOption(goal.target);
     }
@@ -53,6 +53,25 @@ struct UnitAI {
       int apLeft = _unit.ap - _pathfinder.costTo(tile);
       int act = _unit.firstUseableActionFrom(target, tile, apLeft);
       if (act != 0) {
+        auto path = _pathfinder.pathTo(tile);
+        auto tileScore = computeTilePriority(_battle, _profile, tile, _unit);
+        auto attackScore = attackScore(_unit, target, act, _profile);
+        auto score = average(tileScore, attackScore);
+        options ~= new ActDecison(_unit, path, target, act, score);
+      }
+    }
+    return options.frontOr(null);
+  }
+
+  auto bestAidOption(Tile target, bool canMove) {
+    AIDecision[] options;
+    foreach (tile ; _pathfinder.tilesInRange) {
+      if (tile != _unit.tile && !canMove) { continue; }
+      int apLeft = _unit.ap - _pathfinder.costTo(tile);
+      int act = 0;
+      if      (!_unit.getAction(1).isAttack) { act = 1; }
+      else if (!_unit.getAction(2).isAttack) { act = 2; }
+      if (act != 0 && _unit.canUseActionFrom(act, target, tile, apLeft)) {
         auto path = _pathfinder.pathTo(tile);
         auto tileScore = computeTilePriority(_battle, _profile, tile, _unit);
         auto attackScore = attackScore(_unit, target, act, _profile);
