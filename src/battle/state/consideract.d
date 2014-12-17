@@ -3,6 +3,7 @@ module battle.state.consideract;
 import std.range;
 import dau.all;
 import model.all;
+import gui.battlepopup;
 import battle.util;
 import battle.battle;
 import battle.system.all;
@@ -36,6 +37,8 @@ class ConsiderAct : State!Battle {
 
       if (!_hasEnoughAp) { // gray-out range overlay if not enough ap
         _rangeOverlay.tint = notEnoughApTint;
+        auto popupPos = cast(Vector2i) (_unit.center - b.camera.area.topLeft);
+        b.gui.addElement(new BattlePopup(popupPos, BattlePopup.Type.notEnoughAp));
       }
 
       auto hintSys = b.getSystem!InputHintSystem;
