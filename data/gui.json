@@ -61,56 +61,56 @@
       "damage": {
         "properties": {
           "fontName": "Mecha",
-          "fontSize": "18",
+          "fontSize": "20",
           "textColor": "1,0,0"
         }
       },
       "heal": {
         "properties": {
           "fontName": "Mecha",
-          "fontSize": "18",
+          "fontSize": "20",
           "textColor": "0,1,0"
         }
       },
       "evade": {
         "properties": {
           "fontName": "Mecha",
-          "fontSize": "18",
+          "fontSize": "20",
           "textColor": "0,0,1"
         }
       },
       "armor": {
         "properties": {
           "fontName": "Mecha",
-          "fontSize": "18",
+          "fontSize": "20",
           "textColor": "0,0,1"
         }
       },
       "toxin": {
         "properties": {
           "fontName": "Mecha",
-          "fontSize": "18",
+          "fontSize": "20",
           "textColor": "0,1,0"
         }
       },
       "slow": {
         "properties": {
           "fontName": "Mecha",
-          "fontSize": "18",
+          "fontSize": "20",
           "textColor": "1,0,0"
         }
       },
       "stun": {
         "properties": {
           "fontName": "Mecha",
-          "fontSize": "18",
+          "fontSize": "20",
           "textColor": "1,0,0"
         }
       },
       "miss": {
         "properties": {
           "fontName": "Mecha",
-          "fontSize": "18",
+          "fontSize": "20",
           "textColor": "0,0,0"
         }
       }
