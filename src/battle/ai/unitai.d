@@ -51,38 +51,28 @@ struct UnitAI {
     foreach (tile ; _pathfinder.tilesInRange) {
       if (tile != _unit.tile && !canMove) { continue; }
       int apLeft = _unit.ap - _pathfinder.costTo(tile);
-      int act = _unit.firstUseableActionFrom(target, tile, apLeft);
-      if (act != 0) {
-        auto path = _pathfinder.pathTo(tile);
-        auto tileScore = computeTilePriority(_battle, _profile, tile, _unit);
-        auto attackScore = attackScore(_unit, target, act, _profile);
-        auto score = average(tileScore, attackScore);
-        options ~= new ActDecison(_unit, path, target, act, score);
+      foreach(num ; [1, 2]) {
+        if (_unit.canUseActionFrom(num, target, tile, apLeft) && _unit.getAction(num).isAttack) {
+          options ~= createAttackOption(num, target, tile);
+        }
       }
     }
-    return options.frontOr(null);
+    return options.empty ? null : options.sort!((a,b) => a.score > b.score).front;
   }
 
   auto bestAidOption(Tile target, bool canMove) {
+    auto enemies = _battle.enemiesTo(_unit.team);
     AIDecision[] options;
-    auto tiles = _pathfinder.tilesInRange
-      .filter!(x => cast(Unit) x.entity !is null)
-      .filter!(x => (cast(Unit) x.entity).team == _unit.team);
-    foreach (tile ; tiles) {
+    foreach (tile ; _pathfinder.tilesInRange) {
       if (tile != _unit.tile && !canMove) { continue; }
       int apLeft = _unit.ap - _pathfinder.costTo(tile);
-      int act = 0;
-      if      (!_unit.getAction(1).isAttack) { act = 1; }
-      else if (!_unit.getAction(2).isAttack) { act = 2; }
-      if (act != 0 && _unit.canUseActionFrom(act, target, tile, apLeft)) {
-        auto path = _pathfinder.pathTo(tile);
-        auto tileScore = computeTilePriority(_battle, _profile, tile, _unit);
-        auto attackScore = attackScore(_unit, target, act, _profile);
-        auto score = average(tileScore, attackScore);
-        options ~= new ActDecison(_unit, path, target, act, score);
+      foreach(num ; [1,2]) {
+        if (_unit.canUseActionFrom(num, target, tile, apLeft) && !_unit.getAction(num).isAttack) {
+          options ~= createBuffOption(num, target, tile, enemies);
+        }
       }
     }
-    return options.frontOr(null);
+    return options.empty ? null : options.sort!((a,b) => a.score > b.score).front;
   }
 
   private:
@@ -91,4 +81,20 @@ struct UnitAI {
   TileMap _map;
   AIProfile _profile;
   Battle _battle;
+
+  auto createAttackOption(int actNum, Tile target, Tile attackPosition) {
+    auto path = _pathfinder.pathTo(attackPosition);
+    auto tileScore = computeTilePriority(_battle, _profile, attackPosition, _unit);
+    auto attackScore = attackScore(_unit, target, actNum, _profile);
+    auto score = average(tileScore, attackScore);
+    return new ActDecison(_unit, path, target, actNum, score);
+  } 
+
+  auto createBuffOption(int actNum, Tile target, Tile buffPosition, Unit[] enemies) {
+    auto path = _pathfinder.pathTo(buffPosition);
+    auto tileScore = computeTilePriority(_battle, _profile, buffPosition, _unit);
+    auto buffScore = buffScore(_unit, target, actNum, _profile, enemies);
+    auto score = average(tileScore, buffScore);
+    return new ActDecison(_unit, path, target, actNum, score);
+  } 
 }

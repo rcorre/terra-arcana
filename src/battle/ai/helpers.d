@@ -1,5 +1,6 @@
 module battle.ai.helpers;
 
+import std.math, std.algorithm;
 import dau.util.math;
 import model.all;
 import battle.battle;
@@ -37,8 +38,23 @@ float attackScore(Unit attacker, Unit defender, const UnitAction action, AIProfi
   return score * profile.agression;
 }
 
-float buffScore(Unit actor, Unit receiver, const UnitAction action, AIProfile profile) {
-  return action.power * effectFactor[action.effect]; // TODO compare against unit hp
+float buffScore(Unit actor, Tile target, int actNum, AIProfile profile,
+    Unit[] enemies)
+{
+  auto receiver = cast(Unit) target.entity;
+  auto action = actor.getAction(actNum);
+  if (receiver is null) {
+    return 0;
+  }
+  else if (action.effect == UnitAction.Effect.heal) {
+    float hpFactor = (receiver.maxHp - receiver.hp) / cast(float) receiver.maxHp;
+    return action.power * effectFactor[UnitAction.Effect.heal] * hpFactor;
+  }
+  else {
+    int threatDistance = enemies.map!(x => x.tile.distance(receiver.tile)).minPos.front;
+    float threatFactor = 1 - (threatDistance - 1) * 0.2;
+    return action.power * effectFactor[action.effect] * threatFactor;
+  }
 }
 
 float effectScore(const UnitAction action, Unit defender) {
@@ -88,7 +104,7 @@ auto idealAttack(Unit attacker, Unit defender, AIProfile profile) {
     }
   }
 
-  return attacker.getAction(idealAction);
+  return idealAction == 0 ? null : attacker.getAction(idealAction);
 }
 
 float computeTilePriority(Battle b, AIProfile profile, Tile tile, Unit unit) {

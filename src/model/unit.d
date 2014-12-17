@@ -98,7 +98,7 @@ class Unit : Entity {
   auto getAction(int num) {
     if      (num == 1) { return action1; }
     else if (num == 2) { return action2; }
-    else               { return null; }
+    else               { assert(0, "action num can only be 1 or 2"); }
   }
 
   void consumeAp(int amount) {
