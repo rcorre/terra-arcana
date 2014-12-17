@@ -8,6 +8,8 @@ import battle.battle;
 import battle.system.all;
 import battle.state.performaction;
 
+private enum notEnoughApTint = color(0.5,0.5,0.5,0.5);
+
 /// player may click to move a unit
 class ConsiderAct : State!Battle {
   this(Unit unit, int actionNum) {
@@ -30,6 +32,11 @@ class ConsiderAct : State!Battle {
       _rangeOverlay = new Animation("gui/overlay", overlayName, Animation.Repeat.loop);
       _targetOverlay = new Animation("gui/overlay", targetName, Animation.Repeat.loop);
       _tilesInRange = b.map.tilesInRange(_unit.tile, _action.minRange, _action.maxRange);
+      _hasEnoughAp = _unit.apCost(_actionNum) <= _unit.ap;
+
+      if (!_hasEnoughAp) { // gray-out range overlay if not enough ap
+        _rangeOverlay.tint = notEnoughApTint;
+      }
 
       auto hintSys = b.getSystem!InputHintSystem;
       hintSys.hideHints();
@@ -63,7 +70,7 @@ class ConsiderAct : State!Battle {
         sb.draw(_rangeOverlay, tile.center);
       }
       auto tile = _tileHover.tileUnderMouse;
-      if (_tilesInRange.canFind(tile) &&
+      if (_tilesInRange.canFind(tile) && _hasEnoughAp &&
           (_action.target == UnitAction.target.burst || _action.target == UnitAction.target.line)) {
         foreach(other ; tilesAffected(b.map, tile, _unit, _action)) {
           sb.draw(_targetOverlay, other.center);
@@ -73,6 +80,7 @@ class ConsiderAct : State!Battle {
   }
 
   private:
+  bool _hasEnoughAp;
   Unit _unit;
   int _actionNum;
   const UnitAction _action;

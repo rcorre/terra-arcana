@@ -191,10 +191,15 @@ class Unit : Entity {
     return canUseActionFrom(num, target, tile, ap);
   }
 
+  /// how much ap it would cost to use this action
+  int apCost(int actionNum) {
+    return getAction(actionNum).apCost * (isStunned ? 2 : 1);
+  }
+
   /// return true if can use action num from position on target
   bool canUseActionFrom(int num, Tile target, Tile position, int apLeft) {
     auto action = getAction(num);
-    if (action.apCost * (isStunned ? 2 : 1) > apLeft) { return false; }
+    if (apCost(num) > apLeft) { return false; }
     int dist = position.distance(target);
     bool inRange = dist <= action.maxRange && dist >= action.minRange;
     auto other = cast(Unit) target.entity;
