@@ -15,6 +15,13 @@ private enum string[UnitAction.Effect.max + 1] formats = [
 ];
 
 class BattlePopup : GUIElement {
+  enum Type : string {
+    miss = "miss! (%d -> %d)",
+    cover = "cover (%d -> %d)",
+    toxicDamage = "toxin (%d -> %d)",
+    notEnoughAp = "not enough AP"
+  }
+
   this(Vector2i pos, UnitAction.Effect effect, int value) {
     super(getGUIData("battlePopup"), pos);
     _duration = data["duration"].to!float;
@@ -23,16 +30,13 @@ class BattlePopup : GUIElement {
     addChild(new TextBox(data.child[effect.to!string], text));
   }
 
-  static BattlePopup evadeMessage(Vector2i pos) {
-    return new BattlePopup(pos);
-  }
-
-  private this(Vector2i pos) {
+  this(T...)(Vector2i pos, Type type, T args) {
     super(getGUIData("battlePopup"), pos);
     _duration = data["duration"].to!float;
     _velocity = data["velocity"].parseVector!float;
-    string text = "miss!";
-    addChild(new TextBox(data.child["miss"], text));
+    string text = type.format(args);
+    string key = type.to!string;
+    addChild(new TextBox(data.child[key], text));
   }
 
   override void update(float time) {

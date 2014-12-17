@@ -54,7 +54,9 @@ class ApplyEffect : State!Battle {
       // show popup
       auto popupPos = cast(Vector2i) (_target.center - b.camera.area.topLeft);
       if (!hit) {
-        b.gui.addElement(BattlePopup.evadeMessage(popupPos));
+        int evd = _target.evade; // evade after attack
+        // print previous and current evade
+        b.gui.addElement(new BattlePopup(popupPos, BattlePopup.Type.miss, evd + 1, evd));
       }
       else {
         b.gui.addElement(new BattlePopup(popupPos, _action.effect, effectAmount));

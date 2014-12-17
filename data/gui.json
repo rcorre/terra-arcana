@@ -113,6 +113,27 @@
           "fontSize": "20",
           "textColor": "0,0,0"
         }
+      },
+      "cover": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "20",
+          "textColor": "0,1,0"
+        }
+      },
+      "toxicDamage": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "20",
+          "textColor": "1,0,0"
+        }
+      },
+      "notEnoughAp": {
+        "properties": {
+          "fontName": "Mecha",
+          "fontSize": "20",
+          "textColor": "0,1,0"
+        }
       }
     }
   },
