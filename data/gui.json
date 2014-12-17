@@ -1208,11 +1208,38 @@
   "selectBattle": {
     "properties": {
       "texture": "gui/titleScreen",
-      "selfFactionOffset": "33, 185",
-      "otherFactionOffset": "577, 185",
-      "mapSelectOffset": "401, 489"
+      "selfFactionOffset": "33, 160",
+      "otherFactionOffset": "577, 160",
+      "mapSelectOffset": "401, 500"
     },
     "child": {
+      "difficulty": {
+        "properties": {
+          "offset": "401, 462",
+          "texture": "gui/mapTextBox",
+          "buttonSpacingX": "32"
+        },
+        "child": {
+          "nextButton": {
+            "properties": {
+              "texture": "gui/arrows",
+              "sprite": "rightArrow"
+            }
+          },
+          "prevButton": {
+            "properties": {
+              "texture": "gui/arrows",
+              "sprite": "leftArrow"
+            }
+          },
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "26"
+            }
+          }
+        }
+      },
       "titleText": {
         "properties": {
           "offset"   : "400, 55",

@@ -9,8 +9,6 @@ import battle.battle;
 import title.title;
 import title.state.showtitle;
 
-private enum mapFormat = Paths.mapDir ~ "/%s.json";
-
 private enum PostColor : Color {
   self = Color.blue,
   other = Color.green,
@@ -40,14 +38,10 @@ class BattleSelectionScreen : GUIElement {
     _title = title;
     this.isHost = isHost || client is null; // if singleplayer, default to host
 
-    auto mapPaths = Paths.mapDir.dirEntries("*.json", SpanMode.shallow);
-    auto mapNames = mapPaths.map!(x => x.baseName(".json")).array;
-
     _startButton = new Button(data.child["startButton"], &beginBattle);
     _startButton.enabled = false;
 
     // map an faction selections
-    auto mapPos             = data["mapSelectOffset"].parseVector!int;
     auto selfFactionOffset  = data["selfFactionOffset"].parseVector!int;
     auto otherFactionOffset = data["otherFactionOffset"].parseVector!int;
 
@@ -55,8 +49,7 @@ class BattleSelectionScreen : GUIElement {
     bool canPickOtherFaction = client is null;
     _otherFactionMenu  = new FactionMenu(otherFactionOffset, &selectOtherFaction,
         canPickOtherFaction);
-    _mapSelector = new StringSelection(getGUIData("selectMap"), mapPos, mapNames, &selectMap);
-    addChildren(_startButton, _playerFactionMenu, _otherFactionMenu, _mapSelector);
+    addChildren(_startButton, _playerFactionMenu, _otherFactionMenu);
 
     _messageBox = new MessageBox(data.child["messageBox"]);
     _messageInput = new TextInput(data.child["messageInput"], &postMessage);
@@ -65,6 +58,10 @@ class BattleSelectionScreen : GUIElement {
     addChild(new Button(data.child["backButton"], &backToMenu));
 
     addChildren!TextBox("titleText", "subtitle");
+    auto levels = Paths.mapDir.dirEntries(SpanMode.shallow).map!(x => x.baseName).array;
+    _difficultySelector = new StringSelection(data.child["difficulty"], levels, &setDifficulty);
+    addChild(_difficultySelector);
+    setDifficulty(levels.front);
   }
 
   override void update(float time) {
@@ -80,7 +77,7 @@ class BattleSelectionScreen : GUIElement {
 
   private:
   FactionMenu _playerFactionMenu, _otherFactionMenu;
-  StringSelection _mapSelector;
+  StringSelection _mapSelector, _difficultySelector;
   Button _startButton;
   MessageBox _messageBox;
   TextInput _messageInput;
@@ -91,6 +88,17 @@ class BattleSelectionScreen : GUIElement {
     return isHost && 
       _playerFactionMenu.selection !is null && 
       _otherFactionMenu.selection !is null;
+  }
+
+  void setDifficulty(string difficulty) {
+    if (_mapSelector !is null) { _mapSelector.active = false; }
+    auto dir = buildPath(Paths.mapDir, difficulty);
+    auto mapPaths = dir.dirEntries("*.json", SpanMode.shallow);
+
+    auto mapNames = mapPaths.map!(x => x.baseName(".json")).array;
+    auto mapPos  = data["mapSelectOffset"].parseVector!int;
+    _mapSelector = new StringSelection(getGUIData("selectMap"), mapPos, mapNames, &selectMap);
+    addChild(_mapSelector);
   }
 
   void processMessage(NetworkMessage msg) {
@@ -143,11 +151,13 @@ class BattleSelectionScreen : GUIElement {
   void beginBattle() {
     auto playerFaction = _playerFactionMenu.selection;
     auto otherFaction = _otherFactionMenu.selection;
-    auto mapName = _mapSelector.selection;
     if (isHost && _client !is null) { 
       _client.send(NetworkMessage(NetworkMessage.Type.startBattle)); 
     }
-    setScene(new Battle(mapName, playerFaction, otherFaction, _client, isHost));
+    auto diff = _difficultySelector.selection;
+    auto map = _mapSelector.selection;
+    auto path = buildPath(Paths.mapDir, diff, map ~ ".json");
+    setScene(new Battle(path, playerFaction, otherFaction, _client, isHost));
   }
 
   void backToMenu() {

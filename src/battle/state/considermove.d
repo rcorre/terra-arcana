@@ -22,7 +22,7 @@ class ConsiderMove : State!Battle {
       b.disableSystem!BattleCameraSystem;
       _tileHover = b.getSystem!TileHoverSystem;
       _pathFinder = new Pathfinder(b.map, _unit);
-      if (_pathFinder.tilesInRange.empty || b.activePlayer.commandPoints <= 0) {
+      if (!_unit.canAct || _pathFinder.tilesInRange.empty || b.activePlayer.commandPoints <= 0) {
         b.states.popState();
       }
       _allyCursor  = new Animation("gui/overlay", "ally", Animation.Repeat.loop);

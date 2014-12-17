@@ -10,6 +10,11 @@ import dau.gui.textbox;
 
 /// select one of multiple string values using horizontal scroll buttons
 class StringSelection : ScrollSelection!string {
+  this(GUIData data, string[] entries, Action onChange = doNothing!Action) {
+    auto pos = data["offset"].parseVector!int;
+    this(data, pos, entries, onChange);
+  }
+
   this(GUIData data, Vector2i pos, string[] entries, Action onChange = doNothing!Action) {
     super(data, pos, entries, onChange);
   }
