@@ -58,7 +58,7 @@ float buffScore(Unit actor, Tile target, int actNum, AIProfile profile,
 }
 
 float effectScore(const UnitAction action, Unit defender) {
-  return max((action.predictEffect(defender) * effectFactor[action.effect]) / defender.hp, 1);
+  return (action.predictEffect(defender) * effectFactor[action.effect]) / defender.hp;
 }
 
 int predictNumHits(const UnitAction action, Unit defender) {
