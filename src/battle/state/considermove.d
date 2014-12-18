@@ -47,10 +47,18 @@ class ConsiderMove : State!Battle {
         auto tile = _tileHover.tileUnderMouse;
         _path = _pathFinder.pathTo(tile);
         b.cursor.setSprite((_path is null) ? "inactive" : "active");
+        auto other = _tileHover.unitUnderMouse;
+        if (other !is null && other.team == _unit.team && other.canAct) {
+          b.cursor.setSprite("ally");
+        }
       }
       if (input.select) {
         if (_path is null || _path.empty) {
           b.states.popState();
+          auto other = _tileHover.unitUnderMouse;
+          if (other !is null && other.team == _unit.team) {
+            b.states.pushState(new ConsiderMove(other));
+          }
         }
         else {
           b.states.pushState(new MoveUnit(_unit, _path));
@@ -101,7 +109,6 @@ class ConsiderMove : State!Battle {
   TileHoverSystem _tileHover;
   Pathfinder _pathFinder;
   Tile[] _path;
-  Player _player;
 
   void drawPath(SpriteBatch sb, Tile start, Tile[] tiles, Sprite icon) {
     auto r1 = chain(only(start), tiles.retro);
