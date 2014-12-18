@@ -4,6 +4,17 @@ import std.math : ceil, floor;
 import std.algorithm : min, max, sum, map;
 import std.range : zip;
 
+/// represent a value that is always clamped between two other values
+struct Clamped(T, alias lower, alias upper) if (is(typeof(clamp(T.init, lower, upper)) : T)) {
+  alias val this;
+
+  private @property ref T val() { 
+    _val = _val.clamp(lower, upper);
+    return _val;
+  }
+  private T _val;
+}
+
 /// add amount to start, but don't let it go past end
 T approach(T, U, V)(T start, U end, V amount) {
   if (start < end) {
@@ -40,6 +51,28 @@ int roundDown(real val) {
 T lerp(T, U : real)(T start, T end, U factor) {
   factor = clamp(factor, 0, 1);
   return cast(T) (start + (end - start) * factor);
+}
+
+unittest {
+  Clamped!(float, 0, 1) f;
+
+  f = 0;
+  assert(f == 0);
+
+  f = -2;
+  assert(f == 0);
+
+  f = 1;
+  assert(f == 1);
+
+  f = 3;
+  assert(f == 1);
+
+  f = 0.5f;
+  assert(f == 0.5f);
+
+  f += 1.5f;
+  assert(f == 1.0f);
 }
 
 unittest {
