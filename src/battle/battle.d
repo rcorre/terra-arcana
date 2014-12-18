@@ -188,6 +188,10 @@ package:
     return enemies;
   }
 
+  auto alliesTo(int team) {
+    return playerByTeam(team).units;
+  }
+
   private:
   BattlePanel _panel;
   Cycle!(Player[]) _turnCycle;
