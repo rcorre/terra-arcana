@@ -140,7 +140,7 @@ package:
     }
 
     foreach(pl ; players) {
-      if (pl.maxCommandPoints == 0) {
+      if (pl.maxCommandPoints == Player.baseCommandPoints) {
         states.setState(new BattleOver(pl.isLocal ? No.Victory : Yes.Victory));
         return;
       }

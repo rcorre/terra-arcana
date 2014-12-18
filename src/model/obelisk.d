@@ -4,7 +4,7 @@ import std.string : format;
 import dau.all;
 
 class Obelisk : Entity {
-  enum commandBonus = 2; /// command points awarded per obelisk held
+  enum commandBonus = 1; /// command points awarded per obelisk held
 
   const int row, col;
 
