@@ -13,6 +13,7 @@ import battle.state.checkunitdestruction;
 import battle.system.all;
 import battle.ai.all;
 import gui.battlepanel;
+import gui.battlepopup;
 
 private enum mapFormat = Paths.mapDir ~ "/%s.json";
 
@@ -106,7 +107,14 @@ package:
 
   void startNewTurn() {
     if (_activePlayer !is null) {
-      _activePlayer.endTurn();
+      foreach(unit ; _activePlayer.units) {
+        bool gainedCover = unit.endTurn();
+        if (gainedCover) {
+          auto popupPos = cast(Vector2i) (unit.center - camera.area.topLeft);
+          int cover = unit.evade;
+          gui.addElement(new BattlePopup(popupPos, BattlePopup.Type.cover, cover - 1, cover));
+        }
+      }
       states.popState(); // pop previous player's turn state
     }
     auto player = _turnCycle.front;

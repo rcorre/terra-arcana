@@ -31,12 +31,6 @@ class Player {
     _commandPoints -= amount;
   }
 
-  void endTurn() {
-    foreach(unit ; units) {
-      unit.endTurn();
-    }
-  }
-
   void beginTurn() {
     foreach(unit ; units) {
       unit.startTurn();

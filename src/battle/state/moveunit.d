@@ -4,6 +4,7 @@ import std.array;
 import std.algorithm : map, sum;
 import dau.all;
 import model.all;
+import gui.battlepopup;
 import battle.battle;
 import battle.system.all;
 import battle.state.triggertrap;
@@ -48,6 +49,11 @@ class MoveUnit : State!Battle {
         b.states.printStateTrace();
       }
       _unit.tile = _currentTile;
+      if (_unit.hasTrait(Unit.Trait.guerilla) && _currentTile.cover > 0) {
+        auto popupPos = cast(Vector2i) (_unit.center - b.camera.area.topLeft);
+        int cover = _unit.evade;
+        b.gui.addElement(new BattlePopup(popupPos, BattlePopup.Type.cover, cover - 1, cover));
+      }
     }
 
     void end(Battle b) {

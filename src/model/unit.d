@@ -75,12 +75,16 @@ class Unit : Entity {
     bool isToxic()  { return _toxin > 0; }
   }
 
-  void endTurn() {
+  /// returns true if gained more cover
+  bool endTurn() {
     _slow = max(0, _slow - 1);
     _stun = max(0, _stun - 1);
-    if (!hasTrait(UnitData.Trait.flight)) { // no cover bonus for flying units
-      _coverBonus = min(_coverBonus + 1, tile.cover);
+    // check if unit can take cover
+    if (!hasTrait(UnitData.Trait.flight) && _coverBonus < tile.cover) {
+      ++_coverBonus;
+      return true;
     }
+    return false;
   }
 
   void startTurn() {
