@@ -4,13 +4,16 @@ SVGDIR   = resources/svg
 MMPZDIR  = resources/mmpz
 TTFDIR   = resources/font
 SOUNDSRC = resources/sound
+MAPSRC   = resources/tiled
 
+CONTENTDIR = content
 # Content directories
-PNGDIR    = content/image
-OGGDIR    = content/music
+PNGDIR    = $(CONTENTDIR)/image
+OGGDIR    = $(CONTENTDIR)/music
 GUIDIR    = $(PNGDIR)/gui
-FONTDIR   = content/font
-SOUNDDEST = content/sound
+FONTDIR   = $(CONTENTDIR)/font
+SOUNDDEST = $(CONTENTDIR)/sound
+MAPDEST	  = $(CONTENTDIR)/maps
 
 # Source files
 #ASEFILES  := $(wildcard $(ASEDIR)/*.ase)
@@ -20,6 +23,7 @@ MMPZFILES  := $(wildcard $(MMPZDIR)/*.mmpz)
 GUIFILES   := $(wildcard $(SVGDIR)/*.svg)
 FONTFILES  := $(wildcard $(TTFDIR)/*.ttf)
 SOUNDFILES := $(wildcard $(SOUNDSRC)/*.ogg)
+MAPFILES	 := $(wildcard $(MAPSRC)/*.tmx)
 
 all: debug
 
@@ -30,14 +34,12 @@ release: content
 	@dub build release --quiet
 
 run: content
-	@dub run --quiet 
+	@dub run --quiet
 
-content: dirs sprites gui music fonts sounds
+content: dirs sprites gui music fonts sounds maps
 
 dirs:
-	@mkdir -p $(PNGDIR) $(OGGDIR) $(GUIDIR) $(WAVDIR) $(FONTDIR)
-
-#sprites: $(ASEFILES:$(ASEDIR)/%.ase=$(PNGDIR)/%.png)
+	@mkdir -p $(PNGDIR) $(OGGDIR) $(GUIDIR) $(SOUNDDEST) $(FONTDIR) $(MAPDEST)
 
 sprites: $(SPRITES:%=$(PNGDIR)/%.png)
 
@@ -69,9 +71,11 @@ $(SOUNDDEST)/%.ogg : $(SOUNDSRC)/%.ogg
 	@echo copying sound $*
 	@cp $(SOUNDSRC)/$*.ogg $(SOUNDDEST)/$*.ogg
 
+maps: $(MAPFILES:$(MAPSRC)/%.tmx=$(MAPDEST)/%.json)
+
+$(MAPDEST)/%.json : $(MAPSRC)/%.tmx
+	@echo making map $*
+	@tiled --export-map $(MAPSRC)/$*.tmx $(MAPDEST)/$*.json
+
 clean:
-	@$(RM) $(PNGDIR)/*.png
-	@$(RM) $(GUIDIR)/*.png
-	@$(RM) $(WAVDIR)/*.wav
-	@$(RM) $(OGGDIR)/*.ogg
-	@$(RM) $(FONTDIR)/*.ttf
+	@$(RM) -r $(CONTENTDIR)
