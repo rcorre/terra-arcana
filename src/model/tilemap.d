@@ -1,6 +1,6 @@
 module model.tilemap;
 
-import std.string, std.math;
+import std.algorithm, std.string, std.math, std.file, std.path;
 import dau.all;
 import model.tile;
 
@@ -66,4 +66,35 @@ class TileMap : Entity {
 
   private:
   Tile[][] _tiles;
+}
+
+auto allMaps() {
+  return _maps.values;
+}
+
+auto fetchMap(string key) {
+  assert(key in _maps, "no map matches key " ~ key);
+  return _maps[key];
+}
+
+auto mapKey(MapData data) {
+  foreach(key, val ; _maps) {
+    if (val == data) {
+      return key;
+    }
+  }
+  assert(0, "no key found for map data");
+}
+
+private:
+MapData[string] _maps;
+
+static this() {
+  auto load = {
+    foreach(entry ; Paths.mapDir.dirEntries(SpanMode.depth)) {
+      auto key = entry.baseName(".json");
+      _maps[key] = loadTiledMap(entry);
+    }
+  };
+  onInit(load);
 }

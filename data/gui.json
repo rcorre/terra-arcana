@@ -1199,44 +1199,16 @@
     }
   },
 
-  "selectMap": {
-    "properties": {
-      "texture": "gui/mapTextBox",
-      "buttonSpacingX": "32"
-    },
-    "child": {
-      "nextButton": {
-        "properties": {
-          "texture": "gui/arrows",
-          "sprite": "rightArrow"
-        }
-      },
-      "prevButton": {
-        "properties": {
-          "texture": "gui/arrows",
-          "sprite": "leftArrow"
-        }
-      },
-      "text": {
-        "properties": {
-          "fontName": "Mecha",
-          "fontSize": "26"
-        }
-      }
-    }
-  },
-
   "selectBattle": {
     "properties": {
       "texture": "gui/titleScreen",
       "selfFactionOffset": "33, 160",
-      "otherFactionOffset": "577, 160",
-      "mapSelectOffset": "401, 500"
+      "otherFactionOffset": "577, 160"
     },
     "child": {
-      "difficulty": {
+      "selectMap": {
         "properties": {
-          "offset": "401, 462",
+          "offset": "400, 500",
           "texture": "gui/mapTextBox",
           "buttonSpacingX": "32"
         },

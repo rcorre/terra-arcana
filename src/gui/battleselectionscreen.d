@@ -5,6 +5,7 @@ import dau.all;
 import net.all;
 import model.all;
 import gui.factionmenu;
+import gui.mapselector;
 import battle.battle;
 import title.title;
 import title.state.showtitle;
@@ -58,10 +59,8 @@ class BattleSelectionScreen : GUIElement {
     addChild(new Button(data.child["backButton"], &backToMenu));
 
     addChildren!TextBox("titleText", "subtitle");
-    auto levels = Paths.mapDir.dirEntries(SpanMode.shallow).map!(x => x.baseName).array;
-    _difficultySelector = new StringSelection(data.child["difficulty"], levels, &setDifficulty);
-    addChild(_difficultySelector);
-    setDifficulty(levels.front);
+
+    _mapSelector = addChild(new MapSelector(data.child["selectMap"], allMaps, &selectMap));
   }
 
   override void update(float time) {
@@ -77,7 +76,7 @@ class BattleSelectionScreen : GUIElement {
 
   private:
   FactionMenu _playerFactionMenu, _otherFactionMenu;
-  StringSelection _mapSelector, _difficultySelector;
+  MapSelector _mapSelector;
   Button _startButton;
   MessageBox _messageBox;
   TextInput _messageInput;
@@ -85,20 +84,9 @@ class BattleSelectionScreen : GUIElement {
   Title _title;
 
   @property bool canStartGame() {
-    return isHost && 
-      _playerFactionMenu.selection !is null && 
+    return isHost &&
+      _playerFactionMenu.selection !is null &&
       _otherFactionMenu.selection !is null;
-  }
-
-  void setDifficulty(string difficulty) {
-    if (_mapSelector !is null) { _mapSelector.active = false; }
-    auto dir = buildPath(Paths.mapDir, difficulty);
-    auto mapPaths = dir.dirEntries("*.json", SpanMode.shallow);
-
-    auto mapNames = mapPaths.map!(x => x.baseName(".json")).array;
-    auto mapPos  = data["mapSelectOffset"].parseVector!int;
-    _mapSelector = new StringSelection(getGUIData("selectMap"), mapPos, mapNames, &selectMap);
-    addChild(_mapSelector);
   }
 
   void processMessage(NetworkMessage msg) {
@@ -114,7 +102,7 @@ class BattleSelectionScreen : GUIElement {
         string name = msg.chooseMap.name;
         auto note = PostFormat.otherChoseMap.format(name);
         _messageBox.postMessage(note, PostColor.note);
-        _mapSelector.selection = name;
+        _mapSelector.selection = fetchMap(name);
         break;
       case chooseFaction:
         string name = msg.chooseFaction.name;
@@ -151,13 +139,11 @@ class BattleSelectionScreen : GUIElement {
   void beginBattle() {
     auto playerFaction = _playerFactionMenu.selection;
     auto otherFaction = _otherFactionMenu.selection;
-    if (isHost && _client !is null) { 
-      _client.send(NetworkMessage(NetworkMessage.Type.startBattle)); 
+    if (isHost && _client !is null) {
+      _client.send(NetworkMessage(NetworkMessage.Type.startBattle));
     }
-    auto diff = _difficultySelector.selection;
     auto map = _mapSelector.selection;
-    auto path = buildPath(Paths.mapDir, diff, map ~ ".json");
-    setScene(new Battle(path, playerFaction, otherFaction, _client, isHost));
+    setScene(new Battle(map, playerFaction, otherFaction, _client, isHost));
   }
 
   void backToMenu() {
@@ -175,9 +161,9 @@ class BattleSelectionScreen : GUIElement {
     }
   }
 
-  void selectMap(string mapName) {
+  void selectMap(MapData map) {
     if (_client !is null) {
-      _client.send(NetworkMessage.makeChooseMap(mapName));
+      _client.send(NetworkMessage.makeChooseMap(map.mapKey));
     }
   }
 }
