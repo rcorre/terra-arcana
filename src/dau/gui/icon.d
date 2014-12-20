@@ -13,6 +13,9 @@ class Icon : GUIElement {
     auto pos = data.get("offset", "0,0").parseVector!int;
     auto anchor = data.get("anchor", "topLeft").to!Anchor;
     super(data, pos, anchor);
+    if ("text" in data.child) {
+      addChild(new TextBox(data.child["text"]));
+    }
   }
 
   this(GUIData data, Vector2i pos, Anchor anchor = Anchor.topLeft) {

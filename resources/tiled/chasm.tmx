@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="29" height="19" tilewidth="32" tileheight="32" nextobjectid="25">
  <properties>
+  <property name="difficulty" value="1"/>
   <property name="name" value="Chasm"/>
  </properties>
  <tileset firstgid="1" source="terrain.tsx"/>
