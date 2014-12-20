@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="29" height="19" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="29" height="19" tilewidth="32" tileheight="32" nextobjectid="25">
+ <properties>
+  <property name="name" value="Chasm"/>
+ </properties>
  <tileset firstgid="1" source="terrain.tsx"/>
  <layer name="terrain" width="29" height="19">
   <data>
@@ -557,29 +560,29 @@
   </data>
  </layer>
  <objectgroup name="feature">
-  <object name="spawn" type="2" gid="18" x="352" y="96"/>
-  <object name="spawn" type="2" gid="18" x="384" y="96"/>
-  <object name="spawn" type="2" gid="18" x="416" y="96"/>
-  <object name="spawn" type="2" gid="18" x="448" y="96"/>
-  <object name="spawn" type="2" gid="18" x="480" y="96"/>
-  <object name="spawn" type="2" gid="18" x="512" y="96"/>
-  <object name="spawn" type="2" gid="18" x="544" y="96"/>
-  <object name="spawn" type="1" gid="18" x="416" y="544"/>
-  <object name="spawn" type="1" gid="18" x="352" y="544"/>
-  <object name="spawn" type="1" gid="18" x="384" y="544"/>
-  <object name="spawn" type="1" gid="18" x="480" y="544"/>
-  <object name="spawn" type="1" gid="18" x="448" y="544"/>
-  <object name="spawn" type="1" gid="18" x="544" y="544"/>
-  <object name="spawn" type="1" gid="18" x="512" y="544"/>
-  <object name="obelisk" type="1" gid="10" x="320" y="480"/>
-  <object name="obelisk" type="1" gid="10" x="576" y="480"/>
-  <object name="obelisk" type="0" gid="9" x="224" y="416"/>
-  <object name="obelisk" type="2" gid="11" x="320" y="160"/>
-  <object name="obelisk" type="2" gid="11" x="576" y="160"/>
-  <object name="obelisk" type="0" gid="9" x="224" y="224"/>
-  <object name="obelisk" type="0" gid="9" x="64" y="512"/>
-  <object name="obelisk" type="0" gid="9" x="800" y="192"/>
-  <object name="obelisk" type="0" gid="9" x="64" y="128"/>
-  <object name="obelisk" type="0" gid="9" x="800" y="448"/>
+  <object id="1" name="spawn" type="2" gid="18" x="352" y="96"/>
+  <object id="2" name="spawn" type="2" gid="18" x="384" y="96"/>
+  <object id="3" name="spawn" type="2" gid="18" x="416" y="96"/>
+  <object id="4" name="spawn" type="2" gid="18" x="448" y="96"/>
+  <object id="5" name="spawn" type="2" gid="18" x="480" y="96"/>
+  <object id="6" name="spawn" type="2" gid="18" x="512" y="96"/>
+  <object id="7" name="spawn" type="2" gid="18" x="544" y="96"/>
+  <object id="8" name="spawn" type="1" gid="18" x="416" y="544"/>
+  <object id="9" name="spawn" type="1" gid="18" x="352" y="544"/>
+  <object id="10" name="spawn" type="1" gid="18" x="384" y="544"/>
+  <object id="11" name="spawn" type="1" gid="18" x="480" y="544"/>
+  <object id="12" name="spawn" type="1" gid="18" x="448" y="544"/>
+  <object id="13" name="spawn" type="1" gid="18" x="544" y="544"/>
+  <object id="14" name="spawn" type="1" gid="18" x="512" y="544"/>
+  <object id="15" name="obelisk" type="1" gid="10" x="320" y="480"/>
+  <object id="16" name="obelisk" type="1" gid="10" x="576" y="480"/>
+  <object id="17" name="obelisk" type="0" gid="9" x="224" y="416"/>
+  <object id="18" name="obelisk" type="2" gid="11" x="320" y="160"/>
+  <object id="19" name="obelisk" type="2" gid="11" x="576" y="160"/>
+  <object id="20" name="obelisk" type="0" gid="9" x="224" y="224"/>
+  <object id="21" name="obelisk" type="0" gid="9" x="64" y="512"/>
+  <object id="22" name="obelisk" type="0" gid="9" x="800" y="192"/>
+  <object id="23" name="obelisk" type="0" gid="9" x="64" y="128"/>
+  <object id="24" name="obelisk" type="0" gid="9" x="800" y="448"/>
  </objectgroup>
 </map>
