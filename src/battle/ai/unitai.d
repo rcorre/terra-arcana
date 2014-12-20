@@ -20,6 +20,7 @@ struct UnitAI {
   }
 
   auto bestSolutionTo(AIGoal goal, int cmdPoints) {
+    if (stayOnTile) { return null; }
     bool canMoveAndAttack = cmdPoints >= 2;
     final switch (goal.type) with (AIGoal.Type) {
       case attack:
@@ -32,6 +33,7 @@ struct UnitAI {
   }
 
   auto bestCaptureOption(Tile tile) {
+    if (stayOnTile) { return null; }
     if (tile == _unit.tile) { 
       return null; // already on tile
     }
@@ -47,6 +49,7 @@ struct UnitAI {
   }
 
   auto bestAttackOption(Tile target, bool canMove) {
+    if (stayOnTile) { return null; }
     AIDecision[] options;
     foreach (tile ; _pathfinder.tilesInRange) {
       if (tile != _unit.tile && !canMove) { continue; }
@@ -61,6 +64,7 @@ struct UnitAI {
   }
 
   auto bestAidOption(Tile target, bool canMove) {
+    if (stayOnTile) { return null; }
     auto enemies = _battle.enemiesTo(_unit.team);
     AIDecision[] options;
     foreach (tile ; _pathfinder.tilesInRange) {
@@ -97,4 +101,9 @@ struct UnitAI {
     auto score = average(tileScore, buffScore);
     return new ActDecison(_unit, path, target, actNum, score);
   } 
+
+  @property bool stayOnTile() {
+    auto obelisk = cast(Obelisk) _unit.tile.feature;
+    return obelisk !is null && obelisk.team != _unit.team;
+  }
 }
