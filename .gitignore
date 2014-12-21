@@ -17,6 +17,10 @@ __dummy.html
 *.lib
 *.exe
 
+# packaging
+*.zip
+*.tar.gz
+
 # other files
 *.bak
 save/
