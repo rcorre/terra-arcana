@@ -117,12 +117,12 @@ class ActionInfo : GUIElement {
   void addEffectText(const UnitAction action) {
     auto title = action.effect.to!string.capitalize;
 
-    string effect = (action.hits > 1) ? 
-      "%d".format(action.power) : 
-      "%dx%d".format(action.power, action.hits);
+    string effect = (action.hits > 1) ?
+      "%dx%d".format(action.power, action.hits) :
+      "%d".format(action.power);
 
-    string range = (action.minRange == action.maxRange) ? 
-      "%d".format(action.minRange) : 
+    string range = (action.minRange == action.maxRange) ?
+      "%d".format(action.minRange) :
       "%d-%d".format(action.minRange, action.maxRange);
 
     auto text = effectFmt.format(title, effect, range, action.target);
