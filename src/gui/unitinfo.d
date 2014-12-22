@@ -23,7 +23,7 @@ class UnitInfoGUI : GUIElement {
       auto spriteOffset     = data["spriteOffset"].parseVector!int;
       auto unitIconData     = getGUIData(iconFmt.format(unit.key));
       addChild(new Icon(unitIconData, spriteOffset));
-      addChild(new TextBox(data.child["nameText"]));
+      addChild(new TextBox(data.child["nameText"], unit.name));
 
       // pip bars for hp, ap, armor, evade
       _hpBar = new PipBar(data.child["hpBar"], unit.maxHp);

@@ -1498,9 +1498,9 @@
       },
       "nameText": {
         "properties": {
-          "offset": "49, 12",
+          "offset": "49, 10",
           "fontName": "Mecha",
-          "fontSize": "16"
+          "fontSize": "18"
         }
       },
       "text": {
