@@ -1,5 +1,6 @@
 module battle.system.inputhint;
 
+import std.string, std.algorithm;
 import dau.all;
 import battle.battle;
 import model.all;
@@ -17,27 +18,33 @@ class InputHintSystem : System!Battle {
   }
 
   void setHint(int idx, string key, string command) {
-    if (Preferences.fetch.showInputHints) {
-      if (idx >= _hints.length) {
-        auto hint = scene.gui.addElement(new InputHint(key, command, cast(int) _hints.length));
-        _hints ~= hint;
-      }
-      else {
-        if (_hints[idx] !is null) { 
-          if (_hints[idx].key == key && _hints[idx].command == command) { 
-            return; 
-          }
-          _hints[idx].active = false; 
-        }
-        auto hint = scene.gui.addElement(new InputHint(key, command, idx));
-        _hints[idx] = hint;
-      }
+    if (!Preferences.fetch.showInputHints) { return; } // hints disabled
+
+    if (idx >= _hints.length) {
+      _hints.length = idx + 1;
+    }
+    auto current = _hints[idx];
+    if (current is null) {
+      _hints[idx] = scene.gui.addElement(new InputHint(key, command, idx));
+    }
+    else if (current.command != command || current.key != key) {
+      current.active = false;
+      _hints[idx] = scene.gui.addElement(new InputHint(key, command, idx));
+    }
+  }
+
+  void clearHint(int idx) {
+    if (idx >= _hints.length) { return; }
+    auto hint = _hints[idx];
+    if (hint !is null) {
+      hint.active = false;
+      _hints[idx] = null;
     }
   }
 
   void hideHints() {
-    foreach(hint ; _hints) {
-      hint.transitionActive = false;
+    foreach(hint ; _hints.filter!(x => x !is null)) {
+      hint.active = false;
     }
     _hints = [];
   }

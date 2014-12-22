@@ -43,7 +43,7 @@ class PlayerTurn : State!Battle {
       if (_tileHoverSys.tileUnderMouseChanged) {
         checkMouse(b);
       }
-      
+
       if (input.select) {
         if (unit !is null && unit.team == _player.teamIdx) {
           b.states.pushState(new ConsiderMove(unit));

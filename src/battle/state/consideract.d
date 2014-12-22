@@ -27,7 +27,6 @@ class ConsiderAct : State!Battle {
         b.states.popState();
       }
       _tileHover = b.getSystem!TileHoverSystem;
-      adjustCursor(b);
       auto overlayName = _action.isAttack ? "enemy" : "ally";
       auto targetName = _action.isAttack ? "enemy-target" : "ally-target";
       _rangeOverlay = new Animation("gui/overlay", overlayName, Animation.Repeat.loop);
@@ -41,11 +40,9 @@ class ConsiderAct : State!Battle {
         b.gui.addElement(new BattlePopup(popupPos, BattlePopup.Type.notEnoughAp));
       }
 
-      auto hintSys = b.getSystem!InputHintSystem;
-      hintSys.hideHints();
-      hintSys.showHint("lmb", "use");
-      hintSys.showHint("rmb", "inspect");
-      hintSys.showHint("space", "cancel");
+      _hintSys = b.getSystem!InputHintSystem;
+      _hintSys.hideHints();
+      adjustHints(b);
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -53,7 +50,7 @@ class ConsiderAct : State!Battle {
       _targetOverlay.update(time);
       auto tile = _tileHover.tileUnderMouse;
       if (_tileHover.tileUnderMouseChanged) {
-        adjustCursor(b);
+        adjustHints(b);
       }
       if (input.select && _unit.canUseAction(_actionNum, tile)) {
         b.states.setState(new PerformAction(_unit, _actionNum, tile));
@@ -89,14 +86,19 @@ class ConsiderAct : State!Battle {
   const UnitAction _action;
   Animation _targetOverlay, _rangeOverlay;
   TileHoverSystem _tileHover;
+  InputHintSystem _hintSys;
   Tile[] _tilesInRange;
 
-  void adjustCursor(Battle b) {
+  void adjustHints(Battle b) {
     if (_unit.canUseAction(_actionNum, _tileHover.tileUnderMouse)) {
       b.cursor.setSprite(_action.isAttack ? "enemy" : "ally");
+      _hintSys.setHint(0, "lmb", "use");
     }
     else {
       b.cursor.setSprite("inactive");
+      _hintSys.clearHint(0);
     }
+    auto rmbHint = (_tileHover.unitUnderMouse is null) ? "cancel" : "inspect";
+    _hintSys.setHint(1, "rmb", rmbHint);
   }
 }
