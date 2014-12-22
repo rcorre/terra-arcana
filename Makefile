@@ -28,13 +28,13 @@ MAPFILES	 := $(wildcard $(MAPSRC)/*.tmx)
 all: debug
 
 debug: content
-	@dub build --build=debug --quiet
+	@dub build --compiler=dmd --build=debug --quiet
 
 release: content
-	@dub build release --quiet
+	@dub build --compiler=dmd release --quiet
 
 run: content
-	@dub run --quiet
+	@dub run --compiler=dmd --quiet
 
 content: dirs sprites gui music fonts sounds maps
 
