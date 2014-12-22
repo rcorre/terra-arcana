@@ -51,7 +51,7 @@ music: $(MMPZFILES:$(MMPZDIR)/%.mmpz=$(OGGDIR)/%.ogg)
 
 $(OGGDIR)/%.ogg : $(MMPZDIR)/%.mmpz
 	@echo building song $*
-	@-! { lmms -r $(MMPZDIR)/$*.mmpz -f ogg -o $(OGGDIR)/$*.ogg ; } >/dev/null 2>&1
+	@-! { lmms -r $(MMPZDIR)/$*.mmpz -f ogg -b 64 -o $(OGGDIR)/$*.ogg ; } >/dev/null 2>&1
 
 gui: $(GUIFILES:$(SVGDIR)/%.svg=$(GUIDIR)/%.png)
 
