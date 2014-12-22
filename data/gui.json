@@ -30,8 +30,8 @@
   "inputHint": {
     "properties": {
       "texture": "gui/inputHint",
-      "startPos": "257, 616",
-      "spacing": "160, 0",
+      "startPos": "227, 616",
+      "spacing": "130, 0",
       "iconOffset": "0,0"
     },
     "child": {

@@ -4,7 +4,11 @@ import dau.all;
 
 /// show unit AP and HP on the side of the screen
 class InputHint : DynamicGUIElement {
+  const string key, command;
+
   this(string key, string command, int index) {
+    this.key = key;
+    this.command = command;
     auto data = getGUIData("inputHint");
     auto pos = data["startPos"].parseVector!int;
     pos += data["spacing"].parseVector!int * index;

@@ -16,6 +16,25 @@ class InputHintSystem : System!Battle {
     }
   }
 
+  void setHint(int idx, string key, string command) {
+    if (Preferences.fetch.showInputHints) {
+      if (idx >= _hints.length) {
+        auto hint = scene.gui.addElement(new InputHint(key, command, cast(int) _hints.length));
+        _hints ~= hint;
+      }
+      else {
+        if (_hints[idx] !is null) { 
+          if (_hints[idx].key == key && _hints[idx].command == command) { 
+            return; 
+          }
+          _hints[idx].active = false; 
+        }
+        auto hint = scene.gui.addElement(new InputHint(key, command, idx));
+        _hints[idx] = hint;
+      }
+    }
+  }
+
   void hideHints() {
     foreach(hint ; _hints) {
       hint.transitionActive = false;

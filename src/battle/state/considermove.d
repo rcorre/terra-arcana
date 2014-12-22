@@ -31,11 +31,12 @@ class ConsiderMove : State!Battle {
       _pathCursor  = new Animation("gui/overlay", "path", Animation.Repeat.loop);
 
 
-      auto hintSys = b.getSystem!InputHintSystem;
-      hintSys.hideHints();
-      hintSys.showHint("lmb", "move");
-      hintSys.showHint("q", "action1");
-      hintSys.showHint("e", "action2");
+      _hintSys = b.getSystem!InputHintSystem;
+      _hintSys.hideHints();
+      _hintSys.showHint("lmb", "move");
+      _hintSys.showHint("q", "action1");
+      _hintSys.showHint("e", "action2");
+      _hintSys.showHint("rmb", "cancel");
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -46,10 +47,20 @@ class ConsiderMove : State!Battle {
       if (_tileHover.tileUnderMouseChanged) {
         auto tile = _tileHover.tileUnderMouse;
         _path = _pathFinder.pathTo(tile);
+        if (_path !is null) {
+          _hintSys.setHint(0, "lmb", "move");
+        }
         b.cursor.setSprite((_path is null) ? "inactive" : "active");
         auto other = _tileHover.unitUnderMouse;
-        if (other !is null && other.team == _unit.team && other.canAct) {
-          b.cursor.setSprite("ally");
+        if (other !is null) {
+          _hintSys.setHint(3, "rmb", "inspect");
+          if (other.team == _unit.team && other.canAct) {
+            b.cursor.setSprite("ally");
+            _hintSys.setHint(0, "lmb", "select");
+          }
+        }
+        else {
+          _hintSys.setHint(3, "rmb", "cancel");
         }
       }
       if (input.select) {
@@ -110,6 +121,7 @@ class ConsiderMove : State!Battle {
   Unit _unit;
   Animation _allyCursor, _enemyCursor, _moveCursor, _pathCursor;
   TileHoverSystem _tileHover;
+  InputHintSystem _hintSys;
   Pathfinder _pathFinder;
   Tile[] _path;
 
