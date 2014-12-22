@@ -67,6 +67,9 @@ class ConsiderMove : State!Battle {
           net.broadcastMove(_unit, _path);
         }
       }
+      else if (input.inspect && _tileHover.unitUnderMouse is null) {
+        b.states.popState();
+      }
       else if (input.skip) {
         b.states.popState();
       }
