@@ -136,7 +136,7 @@
     "baseEvade"  : 0,
 
     "action1": {
-      "name"        : "Flamethrower",
+      "name"        : "Torch",
       "description" : "",
       "target"      : "line",
       "effect"      : "damage",
