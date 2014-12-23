@@ -91,7 +91,9 @@ class StateMachine(T) {
         currentState._started = true;
         currentState.start(_obj);
       }
-      currentState.enter(_obj);
+      if (currentState._started) { // state might have changed after start
+        currentState.enter(_obj);
+      }
     }
   }
 }
