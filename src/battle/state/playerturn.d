@@ -23,17 +23,16 @@ class PlayerTurn : State!Battle {
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       _unitJumpList = bicycle(_player.moveableUnits.array);
+      // auto end turn if out of cp
       if (_player.commandPoints == 0) {
         b.startNewTurn();
         b.getSystem!BattleNetworkSystem.broadcastEndTurn(); // notify network
       }
-      checkMouse(b);
 
-      auto hintSys = b.getSystem!InputHintSystem;
-      hintSys.hideHints();
-      hintSys.showHint("lmb", "select");
-      hintSys.showHint("rmb", "inspect");
-      hintSys.showHint("space", "end turn");
+      _hintSys = b.getSystem!InputHintSystem;
+      _hintSys.hideHints();
+
+      checkMouse(b);
     }
 
     void update(Battle b, float time, InputManager input) {
@@ -72,10 +71,15 @@ class PlayerTurn : State!Battle {
     void end(Battle b) {
       b.getSystem!InputHintSystem.hideHints();
     }
+
+    void exit(Battle b) {
+      _hintSys.hideHints();
+    }
   }
 
   private:
   TileHoverSystem _tileHoverSys;
+  InputHintSystem _hintSys;
   Animation _cursor;
   Player _player;
   Bicycle!(Unit[]) _unitJumpList;
@@ -85,12 +89,22 @@ class PlayerTurn : State!Battle {
     auto tile = _tileHoverSys.tileUnderMouse;
     auto unit = _tileHoverSys.unitUnderMouse;
     _mouseOverSpawnPoint = b.spawnPointsFor(_player.teamIdx).canFind(tile);
+
     if (unit is null) {
       b.cursor.setSprite(_mouseOverSpawnPoint ? "active" : "inactive");
+      _hintSys.clearHint(1);
+      if (_mouseOverSpawnPoint) {
+        _hintSys.setHint(0, "lmb", "deploy");
+      }
+      else {
+        _hintSys.clearHint(0);
+      }
     }
     else {
+      _hintSys.setHint(1, "rmb", "inspect");
       if (unit.team == _player.teamIdx) {
         b.cursor.setSprite("ally");
+        _hintSys.setHint(0, "lmb", "select");
       }
       else {
         b.cursor.setSprite("enemy");

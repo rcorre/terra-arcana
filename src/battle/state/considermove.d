@@ -96,6 +96,7 @@ class ConsiderMove : State!Battle {
     }
 
     void exit(Battle b) {
+      _hintSys.hideHints();
       _path = null;
     }
   }

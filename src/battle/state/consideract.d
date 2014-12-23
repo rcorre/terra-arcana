@@ -77,6 +77,10 @@ class ConsiderAct : State!Battle {
         }
       }
     }
+
+    void exit(Battle b) {
+      _hintSys.hideHints();
+    }
   }
 
   private:
@@ -98,7 +102,11 @@ class ConsiderAct : State!Battle {
       b.cursor.setSprite("inactive");
       _hintSys.clearHint(0);
     }
-    auto rmbHint = (_tileHover.unitUnderMouse is null) ? "cancel" : "inspect";
-    _hintSys.setHint(1, "rmb", rmbHint);
+    if (_tileHover.unitUnderMouse is null) {
+      _hintSys.clearHint(1);
+    }
+    else {
+      _hintSys.setHint(1, "rmb", "inspect");
+    }
   }
 }
