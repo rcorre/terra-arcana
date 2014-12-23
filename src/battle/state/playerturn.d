@@ -17,19 +17,21 @@ class PlayerTurn : State!Battle {
   }
 
   override {
+    void start(Battle b) {
+      _hintSys = b.getSystem!InputHintSystem;
+      _tileHoverSys = b.getSystem!TileHoverSystem;
+      _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
+    }
+
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.enableSystem!BattleCameraSystem;
-      _tileHoverSys = b.getSystem!TileHoverSystem;
-      _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
-      _unitJumpList = bicycle(_player.moveableUnits.array);
       // auto end turn if out of cp
       if (_player.commandPoints == 0) {
         b.startNewTurn();
         b.getSystem!BattleNetworkSystem.broadcastEndTurn(); // notify network
       }
 
-      _hintSys = b.getSystem!InputHintSystem;
       _hintSys.hideHints();
 
       checkMouse(b);
@@ -68,12 +70,8 @@ class PlayerTurn : State!Battle {
       }
     }
 
-    void end(Battle b) {
-      b.getSystem!InputHintSystem.hideHints();
-    }
-
     void exit(Battle b) {
-      _hintSys.hideHints();
+      b.getSystem!InputHintSystem.hideHints();
     }
   }
 
@@ -82,7 +80,6 @@ class PlayerTurn : State!Battle {
   InputHintSystem _hintSys;
   Animation _cursor;
   Player _player;
-  Bicycle!(Unit[]) _unitJumpList;
   bool _mouseOverSpawnPoint;
 
   void checkMouse(Battle b) {

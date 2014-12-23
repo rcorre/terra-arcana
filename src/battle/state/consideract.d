@@ -20,13 +20,17 @@ class ConsiderAct : State!Battle {
   }
 
   override {
+    void start(Battle b) {
+      _tileHover = b.getSystem!TileHoverSystem;
+      _hintSys = b.getSystem!InputHintSystem;
+    }
+
     void enter(Battle b) {
       b.enableSystem!TileHoverSystem;
       b.disableSystem!BattleCameraSystem;
       if (!_unit.canAct || b.activePlayer.commandPoints <= 0) {
         b.states.popState();
       }
-      _tileHover = b.getSystem!TileHoverSystem;
       auto overlayName = _action.isAttack ? "enemy" : "ally";
       auto targetName = _action.isAttack ? "enemy-target" : "ally-target";
       _rangeOverlay = new Animation("gui/overlay", overlayName, Animation.Repeat.loop);
@@ -40,7 +44,6 @@ class ConsiderAct : State!Battle {
         b.gui.addElement(new BattlePopup(popupPos, BattlePopup.Type.notEnoughAp));
       }
 
-      _hintSys = b.getSystem!InputHintSystem;
       _hintSys.hideHints();
       adjustHints(b);
     }
@@ -79,7 +82,7 @@ class ConsiderAct : State!Battle {
     }
 
     void exit(Battle b) {
-      _hintSys.hideHints();
+      b.getSystem!InputHintSystem.hideHints();
     }
   }
 

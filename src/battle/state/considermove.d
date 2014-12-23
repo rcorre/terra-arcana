@@ -17,21 +17,25 @@ class ConsiderMove : State!Battle {
   }
 
   override {
-    void enter(Battle b) {
-      b.enableSystem!TileHoverSystem;
-      b.disableSystem!BattleCameraSystem;
+    void start(Battle b) {
       _tileHover = b.getSystem!TileHoverSystem;
-      _pathFinder = new Pathfinder(b.map, _unit);
-      if (!_unit.canAct || _pathFinder.tilesInRange.empty || b.activePlayer.commandPoints <= 0) {
-        b.states.popState();
-      }
+      _hintSys = b.getSystem!InputHintSystem;
+
       _allyCursor  = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
       _enemyCursor = new Animation("gui/overlay", "enemy", Animation.Repeat.loop);
       _moveCursor  = new Animation("gui/overlay", "move", Animation.Repeat.loop);
       _pathCursor  = new Animation("gui/overlay", "path", Animation.Repeat.loop);
+    }
 
+    void enter(Battle b) {
+      b.enableSystem!TileHoverSystem;
+      b.disableSystem!BattleCameraSystem;
 
-      _hintSys = b.getSystem!InputHintSystem;
+      _pathFinder = new Pathfinder(b.map, _unit);
+      if (!_unit.canAct || _pathFinder.tilesInRange.empty || b.activePlayer.commandPoints <= 0) {
+        b.states.popState();
+      }
+
       _hintSys.hideHints();
       adjustHints(b);
     }
@@ -96,7 +100,7 @@ class ConsiderMove : State!Battle {
     }
 
     void exit(Battle b) {
-      _hintSys.hideHints();
+      b.getSystem!InputHintSystem.hideHints();
       _path = null;
     }
   }
