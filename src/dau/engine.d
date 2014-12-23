@@ -1,5 +1,6 @@
 module dau.engine;
 
+import std.string;
 import dau.allegro;
 import dau.setup;
 import dau.scene;
@@ -16,7 +17,7 @@ void registerEventHandler(AllegroEventHandler handler, ALLEGRO_EVENT_TYPE type) 
 }
 
 /// pass FirstSceneType to instantiate first scene after allegro setup
-int runGame(FirstSceneType)() {
+int runGame(FirstSceneType)(string iconPath = null) {
   return al_run_allegro({
     // initialize
     al_init();
@@ -50,6 +51,12 @@ int runGame(FirstSceneType)() {
           ALLEGRO_INVERSE_ALPHA);
     }
 
+    if (iconPath !is null) {
+      _icon = al_load_bitmap(iconPath.toStringz);
+      al_set_display_icon(mainDisplay, _icon);
+      onShutdown({ al_destroy_bitmap(_icon); });
+    }
+
     runSetupFunctions();
 
     al_start_timer(mainTimer); // start fps timer
@@ -63,7 +70,7 @@ int runGame(FirstSceneType)() {
       }
     }
 
-    shutdownGame();
+    runShutdownFunctions();
 
     return 0;
   });
@@ -116,3 +123,4 @@ void mainDraw() {
 
 private:
 AllegroEventHandler[][ALLEGRO_EVENT_TYPE] _eventHandlers;
+ALLEGRO_BITMAP* _icon;

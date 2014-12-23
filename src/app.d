@@ -3,5 +3,5 @@ import dau.setup;
 import title.title;
 
 int main(char[][] args) {
-  return runGame!Title();
+  return runGame!Title("icon.png");
 }
