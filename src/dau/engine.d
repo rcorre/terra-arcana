@@ -35,7 +35,6 @@ int runGame(FirstSceneType)(string iconPath = null) {
     al_init_image_addon();
     al_init_font_addon();
     al_init_ttf_addon();
-    al_init_primitives_addon();
 
     al_reserve_samples(Settings.numAudioSamples);
 
