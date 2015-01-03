@@ -11,19 +11,34 @@
     "allegro-static",
     "allegro_acodec-static",
     "allegro_audio-static",
-    "allegro_font-static",
-    "allegro_ttf-static",
-    "allegro_image-static",
     "allegro_color-static",
-    "allegro_primitives-static"
+    "allegro_dialog-static",
+    "allegro_font-static",
+    "allegro_image-static",
+    "allegro_main-static",
+    "allegro_memfile-static",
+    "allegro_physfs-static",
+    "allegro_primitives-static",
+    "allegro_ttf-static"
   ],
   "lflags": [
-    "-L../allegro/build/lib",
-    "-lFLAC", 
-    "-logg", 
+    "-L../allegro/build/lib/",
+    "-lm",
+    "-lpthread",
+    "-lSM",
+    "-lICE",
+    "-lX11",
+    "-lXext",
+    "-lXcursor",
+    "-lXinerama",
+    "-lXrandr",
+    "-lGL",
+    "-lGLU",
+    "-lFLAC",
+    "-logg",
+    "-ldumb",
     "-lvorbisfile",
     "-lvorbis",
-    "-logg",
     "-lpulse-simple",
     "-lpulse",
     "-lasound",
@@ -42,24 +57,10 @@
     "-lfontconfig",
     "-lfreetype",
     "-lgthread-2.0",
-    "-lglib-2.0",
     "-lpng",
     "-lz",
     "-ljpeg",
-    "-lphysfs",
-    "-lfreetype",
-    "-lz",
-    "-lm",
-    "-lpthread",
-    "-lSM",
-    "-lICE",
-    "-lX11",
-    "-lXext",
-    "-lXcursor",
-    "-lXinerama",
-    "-lXrandr",
-    "-lGL",
-    "-lGLU"
+    "-lphysfs"
   ],
   "buildTypes": {
     "trace": {
@@ -68,3 +69,4 @@
     }
   }
 }
+
