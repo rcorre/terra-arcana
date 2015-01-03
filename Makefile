@@ -7,6 +7,7 @@ SOUNDSRC = resources/sound
 MAPSRC   = resources/tiled
 
 CONTENTDIR = content
+BINDIR     = bin
 # Content directories
 PNGDIR    = $(CONTENTDIR)/image
 OGGDIR    = $(CONTENTDIR)/music
@@ -82,3 +83,4 @@ $(MAPDEST)/%.json : $(MAPSRC)/%.tmx
 
 clean:
 	@$(RM) -r $(CONTENTDIR)
+	@$(RM) -r $(BINDIR)
