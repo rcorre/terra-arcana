@@ -1,5 +1,5 @@
 # bin
-terra-arcana
+bin/
 
 # content (generated from resources by Makefile)
 content/
