@@ -13,7 +13,7 @@ class Button : GUIElement {
   this(GUIData data, Action onClick) {
     auto pos = data["offset"].parseVector!int;
     auto anchor = data.get("anchor", "topLeft").to!Anchor;
-    this(data, pos, onClick, anchor); 
+    this(data, pos, onClick, anchor);
   }
 
   this(GUIData data, Vector2i pos, Action onClick, Anchor anchor = Anchor.topLeft) {

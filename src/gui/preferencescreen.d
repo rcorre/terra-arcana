@@ -37,7 +37,7 @@ class PreferenceScreen : GUIElement {
     _fullScreenButton = addChild(new Button(data.child["toggleFullScreen"], &toggleFullScreen));
     _resolutionButton = addChild(new Button(data.child["setResolution"], &setResolution));
     _inputHintsButton.text = "Show Input Hints: " ~ (_preferences.showInputHints ? "on" : "off");
-    _fullScreenButton.text = "Full Screen: " ~ (_preferences.fullScreen ? "on" : "off");
+    _fullScreenButton.text = _preferences.screenMode.prettyString;
 
     _selectResolution = addChild(new DisplaySelector(data.child["selectResolution"]));
   }
@@ -76,8 +76,18 @@ class PreferenceScreen : GUIElement {
   }
 
   void toggleFullScreen() {
-    _preferences.fullScreen = !_preferences.fullScreen;
-    _fullScreenButton.text = "Full Screen: " ~ (_preferences.fullScreen ? "on" : "off");
+    final switch (_preferences.screenMode) with (ScreenMode) {
+      case windowed:
+        _preferences.screenMode = fullScreen;
+        break;
+      case fullScreen:
+        _preferences.screenMode = fullScreenWindow;
+        break;
+      case fullScreenWindow:
+        _preferences.screenMode = windowed;
+        break;
+    }
+    _fullScreenButton.text = _preferences.screenMode.prettyString;
   }
 
   void setResolution() {

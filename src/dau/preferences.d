@@ -5,21 +5,27 @@ import dau.setup;
 import dau.util.jsonizer;
 import dau.util.math;
 
+enum ScreenMode {
+  windowed,
+  fullScreen,
+  fullScreenWindow
+}
+
 class Preferences {
   mixin JsonizeMe;
 
   @jsonize {
-    bool showInputHints = true;
-    bool fullScreen     = false;
-    int screenSizeX = Settings.screenW;
-    int screenSizeY = Settings.screenH;
+    bool showInputHints   = true;
+    ScreenMode screenMode = ScreenMode.windowed;
+    int screenSizeX       = Settings.screenW;
+    int screenSizeY       = Settings.screenH;
     @property {
       real soundVolume() { return _soundVolume; }
       real musicVolume() { return _musicVolume; }
 
       void soundVolume(real val) { _soundVolume = val.clamp(0f, 1f); }
-      void musicVolume(real val) { 
-        _musicVolume = val.clamp(0f, 1f); 
+      void musicVolume(real val) {
+        _musicVolume = val.clamp(0f, 1f);
       }
     }
   }

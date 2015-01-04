@@ -25,8 +25,19 @@ int runGame(FirstSceneType)(string iconPath = null) {
 
     al_set_new_display_option(ALLEGRO_DISPLAY_OPTIONS.ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
     auto prefs = Preferences.fetch();
+    final switch (prefs.screenMode) with (ScreenMode) {
+      case windowed:
+        al_set_new_display_flags(ALLEGRO_WINDOWED);
+        break;
+      case fullScreen:
+        al_set_new_display_flags(ALLEGRO_FULLSCREEN);
+        break;
+      case fullScreenWindow:
+        al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+        break;
+    }
     mainDisplay = al_create_display(prefs.screenSizeX, prefs.screenSizeY);
-    setDisplayTransform(prefs.screenSizeX, prefs.screenSizeY);
+    setDisplayTransform(al_get_display_width(mainDisplay), al_get_display_height(mainDisplay));
     mainEventQueue = al_create_event_queue();
     mainTimer = al_create_timer(1.0 / Settings.fps);
 
