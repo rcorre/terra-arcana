@@ -31,11 +31,11 @@ all: debug
 debug: content
 	@dub build --compiler=dmd --build=debug --quiet
 
+static: content
+	@dub build --compiler=dmd --build=debug --config=static --quiet
+
 release: content
 	@dub build --compiler=dmd --build=release --quiet
-
-static: content
-	@dub build --config=static --compiler=dmd --build=release --quiet
 
 run: content
 	@dub run --compiler=dmd --quiet
