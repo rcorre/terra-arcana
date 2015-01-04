@@ -10,6 +10,7 @@ class Preferences {
 
   @jsonize {
     bool showInputHints = true;
+    bool fullScreen     = false;
     @property {
       real soundVolume() { return _soundVolume; }
       real musicVolume() { return _musicVolume; }

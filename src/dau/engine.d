@@ -1,9 +1,10 @@
 module dau.engine;
 
-import std.string;
+import std.string, std.algorithm;
 import dau.allegro;
 import dau.setup;
 import dau.scene;
+import dau.preferences;
 
 // global variables
 ALLEGRO_DISPLAY* mainDisplay;
@@ -23,7 +24,12 @@ int runGame(FirstSceneType)(string iconPath = null) {
     al_init();
 
     al_set_new_display_option(ALLEGRO_DISPLAY_OPTIONS.ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
-    mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
+    if (Preferences.fetch.fullScreen) {
+      createFullScreenDisplay();
+    }
+    else {
+      mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
+    }
     mainEventQueue = al_create_event_queue();
     mainTimer = al_create_timer(1.0 / Settings.fps);
 
@@ -118,6 +124,29 @@ void mainUpdate() {
 
 void mainDraw() {
   currentScene.draw();
+}
+
+auto findMaxDisplayMode() {
+  ALLEGRO_DISPLAY_MODE mode, largest;
+  for(int i = 0 ; i < al_get_num_display_modes() ; i++) {
+    al_get_display_mode(0, &mode);
+    if (mode.width > largest.width) {
+      largest = mode;
+    }
+  }
+  return largest;
+}
+
+void createFullScreenDisplay() {
+  auto mode = findMaxDisplayMode();
+  mainDisplay = al_create_display(mode.width, mode.height);
+  float sx = cast(float) mode.width / Settings.screenW;
+  float sy = cast(float) mode.height / Settings.screenH;
+  float scale = min(sx, sy);
+  ALLEGRO_TRANSFORM trans;
+  al_identity_transform(&trans);
+  al_scale_transform(&trans, scale, scale);
+  al_use_transform(&trans);
 }
 
 private:
