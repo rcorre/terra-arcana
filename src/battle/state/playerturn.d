@@ -35,6 +35,9 @@ class PlayerTurn : State!Battle {
       }
 
       _hintSys.hideHints();
+      if (!b.getSystem!UndoMoveSystem.empty) {
+        _hintSys.setHint(2, "u", "undo");
+      }
 
       checkMouse(b);
     }
