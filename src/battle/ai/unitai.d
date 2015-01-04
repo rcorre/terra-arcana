@@ -20,8 +20,7 @@ struct UnitAI {
   }
 
   auto bestSolutionTo(AIGoal goal, int cmdPoints) {
-    if (stayOnTile) { return null; }
-    bool canMoveAndAttack = cmdPoints >= 2;
+    bool canMoveAndAttack = stayOnTile ? false : cmdPoints >= 2;
     final switch (goal.type) with (AIGoal.Type) {
       case attack:
         return bestAttackOption(goal.target, canMoveAndAttack);

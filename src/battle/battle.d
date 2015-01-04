@@ -60,8 +60,9 @@ class Battle : Scene!Battle {
           _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), team);
           break;
         case "obelisk":
-          auto pos = map.tileAt(obj.row, obj.col).center;
-          auto obelisk = new Obelisk(pos, obj.row, obj.col);
+          auto tile = map.tileAt(obj.row, obj.col);
+          auto obelisk = new Obelisk(tile.center, obj.row, obj.col);
+          tile.feature = obelisk;
           entities.registerEntity(obelisk);
           if (team != 0) {
             captureObelisk(obelisk, team);
