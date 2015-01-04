@@ -8,6 +8,7 @@ import battle.ai.all;
 import battle.battle;
 import battle.system.all;
 import battle.state.moveunit;
+import battle.state.undomove;
 import battle.state.performaction;
 import battle.state.deployunit;
 
@@ -56,6 +57,9 @@ class NetworkTurn : State!Battle {
         auto target = act.target.getTile(b.map);
         auto actionNum = cast(int) act.actionNum;
         b.states.pushState(new PerformAction(actor, actionNum, target));
+        break;
+      case undoMove:
+        b.states.pushState(new UndoMove());
         break;
       case endTurn:
         b.startNewTurn;

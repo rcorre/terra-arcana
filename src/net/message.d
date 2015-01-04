@@ -22,6 +22,7 @@ struct NetworkMessage {
     moveUnit,
     deployUnit,
     performAction,
+    undoMove,
     endTurn
   }
 
@@ -44,6 +45,11 @@ struct NetworkMessage {
     auto makeCloseConnection() {
       return NetworkMessage(Type.closeConnection);
     }
+
+    auto makeUndoMove() {
+      return NetworkMessage(Type.undoMove);
+    }
+
     auto makeChat(string text) {
       auto msg = NetworkMessage(Type.chat);
       msg.chat.text = text;

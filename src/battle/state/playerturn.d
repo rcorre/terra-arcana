@@ -63,6 +63,7 @@ class PlayerTurn : State!Battle {
       }
       else if (input.undo) {
         b.states.pushState(new UndoMove);
+        b.getSystem!BattleNetworkSystem.broadcastUndo();
       }
     }
 

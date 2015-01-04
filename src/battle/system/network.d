@@ -27,6 +27,10 @@ class BattleNetworkSystem : System!Battle {
     if (_client !is null) { _client.send(NetworkMessage(NetworkMessage.Type.endTurn)); }
   }
 
+  void broadcastUndo() {
+    if (_client !is null) { _client.send(NetworkMessage(NetworkMessage.Type.undoMove)); }
+  }
+
   void broadcastMove(Unit unit, Tile[] path) {
     if (_client !is null) { _client.send(NetworkMessage.makeMove(unit.tile, path)); }
   }
