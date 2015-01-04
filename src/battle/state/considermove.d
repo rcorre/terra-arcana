@@ -7,6 +7,7 @@ import battle.battle;
 import battle.pathfinder;
 import battle.system.all;
 import battle.state.moveunit;
+import battle.state.undomove;
 import battle.state.consideract;
 import battle.state.showbattlemenu;
 
@@ -37,6 +38,11 @@ class ConsiderMove : State!Battle {
       }
 
       _hintSys.hideHints();
+
+      if (!b.getSystem!UndoMoveSystem.empty) {
+        _hintSys.setHint(2, "u", "undo");
+      }
+
       adjustHints(b);
     }
 
@@ -79,6 +85,10 @@ class ConsiderMove : State!Battle {
       }
       else if (input.exit) {
         b.states.pushState(new ShowBattleMenu);
+      }
+      else if (input.undo) {
+        b.states.pushState(new UndoMove);
+        b.getSystem!BattleNetworkSystem.broadcastUndo();
       }
     }
 
