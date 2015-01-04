@@ -34,6 +34,13 @@ class Player {
     _commandPoints -= amount;
   }
 
+  void restoreCommandPoints(int amount) {
+    assert(_commandPoints + amount <= _maxCommandPoints,
+        "tried to add %d CP, but already have %d/%d"
+        .format(amount, _commandPoints, _maxCommandPoints));
+    _commandPoints += amount;
+  }
+
   void beginTurn() {
     foreach(unit ; units) {
       unit.startTurn();

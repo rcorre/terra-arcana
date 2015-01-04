@@ -10,21 +10,21 @@ class UndoMoveSystem : System!Battle {
     super(b);
   }
 
-  @property bool empty() { return _moves.empty; }
+  @property bool empty() { return _undos.empty; }
 
-  void pushMove(Unit unit, Tile[] path) {
-    _moves.insertFront(MoveRecord(unit, path));
+  void pushMove(Unit unit) {
+    _undos.insertFront(UndoRecord(unit, unit.tile, unit.ap));
   }
 
   auto popMove() {
-    assert(!_moves.empty, "no undoable move to pop");
-    auto record = _moves.front;
-    _moves.removeFront();
+    assert(!_undos.empty, "no undoable move to pop");
+    auto record = _undos.front;
+    _undos.removeFront();
     return record;
   }
 
   void clearMoves() {
-    _moves.clear();
+    _undos.clear();
   }
 
   override {
@@ -34,10 +34,11 @@ class UndoMoveSystem : System!Battle {
   }
 
   private:
-  struct MoveRecord {
+  struct UndoRecord {
     Unit unit;
-    Tile[] path;
+    Tile tile;
+    int ap;
   }
 
-  SList!MoveRecord _moves;
+  SList!UndoRecord _undos;
 }

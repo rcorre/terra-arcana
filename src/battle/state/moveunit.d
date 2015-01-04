@@ -15,14 +15,14 @@ class MoveUnit : State!Battle {
   this(Unit unit, Tile[] path) {
     _unit = unit;
     _path = path;
-    _unit.consumeAp(path.map!(x => unit.computeMoveCost(x)).sum);
     _pos = cast(Vector2f) unit.center;
   }
 
   override {
     void start(Battle b) {
-      b.getSystem!UndoMoveSystem.pushMove(_unit, _path);
+      b.getSystem!UndoMoveSystem.pushMove(_unit);
       b.activePlayer.consumeCommandPoints(1);
+      _unit.consumeAp(_path.map!(x => _unit.computeMoveCost(x)).sum);
       b.refreshBattlePanel();
       _unit.sprite.depth += 1;  // make sure it passes over other units
     }

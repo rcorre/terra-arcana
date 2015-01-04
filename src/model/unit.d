@@ -110,6 +110,11 @@ class Unit : Entity {
     _ap -= amount;
   }
 
+  void setAp(int amount) {
+    assert(amount >= 0 && amount <= maxAp, "setAp invalid value %d/%d".format(amount, maxAp));
+    _ap = amount;
+  }
+
   /// deal damage, returns amount of damage dealt
   int dealDamage(int amount, bool ignoreArmor) {
     amount -= ignoreArmor ? 0 : armor;

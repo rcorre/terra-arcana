@@ -6,6 +6,7 @@ import model.all;
 import battle.battle;
 import battle.system.all;
 import battle.state.endturn;
+import battle.state.undomove;
 import battle.state.considermove;
 import battle.state.showbattlemenu;
 import battle.state.chooseunittodeploy;
@@ -59,6 +60,9 @@ class PlayerTurn : State!Battle {
       }
       else if (input.exit) {
         b.states.pushState(new ShowBattleMenu);
+      }
+      else if (input.undo) {
+        b.states.pushState(new UndoMove);
       }
     }
 
