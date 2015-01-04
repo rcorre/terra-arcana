@@ -9,7 +9,7 @@ class Preferences {
   mixin JsonizeMe;
 
   @jsonize {
-    bool showInputHints;
+    bool showInputHints = true;
     @property {
       real soundVolume() { return _soundVolume; }
       real musicVolume() { return _musicVolume; }
