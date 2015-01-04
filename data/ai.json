@@ -3,8 +3,8 @@
     "claimObelisk": 0.9,
     "protectObelisk": 0.1,
     "deploy": 0.15,
-    "mobility": 0.5,
-    "agression": 1.0,
+    "mobility": 0.4,
+    "agression": 1.5,
     "support": 0.5,
     "avoidCounter": 0.2
   }
