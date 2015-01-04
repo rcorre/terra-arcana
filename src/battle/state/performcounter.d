@@ -13,7 +13,7 @@ class PerformCounter : State!Battle {
   this(Unit actor, Unit target) {
     _actor = actor;
     _target = target;
-    _actionNum = actor.firstUseableAction(target);
+    _actionNum = actor.firstUseableCounter(target);
   }
 
   override {
