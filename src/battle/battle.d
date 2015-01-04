@@ -35,6 +35,7 @@ class Battle : Scene!Battle {
       new TileHoverSystem(this),
       new InputHintSystem(this),
       new BattleCameraSystem(this),
+      new UndoMoveSystem(this),
       new BattleNetworkSystem(this, client)
     ];
     Sprite[string] cursorSprites = [

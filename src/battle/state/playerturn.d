@@ -21,6 +21,7 @@ class PlayerTurn : State!Battle {
       _hintSys = b.getSystem!InputHintSystem;
       _tileHoverSys = b.getSystem!TileHoverSystem;
       _cursor = new Animation("gui/overlay", "ally", Animation.Repeat.loop);
+      b.getSystem!UndoMoveSystem.clearMoves();
     }
 
     void enter(Battle b) {

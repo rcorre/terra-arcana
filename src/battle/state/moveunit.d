@@ -21,6 +21,7 @@ class MoveUnit : State!Battle {
 
   override {
     void start(Battle b) {
+      b.getSystem!UndoMoveSystem.pushMove(_unit, _path);
       b.activePlayer.consumeCommandPoints(1);
       b.refreshBattlePanel();
       _unit.sprite.depth += 1;  // make sure it passes over other units
@@ -70,6 +71,7 @@ class MoveUnit : State!Battle {
   void checkForTrap(Battle b) {
     auto trap = cast(Trap) _path.back.trap;
     if (trap !is null && trap.team != _unit.team && !_unit.hasTrait(UnitData.Trait.flight)) {
+      b.getSystem!UndoMoveSystem.popMove(); // cannot undo if stepped on trap
       b.states.pushState(new TriggerTrap(_path.back));
     }
   }
