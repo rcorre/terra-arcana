@@ -59,7 +59,7 @@ abstract class ScrollSelection(EntryType) : GUIElement {
   GUIElement _currentElement;
 
   void updateEntry() {
-      _currentElement.active = false;
-      _currentElement = addChild(createEntry(_currentSelection, size / 2));
+    _currentElement.active = false;
+    _currentElement = addChild(createEntry(_currentSelection, size / 2));
   }
 }

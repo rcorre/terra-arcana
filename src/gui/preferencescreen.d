@@ -1,9 +1,11 @@
 module gui.preferencescreen;
 
+import std.string, std.array, std.algorithm;
 import dau.all;
 import model.all;
 import title.title;
 import title.state.showtitle;
+import gui.displayselector;
 
 private enum volumeIncrement = 0.1;
 
@@ -33,15 +35,18 @@ class PreferenceScreen : GUIElement {
 
     _inputHintsButton = addChild(new Button(data.child["toggleInputHints"], &toggleInputHints));
     _fullScreenButton = addChild(new Button(data.child["toggleFullScreen"], &toggleFullScreen));
+    _resolutionButton = addChild(new Button(data.child["setResolution"], &setResolution));
     _inputHintsButton.text = "Show Input Hints: " ~ (_preferences.showInputHints ? "on" : "off");
     _fullScreenButton.text = "Full Screen: " ~ (_preferences.fullScreen ? "on" : "off");
+
+    _selectResolution = addChild(new DisplaySelector(data.child["selectResolution"]));
   }
 
   private:
   Preferences _preferences;
   PipBar _musicBar, _soundBar;
-  Button _inputHintsButton, _fullScreenButton;
-  TextBox _restartText;
+  Button _inputHintsButton, _fullScreenButton, _resolutionButton;
+  DisplaySelector _selectResolution;
 
   void musicVolumeUp() {
     _preferences.musicVolume = _preferences.musicVolume + volumeIncrement;
@@ -73,12 +78,12 @@ class PreferenceScreen : GUIElement {
   void toggleFullScreen() {
     _preferences.fullScreen = !_preferences.fullScreen;
     _fullScreenButton.text = "Full Screen: " ~ (_preferences.fullScreen ? "on" : "off");
-    if (_restartText is null) {
-      _restartText = addChild!TextBox("restartRequired");
-    }
-    else {
-      _restartText.active = false;
-      _restartText = null;
-    }
+  }
+
+  void setResolution() {
+    auto mode = _selectResolution.selection;
+    _preferences.screenSizeX = mode.width;
+    _preferences.screenSizeY = mode.height;
+    resizeDisplay(mode.width, mode.height);
   }
 }

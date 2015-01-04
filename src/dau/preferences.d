@@ -11,6 +11,8 @@ class Preferences {
   @jsonize {
     bool showInputHints = true;
     bool fullScreen     = false;
+    int screenSizeX = Settings.screenW;
+    int screenSizeY = Settings.screenH;
     @property {
       real soundVolume() { return _soundVolume; }
       real musicVolume() { return _musicVolume; }

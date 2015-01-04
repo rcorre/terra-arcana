@@ -24,12 +24,9 @@ int runGame(FirstSceneType)(string iconPath = null) {
     al_init();
 
     al_set_new_display_option(ALLEGRO_DISPLAY_OPTIONS.ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
-    if (Preferences.fetch.fullScreen) {
-      createFullScreenDisplay();
-    }
-    else {
-      mainDisplay = al_create_display(Settings.screenW, Settings.screenH);
-    }
+    auto prefs = Preferences.fetch();
+    mainDisplay = al_create_display(prefs.screenSizeX, prefs.screenSizeY);
+    setDisplayTransform(prefs.screenSizeX, prefs.screenSizeY);
     mainEventQueue = al_create_event_queue();
     mainTimer = al_create_timer(1.0 / Settings.fps);
 
@@ -85,6 +82,21 @@ void shutdownGame() {
   _run = false;
 }
 
+void resizeDisplay(int width, int height) {
+  al_resize_display(mainDisplay, width, height);
+  setDisplayTransform(width, height);
+}
+
+auto getSupportedDisplayModes() {
+  ALLEGRO_DISPLAY_MODE mode;
+  ALLEGRO_DISPLAY_MODE[] modes;
+  for(int i = 0 ; i < al_get_num_display_modes() ; i++) {
+    al_get_display_mode(i, &mode);
+    modes ~= mode;
+  }
+  return modes.sort!((a,b) => a.width < b.width);
+}
+
 private:
 bool _run = true;
 
@@ -104,6 +116,11 @@ bool processEvents() {
     case ALLEGRO_EVENT_DISPLAY_CLOSE:
       {
         shutdownGame();
+        break;
+      }
+    case ALLEGRO_EVENT_DISPLAY_RESIZE:
+      {
+        al_acknowledge_resize(mainDisplay);
         break;
       }
     default:
@@ -137,11 +154,9 @@ auto findMaxDisplayMode() {
   return largest;
 }
 
-void createFullScreenDisplay() {
-  auto mode = findMaxDisplayMode();
-  mainDisplay = al_create_display(mode.width, mode.height);
-  float sx = cast(float) mode.width / Settings.screenW;
-  float sy = cast(float) mode.height / Settings.screenH;
+void setDisplayTransform(int width, int height) {
+  float sx = cast(float) width / Settings.screenW;
+  float sy = cast(float) height / Settings.screenH;
   float scale = min(sx, sy);
   ALLEGRO_TRANSFORM trans;
   al_identity_transform(&trans);

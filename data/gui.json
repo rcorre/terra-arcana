@@ -654,7 +654,7 @@
       },
       "musicText": {
         "properties": {
-          "offset": "400, 220",
+          "offset": "400, 190",
           "anchor": "center",
           "text": "Music Volume",
           "fontName": "Mecha",
@@ -663,7 +663,7 @@
       },
       "soundText": {
         "properties": {
-          "offset": "400, 313",
+          "offset": "400, 283",
           "anchor": "center",
           "text": "Sound Volume",
           "fontName": "Mecha",
@@ -672,7 +672,7 @@
       },
       "musicVolumeBar": {
         "properties": {
-          "area": "240, 249, 385, 33",
+          "area": "240, 219, 385, 33",
           "numPips": "10"
         },
         "child": {
@@ -685,7 +685,7 @@
       },
       "soundVolumeBar": {
         "properties": {
-          "area": "240, 345, 385, 33",
+          "area": "240, 315, 385, 33",
           "numPips": "10"
         },
         "child": {
@@ -698,71 +698,117 @@
       },
       "musicVolumeUp": {
         "properties": {
-          "offset": "590, 244",
+          "offset": "590, 214",
           "texture": "gui/arrows",
           "sprite": "rightArrow"
         }
       },
       "musicVolumeDown": {
         "properties": {
-          "offset": "180, 244",
+          "offset": "180, 214",
           "texture": "gui/arrows",
           "sprite": "leftArrow"
         }
       },
       "soundVolumeUp": {
         "properties": {
-          "offset": "590, 341",
+          "offset": "590, 311",
           "texture": "gui/arrows",
           "sprite": "rightArrow"
         }
       },
       "soundVolumeDown": {
         "properties": {
-          "offset": "180, 341",
+          "offset": "180, 311",
           "texture": "gui/arrows",
           "sprite": "leftArrow"
         }
       },
       "toggleInputHints": {
         "properties": {
-          "offset": "400, 440",
+          "offset": "400, 420",
           "anchor": "center",
           "text": "Show Input Hints",
-          "texture": "gui/rectButton"
+          "texture": "gui/rectButton",
+          "toolTipTitle": "Show Input Hints",
+          "toolTipText": "to learn controls"
         },
         "child": {
           "text": {
             "properties": {
               "fontName": "Mecha",
               "fontSize": "24"
+            }
+          }
+        }
+      },
+      "setResolution": {
+        "properties": {
+          "offset": "300, 460",
+          "anchor": "center",
+          "text": "Set Resolution",
+          "scale": "0.7, 1.0",
+          "texture": "gui/rectButton",
+          "toolTipText": "800x600 recommended",
+          "toolTipTitle": "Set Resolution"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24",
+              "toolTipText": "800x600 recommended",
+              "toolTipTitle": "Set Resolution"
+            }
+          }
+        }
+      },
+      "selectResolution": {
+        "properties": {
+          "offset": "550, 460",
+          "texture": "gui/rectButton",
+          "scale": "0.5, 1.0",
+          "buttonSpacingX": "32"
+        },
+        "child": {
+          "nextButton": {
+            "properties": {
+              "texture": "gui/arrows",
+              "sprite": "rightArrow"
+            }
+          },
+          "prevButton": {
+            "properties": {
+              "texture": "gui/arrows",
+              "sprite": "leftArrow"
+            }
+          },
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "26"
             }
           }
         }
       },
       "toggleFullScreen": {
         "properties": {
-          "offset": "400, 480",
+          "offset": "400, 500",
           "anchor": "center",
           "text": "Full Screen",
-          "texture": "gui/rectButton"
+          "texture": "gui/rectButton",
+          "toolTipText": "Restart required",
+          "toolTipTitle": "Full Screen Mode"
         },
         "child": {
           "text": {
             "properties": {
               "fontName": "Mecha",
-              "fontSize": "24"
+              "fontSize": "24",
+              "toolTipText": "Restart required",
+              "toolTipTitle": "Full Screen Mode"
             }
           }
-        }
-      },
-      "restartRequired": {
-        "properties": {
-          "offset": "650, 480",
-          "anchor": "center",
-          "fontName": "Mecha",
-          "fontSize": "24",
-          "text": "Restart Required"
         }
       },
       "exit": {
