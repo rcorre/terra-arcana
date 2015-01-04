@@ -32,6 +32,7 @@ class PerformAction : State!Battle {
   override {
     void start(Battle b) {
       b.disableSystem!TileHoverSystem;
+      b.getSystem!UndoMoveSystem.clearMoves();
       // place actor in left unit info slot, target in right
       _tilesAffected = tilesAffected(b.map, _target, _actor, _action);
       auto unitsAffected = unitsAffected(b.map, _target, _actor, _action);

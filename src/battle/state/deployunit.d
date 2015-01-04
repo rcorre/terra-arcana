@@ -3,6 +3,7 @@ module battle.state.deployunit;
 import dau.all;
 import model.all;
 import battle.battle;
+import battle.system.undomove;
 
 class DeployUnit : State!Battle {
   this (Player player, Tile tile, string key) {
@@ -17,6 +18,7 @@ class DeployUnit : State!Battle {
       _player.consumeCommandPoints(unit.deployCost);
       b.refreshBattlePanel();
       b.states.popState;
+      b.getSystem!UndoMoveSystem.clearMoves();
     }
   }
 
