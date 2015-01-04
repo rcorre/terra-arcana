@@ -32,13 +32,16 @@ class PreferenceScreen : GUIElement {
     addChild(new Button(data.child["exit"], { _preferences.save(); goBack(); }));
 
     _inputHintsButton = addChild(new Button(data.child["toggleInputHints"], &toggleInputHints));
+    _fullScreenButton = addChild(new Button(data.child["toggleFullScreen"], &toggleFullScreen));
     _inputHintsButton.text = "Show Input Hints: " ~ (_preferences.showInputHints ? "on" : "off");
+    _fullScreenButton.text = "Full Screen: " ~ (_preferences.fullScreen ? "on" : "off");
   }
 
   private:
   Preferences _preferences;
   PipBar _musicBar, _soundBar;
-  Button _inputHintsButton;
+  Button _inputHintsButton, _fullScreenButton;
+  TextBox _restartText;
 
   void musicVolumeUp() {
     _preferences.musicVolume = _preferences.musicVolume + volumeIncrement;
@@ -65,5 +68,17 @@ class PreferenceScreen : GUIElement {
   void toggleInputHints() {
     _preferences.showInputHints = !_preferences.showInputHints;
     _inputHintsButton.text = "Show Input Hints: " ~ (_preferences.showInputHints ? "on" : "off");
+  }
+
+  void toggleFullScreen() {
+    _preferences.fullScreen = !_preferences.fullScreen;
+    _fullScreenButton.text = "Full Screen: " ~ (_preferences.fullScreen ? "on" : "off");
+    if (_restartText is null) {
+      _restartText = addChild!TextBox("restartRequired");
+    }
+    else {
+      _restartText.active = false;
+      _restartText = null;
+    }
   }
 }

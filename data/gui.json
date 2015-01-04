@@ -726,7 +726,7 @@
       },
       "toggleInputHints": {
         "properties": {
-          "offset": "400, 450",
+          "offset": "400, 440",
           "anchor": "center",
           "text": "Show Input Hints",
           "texture": "gui/rectButton"
@@ -738,6 +738,31 @@
               "fontSize": "24"
             }
           }
+        }
+      },
+      "toggleFullScreen": {
+        "properties": {
+          "offset": "400, 480",
+          "anchor": "center",
+          "text": "Full Screen",
+          "texture": "gui/rectButton"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
+        }
+      },
+      "restartRequired": {
+        "properties": {
+          "offset": "650, 480",
+          "anchor": "center",
+          "fontName": "Mecha",
+          "fontSize": "24",
+          "text": "Restart Required"
         }
       },
       "exit": {

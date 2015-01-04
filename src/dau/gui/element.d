@@ -142,6 +142,11 @@ class GUIElement {
       }
     }
 
+    /// automatically add child from the given key
+    T addChild(T)(string key) if(is(typeof(new T(GUIData.init)) : GUIElement)) {
+      return addChild(new T(data.child[key]));
+    }
+
     /// automatically add children from the given keys
     void addChildren(T)(string[] keys ...) if(is(typeof(new T(GUIData.init)) : GUIElement)) {
       foreach(key ; keys) {
