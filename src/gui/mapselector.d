@@ -10,7 +10,7 @@ class MapSelector : ScrollSelection!MapData {
     auto del = delegate(MapData map) {
       onChange(map);
       _difficulty.setVal(map.properties.get("difficulty", "1").to!int);
-    }; 
+    };
     super(data, pos, entries, del);
     addChild(new Icon(data.child["mapSelectorBottom"]));
     _difficulty = addChild(new PipBar(data.child["difficulty"]));

@@ -551,6 +551,102 @@
     }
   },
 
+  "battleTypeScreen": {
+    "properties": {
+      "texture": "gui/titleScreen"
+    },
+    "child": {
+      "titleText": {
+        "properties": {
+          "offset"   : "400, 55",
+          "text"     : "Terra Arcana",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "48"
+        }
+      },
+      "versionText": {
+        "properties": {
+          "offset"   : "400, 106",
+          "text"     : "Battle Type",
+          "anchor"   : "center",
+          "fontName" : "Mecha",
+          "fontSize" : "32"
+        }
+      },
+      "battle": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Battle",
+          "offset" : "400, 201",
+          "anchor": "center",
+          "toolTipTitle": "Capture the obelisks",
+          "toolTipText": "Spend CP to deploy units"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "skirmish": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Skirmish",
+          "offset" : "400, 265",
+          "anchor": "center",
+          "toolTipTitle": "Defeat all enemies",
+          "toolTipText": "Armies are pre-deployed"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "tutorial": {
+        "properties": {
+          "texture": "gui/rectButton",
+          "text": "Tutorial",
+          "offset" : "400, 329",
+          "anchor": "center",
+          "toolTipTitle": "Tutorial",
+          "toolTipText": "Learn to play"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      },
+      "exit": {
+        "properties": {
+          "texture": "gui/edgeButton",
+          "text": "Back",
+          "offset" : "50, 552",
+          "anchor": "center"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "32"
+            }
+          }
+        }
+      }
+    }
+  },
+
   "battleMenu": {
     "properties": {
       "texture": "gui/battleMenu",

@@ -3,7 +3,7 @@ module gui.titlescreen;
 import dau.all;
 import model.all;
 import title.title;
-import title.state.selectbattle;
+import title.state.selectbattletype;
 import title.state.editpreferences;
 import title.state.showinstructions;
 import title.state.hostgame;
@@ -30,7 +30,7 @@ class TitleScreen : GUIElement {
   private:
   Title _title;
   void singlePlayerButton() {
-    _title.states.pushState(new SelectBattle);
+    _title.states.pushState(new SelectBattleType);
   }
 
   void hostGame() {
