@@ -12,10 +12,10 @@ class BattleTypeScreen : GUIElement {
     addChild(new TextBox(data.child["titleText"]));
     addChild(new TextBox(data.child["versionText"]));
 
-    addChild(new Button(data.child["battle"],   { proceed(); } ));
-    addChild(new Button(data.child["skirmish"], { proceed(); } ));
+    addChild(new Button(data.child["battle"],   { proceed(MapType.battle);   } ));
+    addChild(new Button(data.child["skirmish"], { proceed(MapType.skirmish); } ));
     if (client is null) { // only provide tutorial for singleplayer
-      addChild(new Button(data.child["tutorial"], { proceed(); } ));
+      addChild(new Button(data.child["tutorial"], { proceed(MapType.tutorial); } ));
     }
     addChild(new Button(data.child["exit"],     { title.states.popState(); } ));
 
@@ -29,7 +29,7 @@ class BattleTypeScreen : GUIElement {
   private NetworkClient _client;
   private bool _isHost;
 
-  void proceed() {
-    _title.states.pushState(new SelectBattle());
+  void proceed(MapType type) {
+    _title.states.pushState(new SelectBattle(type));
   }
 }

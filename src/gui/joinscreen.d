@@ -50,7 +50,7 @@ class JoinScreen : GUIElement {
   void joinGame() {
     try {
       auto client = new NetworkClient(_ipInput.text, _portInput.text.to!ushort);
-      _title.states.setState(new SelectBattle(client, false));
+      _title.states.setState(new SelectBattle(MapType.battle, client, false));
     }
     catch(Exception ex) {
       _messageBox.postMessage(ex.msg, PostColor.error);

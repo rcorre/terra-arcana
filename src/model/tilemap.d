@@ -1,17 +1,25 @@
 module model.tilemap;
 
-import std.algorithm, std.string, std.math, std.file, std.path;
+import std.algorithm, std.string, std.math, std.file, std.path, std.conv;
 import dau.all;
 import model.tile;
+
+enum MapType {
+  battle,
+  skirmish,
+  tutorial
+}
 
 class TileMap : Entity {
   const {
     int numRows, numCols;
+    MapType type;
   }
 
   this(MapData map, EntityManager entities) {
     numCols = map.width;
     numRows = map.height;
+    type = "type" in map.properties ? map.properties["type"].to!MapType : MapType.battle;
     auto terrain = map.layerTileData("terrain");
     _tiles = new Tile[][numRows];
     foreach(data ; terrain) {
@@ -68,8 +76,14 @@ class TileMap : Entity {
   Tile[][] _tiles;
 }
 
-auto allMaps() {
-  return _maps.values;
+/// returns true if the data contains information for the provided play type
+bool supports(MapData data, MapType type) {
+  return data.layers.canFind!(x => x.name == type.to!string);
+}
+
+/// return map datas which support the given map type
+auto getMapDatas(MapType type) {
+  return _maps.values.filter!(x => x.supports(type));
 }
 
 auto fetchMap(string key) {

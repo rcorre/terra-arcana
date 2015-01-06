@@ -32,7 +32,7 @@ private enum PostFormat : string {
 class BattleSelectionScreen : GUIElement {
   const bool isHost;
 
-  this(Title title, NetworkClient client = null, bool isHost = false) {
+  this(Title title, MapType mapType, NetworkClient client = null, bool isHost = false) {
     super(getGUIData("selectBattle"), Vector2i.zero);
 
     _client = client;
@@ -60,7 +60,8 @@ class BattleSelectionScreen : GUIElement {
 
     addChildren!TextBox("titleText", "subtitle");
 
-    _mapSelector = addChild(new MapSelector(data.child["selectMap"], allMaps, &selectMap));
+    auto mapDatas = getMapDatas(mapType).array;
+    _mapSelector = addChild(new MapSelector(data.child["selectMap"], mapDatas, &selectMap));
   }
 
   override void update(float time) {
