@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" nextobjectid="23">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" nextobjectid="46">
  <properties>
   <property name="difficulty" value="1"/>
   <property name="name" value="Valley"/>
@@ -485,6 +485,11 @@
   </data>
  </layer>
  <objectgroup name="battle">
+  <properties>
+   <property name="description" value="A balanced battle"/>
+   <property name="name" value="Standard"/>
+   <property name="type" value="battle"/>
+  </properties>
   <object id="1" name="spawn" type="2" gid="18" x="288" y="96"/>
   <object id="2" name="spawn" type="2" gid="18" x="320" y="96"/>
   <object id="3" name="spawn" type="2" gid="18" x="352" y="96"/>
@@ -507,5 +512,40 @@
   <object id="20" name="obelisk" type="0" gid="9" x="448" y="320"/>
   <object id="21" name="obelisk" type="0" gid="9" x="128" y="448"/>
   <object id="22" name="obelisk" type="0" gid="9" x="640" y="192"/>
+ </objectgroup>
+ <objectgroup name="challenge-battle">
+  <properties>
+   <property name="description" value="Favors player 2"/>
+   <property name="name" value="Challenge"/>
+   <property name="type" value="battle"/>
+  </properties>
+  <object id="23" name="spawn" type="2" gid="18" x="288" y="96"/>
+  <object id="24" name="spawn" type="2" gid="18" x="320" y="96"/>
+  <object id="25" name="spawn" type="2" gid="18" x="352" y="96"/>
+  <object id="26" name="spawn" type="2" gid="18" x="384" y="96"/>
+  <object id="27" name="spawn" type="2" gid="18" x="416" y="96"/>
+  <object id="28" name="spawn" type="2" gid="18" x="448" y="96"/>
+  <object id="29" name="spawn" type="2" gid="18" x="480" y="96"/>
+  <object id="30" name="spawn" type="1" gid="18" x="352" y="544"/>
+  <object id="31" name="spawn" type="1" gid="18" x="288" y="544"/>
+  <object id="32" name="spawn" type="1" gid="18" x="320" y="544"/>
+  <object id="33" name="spawn" type="1" gid="18" x="416" y="544"/>
+  <object id="34" name="spawn" type="1" gid="18" x="384" y="544"/>
+  <object id="35" name="spawn" type="1" gid="18" x="480" y="544"/>
+  <object id="36" name="spawn" type="1" gid="18" x="448" y="544"/>
+  <object id="38" name="obelisk" type="1" gid="10" x="384" y="480"/>
+  <object id="39" name="obelisk" type="0" gid="9" x="320" y="320"/>
+  <object id="40" name="obelisk" type="2" gid="11" x="352" y="160"/>
+  <object id="41" name="obelisk" type="2" gid="11" x="416" y="160"/>
+  <object id="42" name="obelisk" type="0" gid="9" x="448" y="320"/>
+  <object id="43" name="obelisk" type="0" gid="9" x="128" y="192"/>
+  <object id="44" name="obelisk" type="0" gid="9" x="640" y="192"/>
+  <object id="45" name="obelisk" type="2" gid="11" x="384" y="96"/>
+ </objectgroup>
+ <objectgroup name="skirmish">
+  <properties>
+   <property name="description" value="Federation vs Gaia - balanced"/>
+   <property name="type" value="skirmish"/>
+  </properties>
  </objectgroup>
 </map>

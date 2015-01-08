@@ -22,8 +22,8 @@ private enum PostFormat : string {
   other = "opponent: %s",
   error = "error: %s",
   note  = "system: %s",
-  youChoseMap = "you chose map %s",
-  otherChoseMap = "opponent chose map %s",
+  youChoseMap = "you chose map %s: %s",
+  otherChoseMap = "opponent chose map %s: %s",
   youChoseFaction = "you chose faction %s",
   otherChoseFaction = "opponent chose faction %s",
 }
@@ -60,7 +60,7 @@ class BattleSelectionScreen : GUIElement {
 
     addChildren!TextBox("titleText", "subtitle");
 
-    auto mapDatas = getMapDatas(mapType).array;
+    auto mapDatas = mapLayoutsOfType(mapType).array;
     _mapSelector = addChild(new MapSelector(data.child["selectMap"], mapDatas, &selectMap));
   }
 
@@ -100,10 +100,11 @@ class BattleSelectionScreen : GUIElement {
         _messageBox.postMessage(PostFormat.other.format(msg.chat.text), PostColor.other);
         break;
       case chooseMap:
-        string name = msg.chooseMap.name;
-        auto note = PostFormat.otherChoseMap.format(name);
+        string mapName = msg.chooseMap.mapName;
+        string layoutName = msg.chooseMap.layoutName;
+        auto note = PostFormat.otherChoseMap.format(mapName, layoutName);
         _messageBox.postMessage(note, PostColor.note);
-        _mapSelector.selection = fetchMap(name);
+        _mapSelector.setSelection(mapName, layoutName);
         break;
       case chooseFaction:
         string name = msg.chooseFaction.name;
@@ -162,9 +163,9 @@ class BattleSelectionScreen : GUIElement {
     }
   }
 
-  void selectMap(MapData map) {
+  void selectMap(MapLayout layout) {
     if (_client !is null) {
-      _client.send(NetworkMessage.makeChooseMap(map.mapKey));
+      _client.send(NetworkMessage.makeChooseMap(layout.mapName, layout.layoutName));
     }
   }
 }

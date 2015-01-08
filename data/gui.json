@@ -1369,64 +1369,78 @@
   "selectBattle": {
     "properties": {
       "texture": "gui/titleScreen",
-      "selfFactionOffset": "33, 140",
+      "selfFactionOffset": "25, 140",
       "otherFactionOffset": "577, 140"
     },
     "child": {
       "selectMap": {
         "properties": {
           "offset": "400, 470",
-          "texture": "gui/mapTextBox",
-          "buttonSpacingX": "32"
+          "texture": "gui/mapSelectorBottom",
+          "anchor": "center"
         },
         "child": {
-          "difficulty": {
+          "chooseMap": {
             "properties": {
-              "area": "170, 38, 385, 33",
-              "brightShade": "1,1,1,0.5",
-              "dimShade": "0,0,0,0",
-              "numPips": "5"
+              "offset": "195, 20",
+              "anchor": "center",
+              "texture": "gui/mapTextBox",
+              "buttonSpacingX": "32"
             },
             "child": {
-              "pip": {
+              "nextButton": {
                 "properties": {
-                  "texture": "gui/menuPip"
+                  "texture": "gui/arrows",
+                  "sprite": "rightArrow"
                 }
-              }
-            }
-          },
-          "mapSelectorBottom": {
-            "properties": {
-              "offset": "32, 32",
-              "texture": "gui/mapSelectorBottom"
-            },
-            "child": {
+              },
+              "prevButton": {
+                "properties": {
+                  "texture": "gui/arrows",
+                  "sprite": "leftArrow"
+                }
+              },
               "text": {
                 "properties": {
-                  "offset": "36, 4",
                   "fontName": "Mecha",
-                  "fontSize": "24",
-                  "text": "Difficulty"
+                  "fontSize": "26"
                 }
               }
             }
           },
-          "nextButton": {
+          "chooseLayout": {
             "properties": {
-              "texture": "gui/arrows",
-              "sprite": "rightArrow"
+              "offset": "195, 60",
+              "anchor": "center",
+              "texture": "gui/mapTextBox",
+              "buttonSpacingX": "32"
+            },
+            "child": {
+              "nextButton": {
+                "properties": {
+                  "texture": "gui/arrows",
+                  "sprite": "rightArrow"
+                }
+              },
+              "prevButton": {
+                "properties": {
+                  "texture": "gui/arrows",
+                  "sprite": "leftArrow"
+                }
+              },
+              "text": {
+                "properties": {
+                  "fontName": "Mecha",
+                  "fontSize": "26"
+                }
+              }
             }
           },
-          "prevButton": {
+          "description": {
             "properties": {
-              "texture": "gui/arrows",
-              "sprite": "leftArrow"
-            }
-          },
-          "text": {
-            "properties": {
+              "offset": "5, 98",
               "fontName": "Mecha",
-              "fontSize": "26"
+              "fontSize": "18"
             }
           }
         }
@@ -1484,7 +1498,7 @@
       "messageBox": {
         "properties": {
           "texture"  : "gui/messagePanel",
-          "offset"   : "257, 160",
+          "offset"   : "257, 120",
           "anchor"   : "topLeft",
           "fontName" : "Mecha",
           "fontSize" : "16",
@@ -1501,7 +1515,7 @@
           "cursorAnimation": "textInput",
           "unfocusedTint": "0.0, 0.5, 0.5",
           "focusedTint": "0.0, 0.7, 0.7",
-          "offset": "257, 418",
+          "offset": "257, 377",
           "anchor": "topLeft",
           "scale": "1.2, 0.6"
         },

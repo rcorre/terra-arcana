@@ -1,27 +1,56 @@
 module gui.mapselector;
 
-import std.conv;
+import std.conv, std.algorithm, std.range;
 import dau.all;
+import model.all;
 
 /// select one of multiple maps
-class MapSelector : ScrollSelection!MapData {
-  this(GUIData data, MapData[] entries, Action onChange = doNothing!Action) {
-    auto pos = data["offset"].parseVector!int;
-    auto del = delegate(MapData map) {
-      onChange(map);
-      _difficulty.setVal(map.properties.get("difficulty", "1").to!int);
-    };
-    super(data, pos, entries, del);
-    addChild(new Icon(data.child["mapSelectorBottom"]));
-    _difficulty = addChild(new PipBar(data.child["difficulty"]));
-    _difficulty.setVal(selection.properties.get("difficulty", "1").to!int);
+class MapSelector : GUIElement {
+  alias Action = void delegate(MapLayout);
+
+  this(GUIData data, MapLayout[] layouts, Action onChange = doNothing!Action) {
+    super(data);
+    string[] maps;
+    foreach(layout ; layouts) {
+      if (!maps.canFind(layout.mapName)) { maps ~= layout.mapName; }
+    }
+    _layouts     = layouts;
+    _onChange    = onChange;
+    _mapSelector = addChild(new StringSelection(data.child["chooseMap"], maps, &setMap));
+    _description = addChild(new TextBox(data.child["description"]));
+
+    setMap(_mapSelector.selection);
   }
 
-  override GUIElement createEntry(MapData map, Vector2i pos) {
-    auto text = map.properties.get("name", "Untitled");
-    return new TextBox(data.child["text"], text, pos, Anchor.center);
+  @property {
+    auto selection() {
+      return _layouts.find!(x => x.mapName == _mapSelector.selection &&
+          x.layoutName == _layoutSelector.selection).front;
+    }
+  }
+
+  void setSelection(string mapName, string layoutName) {
+    _mapSelector.selection = mapName;
+    _layoutSelector.selection = layoutName;
   }
 
   private:
-  PipBar _difficulty;
+  PipBar          _difficulty;
+  StringSelection _layoutSelector;
+  StringSelection _mapSelector;
+  TextBox         _description;
+  MapLayout[]     _layouts;
+  Action          _onChange;
+
+  void setMap(string mapName) {
+    if (_layoutSelector !is null) { _layoutSelector.active = false; }
+    auto layouts = _layouts.filter!(x => x.mapName == mapName).map!(x => x.layoutName).array;
+    _layoutSelector = addChild(new StringSelection(data.child["chooseLayout"], layouts, &setLayout));
+    setLayout(_layoutSelector.selection);
+  }
+
+  void setLayout(string name) {
+    _onChange(selection);
+    _description.text = selection.description;
+  }
 }

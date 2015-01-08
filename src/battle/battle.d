@@ -18,7 +18,7 @@ import gui.battlepopup;
 private enum mapFormat = Paths.mapDir ~ "/%s.json";
 
 class Battle : Scene!Battle {
-  this(MapData mapData, Faction playerFaction, Faction pcFaction, NetworkClient client = null,
+  this(MapLayout layout, Faction playerFaction, Faction pcFaction, NetworkClient client = null,
       bool isHost = false)
   {
     _client = client;
@@ -51,9 +51,9 @@ class Battle : Scene!Battle {
     _turnCycle = cycle(_players);
     cursor.setSprite("inactive");
 
-    map = new TileMap(mapData, entities);
+    map = new TileMap(layout.mapData, entities);
     entities.registerEntity(map);
-    foreach(obj ; mapData.layerTileData("feature")) {
+    foreach(obj ; layout.objectData) {
       int team = obj.objectType.to!int;
       switch(obj.objectName) {
         case "spawn":

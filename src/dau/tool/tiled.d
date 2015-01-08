@@ -128,6 +128,7 @@ class MapLayer {
   @jsonize {
     int[] data;
     MapObject[] objects;
+    string[string] properties;
     int width, height;
     string name;
     float opacity;

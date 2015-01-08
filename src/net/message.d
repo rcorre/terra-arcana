@@ -63,9 +63,10 @@ struct NetworkMessage {
       return msg;
     }
 
-    auto makeChooseMap(string name) {
+    auto makeChooseMap(string mapName, string layoutName) {
       auto msg = NetworkMessage(Type.chooseMap);
-      msg.chooseMap.name = name;
+      msg.chooseMap.mapName = mapName;
+      msg.chooseMap.layoutName = layoutName;
       return msg;
     }
 
@@ -134,7 +135,8 @@ struct ChooseFaction {
 }
 
 struct ChooseMap {
-  NetString!mapNameSize name;
+  NetString!mapNameSize mapName;
+  NetString!mapNameSize layoutName;
 }
 
 struct NetworkMove {
