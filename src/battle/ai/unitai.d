@@ -49,33 +49,39 @@ struct UnitAI {
 
   auto bestAttackOption(Tile target, bool canMove) {
     if (stayOnTile) { return null; }
-    AIDecision[] options;
+    AIDecision bestOption;
     foreach (tile ; _pathfinder.tilesInRange) {
       if (tile != _unit.tile && !canMove) { continue; }
       int apLeft = _unit.ap - _pathfinder.costTo(tile);
       foreach(num ; [1, 2]) {
         if (_unit.canUseActionFrom(num, target, tile, apLeft) && _unit.getAction(num).isAttack) {
-          options ~= createAttackOption(num, target, tile);
+          auto option = createAttackOption(num, target, tile);
+          if (bestOption is null || option.score > bestOption.score) {
+            bestOption = option;
+          }
         }
       }
     }
-    return options.empty ? null : options.sort!((a,b) => a.score > b.score).front;
+    return bestOption;
   }
 
   auto bestAidOption(Tile target, bool canMove) {
     if (stayOnTile) { return null; }
     auto enemies = _battle.enemiesTo(_unit.team);
-    AIDecision[] options;
+    AIDecision bestOption;
     foreach (tile ; _pathfinder.tilesInRange) {
       if (tile != _unit.tile && !canMove) { continue; }
       int apLeft = _unit.ap - _pathfinder.costTo(tile);
       foreach(num ; [1,2]) {
         if (_unit.canUseActionFrom(num, target, tile, apLeft) && !_unit.getAction(num).isAttack) {
-          options ~= createBuffOption(num, target, tile, enemies);
+          auto option = createBuffOption(num, target, tile, enemies);
+          if (bestOption is null || option.score > bestOption.score) {
+            bestOption = option;
+          }
         }
       }
     }
-    return options.empty ? null : options.sort!((a,b) => a.score > b.score).front;
+    return bestOption;
   }
 
   private:
