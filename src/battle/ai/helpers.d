@@ -3,6 +3,7 @@ module battle.ai.helpers;
 import std.math, std.algorithm;
 import dau.util.math;
 import model.all;
+import battle.util;
 import battle.battle;
 import battle.ai.profile;
 
@@ -20,15 +21,23 @@ private enum effectFactor = [
 
 private enum wasteEvadeScore = 0.3; /// score for degrading the targets evasion
 
-float attackScore(Unit attacker, Tile target, int actionNum, AIProfile profile) {
+float attackScore(Unit attacker, Tile target, int actionNum, AIProfile profile, TileMap map) {
   auto defender = cast(Unit) target.entity;
   auto action = attacker.getAction(actionNum);
-  return attackScore(attacker, defender, action, profile);
+  return tilesAffected(map, target, attacker, action)
+    .map!(tile => attackScore(attacker, cast(Unit) tile.entity, action, profile))
+    .sum;
 }
 
 float attackScore(Unit attacker, Unit defender, const UnitAction action, AIProfile profile) {
-  float score = action.effectScore(defender) ;
-  if (!action.willDisableDefender(defender)) {
+  if (defender is null) {
+    return 0;
+  }
+  float score = action.effectScore(defender);
+  if (attacker.team == defender.team) {
+    score = -score; // friendly fire penalty
+  }
+  else if (!action.willDisableDefender(defender)) {
     int counterNum = defender.firstUseableAction(attacker);
     if (counterNum != 0) {
       auto counter = defender.getAction(counterNum);

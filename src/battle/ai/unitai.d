@@ -88,7 +88,7 @@ struct UnitAI {
   auto createAttackOption(int actNum, Tile target, Tile attackPosition) {
     auto path = _pathfinder.pathTo(attackPosition);
     auto tileScore = computeTilePriority(_battle, _profile, attackPosition, _unit);
-    auto attackScore = attackScore(_unit, target, actNum, _profile);
+    auto attackScore = attackScore(_unit, target, actNum, _profile, _map);
     auto score = average(tileScore, attackScore);
     return new ActDecison(_unit, path, target, actNum, score);
   } 
