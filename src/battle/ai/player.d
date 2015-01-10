@@ -13,8 +13,8 @@ import battle.ai.decision;
 private enum deployVariance = 0.1f;
 
 class AIPlayer : Player {
-  this(const Faction faction, int teamIdx, string profileKey) {
-    super(faction, teamIdx, false);
+  this(const Faction faction, int teamIdx, string profileKey, int baseCP) {
+    super(faction, teamIdx, false, baseCP);
     _profile = getAIProfile(profileKey);
   }
 

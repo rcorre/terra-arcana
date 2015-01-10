@@ -32,6 +32,11 @@ class MapLayout {
     auto layoutName()  { return _layer.properties.get("name", _layer.name); }
     auto objectData()  { return _data.layerTileData(_layer.name); }
   }
+
+  int playerBaseCP(int playerIdx, int defaultCP) {
+    auto key = "player%dcp".format(playerIdx);
+    return key in _layer.properties ? _layer.properties[key].to!int : defaultCP;
+  }
 }
 
 /// return map datas which support the given map type

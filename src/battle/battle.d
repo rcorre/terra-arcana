@@ -24,15 +24,27 @@ class Battle : Scene!Battle {
     _client = client;
     mapType = layout.type;
 
+    int player1cp = layout.playerBaseCP(1, Player.defaultCP);
+    int player2cp = layout.playerBaseCP(2, Player.defaultCP);
     if (client is null) {
-      _players = [new Player(playerFaction, 1, true), new AIPlayer(pcFaction, 2, "balanced")];
+      _players = [
+        new Player(playerFaction, 1, true, player1cp),
+        new AIPlayer(pcFaction, 2, "balanced", player2cp)
+      ];
     }
     else if (isHost) {
-      _players = [new Player(playerFaction, 1, true), new Player(pcFaction, 2, false)];
+      _players = [
+        new Player(playerFaction, 1, true, player1cp),
+        new Player(pcFaction, 2, false, player2cp)
+      ];
     }
     else {
-      _players = [new Player(pcFaction, 1, false), new Player(playerFaction, 2, true)];
+      _players = [
+        new Player(pcFaction, 1, false, player1cp),
+        new Player(playerFaction, 2, true, player2cp)
+      ];
     }
+
     System!Battle[] systems = [
       new TileHoverSystem(this),
       new InputHintSystem(this),
@@ -40,6 +52,7 @@ class Battle : Scene!Battle {
       new UndoMoveSystem(this),
       new BattleNetworkSystem(this, client)
     ];
+
     Sprite[string] cursorSprites = [
       "inactive" : new Animation("gui/cursor", "inactive", Animation.Repeat.loop),
       "active"   : new Animation("gui/cursor", "active", Animation.Repeat.loop),
@@ -47,7 +60,9 @@ class Battle : Scene!Battle {
       "enemy"    : new Animation("gui/cursor", "enemy", Animation.Repeat.loop),
       "wait"     : new Animation("gui/cursor", "wait", Animation.Repeat.loop),
     ];
+
     super(systems, cursorSprites);
+
     _panel = new BattlePanel;
     gui.addElement(_panel);
     _turnCycle = cycle(_players);
@@ -71,7 +86,7 @@ class Battle : Scene!Battle {
           }
           break;
         case "unit":
-          assert("key" in obj.properties, 
+          assert("key" in obj.properties,
               "unit object at %d,%d has no key".format(obj.row, obj.col));
           spawnUnit(obj.properties["key"], playerByTeam(team), tile);
           break;
@@ -162,7 +177,7 @@ package:
   bool checkVictory(Player pl) {
     final switch (mapType) with (MapType) {
       case battle:
-        if (pl.maxCommandPoints == Player.baseCommandPoints) {
+        if (pl.maxCommandPoints == pl.baseCommandPoints) {
           states.setState(new BattleOver(pl.isLocal ? No.Victory : Yes.Victory));
           return true;
         }

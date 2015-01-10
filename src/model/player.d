@@ -6,17 +6,19 @@ import model.faction;
 import model.unit;
 
 class Player {
-  enum baseCommandPoints = 2;
+  private enum defaultCP = 2;
 
   const Faction faction;
   const bool isLocal;
   const int teamIdx;
+  const int baseCommandPoints;
   int mana;
 
-  this(const Faction faction, int teamIdx, bool isLocal) {
+  this(const Faction faction, int teamIdx, bool isLocal, int baseCommandPoints) {
     this.faction = faction;
     this.teamIdx = teamIdx;
     this.isLocal = isLocal;
+    this.baseCommandPoints = baseCommandPoints;
     _maxCommandPoints = baseCommandPoints;
   }
 

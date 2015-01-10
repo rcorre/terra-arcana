@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" nextobjectid="26">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" nextobjectid="57">
  <properties>
   <property name="difficulty" value="3"/>
   <property name="name" value="Spire"/>
  </properties>
  <tileset firstgid="1" source="terrain.tsx"/>
+ <tileset firstgid="49" name="unit-sheet" tilewidth="32" tileheight="32">
+  <image source="../unit-sheet.png" width="128" height="96"/>
+ </tileset>
  <layer name="terrain" width="25" height="19">
   <data>
    <tile gid="1"/>
@@ -484,7 +487,7 @@
    <tile gid="44"/>
   </data>
  </layer>
- <objectgroup name="battle">
+ <objectgroup name="battle" visible="0">
   <properties>
    <property name="description" value="Favors team 2"/>
    <property name="name" value="Challenge"/>
@@ -493,8 +496,6 @@
   <object id="1" name="spawn" type="2" gid="18" x="352" y="64"/>
   <object id="2" name="spawn" type="2" gid="18" x="384" y="64"/>
   <object id="3" name="spawn" type="2" gid="18" x="416" y="64"/>
-  <object id="4" name="spawn" type="2" gid="18" x="448" y="64"/>
-  <object id="5" name="spawn" type="2" gid="18" x="480" y="64"/>
   <object id="6" name="spawn" type="2" gid="18" x="512" y="64"/>
   <object id="7" name="spawn" type="2" gid="18" x="544" y="64"/>
   <object id="8" name="spawn" type="1" gid="18" x="416" y="576"/>
@@ -515,5 +516,161 @@
   <object id="23" name="obelisk" type="0" gid="9" x="704" y="352"/>
   <object id="24" name="obelisk" type="2" gid="11" x="352" y="192"/>
   <object id="25" name="obelisk" type="2" gid="11" x="544" y="192"/>
+ </objectgroup>
+ <objectgroup name="skirmish1">
+  <properties>
+   <property name="description" value="Hold a defensible position"/>
+   <property name="faction1" value="federation"/>
+   <property name="faction2" value="gaia"/>
+   <property name="name" value="Onslaught"/>
+   <property name="player1cp" value="3"/>
+   <property name="player2cp" value="6"/>
+   <property name="type" value="skirmish"/>
+  </properties>
+  <object id="26" name="unit" type="1" gid="52" x="448" y="128">
+   <properties>
+    <property name="key" value="guardian"/>
+   </properties>
+  </object>
+  <object id="27" name="unit" type="1" gid="52" x="480" y="128">
+   <properties>
+    <property name="key" value="guardian"/>
+   </properties>
+  </object>
+  <object id="28" name="unit" type="1" gid="52" x="256" y="96">
+   <properties>
+    <property name="key" value="guardian"/>
+   </properties>
+  </object>
+  <object id="29" name="unit" type="1" gid="52" x="608" y="96">
+   <properties>
+    <property name="key" value="guardian"/>
+   </properties>
+  </object>
+  <object id="30" name="unit" type="1" gid="58" x="352" y="96">
+   <properties>
+    <property name="key" value="sniper"/>
+   </properties>
+  </object>
+  <object id="33" name="unit" type="1" gid="58" x="544" y="96">
+   <properties>
+    <property name="key" value="sniper"/>
+   </properties>
+  </object>
+  <object id="34" name="unit" type="1" gid="50" x="320" y="160">
+   <properties>
+    <property name="key" value="assault"/>
+   </properties>
+  </object>
+  <object id="35" name="unit" type="1" gid="50" x="576" y="160">
+   <properties>
+    <property name="key" value="assault"/>
+   </properties>
+  </object>
+  <object id="36" name="unit" type="1" gid="55" x="448" y="64">
+   <properties>
+    <property name="key" value="medic"/>
+   </properties>
+  </object>
+  <object id="37" name="unit" type="1" gid="55" x="480" y="64">
+   <properties>
+    <property name="key" value="medic"/>
+   </properties>
+  </object>
+  <object id="38" name="unit" type="2" gid="59" x="384" y="352">
+   <properties>
+    <property name="key" value="treant"/>
+   </properties>
+  </object>
+  <object id="39" name="unit" type="2" gid="59" x="544" y="320">
+   <properties>
+    <property name="key" value="treant"/>
+   </properties>
+  </object>
+  <object id="40" name="unit" type="2" gid="59" x="96" y="192">
+   <properties>
+    <property name="key" value="treant"/>
+   </properties>
+  </object>
+  <object id="41" name="unit" type="2" gid="59" x="736" y="160">
+   <properties>
+    <property name="key" value="treant"/>
+   </properties>
+  </object>
+  <object id="42" name="unit" type="2" gid="60" x="192" y="416">
+   <properties>
+    <property name="key" value="wyvern"/>
+   </properties>
+  </object>
+  <object id="43" name="unit" type="2" gid="60" x="320" y="416">
+   <properties>
+    <property name="key" value="wyvern"/>
+   </properties>
+  </object>
+  <object id="44" name="unit" type="2" gid="60" x="480" y="416">
+   <properties>
+    <property name="key" value="wyvern"/>
+   </properties>
+  </object>
+  <object id="45" name="unit" type="2" gid="60" x="672" y="416">
+   <properties>
+    <property name="key" value="wyvern"/>
+   </properties>
+  </object>
+  <object id="46" name="unit" type="2" gid="53" x="416" y="352">
+   <properties>
+    <property name="key" value="hellblossom"/>
+   </properties>
+  </object>
+  <object id="47" name="unit" type="2" gid="53" x="608" y="288">
+   <properties>
+    <property name="key" value="hellblossom"/>
+   </properties>
+  </object>
+  <object id="48" name="unit" type="2" gid="53" x="736" y="64">
+   <properties>
+    <property name="key" value="hellblossom"/>
+   </properties>
+  </object>
+  <object id="49" name="unit" type="2" gid="53" x="64" y="160">
+   <properties>
+    <property name="key" value="hellblossom"/>
+   </properties>
+  </object>
+  <object id="50" name="unit" type="2" gid="49" x="96" y="96">
+   <properties>
+    <property name="key" value="antlion"/>
+   </properties>
+  </object>
+  <object id="51" name="unit" type="2" gid="49" x="416" y="288">
+   <properties>
+    <property name="key" value="antlion"/>
+   </properties>
+  </object>
+  <object id="52" name="unit" type="2" gid="49" x="448" y="288">
+   <properties>
+    <property name="key" value="antlion"/>
+   </properties>
+  </object>
+  <object id="53" name="unit" type="2" gid="49" x="704" y="288">
+   <properties>
+    <property name="key" value="antlion"/>
+   </properties>
+  </object>
+  <object id="54" name="unit" type="2" gid="49" x="768" y="96">
+   <properties>
+    <property name="key" value="antlion"/>
+   </properties>
+  </object>
+  <object id="55" name="unit" type="2" gid="60" x="64" y="256">
+   <properties>
+    <property name="key" value="wyvern"/>
+   </properties>
+  </object>
+  <object id="56" name="unit" type="2" gid="59" x="96" y="128">
+   <properties>
+    <property name="key" value="treant"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
