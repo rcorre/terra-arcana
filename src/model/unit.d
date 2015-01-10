@@ -194,7 +194,7 @@ class Unit : Entity {
 
   int firstUseableCounter(Unit enemy) {
     if      (canUseAction(1, enemy) && getAction(1).isAttack) { return 1; }
-    else if (canUseAction(2, enemy) && getAction(2).isAttack) { return 1; }
+    else if (canUseAction(2, enemy) && getAction(2).isAttack) { return 2; }
     else                                                      { return 0; }
   }
 
