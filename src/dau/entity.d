@@ -48,7 +48,7 @@ class EntityManager {
   }
 
   auto findEntities(string tag) {
-    return _entityMap[tag][];
+    return _entityMap.get(tag, [])[];
   }
 
   void updateEntities(float time) {

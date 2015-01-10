@@ -71,6 +71,8 @@ class Battle : Scene!Battle {
           }
           break;
         case "unit":
+          assert("key" in obj.properties, 
+              "unit object at %d,%d has no key".format(obj.row, obj.col));
           spawnUnit(obj.properties["key"], playerByTeam(team), tile);
           break;
         default:
