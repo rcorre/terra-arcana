@@ -57,18 +57,21 @@ class Battle : Scene!Battle {
     entities.registerEntity(map);
     foreach(obj ; layout.objectData) {
       int team = obj.objectType.to!int;
+      auto tile = map.tileAt(obj.row, obj.col);
       switch(obj.objectName) {
         case "spawn":
-          _spawnPoints ~= new SpawnPoint(map.tileAt(obj.row, obj.col), team);
+          _spawnPoints ~= new SpawnPoint(tile, team);
           break;
         case "obelisk":
-          auto tile = map.tileAt(obj.row, obj.col);
           auto obelisk = new Obelisk(tile.center, obj.row, obj.col);
           tile.feature = obelisk;
           entities.registerEntity(obelisk);
           if (team != 0) {
             captureObelisk(obelisk, team);
           }
+          break;
+        case "unit":
+          spawnUnit(obj.properties["key"], playerByTeam(team), tile);
           break;
         default:
           assert(0, "invalid object named " ~ obj.objectName);
