@@ -22,6 +22,8 @@ class Battle : Scene!Battle {
       bool isHost = false)
   {
     _client = client;
+    mapType = layout.type;
+
     if (client is null) {
       _players = [new Player(playerFaction, 1, true), new AIPlayer(pcFaction, 2, "balanced")];
     }
@@ -86,6 +88,7 @@ class Battle : Scene!Battle {
 
 package:
   TileMap map;
+  const MapType mapType;
 
   @property {
     auto players() { return _players[]; }
@@ -141,10 +144,7 @@ package:
     }
 
     foreach(pl ; players) {
-      if (pl.maxCommandPoints == Player.baseCommandPoints) {
-        states.setState(new BattleOver(pl.isLocal ? No.Victory : Yes.Victory));
-        return;
-      }
+      if (checkVictory(pl)) { return; }
     }
 
     player.beginTurn();
@@ -152,6 +152,27 @@ package:
       states.pushState(new CheckUnitDestruction(unit));
     }
     refreshBattlePanel();
+  }
+
+  bool checkVictory(Player pl) {
+    final switch (mapType) with (MapType) {
+      case battle:
+        if (pl.maxCommandPoints == Player.baseCommandPoints) {
+          states.setState(new BattleOver(pl.isLocal ? No.Victory : Yes.Victory));
+          return true;
+        }
+        break;
+      case skirmish:
+        if (pl.units.filter!(x => x.isAlive).empty) {
+          states.setState(new BattleOver(pl.isLocal ? No.Victory : Yes.Victory));
+          return true;
+        }
+        break;
+      case tutorial:
+        // TODO
+        break;
+    }
+    return false;
   }
 
   void refreshBattlePanel() {
