@@ -1394,7 +1394,7 @@
     "child": {
       "faction1": {
         "properties": {
-          "offset"         : "165, 180",
+          "offset"         : "385, 155",
           "texture"        : "gui/mapSelectorBottom",
           "texture"        : "gui/mapTextBox",
           "scale"          : "0.5, 1.0",
@@ -1423,7 +1423,7 @@
       },
       "faction2": {
         "properties": {
-          "offset"         : "165, 280",
+          "offset"         : "385, 220",
           "texture"        : "gui/mapSelectorBottom",
           "texture"        : "gui/mapTextBox",
           "scale"          : "0.5, 1.0",
@@ -1452,7 +1452,7 @@
       },
       "selectMap": {
         "properties": {
-          "offset": "353, 377",
+          "offset": "553, 377",
           "texture": "gui/mapSelectorBottom",
           "anchor": "center"
         },
@@ -1542,7 +1542,7 @@
       },
       "player1label": {
         "properties": {
-          "offset": "60, 130",
+          "offset": "60, 145",
           "fontName": "Mecha",
           "text": "Player 1:",
           "texture": "gui/rectButton",
@@ -1552,7 +1552,7 @@
       },
       "player1button": {
         "properties": {
-          "offset"  : "150, 125",
+          "offset"  : "150, 140",
           "texture" : "gui/rectButton",
           "text"    : "You",
           "scale"   : "0.4, 1.0"
@@ -1568,7 +1568,7 @@
       },
       "player2label": {
         "properties": {
-          "offset": "60, 230",
+          "offset": "60, 210",
           "fontName": "Mecha",
           "text": "Player 2:",
           "texture": "gui/rectButton",
@@ -1578,7 +1578,7 @@
       },
       "player2button": {
         "properties": {
-          "offset": "150, 225",
+          "offset": "150, 205",
           "text": "PC",
           "texture": "gui/rectButton",
           "scale": "0.4, 1.0"
@@ -1613,7 +1613,7 @@
       "messageBox": {
         "properties": {
           "texture"  : "gui/messagePanel",
-          "offset"   : "33, 340",
+          "offset"   : "33, 300",
           "anchor"   : "topLeft",
           "fontName" : "Mecha",
           "fontSize" : "16",
@@ -1640,7 +1640,7 @@
           "cursorAnimation": "textInput",
           "unfocusedTint": "0.0, 0.5, 0.5",
           "focusedTint": "0.0, 0.7, 0.7",
-          "offset": "33, 500",
+          "offset": "33, 485",
           "anchor": "topLeft",
           "scale": "1.2, 0.6"
         },
