@@ -3,6 +3,7 @@ module dau.gui.messagebox;
 import std.string, std.conv, std.container : DList;
 import dau.gui.element;
 import dau.gui.data;
+import dau.gui.textbox;
 import dau.geometry.all;
 import dau.graphics.all;
 
@@ -15,6 +16,7 @@ class MessageBox : GUIElement {
     _maxLines = ("maxLines" in data) ? data["maxLines"].to!int : int.max;
     _charLimit = ("charLimit" in data) ? data["charLimit"].to!int : int.max;
     super(data, pos, anchor);
+    addChild!TextBox("label");
   }
 
   override void draw(Vector2i parentTopLeft) {

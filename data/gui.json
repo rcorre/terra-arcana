@@ -960,6 +960,16 @@
           "maxLines" : "17",
           "textBuffer": "4,-4",
           "scale": "1, 0.5"
+        },
+        "child": {
+          "label": {
+            "properties": {
+              "offset"   : "4,2",
+              "fontName" : "Mecha",
+              "fontSize" : "22",
+              "text"     : "Chat"
+            }
+          }
         }
       },
       "portLabel": {
@@ -1265,6 +1275,16 @@
           "maxLines" : "17",
           "textBuffer": "4,-4",
           "scale": "1, 0.5"
+        },
+        "child": {
+          "label": {
+            "properties": {
+              "offset"   : "4,2",
+              "fontName" : "Mecha",
+              "fontSize" : "22",
+              "text"     : "Chat"
+            }
+          }
         }
       },
       "portLabel": {
@@ -1600,6 +1620,16 @@
           "charLimit" : "80",
           "maxLines" : "8",
           "textBuffer": "4,-4"
+        },
+        "child": {
+          "label": {
+            "properties": {
+              "offset"   : "4,2",
+              "fontName" : "Mecha",
+              "fontSize" : "22",
+              "text"     : "Chat"
+            }
+          }
         }
       },
       "messageInput": {
