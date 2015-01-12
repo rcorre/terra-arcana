@@ -1369,13 +1369,70 @@
   "selectBattle": {
     "properties": {
       "texture": "gui/titleScreen",
-      "selfFactionOffset": "25, 140",
       "otherFactionOffset": "577, 140"
     },
     "child": {
+      "faction1": {
+        "properties": {
+          "offset"         : "165, 180",
+          "texture"        : "gui/mapSelectorBottom",
+          "texture"        : "gui/mapTextBox",
+          "scale"          : "0.5, 1.0",
+          "buttonSpacingX" : "32"
+        },
+        "child": {
+          "nextButton": {
+            "properties": {
+              "texture" : "gui/arrows",
+              "sprite"  : "rightArrow"
+            }
+          },
+          "prevButton": {
+            "properties": {
+              "texture": "gui/arrows",
+              "sprite": "leftArrow"
+            }
+          },
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "26"
+            }
+          }
+        }
+      },
+      "faction2": {
+        "properties": {
+          "offset"         : "165, 280",
+          "texture"        : "gui/mapSelectorBottom",
+          "texture"        : "gui/mapTextBox",
+          "scale"          : "0.5, 1.0",
+          "buttonSpacingX" : "32"
+        },
+        "child": {
+          "nextButton": {
+            "properties": {
+              "texture" : "gui/arrows",
+              "sprite"  : "rightArrow"
+            }
+          },
+          "prevButton": {
+            "properties": {
+              "texture": "gui/arrows",
+              "sprite": "leftArrow"
+            }
+          },
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "26"
+            }
+          }
+        }
+      },
       "selectMap": {
         "properties": {
-          "offset": "400, 470",
+          "offset": "353, 377",
           "texture": "gui/mapSelectorBottom",
           "anchor": "center"
         },
@@ -1463,18 +1520,56 @@
           "fontSize" : "32"
         }
       },
-      "playerLabel": {
+      "player1label": {
         "properties": {
-          "offset": "33, 20",
-          "fontName": "Mecha_Bold",
-          "fontSize": "48"
+          "offset": "60, 130",
+          "fontName": "Mecha",
+          "text": "Player 1:",
+          "texture": "gui/rectButton",
+          "scale": "0.3, 1.0",
+          "fontSize": "24"
         }
       },
-      "otherPlayerLabel": {
+      "player1button": {
         "properties": {
-          "offset": "715, 20",
-          "fontName": "Mecha_Bold",
-          "fontSize": "48"
+          "offset"  : "150, 125",
+          "texture" : "gui/rectButton",
+          "text"    : "You",
+          "scale"   : "0.4, 1.0"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
+        }
+      },
+      "player2label": {
+        "properties": {
+          "offset": "60, 230",
+          "fontName": "Mecha",
+          "text": "Player 2:",
+          "texture": "gui/rectButton",
+          "scale": "0.3, 1.0",
+          "fontSize": "24"
+        }
+      },
+      "player2button": {
+        "properties": {
+          "offset": "150, 225",
+          "text": "PC",
+          "texture": "gui/rectButton",
+          "scale": "0.4, 1.0"
+        },
+        "child": {
+          "text": {
+            "properties": {
+              "fontName": "Mecha",
+              "fontSize": "24"
+            }
+          }
         }
       },
       "startButton": {
@@ -1498,12 +1593,12 @@
       "messageBox": {
         "properties": {
           "texture"  : "gui/messagePanel",
-          "offset"   : "257, 120",
+          "offset"   : "33, 340",
           "anchor"   : "topLeft",
           "fontName" : "Mecha",
           "fontSize" : "16",
           "charLimit" : "80",
-          "maxLines" : "12",
+          "maxLines" : "8",
           "textBuffer": "4,-4"
         }
       },
@@ -1515,7 +1610,7 @@
           "cursorAnimation": "textInput",
           "unfocusedTint": "0.0, 0.5, 0.5",
           "focusedTint": "0.0, 0.7, 0.7",
-          "offset": "257, 377",
+          "offset": "33, 500",
           "anchor": "topLeft",
           "scale": "1.2, 0.6"
         },
@@ -1541,34 +1636,6 @@
             "properties": {
               "fontName": "Mecha",
               "fontSize": "32"
-            }
-          }
-        }
-      }
-    }
-  },
-
-  "factionMenu": {
-    "properties": {
-      "firstButtonOffset" : "4, 8",
-      "menuSpacingY": "8",
-      "texture": "gui/faction_menu"
-    },
-    "child": {
-      "factionButton": {
-        "properties": {
-          "texture"       : "gui/faction_button",
-          "spritesOffset" : "32, 32",
-          "nameOffset"    : "60, 5",
-          "brightShade"   : "1, 1, 1, 0.9",
-          "dullShade"     : "0.9, 0.9, 0.9, 0.6",
-          "disabledShade" : "0.5, 0.5, 0.5, 0.5"
-        },
-        "child": {
-          "text": {
-            "properties": {
-              "fontName": "Mecha",
-              "fontSize": "24"
             }
           }
         }

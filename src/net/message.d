@@ -17,6 +17,7 @@ struct NetworkMessage {
     closeConnection,
     chat,
     chooseFaction,
+    swapPlayers,
     chooseMap,
     startBattle,
     moveUnit,
@@ -56,10 +57,9 @@ struct NetworkMessage {
       return msg;
     }
 
-    auto makeChooseFaction(Faction faction) {
-      auto text = faction.name;
+    auto makeChooseFaction(string factionName) {
       auto msg = NetworkMessage(Type.chooseFaction);
-      msg.chooseFaction.name = text;
+      msg.chooseFaction.name = factionName;
       return msg;
     }
 

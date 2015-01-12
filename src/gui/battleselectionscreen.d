@@ -42,15 +42,15 @@ class BattleSelectionScreen : GUIElement {
     _startButton = new Button(data.child["startButton"], &beginBattle);
     _startButton.enabled = false;
 
-    // map an faction selections
-    auto selfFactionOffset  = data["selfFactionOffset"].parseVector!int;
-    auto otherFactionOffset = data["otherFactionOffset"].parseVector!int;
+    _factionMenu1 = new FactionMenu(data.child["faction1"], &selectFaction1);
+    _factionMenu2 = new FactionMenu(data.child["faction2"], &selectFaction2, client is null);
+    addChildren(_startButton, _factionMenu1, _factionMenu2);
 
-    _playerFactionMenu = new FactionMenu(selfFactionOffset, &selectPlayerFaction);
-    bool canPickOtherFaction = client is null;
-    _otherFactionMenu  = new FactionMenu(otherFactionOffset, &selectOtherFaction,
-        canPickOtherFaction);
-    addChildren(_startButton, _playerFactionMenu, _otherFactionMenu);
+    addChildren!TextBox("player1label", "player2label");
+
+    _player1button = addChild(new Button(data.child["player1button"], &swapPlayers));
+    _player2button = addChild(new Button(data.child["player2button"], &swapPlayers));
+    setPlayerButtonText();
 
     _messageBox = new MessageBox(data.child["messageBox"]);
     _messageInput = new TextInput(data.child["messageInput"], &postMessage);
@@ -76,18 +76,18 @@ class BattleSelectionScreen : GUIElement {
   }
 
   private:
-  FactionMenu _playerFactionMenu, _otherFactionMenu;
-  MapSelector _mapSelector;
-  Button _startButton;
-  MessageBox _messageBox;
-  TextInput _messageInput;
+  FactionMenu   _factionMenu1, _factionMenu2;
+  MapSelector   _mapSelector;
+  Button        _startButton;
+  Button        _player1button, _player2button;
+  MessageBox    _messageBox;
+  TextInput     _messageInput;
   NetworkClient _client;
-  Title _title;
+  Title         _title;
+  int           _playerIdx;
 
   @property bool canStartGame() {
-    return isHost &&
-      _playerFactionMenu.selection !is null &&
-      _otherFactionMenu.selection !is null;
+    return isHost && _factionMenu1.selection !is null && _factionMenu2.selection !is null;
   }
 
   void processMessage(NetworkMessage msg) {
@@ -110,37 +110,39 @@ class BattleSelectionScreen : GUIElement {
         string name = msg.chooseFaction.name;
         auto note = PostFormat.otherChoseFaction.format(name);
         _messageBox.postMessage(note, PostColor.note);
-        auto faction = getFaction(name);
-        _otherFactionMenu.setSelection(faction);
-        selectOtherFaction(faction);
+        _factionMenu2.selection = name;
+        selectFaction2(name);
         break;
       case startBattle:
         beginBattle();
+        break;
+      case swapPlayers:
+        performPlayerSwap();
         break;
       default:
     }
   }
 
-  void selectPlayerFaction(Faction faction) {
-    if (_otherFactionMenu.selection == faction) {
-      _otherFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
+  void selectFaction1(string name) {
+    if (_factionMenu2.selection == name) {
+      _factionMenu2.selection = allFactions.find!(x => x.name != name).front.name;
     }
     if (_client !is null) {
-      _client.send(NetworkMessage.makeChooseFaction(faction));
+      _client.send(NetworkMessage.makeChooseFaction(name));
     }
     _startButton.enabled = canStartGame;
   }
 
-  void selectOtherFaction(Faction faction) {
-    if (_playerFactionMenu.selection == faction) {
-      _playerFactionMenu.setSelection(allFactions.find!(x => x != faction).front);
+  void selectFaction2(string name) {
+    if (_factionMenu1.selection == name) {
+      _factionMenu1.selection = allFactions.find!(x => x.name != name).front.name;
     }
     _startButton.enabled = canStartGame;
   }
 
   void beginBattle() {
-    auto playerFaction = _playerFactionMenu.selection;
-    auto otherFaction = _otherFactionMenu.selection;
+    auto playerFaction = getFaction(_factionMenu1.selection);
+    auto otherFaction = getFaction(_factionMenu2.selection);
     if (isHost && _client !is null) {
       _client.send(NetworkMessage(NetworkMessage.Type.startBattle));
     }
@@ -166,6 +168,34 @@ class BattleSelectionScreen : GUIElement {
   void selectMap(MapLayout layout) {
     if (_client !is null) {
       _client.send(NetworkMessage.makeChooseMap(layout.mapName, layout.layoutName));
+    }
+  }
+
+  void swapPlayers() {
+    performPlayerSwap();
+    if (_client !is null) {
+      _client.send(NetworkMessage(NetworkMessage.Type.swapPlayers));
+    }
+  }
+
+  void performPlayerSwap() {
+    _playerIdx = _playerIdx == 1 ? 2 : 1;
+    setPlayerButtonText();
+  }
+
+  void setPlayerButtonText() {
+    string otherName;
+    if      (_client is null) { otherName = "PC"; }
+    else if (isHost)          { otherName = "Client"; }
+    else                      { otherName = "Host"; }
+
+    if (_playerIdx == 1) {
+      _player1button.text = "You";
+      _player2button.text = otherName;
+    }
+    else {
+      _player1button.text = otherName;
+      _player2button.text = "You";
     }
   }
 }
