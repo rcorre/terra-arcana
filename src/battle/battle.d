@@ -18,30 +18,31 @@ import gui.battlepopup;
 private enum mapFormat = Paths.mapDir ~ "/%s.json";
 
 class Battle : Scene!Battle {
-  this(MapLayout layout, Faction playerFaction, Faction pcFaction, NetworkClient client = null,
-      bool isHost = false)
+  this(MapLayout layout, Faction playerFaction, Faction otherFaction, int playerIdx, 
+      NetworkClient client = null, bool isHost = true)
   {
     _client = client;
     mapType = layout.type;
 
-    int player1cp = layout.playerBaseCP(1, Player.defaultCP);
-    int player2cp = layout.playerBaseCP(2, Player.defaultCP);
+    int otherIdx = (playerIdx == 1) ? 2 : 1;
+    int playerCP = layout.playerBaseCP(playerIdx, Player.defaultCP);
+    int otherCP  = layout.playerBaseCP(otherIdx, Player.defaultCP);
     if (client is null) {
       _players = [
-        new Player(playerFaction, 1, true, player1cp),
-        new AIPlayer(pcFaction, 2, "balanced", player2cp)
+        new Player(playerFaction, playerIdx, true, playerCP),
+        new AIPlayer(otherFaction, otherIdx, "balanced", otherCP)
       ];
     }
-    else if (isHost) {
+    else if (playerIdx == 1) {
       _players = [
-        new Player(playerFaction, 1, true, player1cp),
-        new Player(pcFaction, 2, false, player2cp)
+        new Player(playerFaction, 1, true, playerCP),
+        new Player(otherFaction, 2, false, otherCP)
       ];
     }
     else {
       _players = [
-        new Player(pcFaction, 1, false, player1cp),
-        new Player(playerFaction, 2, true, player2cp)
+        new Player(otherFaction, 1, false, otherCP),
+        new Player(playerFaction, 2, true, playerCP)
       ];
     }
 

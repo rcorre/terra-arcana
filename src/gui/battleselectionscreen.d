@@ -32,12 +32,14 @@ private enum PostFormat : string {
 class BattleSelectionScreen : GUIElement {
   const bool isHost;
 
-  this(Title title, MapType mapType, NetworkClient client = null, bool isHost = false) {
+  this(Title title, MapType mapType, NetworkClient client = null, bool isHost = true) {
     super(getGUIData("selectBattle"), Vector2i.zero);
 
     _client = client;
     _title = title;
     this.isHost = isHost || client is null; // if singleplayer, default to host
+    assert(isHost);
+    _playerIdx = isHost ? 1 : 2;
 
     _startButton = new Button(data.child["startButton"], &beginBattle);
     _startButton.enabled = false;
@@ -147,7 +149,7 @@ class BattleSelectionScreen : GUIElement {
       _client.send(NetworkMessage(NetworkMessage.Type.startBattle));
     }
     auto map = _mapSelector.selection;
-    setScene(new Battle(map, playerFaction, otherFaction, _client, isHost));
+    setScene(new Battle(map, playerFaction, otherFaction, _playerIdx, _client, isHost));
   }
 
   void backToMenu() {

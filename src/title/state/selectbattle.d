@@ -8,7 +8,7 @@ import gui.battleselectionscreen;
 
 /// player may click on a unit to issue orders
 class SelectBattle : State!Title {
-  this(MapType mapType, NetworkClient client = null, bool isHost = false) {
+  this(MapType mapType, NetworkClient client = null, bool isHost = true) {
     _mapType = mapType;
     _client = client;
     _isHost = isHost;
