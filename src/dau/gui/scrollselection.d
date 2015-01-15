@@ -22,22 +22,33 @@ abstract class ScrollSelection(EntryType) : GUIElement {
     auto leftPos = Vector2i(-buttonSpacingX, height / 2);
     auto rightPos = Vector2i(area.width + buttonSpacingX, height / 2);
 
-    addChild(new Button(data.child["prevButton"], leftPos,  &selectPrevious, Anchor.center));
-    addChild(new Button(data.child["nextButton"], rightPos, &selectNext,     Anchor.center));
+    _prev = addChild(new Button(data.child["prevButton"], leftPos,  &selectPrevious, Anchor.center));
+    _next = addChild(new Button(data.child["nextButton"], rightPos, &selectNext,     Anchor.center));
 
     _currentElement = addChild(createEntry(_currentSelection, size / 2));
   }
 
   /// the currently selected entry
-  @property EntryType selection() { return _currentSelection; }
-  @property void selection(EntryType entry) {
-    if (entry == _currentSelection) { return; }
-    EntryType next;
-    do {
-      next = _entries.advance;
-    } while (next != entry && next != _currentSelection);
-    _currentSelection = next;
-    updateEntry();
+  @property {
+    EntryType selection() { return _currentSelection; }
+    void selection(EntryType entry) {
+      if (entry == _currentSelection) { return; }
+      EntryType next;
+      do {
+        next = _entries.advance;
+      } while (next != entry && next != _currentSelection);
+      _currentSelection = next;
+      updateEntry();
+    }
+
+    void enabled(bool val) {
+      sprite.tint = val ? Color.white : color(1,1,1,0.5);
+      _enabled = val;
+      _next.enabled = val;
+      _prev.enabled = val;
+    }
+
+    bool enabled() { return _enabled; }
   }
 
   void selectPrevious() {
@@ -59,6 +70,9 @@ abstract class ScrollSelection(EntryType) : GUIElement {
   EntryType             _currentSelection;
   GUIElement            _currentElement;
   Action                _onChange;
+  bool                  _enabled;
+  Button                _next;
+  Button                _prev;
 
   void updateEntry() {
     _currentElement.active = false;

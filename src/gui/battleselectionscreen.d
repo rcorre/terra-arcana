@@ -70,6 +70,8 @@ class BattleSelectionScreen : GUIElement {
         break;
       case skirmish:
         forceSkirmishFactions();
+        _factionMenu1.enabled = false;
+        _factionMenu2.enabled = false;
         break;
       case tutorial:
     }
