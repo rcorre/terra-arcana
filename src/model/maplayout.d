@@ -14,6 +14,10 @@ enum MapType {
 /// each map defines a single terrain, but map define multiple object layers
 /// a map layout represents a single terrain+object layer combination
 class MapLayout {
+  private enum {
+    factionFormat = "faction%d",
+    baseCPformat  = "player%dcp"
+  }
   private {
     MapData  _data;
     MapLayer _layer;
@@ -34,8 +38,14 @@ class MapLayout {
   }
 
   int playerBaseCP(int playerIdx, int defaultCP) {
-    auto key = "player%dcp".format(playerIdx);
+    auto key = baseCPformat.format(playerIdx);
     return key in _layer.properties ? _layer.properties[key].to!int : defaultCP;
+  }
+
+  string playerFaction(int playerIdx) {
+    auto key = factionFormat.format(playerIdx);
+    assert(key in _layer.properties, "skirmish layer must define " ~ key);
+    return _layer.properties[key].capitalize;
   }
 }
 

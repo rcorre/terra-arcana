@@ -14,27 +14,16 @@ abstract class ScrollSelection(EntryType) : GUIElement {
   this(GUIData data, Vector2i pos, EntryType[] entries, Action onChange = doNothing!Action) {
     assert(entries.length > 0, "a ScrollSelection must have at least 1 entry provided");
     super(data, pos, Anchor.center);
-    _entries = bicycle(entries);
+    _entries          = bicycle(entries);
     _currentSelection = entries[0];
-
-    auto clickPrev = delegate() {
-      _currentSelection = _entries.reverse;
-      updateEntry();
-      onChange(_currentSelection);
-    };
-
-    auto clickNext = delegate() {
-      _currentSelection = _entries.advance;
-      updateEntry();
-      onChange(_currentSelection);
-    };
+    _onChange         = onChange;
 
     int buttonSpacingX = data.get("buttonSpacingX", "0").to!int;
     auto leftPos = Vector2i(-buttonSpacingX, height / 2);
     auto rightPos = Vector2i(area.width + buttonSpacingX, height / 2);
 
-    addChild(new Button(data.child["prevButton"], leftPos, clickPrev, Anchor.center));
-    addChild(new Button(data.child["nextButton"], rightPos, clickNext, Anchor.center));
+    addChild(new Button(data.child["prevButton"], leftPos,  &selectPrevious, Anchor.center));
+    addChild(new Button(data.child["nextButton"], rightPos, &selectNext,     Anchor.center));
 
     _currentElement = addChild(createEntry(_currentSelection, size / 2));
   }
@@ -51,12 +40,25 @@ abstract class ScrollSelection(EntryType) : GUIElement {
     updateEntry();
   }
 
+  void selectPrevious() {
+    _currentSelection = _entries.reverse;
+    updateEntry();
+    _onChange(_currentSelection);
+  };
+
+  void selectNext() {
+    _currentSelection = _entries.advance;
+    updateEntry();
+    _onChange(_currentSelection);
+  };
+
   GUIElement createEntry(EntryType entry, Vector2i pos);
 
   private:
   Bicycle!(EntryType[]) _entries;
-  EntryType _currentSelection;
-  GUIElement _currentElement;
+  EntryType             _currentSelection;
+  GUIElement            _currentElement;
+  Action                _onChange;
 
   void updateEntry() {
     _currentElement.active = false;

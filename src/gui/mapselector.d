@@ -19,7 +19,8 @@ class MapSelector : GUIElement {
     _mapSelector = addChild(new StringSelection(data.child["chooseMap"], maps, &setMap));
     _description = addChild(new TextBox(data.child["description"]));
 
-    setMap(_mapSelector.selection);
+    createLayoutSelector(maps[0]);
+    _description.text = selection.description;
   }
 
   @property {
@@ -44,13 +45,17 @@ class MapSelector : GUIElement {
 
   void setMap(string mapName) {
     if (_layoutSelector !is null) { _layoutSelector.active = false; }
-    auto layouts = _layouts.filter!(x => x.mapName == mapName).map!(x => x.layoutName).array;
-    _layoutSelector = addChild(new StringSelection(data.child["chooseLayout"], layouts, &setLayout));
+    createLayoutSelector(mapName);
     setLayout(_layoutSelector.selection);
   }
 
   void setLayout(string name) {
     _onChange(selection);
     _description.text = selection.description;
+  }
+
+  void createLayoutSelector(string mapName) {
+    auto layouts = _layouts.filter!(x => x.mapName == mapName).map!(x => x.layoutName).array;
+    _layoutSelector = addChild(new StringSelection(data.child["chooseLayout"], layouts, &setLayout));
   }
 }

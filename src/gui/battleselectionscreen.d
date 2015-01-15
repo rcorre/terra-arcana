@@ -44,8 +44,8 @@ class BattleSelectionScreen : GUIElement {
     _startButton = new Button(data.child["startButton"], &beginBattle);
     _startButton.enabled = false;
 
-    _factionMenu1 = new FactionMenu(data.child["faction1"], &selectFaction1);
-    _factionMenu2 = new FactionMenu(data.child["faction2"], &selectFaction2, client is null);
+    _factionMenu1 = new FactionMenu(data.child["faction1"], (name) => selectFaction(1, name));
+    _factionMenu2 = new FactionMenu(data.child["faction2"], (name) => selectFaction(2, name));
     addChildren(_startButton, _factionMenu1, _factionMenu2);
 
     addChildren!TextBox("player1label", "player2label");
@@ -64,6 +64,15 @@ class BattleSelectionScreen : GUIElement {
 
     auto mapDatas = mapLayoutsOfType(mapType).array;
     _mapSelector = addChild(new MapSelector(data.child["selectMap"], mapDatas, &selectMap));
+    final switch (mapType) with (MapType) {
+      case battle:
+        _factionMenu2.selectNext();
+        break;
+      case skirmish:
+        forceSkirmishFactions();
+        break;
+      case tutorial:
+    }
   }
 
   override void update(float time) {
@@ -110,10 +119,15 @@ class BattleSelectionScreen : GUIElement {
         break;
       case chooseFaction:
         string name = msg.chooseFaction.name;
-        auto note = PostFormat.otherChoseFaction.format(name);
+        int    idx  = msg.chooseFaction.playerIdx;
+        auto   note = PostFormat.otherChoseFaction.format(name);
         _messageBox.postMessage(note, PostColor.note);
-        _factionMenu2.selection = name;
-        selectFaction2(name);
+        if (idx == 1) {
+          _factionMenu1.selection = name;
+        }
+        else {
+          _factionMenu2.selection = name;
+        }
         break;
       case startBattle:
         beginBattle();
@@ -125,21 +139,10 @@ class BattleSelectionScreen : GUIElement {
     }
   }
 
-  void selectFaction1(string name) {
-    if (_factionMenu2.selection == name) {
-      _factionMenu2.selection = allFactions.find!(x => x.name != name).front.name;
-    }
+  void selectFaction(int playerIdx, string name) {
     if (_client !is null) {
-      _client.send(NetworkMessage.makeChooseFaction(name));
+      _client.send(NetworkMessage.makeChooseFaction(playerIdx, name));
     }
-    _startButton.enabled = canStartGame;
-  }
-
-  void selectFaction2(string name) {
-    if (_factionMenu1.selection == name) {
-      _factionMenu1.selection = allFactions.find!(x => x.name != name).front.name;
-    }
-    _startButton.enabled = canStartGame;
   }
 
   void beginBattle() {
@@ -171,6 +174,7 @@ class BattleSelectionScreen : GUIElement {
     if (_client !is null) {
       _client.send(NetworkMessage.makeChooseMap(layout.mapName, layout.layoutName));
     }
+    forceSkirmishFactions();
   }
 
   void swapPlayers() {
@@ -198,6 +202,13 @@ class BattleSelectionScreen : GUIElement {
     else {
       _player1button.text = otherName;
       _player2button.text = "You";
+    }
+  }
+
+  void forceSkirmishFactions() {
+    if (_mapSelector.selection.type == MapType.skirmish) {
+      _factionMenu1.selection = _mapSelector.selection.playerFaction(1);
+      _factionMenu2.selection = _mapSelector.selection.playerFaction(2);
     }
   }
 }

@@ -57,9 +57,10 @@ struct NetworkMessage {
       return msg;
     }
 
-    auto makeChooseFaction(string factionName) {
+    auto makeChooseFaction(int playerIdx, string factionName) {
       auto msg = NetworkMessage(Type.chooseFaction);
-      msg.chooseFaction.name = factionName;
+      msg.chooseFaction.playerIdx = cast(ubyte) playerIdx;
+      msg.chooseFaction.name      = factionName;
       return msg;
     }
 
@@ -131,6 +132,7 @@ struct Chat {
 }
 
 struct ChooseFaction {
+  ubyte playerIdx;
   NetString!factionNameSize name;
 }
 
