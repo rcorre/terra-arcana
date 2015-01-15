@@ -66,7 +66,8 @@ class BattleSelectionScreen : GUIElement {
     _mapSelector = addChild(new MapSelector(data.child["selectMap"], mapDatas, &selectMap));
     final switch (mapType) with (MapType) {
       case battle:
-        _factionMenu2.selectNext();
+        _factionMenu1.banFaction(_factionMenu2.selection);
+        _factionMenu2.banFaction(_factionMenu1.selection);
         break;
       case skirmish:
         forceSkirmishFactions();
@@ -144,6 +145,8 @@ class BattleSelectionScreen : GUIElement {
   void selectFaction(int playerIdx, string name) {
     if (_client !is null) {
       _client.send(NetworkMessage.makeChooseFaction(playerIdx, name));
+    }
+    if (playerIdx == 1) {
     }
   }
 
