@@ -42,7 +42,7 @@ class BattleSelectionScreen : GUIElement {
     _playerIdx = isHost ? 1 : 2;
 
     _startButton = new Button(data.child["startButton"], &beginBattle);
-    _startButton.enabled = false;
+    _startButton.enabled = canStartGame;
 
     _factionMenu1 = new FactionMenu(data.child["faction1"], (name) => selectFaction(1, name));
     _factionMenu2 = new FactionMenu(data.child["faction2"], (name) => selectFaction(2, name));
@@ -101,7 +101,7 @@ class BattleSelectionScreen : GUIElement {
   int           _playerIdx;
 
   @property bool canStartGame() {
-    return isHost && _factionMenu1.selection !is null && _factionMenu2.selection !is null;
+    return isHost;
   }
 
   void processMessage(NetworkMessage msg) {
