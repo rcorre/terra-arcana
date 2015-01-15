@@ -14,8 +14,7 @@ abstract class ScrollSelection(EntryType) : GUIElement {
   this(GUIData data, Vector2i pos, EntryType[] entries, Action onChange = doNothing!Action) {
     assert(entries.length > 0, "a ScrollSelection must have at least 1 entry provided");
     super(data, pos, Anchor.center);
-    _entries          = bicycle(entries);
-    _currentSelection = entries[0];
+    this.entries      = entries;
     _onChange         = onChange;
 
     int buttonSpacingX = data.get("buttonSpacingX", "0").to!int;
@@ -24,8 +23,6 @@ abstract class ScrollSelection(EntryType) : GUIElement {
 
     _prev = addChild(new Button(data.child["prevButton"], leftPos,  &selectPrevious, Anchor.center));
     _next = addChild(new Button(data.child["nextButton"], rightPos, &selectNext,     Anchor.center));
-
-    _currentElement = addChild(createEntry(_currentSelection, size / 2));
   }
 
   /// the currently selected entry
@@ -41,6 +38,7 @@ abstract class ScrollSelection(EntryType) : GUIElement {
       updateEntry();
     }
 
+    bool enabled() { return _enabled; }
     void enabled(bool val) {
       sprite.tint = val ? Color.white : color(1,1,1,0.5);
       _enabled = val;
@@ -48,7 +46,15 @@ abstract class ScrollSelection(EntryType) : GUIElement {
       _prev.enabled = val;
     }
 
-    bool enabled() { return _enabled; }
+    auto entries() { return _entries; }
+    void entries(EntryType[] newEntries) { 
+      _entries = bicycle(newEntries); 
+      _currentSelection = entries.front;
+      if (_currentElement !is null) {
+        _currentElement.active = false;
+      }
+      _currentElement = addChild(createEntry(_currentSelection, size / 2));
+    }
   }
 
   void selectPrevious() {
