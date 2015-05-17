@@ -60,7 +60,8 @@ class Pathfinder {
       path.popBack();
     }
 
-    return path.reverse;
+    reverse(path);
+    return path;
   }
 
   private:

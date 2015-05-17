@@ -24,7 +24,9 @@ class UndoMoveSystem : System!Battle {
   }
 
   void clearMoves() {
-    _undos.clear();
+    if (!_undos.empty) {
+      _undos.clear();
+    }
   }
 
   override {

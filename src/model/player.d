@@ -6,7 +6,7 @@ import model.faction;
 import model.unit;
 
 class Player {
-  private enum defaultCP = 2;
+  enum defaultCP = 2;
 
   const Faction faction;
   const bool isLocal;

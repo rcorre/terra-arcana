@@ -11,17 +11,17 @@ private enum MouseButton {
 }
 
 private enum Keymap {
-  left  = [ALLEGRO_KEY_A],
-  right = [ALLEGRO_KEY_D],
-  up    = [ALLEGRO_KEY_W],
-  down  = [ALLEGRO_KEY_S],
+  left  = ALLEGRO_KEY_A,
+  right = ALLEGRO_KEY_D,
+  up    = ALLEGRO_KEY_W,
+  down  = ALLEGRO_KEY_S,
 
-  action1 = [ALLEGRO_KEY_Q],
-  action2 = [ALLEGRO_KEY_E],
-  undo    = [ALLEGRO_KEY_U],
+  action1 = ALLEGRO_KEY_Q,
+  action2 = ALLEGRO_KEY_E,
+  undo    = ALLEGRO_KEY_U,
 
-  skip  = [ALLEGRO_KEY_SPACE],
-  exit  = [ALLEGRO_KEY_ESCAPE],
+  skip  = ALLEGRO_KEY_SPACE,
+  exit  = ALLEGRO_KEY_ESCAPE,
 }
 
 class InputManager {
@@ -79,12 +79,12 @@ class InputManager {
   }
 
   private:
-  bool keyHeld(Keymap buttons) {
-    return buttons.any!(key => al_key_down(&_curKeyboardState, key));
+  bool keyHeld(Keymap key) {
+    return al_key_down(&_curKeyboardState, key);
   }
 
-  bool keyPressed(Keymap buttons) {
-    return buttons.any!(key => !al_key_down(&_prevKeyboardState, key) && al_key_down(&_curKeyboardState, key));
+  bool keyPressed(Keymap key) {
+    return !al_key_down(&_prevKeyboardState, key) && al_key_down(&_curKeyboardState, key);
   }
 
   bool keyReleased(int keycode) {
