@@ -61,13 +61,14 @@ auto fetchMapLayout(string name, string layoutName) {
 private:
 MapLayout[] _allLayouts; /// every possible layout for every map
 
+auto loadLayouts() {
+  foreach(entry ; Paths.mapDir.dirEntries(SpanMode.depth)) {
+    auto map = entry.loadTiledMap();
+    _allLayouts ~= map.layers.filter!(x => x.type == MapLayer.type.objectgroup)
+      .map!(x => new MapLayout(map, x)).array;
+  }
+}
+
 static this() {
-  auto load = {
-    foreach(entry ; Paths.mapDir.dirEntries(SpanMode.depth)) {
-      auto map = entry.loadTiledMap();
-      _allLayouts ~= map.layers.filter!(x => x.type == MapLayer.type.objectgroup)
-        .map!(x => new MapLayout(map, x)).array;
-    }
-  };
-  onInit(load);
+  onInit(&loadLayouts);
 }

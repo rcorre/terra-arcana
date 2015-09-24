@@ -13,13 +13,15 @@ import dau.util.math;
 /// displays a single frame of a texture
 class Sprite {
   Texture.Flip flip;
+  int          depth;
+
   /// create a sprite from a subsection of the bitmap
   this(string textureName, string spriteName = null) {
     _texture = getTexture(textureName);
     int idx = (spriteName is null) ? 0 : _texture.spriteIdx(spriteName);
     _row = idx / _texture.numCols;
     _col = idx % _texture.numCols;
-    _depth = _texture.defaultDepth;
+    depth = _texture.defaultDepth;
   }
 
   /// create a sprite from a subsection of the bitmap
@@ -29,7 +31,7 @@ class Sprite {
     _col = spriteIdx % _texture.numCols;
     assert(_row >= 0 && _col >= 0 && _row < _texture.numRows && _col < _texture.numCols,
         format("sprite coord %d, %d is out of bounds", _row, _col));
-    _depth = _texture.defaultDepth;
+    depth = _texture.defaultDepth;
   }
 
   void flash(float time, Color flashColor) {
@@ -76,7 +78,6 @@ class Sprite {
   }
 
   @property {
-    ref int depth() { return _depth; }
     /// width of the sprite after scaling (px)
     int width() { return cast(int) (_texture.frameWidth * scale.x); }
     /// height of the sprite after scaling (px)
@@ -104,7 +105,6 @@ class Sprite {
   int _row, _col;
 
   private:
-  int _depth;
   Texture _texture;
   Vector2f _scaleFactor = Vector2f(1, 1);
   Color _tint           = Color.white;

@@ -130,7 +130,7 @@ Texture getTexture(string name) {
 
 void preloadTextures(string dir, string glob = "*", SpanMode spanMode = SpanMode.shallow) {
   foreach(path ; dirEntries(dir, glob, spanMode)) {
-    auto name = path.chompPrefix(Paths.bitmapDir ~ "/").stripExtension;
+    auto name = path.name.chompPrefix(Paths.bitmapDir ~ "/").stripExtension;
     if (name !in _textureStore) {
       auto bmp = loadBitmap(name);
       _textureStore[name] = new Texture(bmp, name);
