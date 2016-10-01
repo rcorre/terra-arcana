@@ -41,7 +41,7 @@ class Preferences {
 
   static auto fetch() {
     if (_preferences is null) {
-      if (Paths.preferences.exists) {
+      if (exists(cast(string)Paths.preferences)) {
         _preferences = readJSON!Preferences(Paths.preferences);
       }
       else {
