@@ -1,6 +1,6 @@
 module battle.state.networkturn;
 
-import std.array;
+import std.array, std.algorithm;
 import dau.all;
 import net.all;
 import model.all;

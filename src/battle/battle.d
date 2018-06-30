@@ -1,7 +1,7 @@
 module battle.battle;
 
 import core.memory;
-import std.range, std.algorithm, std.conv, std.typecons;
+import std.format, std.range, std.algorithm, std.conv, std.typecons;
 import dau.all;
 import net.all;
 import model.all;

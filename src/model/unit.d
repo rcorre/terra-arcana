@@ -1,7 +1,6 @@
 module model.unit;
 
-import std.string : format;
-import std.algorithm : canFind, max;
+import std.math, std.string, std.algorithm;
 import dau.all;
 import model.tile;
 import model.unitaction;

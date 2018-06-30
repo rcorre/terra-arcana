@@ -1,6 +1,6 @@
 module gui.battleselectionscreen;
 
-import std.algorithm, std.range, std.file, std.path, std.array;
+import std.algorithm, std.range, std.file, std.path, std.array, std.format;
 import dau.all;
 import net.all;
 import model.all;

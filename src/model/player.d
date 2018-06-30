@@ -1,6 +1,6 @@
 module model.player;
 
-import std.algorithm;
+import std.algorithm, std.format;
 import dau.util.math;
 import model.faction;
 import model.unit;

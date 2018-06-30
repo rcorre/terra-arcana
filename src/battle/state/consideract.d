@@ -1,6 +1,6 @@
 module battle.state.consideract;
 
-import std.range;
+import std.range, std.algorithm;
 import dau.all;
 import model.all;
 import gui.battlepopup;

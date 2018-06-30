@@ -1,6 +1,6 @@
 module battle.pathfinder;
 
-import std.array, std.range, std.algorithm;
+import std.array, std.range, std.algorithm, std.math;
 import std.container : RedBlackTree;
 import model.all;
 
